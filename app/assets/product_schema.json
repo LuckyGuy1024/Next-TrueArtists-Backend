@@ -1,0 +1,14 @@
+{
+  "title": {
+    "required": true,
+    "type": "string"
+  },
+  "description": {
+    "required": true,
+    "type": "text"
+  },
+  "price": {
+    "required": true,
+    "type": "number"
+  }
+}
