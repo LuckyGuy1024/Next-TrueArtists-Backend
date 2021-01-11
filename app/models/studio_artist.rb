@@ -1,0 +1,2 @@
+class StudioArtist < ApplicationRecord
+end

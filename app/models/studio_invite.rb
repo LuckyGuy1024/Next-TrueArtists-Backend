@@ -1,0 +1,2 @@
+class StudioInvite < ApplicationRecord
+end

@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: 'dev_dropshypify'
+  database: 'ta_dev'
 
 test:
   <<: *default
-  database: 'test_dropshypify'
+  database: 'ta_test'
 
 production:
   <<: *default
-  database: 'prod_dropshypify'
+  database: 'ta_prod'
