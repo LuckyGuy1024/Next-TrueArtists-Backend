@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :sessions do
@@ -10,14 +9,8 @@ Rails.application.routes.draw do
   end
 
   resources :users
-
-  resources :suppliers do
-    resources :data_sources
-  end
-
-  resources :products do
-    collection do
-      get 'product_schema' => 'products#product_schema'
-    end
-  end
+  resources :artists, only: [:index, :show]
+  resources :studios, only: [:index, :show]
+  resources :tattoos, only: [:index, :show]
+  resources :articles
 end

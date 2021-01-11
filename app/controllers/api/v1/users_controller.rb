@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request!, only: %i[create]
   before_action :fail_if_unauthenticated!, except: %i[create]
   before_action :find_user, except: %i[create]

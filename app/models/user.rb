@@ -4,7 +4,8 @@ class User < ApplicationRecord
   before_save :downcase_email
   has_secure_password
 
-  has_one :supplier, dependent: :destroy
+  has_one :artist, dependent: :destroy
+  has_one :studio, dependent: :destroy
 
   STRONG_PASSWORD = /(?=.*[a-zA-Z])(?=.*[0-9]).{6,10}/.freeze
 

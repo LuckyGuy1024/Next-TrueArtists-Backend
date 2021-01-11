@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_001448) do
+ActiveRecord::Schema.define(version: 2021_01_11_031053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title"
+    t.string "page_title"
+    t.string "meta_description"
+    t.text "introduction"
+    t.text "content"
+    t.string "status"
+    t.string "slug"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_articles_on_user_id"
+  end
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"

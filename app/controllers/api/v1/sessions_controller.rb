@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SessionsController < ApplicationController
+class Api::V1::SessionsController < ApplicationController
   skip_before_action :authenticate_request!, only: %i[create]
 
   def create
