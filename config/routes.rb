@@ -9,8 +9,15 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :artists, only: [:index, :show]
-  resources :studios, only: [:index, :show]
+  resources :artists do
+    resources :tattoos
+  end
+  resources :studios do
+    resources :tattoos
+    member do
+      put :invite_artist
+    end
+  end
   resources :tattoos, only: [:index, :show]
   resources :articles
 end
