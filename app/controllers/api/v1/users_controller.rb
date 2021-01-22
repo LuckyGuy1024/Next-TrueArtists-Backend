@@ -47,9 +47,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_create_params
-    params.require(:user)
-          .permit(:email, :role,
-                  :status, :password,
+    params.permit(:email,
+                  :role,
+                  :name,
+                  :status,
+                  :password,
                   :password_confirmation)
   end
 end
