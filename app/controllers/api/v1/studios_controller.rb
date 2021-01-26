@@ -4,7 +4,7 @@ class Api::V1::StudiosController < ApplicationController
   before_action :find_studio, except: %i[create index]
 
   def index
-    @studios = paginate(Studio.all)
+    @studios = Studio.paginate(page: params[:page], per_page: 10)
     render json: ActiveModel::Serializer::CollectionSerializer.new(@studios,
                                                                    serializer: StudioSerializer),
            status: :ok
@@ -16,7 +16,7 @@ class Api::V1::StudiosController < ApplicationController
 
   def create
     studio = Studio.new(studio_params)
-    studio.user_id = @current_user&.id
+    studio.user_id = current_user&.id
 
     if studio.save
       render json: StudioSerializer.new(studio).to_json, status: :created
@@ -74,7 +74,6 @@ class Api::V1::StudiosController < ApplicationController
       :name,
       :bio,
       :slug,
-      :years_of_experience,
       :services,
       :specialty,
       :website,
@@ -92,7 +91,7 @@ class Api::V1::StudiosController < ApplicationController
       :country,
       :seeking_guest_spot,
       :guest_studio,
-      :attachments_attributes: [:image]
+      attachments_attributes: [:image]
     )
   end
 end
