@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_185647) do
+ActiveRecord::Schema.define(version: 2021_01_26_220856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_185647) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_185647) do
     t.boolean "guest_artist", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
   create_table "assets", force: :cascade do |t|
@@ -141,6 +143,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_185647) do
     t.decimal "minimum_spend"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
 
   create_table "tattoos", force: :cascade do |t|
