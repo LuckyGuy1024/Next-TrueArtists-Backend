@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request!, only: %i[create]
   before_action :fail_if_unauthenticated!, except: %i[create]
@@ -17,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: Api::UserSerializer.new(@user).to_json, status: :ok
+    render json: UserSerializer.new(@user).to_json, status: :ok
   end
 
   def update
