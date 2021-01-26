@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :page_title
       t.string :meta_description
-      t.text  :introduction
+      t.text :introduction
       t.text :content
       t.string :status
       t.string :slug

@@ -10,145 +10,156 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_031053) do
-
+ActiveRecord::Schema.define(version: 20_210_111_032_149) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "articles", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "title"
-    t.string "page_title"
-    t.string "meta_description"
-    t.text "introduction"
-    t.text "content"
-    t.string "status"
-    t.string "slug"
-    t.integer "author_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_articles_on_user_id"
+  create_table 'articles', force: :cascade do |t|
+    t.bigint 'user_id'
+    t.string 'title'
+    t.string 'page_title'
+    t.string 'meta_description'
+    t.text 'introduction'
+    t.text 'content'
+    t.string 'status'
+    t.string 'slug'
+    t.integer 'author_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['user_id'], name: 'index_articles_on_user_id'
   end
 
-  create_table "artists", force: :cascade do |t|
-    t.integer "user_id"
-    t.text "bio"
-    t.string "slug"
-    t.boolean "licensed"
-    t.boolean "cpr_certified"
-    t.integer "years_of_experience"
-    t.string "styles"
-    t.string "website"
-    t.string "facebook_url"
-    t.string "twitter_url"
-    t.string "instagram_url"
-    t.string "phone_number"
-    t.decimal "minimum_spend"
-    t.decimal "price_per_hour"
-    t.string "currency_code"
-    t.integer "status"
-    t.string "country"
-    t.string "zip_code"
-    t.string "city"
-    t.integer "account_id"
-    t.boolean "seeking_guest_spot", default: false
-    t.boolean "guest_artist", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'artists', force: :cascade do |t|
+    t.integer 'user_id'
+    t.text 'bio'
+    t.string 'slug'
+    t.boolean 'licensed'
+    t.boolean 'cpr_certified'
+    t.integer 'years_of_experience'
+    t.string 'styles'
+    t.string 'website'
+    t.string 'facebook_url'
+    t.string 'twitter_url'
+    t.string 'instagram_url'
+    t.string 'phone_number'
+    t.decimal 'minimum_spend'
+    t.decimal 'price_per_hour'
+    t.string 'currency_code'
+    t.integer 'status'
+    t.string 'country'
+    t.string 'zip_code'
+    t.string 'city'
+    t.integer 'account_id'
+    t.boolean 'seeking_guest_spot', default: false
+    t.boolean 'guest_artist', default: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "assets", force: :cascade do |t|
-    t.integer "attachable_id"
-    t.string "attachable_type"
-    t.string "image_content_type"
-    t.string "image_file_name"
-    t.datetime "image_updated_at"
-    t.integer "image_file_size"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'assets', force: :cascade do |t|
+    t.integer 'attachable_id'
+    t.string 'attachable_type'
+    t.string 'image_content_type'
+    t.string 'image_file_name'
+    t.datetime 'image_updated_at'
+    t.integer 'image_file_size'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "studio_artists", force: :cascade do |t|
-    t.bigint "studio_id"
-    t.bigint "artist_id"
-    t.date "start_date"
-    t.date "end_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["artist_id"], name: "index_studio_artists_on_artist_id"
-    t.index ["studio_id"], name: "index_studio_artists_on_studio_id"
+  create_table 'messages', force: :cascade do |t|
+    t.string 'subject'
+    t.text 'content'
+    t.integer 'receiver_id'
+    t.string 'sender_id'
+    t.boolean 'sender_deleted'
+    t.boolean 'receiver_deleted'
+    t.integer 'parent_id'
+    t.string 'message_type'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "studio_invites", force: :cascade do |t|
-    t.bigint "studio_id"
-    t.string "invite_code"
-    t.string "email"
-    t.boolean "accepted", default: false
-    t.bigint "artist_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["artist_id"], name: "index_studio_invites_on_artist_id"
-    t.index ["studio_id"], name: "index_studio_invites_on_studio_id"
+  create_table 'studio_artists', force: :cascade do |t|
+    t.bigint 'studio_id'
+    t.bigint 'artist_id'
+    t.date 'start_date'
+    t.date 'end_date'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['artist_id'], name: 'index_studio_artists_on_artist_id'
+    t.index ['studio_id'], name: 'index_studio_artists_on_studio_id'
   end
 
-  create_table "studios", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name"
-    t.text "bio"
-    t.string "city"
-    t.string "state"
-    t.string "street_address"
-    t.string "zip_code"
-    t.string "country"
-    t.string "phone_number"
-    t.text "specialty"
-    t.text "accepted_payment_methods"
-    t.boolean "appointment_only", default: false
-    t.text "languages"
-    t.text "services"
-    t.string "email"
-    t.string "facebook_url"
-    t.string "twitter_url"
-    t.string "instagram_url"
-    t.string "website_url"
-    t.decimal "lat", precision: 15, scale: 10
-    t.decimal "lon", precision: 15, scale: 10
-    t.string "status"
-    t.string "slug"
-    t.boolean "accepting_guest_artist", default: false
-    t.boolean "piercings", default: false
-    t.boolean "cosmetic_tattoos", default: true
-    t.boolean "vegan_ink", default: false
-    t.boolean "wifi", default: true
-    t.boolean "privacy_dividers", default: false
-    t.boolean "wheelchair_access", default: false
-    t.boolean "parking", default: false
-    t.boolean "lgbt_friendly", default: true
-    t.decimal "price_per_hour"
-    t.decimal "minimum_spend"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'studio_invites', force: :cascade do |t|
+    t.bigint 'studio_id'
+    t.string 'invite_code'
+    t.string 'email'
+    t.boolean 'accepted', default: false
+    t.bigint 'artist_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['artist_id'], name: 'index_studio_invites_on_artist_id'
+    t.index ['studio_id'], name: 'index_studio_invites_on_studio_id'
   end
 
-  create_table "tattoos", force: :cascade do |t|
-    t.text "styles"
-    t.string "placement"
-    t.string "size"
-    t.string "color"
-    t.string "categories"
-    t.string "tattoo_style"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'studios', force: :cascade do |t|
+    t.integer 'user_id'
+    t.string 'name'
+    t.text 'bio'
+    t.string 'city'
+    t.string 'state'
+    t.string 'street_address'
+    t.string 'zip_code'
+    t.string 'country'
+    t.string 'phone_number'
+    t.text 'specialty'
+    t.text 'accepted_payment_methods'
+    t.boolean 'appointment_only', default: false
+    t.text 'languages'
+    t.text 'services'
+    t.string 'email'
+    t.string 'facebook_url'
+    t.string 'twitter_url'
+    t.string 'instagram_url'
+    t.string 'website_url'
+    t.decimal 'lat', precision: 15, scale: 10
+    t.decimal 'lon', precision: 15, scale: 10
+    t.string 'status'
+    t.string 'slug'
+    t.boolean 'accepting_guest_artist', default: false
+    t.boolean 'piercings', default: false
+    t.boolean 'cosmetic_tattoos', default: true
+    t.boolean 'vegan_ink', default: false
+    t.boolean 'wifi', default: true
+    t.boolean 'privacy_dividers', default: false
+    t.boolean 'wheelchair_access', default: false
+    t.boolean 'parking', default: false
+    t.boolean 'lgbt_friendly', default: true
+    t.decimal 'price_per_hour'
+    t.decimal 'minimum_spend'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "full_name"
-    t.string "email"
-    t.string "role"
-    t.string "password_digest"
-    t.boolean "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'tattoos', force: :cascade do |t|
+    t.text 'styles'
+    t.string 'placement'
+    t.string 'size'
+    t.string 'color'
+    t.string 'categories'
+    t.string 'tattoo_style'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
+  create_table 'users', force: :cascade do |t|
+    t.string 'full_name'
+    t.string 'email'
+    t.string 'role'
+    t.string 'password_digest'
+    t.boolean 'status'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
 end
