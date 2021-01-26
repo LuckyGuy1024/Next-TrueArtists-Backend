@@ -2,12 +2,13 @@ class CreateArtists < ActiveRecord::Migration[6.0]
   def change
     create_table :artists do |t|
       t.integer  'user_id'
+      t.integer  'studio_id'
       t.text     'bio'
       t.string   'slug'
       t.boolean  'licensed'
       t.boolean  'cpr_certified'
       t.integer  'years_of_experience'
-      t.string :styles
+      t.string   'styles'
       t.string   'website'
       t.string   'facebook_url'
       t.string   'twitter_url'
