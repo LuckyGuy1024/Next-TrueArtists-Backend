@@ -78,6 +78,19 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Mailer settings
+  config.action_mailer.default_url_options = { host: ENV.fetch('HOST') }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 25,
+    domain: 'trueartists.com',
+    authentication: :plain,
+    user_name: 'apikey',
+    password: ENV.fetch('SENDGRID_APIKEY')
+  }
+
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
