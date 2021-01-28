@@ -1,6 +1,7 @@
 class ArtistSerializer < ActiveModel::Serializer
-  has_many :studios
+  # has_many :studios
   has_many :tattoos
+
   attributes :id,
              :user_id,
              :slug,
@@ -15,9 +16,7 @@ class ArtistSerializer < ActiveModel::Serializer
              :minimum_spend,
              :price_per_hour,
              :currency_code,
-             :street_address,
              :city,
-             :state,
              :zip_code,
              :country,
              :seeking_guest_spot,

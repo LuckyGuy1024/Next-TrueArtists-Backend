@@ -4,7 +4,7 @@ class Api::V1::ArtistsController < ApplicationController
   before_action :find_artist, except: %i[create index]
 
   def index
-    @artists = paginate(Artist.all)
+    @artists = Artist.paginate(page: params[:page], per_page: 10)
     render json: ActiveModel::Serializer::CollectionSerializer.new(@artists,
                                                                    serializer: ArtistSerializer),
            status: :ok
@@ -16,7 +16,7 @@ class Api::V1::ArtistsController < ApplicationController
 
   def create
     artist = Artist.new(artist_params)
-    artist.user_id = @current_user&.id
+    artist.user_id = current_user&.id
 
     if artist.save
       render json: ArtistSerializer.new(artist).to_json, status: :created
@@ -61,7 +61,7 @@ class Api::V1::ArtistsController < ApplicationController
       :country,
       :seeking_guest_spot,
       :guest_artist,
-      :attachments_attributes: [:image]
+      attachments_attributes: [:image]
     )
   end
 end
