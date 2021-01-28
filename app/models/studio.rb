@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Studio < ApplicationRecord
   include AssetExtension
   has_many :studio_artists

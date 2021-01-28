@@ -47,6 +47,7 @@ class ApplicationController < ActionController::API
     head(status: status) && return if errors.empty?
 
     render(json: json_api_error_format(errors).to_json, status: status) && return if errors.respond_to?(:messages)
+
     render json: { errors: errors }.to_json, status: status
   end
 
@@ -54,6 +55,7 @@ class ApplicationController < ActionController::API
 
   def json_api_error_format(errors)
     return errors if errors.is_a? String
+
     errors.messages.each_with_object({}) do |(attribute, error), res|
       res[attribute] =
         error.each_with_object([]) do |e, attrs|
