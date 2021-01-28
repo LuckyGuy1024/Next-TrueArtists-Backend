@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: Rails.application.credentials.config[:MAIL_NOTIFICATION_FROM]
+  default from: 'support@trueartists.com'
   layout 'mailer'
 end

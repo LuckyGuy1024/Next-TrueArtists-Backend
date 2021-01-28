@@ -49,8 +49,6 @@ class Api::V1::StudiosController < ApplicationController
 
   def artist_invite_params
     params.permit(
-      :id,
-      :studio,
       :phone_number,
       :email
     )
