@@ -49,7 +49,7 @@ class Api::V1::StudiosController < ApplicationController
 
   def artist_invite_params
     params.permit(
-      :id,
+      :phone_number,
       :email
     )
   end
