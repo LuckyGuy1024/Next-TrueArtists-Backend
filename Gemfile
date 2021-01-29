@@ -8,6 +8,9 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
+
+gem 'figaro'
+
 gem 'will_paginate', '~> 3.0'
 gem 'sprockets', '~>3.0'
 gem 'active_model_serializers'
