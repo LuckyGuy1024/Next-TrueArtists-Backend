@@ -78,6 +78,9 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Store files on Amazon S3.
+  config.active_storage.service = :amazon
+
   # Mailer settings
   config.action_mailer.default_url_options = { host: ENV.fetch('HOST') }
 
