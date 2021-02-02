@@ -24,8 +24,7 @@ class StudioInvite < ApplicationRecord
     StudioMailer.artist_studio_invite(self).deliver_now
   end
 
-  def send_sms_invitation
-  end
+  def send_sms_invitation; end
 
   def send_invitation
     send_email_invitation if email

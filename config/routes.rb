@@ -19,7 +19,8 @@ Rails.application.routes.draw do
       resources :studios do
         resources :tattoos
         member do
-          put :invite_artist
+          put :upload
+          delete 'delete-image/:image_id' => 'studios#destroy_image'
         end
       end
       resources :tattoos, only: %i[index show]

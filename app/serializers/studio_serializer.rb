@@ -1,5 +1,8 @@
 class StudioSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+
   has_many :artists
+
 
   attributes :id,
              :user_id,
@@ -34,5 +37,16 @@ class StudioSerializer < ActiveModel::Serializer
              :wheelchair_access,
              :parking,
              :lgbt_friendly,
-             :price_per_hour
+             :price_per_hour,
+             :studio_images
+
+  def studio_images
+    object.studio_images.map do |image|
+      {
+        id: image.id,
+        name: image.filename,
+        image_url: rails_blob_path(image, only_path: true)
+      }
+    end
+  end
 end
