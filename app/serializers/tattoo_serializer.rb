@@ -1,9 +1,10 @@
 class TattooSerializer < ActiveModel::Serializer
   belongs_to :artist
-  belongs_to :tattoos
+  belongs_to :studio
+
   attributes :id,
              :styles,
-             :category,
+             :categories,
              :placement,
              :color,
              :size

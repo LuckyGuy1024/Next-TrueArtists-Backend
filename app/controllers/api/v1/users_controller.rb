@@ -50,7 +50,7 @@ class Api::V1::UsersController < ApplicationController
   def user_create_params
     params.permit(:email,
                   :role,
-                  :name,
+                  :full_name,
                   :status,
                   :password,
                   :password_confirmation)

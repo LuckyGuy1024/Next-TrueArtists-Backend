@@ -1,0 +1,50 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/v1/users/:id",
+  "description": "Successfully update user",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/v1/users/858",
+      "request_body": "user[email]=jimmyjam%40gmail.com",
+      "request_headers": {
+        "Authorization": "Token eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MDQ5ODksImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6ODU4fQ.1VmKU5Ju0wIFzzfV2HrA0WfOPJ8BZfGQ9qWhB19mkyk",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"a9f27065a52deb6c6c9a694d8f019565\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "ace60680-dd82-43da-b2f1-9a335d582de7",
+        "X-Runtime": "0.006430",
+        "Vary": "Origin",
+        "Content-Length": "68"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

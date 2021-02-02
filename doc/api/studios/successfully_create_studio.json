@@ -1,0 +1,50 @@
+{
+  "resource": "Studios",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/v1/studios",
+  "description": "Successfully create studio",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/v1/studios",
+      "request_body": "user_id=850&email=inky%40ink.com&name=Inky+Ink+Studio&bio=Blackity+black+black&city=Kisumu&country=Kenya",
+      "request_headers": {
+        "Authorization": "Token eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MDQ5ODksImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6ODUwfQ.0kZMkQXkPiPb14rCgLOSTgVWaEj6RKznQLF1pQIZtPQ",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"ba6d606b48afb9fb0a3ca2be1b8f2005\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "4e1c8133-0b6c-40b1-bec0-45235f3efcf9",
+        "X-Runtime": "0.042097",
+        "Vary": "Origin",
+        "Content-Length": "666"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "resources": [
+    {
+      "name": "Artists",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Artist not found",
+          "link": "artists/artist_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/artists/:id",
+          "method": "get"
+        },
+        {
+          "description": "Artist not found",
+          "link": "artists/artist_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/artists/:id",
+          "method": "put"
+        },
+        {
+          "description": "Create artists without token",
+          "link": "artists/create_artists_without_token.json",
+          "groups": "all",
+          "route": "/api/v1/artists",
+          "method": "post"
+        },
+        {
+          "description": "Listing artists",
+          "link": "artists/listing_artists.json",
+          "groups": "all",
+          "route": "/api/v1/artists",
+          "method": "get"
+        },
+        {
+          "description": "Successfully create artists",
+          "link": "artists/successfully_create_artists.json",
+          "groups": "all",
+          "route": "/api/v1/artists",
+          "method": "post"
+        },
+        {
+          "description": "Successfully get artists",
+          "link": "artists/successfully_get_artists.json",
+          "groups": "all",
+          "route": "/api/v1/artists/:id",
+          "method": "get"
+        },
+        {
+          "description": "Successfully update artist",
+          "link": "artists/successfully_update_artist.json",
+          "groups": "all",
+          "route": "/api/v1/artists/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Sessions",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Invalid user",
+          "link": "sessions/invalid_user.json",
+          "groups": "all",
+          "route": "/api/v1/sessions/login",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "name": "Studios",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Create studios without token",
+          "link": "studios/create_studios_without_token.json",
+          "groups": "all",
+          "route": "/api/v1/studios",
+          "method": "post"
+        },
+        {
+          "description": "Listing studios",
+          "link": "studios/listing_studios.json",
+          "groups": "all",
+          "route": "/api/v1/studios",
+          "method": "get"
+        },
+        {
+          "description": "Studio not found",
+          "link": "studios/studio_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/studios/:id",
+          "method": "get"
+        },
+        {
+          "description": "Studio not found",
+          "link": "studios/studio_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/studios/:id",
+          "method": "put"
+        },
+        {
+          "description": "Successfully create studio",
+          "link": "studios/successfully_create_studio.json",
+          "groups": "all",
+          "route": "/api/v1/studios",
+          "method": "post"
+        },
+        {
+          "description": "Successfully get studio",
+          "link": "studios/successfully_get_studio.json",
+          "groups": "all",
+          "route": "/api/v1/studios/:id",
+          "method": "get"
+        },
+        {
+          "description": "Successfully update studio",
+          "link": "studios/successfully_update_studio.json",
+          "groups": "all",
+          "route": "/api/v1/studios/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Tattoos",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Listing tattoos",
+          "link": "tattoos/listing_tattoos.json",
+          "groups": "all",
+          "route": "/api/v1/tattoos",
+          "method": "get"
+        },
+        {
+          "description": "Successfully get tattoo",
+          "link": "tattoos/successfully_get_tattoo.json",
+          "groups": "all",
+          "route": "/api/v1/tattoos/:id",
+          "method": "get"
+        },
+        {
+          "description": "Tattoo not found",
+          "link": "tattoos/tattoo_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/tattoos/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Create artists without email",
+          "link": "users/create_artists_without_email.json",
+          "groups": "all",
+          "route": "/api/v1/users",
+          "method": "post"
+        },
+        {
+          "description": "Successfully create artists",
+          "link": "users/successfully_create_artists.json",
+          "groups": "all",
+          "route": "/api/v1/users",
+          "method": "post"
+        },
+        {
+          "description": "Successfully destroy user",
+          "link": "users/successfully_destroy_user.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "delete"
+        },
+        {
+          "description": "Successfully get user",
+          "link": "users/successfully_get_user.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "get"
+        },
+        {
+          "description": "Successfully update user",
+          "link": "users/successfully_update_user.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "put"
+        },
+        {
+          "description": "Unauthorised to make this request",
+          "link": "users/unauthorised_to_make_this_request.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "get"
+        },
+        {
+          "description": "Unauthorised to make this request",
+          "link": "users/unauthorised_to_make_this_request.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "put"
+        },
+        {
+          "description": "Unauthorised to make this request",
+          "link": "users/unauthorised_to_make_this_request.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "delete"
+        },
+        {
+          "description": "User not found",
+          "link": "users/user_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "get"
+        },
+        {
+          "description": "User not found",
+          "link": "users/user_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "put"
+        },
+        {
+          "description": "User not found",
+          "link": "users/user_not_found.json",
+          "groups": "all",
+          "route": "/api/v1/users/:id",
+          "method": "delete"
+        }
+      ]
+    }
+  ]
+}

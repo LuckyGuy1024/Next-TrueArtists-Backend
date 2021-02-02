@@ -35,7 +35,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 
 group :development, :test do
+  gem 'rspec_api_documentation'
+  gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'apitome', github: 'jejacks0n/apitome'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
 end
