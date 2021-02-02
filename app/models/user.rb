@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  require 'json_web_token'
   before_save :downcase_email
   has_secure_password
 
@@ -19,5 +20,17 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.strip.downcase
+  end
+
+  def reset_password_request
+    auth_token = JsonWebToken.encode(user_id: id)
+
+    UserMailer.password_reset_instructions(self, auth_token).deliver_now
+  end
+
+  def set_new_password(attrs)
+    return unless attrs[:password] == attrs[:password_confirmation]
+
+    update(password: attrs[:password])
   end
 end

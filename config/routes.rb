@@ -13,6 +13,11 @@ Rails.application.routes.draw do
       end
 
       resources :users
+      resources :passwords do
+        collection do
+          put 'change_password' => 'passwords#update'
+        end
+      end
       resources :artists do
         resources :tattoos
         member do
