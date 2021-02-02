@@ -2,7 +2,7 @@
 
 module Api::V1
   class ArtistsController < ApplicationController
-    before_action :find_artist, except: %i[index create accept_studio_invite]
+    before_action :find_artist, except: %i[index create accept_artist_invite]
 
     def index
       @artists = Artist.paginate(page: params[:page], per_page: 10)
@@ -16,9 +16,7 @@ module Api::V1
     end
 
     def create
-      artist = Artist.new(artist_params)
-      artist.user_id = current_user&.id
-
+      artist = current_user.build_artist(artist_params)
       if artist.save
         render json: ArtistSerializer.new(artist).to_json, status: :created
       else
@@ -27,10 +25,20 @@ module Api::V1
     end
 
     def update
-      if @artist.update(artist_params)
+      artist = ArtistForm.new(@artist, artist_params).update
+      if artist
         render json: ArtistSerializer.new(@artist).to_json, status: :ok
       else
         render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def remove_image
+      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
+      if attachment.blank?
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: 'We could not delete resource')
       end
     end
 
@@ -62,7 +70,8 @@ module Api::V1
         :country,
         :seeking_guest_spot,
         :guest_artist,
-        attachments_attributes: [:image]
+        :avatar,
+        :hero_banner
       )
     end
   end

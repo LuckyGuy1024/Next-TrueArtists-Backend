@@ -1,8 +1,7 @@
 class StudioSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  has_many :artists
-  has_many :studio_images
 
+  has_many :artists
 
   attributes :id,
              :user_id,
@@ -38,14 +37,25 @@ class StudioSerializer < ActiveModel::Serializer
              :parking,
              :lgbt_friendly,
              :price_per_hour,
-             :studio_images
+             :avatar,
+             :hero_banner
 
-  def studio_images
-    object.studio_images.map do |image|
+  def avatar
+    if object.avatar.attached?
       {
-        id: image.id,
-        name: image.filename,
-        image_url: rails_blob_path(image, only_path: true)
+        id: object.avatar.id,
+        image_url: rails_blob_path(object.avatar, only_path: true),
+        name: object.avatar.filename
+      }
+    end
+  end
+
+  def hero_banner
+    if object.hero_banner.attached?
+      {
+        id: object.hero_banner.id,
+        image_url: rails_blob_path(object.hero_banner, only_path: true),
+        name: object.hero_banner.filename
       }
     end
   end

@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
+gem 'active_model_serializers'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -14,6 +15,8 @@ gem 'figaro'
 gem 'active_model_serializers'
 
 gem 'aws-sdk-s3', require: false
+
+gem 'active_storage_validations'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

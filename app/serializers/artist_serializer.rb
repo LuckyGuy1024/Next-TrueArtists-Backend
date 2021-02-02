@@ -1,5 +1,6 @@
 class ArtistSerializer < ActiveModel::Serializer
-  # has_many :studios
+  include Rails.application.routes.url_helpers
+
   has_many :tattoos
 
   attributes :id,
@@ -20,5 +21,27 @@ class ArtistSerializer < ActiveModel::Serializer
              :zip_code,
              :country,
              :seeking_guest_spot,
-             :guest_artist
+             :guest_artist,
+             :avatar,
+             :hero_banner
+
+  def avatar
+    if object.avatar.attached?
+      {
+        id: object.avatar.id,
+        image_url: rails_blob_path(object.avatar, only_path: true),
+        name: object.avatar.filename
+      }
+    end
+  end
+
+  def hero_banner
+    if object.hero_banner.attached?
+      {
+        id: object.hero_banner.id,
+        image_url: rails_blob_path(object.hero_banner, only_path: true),
+        name: object.hero_banner.filename
+      }
+    end
+  end
 end
