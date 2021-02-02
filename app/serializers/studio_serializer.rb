@@ -1,7 +1,7 @@
 class StudioSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-
   has_many :artists
+  has_many :studio_images
 
 
   attributes :id,
