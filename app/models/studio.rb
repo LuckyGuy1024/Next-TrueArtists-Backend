@@ -12,4 +12,11 @@ class Studio < ApplicationRecord
 
   validates :email, presence: true, on: create
   validates :user_id, uniqueness: true
+
+  # send email to artist after accepting them
+  # to acknowlege that they have been added to studio
+
+  def add_artist(artist_id)
+    studio_artists.create(artist_id: artist_id)
+  end
 end

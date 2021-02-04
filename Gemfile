@@ -3,16 +3,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'puma', '~> 4.1'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 
 gem 'figaro'
 
-gem 'will_paginate', '~> 3.0'
-gem 'sprockets', '~>3.0'
 gem 'active_model_serializers'
 
 gem 'aws-sdk-s3', require: false
@@ -22,6 +20,8 @@ gem 'active_storage_validations'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
+gem 'sprockets', '~>3.0'
+gem 'will_paginate', '~> 3.0'
 
 group :development, :test do
   gem 'rspec_api_documentation'

@@ -7,12 +7,15 @@ class StudioInvite < ApplicationRecord
 
   before_validation :generate_invite_code, on: :create
 
-  def add_studio_invite
-    artist = find_artist(self)
+  def invite_artist_to_studio
+    artist = if email.present?
+               Artist.joins(:user).find_by({ users: { email: email } })
+             else
+               Artist.find_by(phone_number: phone_number)
+             end
 
-    if studio_invite_present?(self)
-      # send reminder email instead
-      # studio_invite.send_invitation_reminder
+    if already_invited?
+      StudioMailer.artist_invite_reminder(self).deliver_now
     else
       self.artist_id = artist&.id
 
@@ -21,22 +24,12 @@ class StudioInvite < ApplicationRecord
     end
   end
 
-  def find_artist(attrs)
-    if attrs[:email].present?
-      Artist.joins(:user).find_by({ users: { email: attrs[:email] } })
+  def already_invited?
+    if email.present?
+      StudioInvite.where(email: email)
     else
-      Artist.find_by(phone_number: attrs[:phone_number])
-    end
-  end
-
-  def studio_invite_present?(attrs)
-    studio_invite = if attrs[:email].present?
-                      StudioInvite.where(email: attrs[:email]).first
-                    else
-                      StudioInvite.where(phone_number: attrs[:phone_number]).first
-                    end
-
-    studio_invite.present?
+      StudioInvite.where(phone_number: phone_number)
+    end.any?
   end
 
   def generate_invite_code
@@ -63,13 +56,15 @@ class StudioInvite < ApplicationRecord
     send_sms_invitation if phone_number
   end
 
-  def add_artist_to_studio(artist_id)
-    studio_artist = StudioArtist.find_or_initialize_by(
-      artist_id: artist_id,
-      studio_id: studio.id
-    )
+  # send email to artist after accepting them
+  # to acknowledge that they have been added to studio
+  def accept!(artist_id)
+    if studio.add_artist(artist_id)
+      update(accepted: true, artist_id: artist_id)
 
-    update(accepted: true, artist_id: artist_id) if studio_artist.save
-    studio_artist
+      StudioMailer.confirm_adding_artist(email, studio.name).deliver_now
+    else
+      errors.full_messages
+    end
   end
 end
