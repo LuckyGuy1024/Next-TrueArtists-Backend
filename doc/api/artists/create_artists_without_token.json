@@ -1,0 +1,142 @@
+{
+  "resource": "Artists",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/v1/artists",
+  "description": "Create artists without token",
+  "explanation": null,
+  "parameters": [
+    {
+      "with_example": true,
+      "name": "slug",
+      "description": " slug"
+    },
+    {
+      "with_example": true,
+      "name": "licensed",
+      "description": " licensed"
+    },
+    {
+      "with_example": true,
+      "name": "years_of_experience",
+      "description": " years of experience"
+    },
+    {
+      "with_example": true,
+      "name": "styles",
+      "description": " styles"
+    },
+    {
+      "with_example": true,
+      "name": "website",
+      "description": " website"
+    },
+    {
+      "with_example": true,
+      "name": "facebook_url",
+      "description": " facebook url"
+    },
+    {
+      "with_example": true,
+      "name": "twitter_url",
+      "description": " twitter url"
+    },
+    {
+      "with_example": true,
+      "name": "instagram_url",
+      "description": " instagram url"
+    },
+    {
+      "with_example": true,
+      "name": "phone_number",
+      "description": " phone number"
+    },
+    {
+      "with_example": true,
+      "name": "minimum_spend",
+      "description": " minimum spend"
+    },
+    {
+      "with_example": true,
+      "name": "price_per_hour",
+      "description": " price per hour"
+    },
+    {
+      "with_example": true,
+      "name": "currency_code",
+      "description": " currency code"
+    },
+    {
+      "with_example": true,
+      "name": "street_address",
+      "description": " street address"
+    },
+    {
+      "with_example": true,
+      "name": "city",
+      "description": " city"
+    },
+    {
+      "with_example": true,
+      "name": "state",
+      "description": " state"
+    },
+    {
+      "with_example": true,
+      "name": "zip_code",
+      "description": " zip code"
+    },
+    {
+      "with_example": true,
+      "name": "country",
+      "description": " country"
+    },
+    {
+      "with_example": true,
+      "name": "seeking_guest_spot",
+      "description": " seeking guest spot"
+    },
+    {
+      "with_example": true,
+      "name": "guest_artist",
+      "description": " guest artist"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/v1/artists",
+      "request_body": "user_id=846&licenced=yes&years_of_experience=3&city=Kisumu&country=Kenya",
+      "request_headers": {
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 422,
+      "response_status_text": "Unprocessable Entity",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-cache",
+        "X-Request-Id": "44786baa-2b56-44dd-9af7-68fb84945af9",
+        "X-Runtime": "0.006660",
+        "Vary": "Origin",
+        "Content-Length": "54"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

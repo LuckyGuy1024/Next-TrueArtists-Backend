@@ -1,0 +1,49 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/v1/users/:id",
+  "description": "Successfully get user",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/v1/users/856",
+      "request_body": null,
+      "request_headers": {
+        "Authorization": "Token eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MDQ5ODksImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6ODU2fQ.e0EuVOru0i7MCEn5rHfwhyoRsMXAnRIxstgszouVRBY",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"078b48519de99b2657a8377b7d90987f\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "2b051ffe-d07c-4b14-86e3-5cec80ea4062",
+        "X-Runtime": "0.003616",
+        "Vary": "Origin",
+        "Content-Length": "61"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

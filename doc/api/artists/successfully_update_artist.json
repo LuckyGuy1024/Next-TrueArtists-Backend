@@ -1,0 +1,50 @@
+{
+  "resource": "Artists",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/v1/artists/:id",
+  "description": "Successfully update artist",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/v1/artists/193",
+      "request_body": "years_of_experience=5&city=Kisumu&country=Kenya",
+      "request_headers": {
+        "Authorization": "Token eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MDQ5ODksImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6ODQ4fQ.AKSKWO6XKwzSP1TIgpdrKob1-sVe-ASEpOCahSUZomU",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"89d63665c4ff39242f4cc191035fdcc2\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "8d34ab53-5541-49c4-a2c9-0d5f9122e62c",
+        "X-Runtime": "0.007653",
+        "Vary": "Origin",
+        "Content-Length": "360"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
