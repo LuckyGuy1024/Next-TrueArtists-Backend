@@ -1,0 +1,52 @@
+{
+  "resource": "Studios",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/v1/studios",
+  "description": "Listing studios",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "target",
+      "description": "The thing you want to greet"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/v1/studios?target=rspec_api_documentation",
+      "request_body": null,
+      "request_headers": {
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "target": "rspec_api_documentation"
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"4f53cda18c2baa0c0354bb5f9a3ecbe5\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "4fb4e999-64a1-4279-81c7-f40fdc327c35",
+        "X-Runtime": "0.009641",
+        "Vary": "Origin",
+        "Content-Length": "2"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

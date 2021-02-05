@@ -1,0 +1,50 @@
+{
+  "resource": "Studios",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/v1/studios/:id",
+  "description": "Successfully update studio",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/v1/studios/121",
+      "request_body": "email=jenkins%40ink.com",
+      "request_headers": {
+        "Authorization": "Token eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MDQ5ODksImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6ODUyfQ.B2RfXvLrnm0C9FJVJUuuZjoeP2-fCsjbHE2PztrJ4mQ",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"cfa63c5d332c6459db663a906c5ce2d6\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "ffb3c7de-b7f7-4b32-8a81-df7cecd9026c",
+        "X-Runtime": "0.006814",
+        "Vary": "Origin",
+        "Content-Length": "649"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

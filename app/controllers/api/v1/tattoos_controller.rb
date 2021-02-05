@@ -2,7 +2,8 @@ class Api::V1::TattoosController < ApplicationController
   before_action :find_tattoo, except: %i[create index]
 
   def index
-    @tattoos = paginate(Tattoo.unscoped.includes(:variant_mappings, :data_sources))
+    @tattoos = Tattoo.paginate(page: params[:page], per_page: 10)
+    # @tattoos = paginate(Tattoo.unscoped.includes(:variant_mappings, :data_sources))
     render json: ActiveModel::Serializer::CollectionSerializer.new(@tattoos,
                                                                    serializer: TattooSerializer),
            status: :ok
@@ -40,13 +41,13 @@ class Api::V1::TattoosController < ApplicationController
   def tattoo_params
     params.permit(
       :studio_id,
-      :tattoo_id,
+      :artist_id,
       :styles,
       :category,
       :placement,
       :color,
       :size,
-      :attachments_attributes: [:image]
+      attachments_attributes: []
     )
   end
 end
