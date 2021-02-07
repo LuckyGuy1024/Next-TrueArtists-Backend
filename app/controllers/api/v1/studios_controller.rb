@@ -34,43 +34,10 @@ class Api::V1::StudiosController < ApplicationController
     end
   end
 
-  def invite_artist
-    if @studio.invite_artist(artist_invite_params)
-      head(:ok)
-    else
-      render_api_error(status: 422, errors: @studio.errors)
-    end
-  end
-
-  def upload
-    if @studio.studio_images.attach(params[:studio_images])
-      render json: StudioSerializer.new(@studio).to_json, status: :ok
-    else
-      render_api_error(status: 422, errors: @studio.errors)
-    end
-  end
-
-  def destroy_image
-    image = @studio.studio_images.find(params[:image_id])
-
-    if image.purge == []
-      head(:ok)
-    else
-      render_api_error(status: 422, errors: 'We could not delete resource')
-    end
-  end
-
   private
 
   def find_studio
     @studio = Studio.find(params[:id])
-  end
-
-  def artist_invite_params
-    params.permit(
-      :phone_number,
-      :email
-    )
   end
 
   def studio_params
