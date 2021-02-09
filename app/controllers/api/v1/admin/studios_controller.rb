@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::StudiosController < ApplicationController
+class Api::V1::Admin::StudiosController < AdminController
   before_action :find_studio, except: %i[create index]
 
   def index
@@ -12,15 +12,6 @@ class Api::V1::StudiosController < ApplicationController
 
   def show
     render json: StudioSerializer.new(@studio).to_json, status: :ok
-  end
-
-  def create
-    studio = current_user.build_studio(studio_params)
-    if studio.save
-      render json: StudioSerializer.new(studio).to_json, status: :created
-    else
-      render_api_error(status: 422, errors: studio.errors)
-    end
   end
 
   def update

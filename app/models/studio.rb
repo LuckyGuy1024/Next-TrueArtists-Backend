@@ -14,10 +14,18 @@ class Studio < ApplicationRecord
   validates :email, presence: true, on: create
   validates :user_id, uniqueness: true
 
+  after_commit :upgrade_user_role, on: :create
+
   # send email to artist after accepting them
   # to acknowlege that they have been added to studio
 
   def add_artist(artist_id)
     studio_artists.create(artist_id: artist_id)
+  end
+
+  private
+
+  def upgrade_user_role
+    user.assign_role(User.roles[:studio])
   end
 end
