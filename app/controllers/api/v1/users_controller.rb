@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate_request!, only: %i[create]
-  before_action :fail_if_unauthenticated!, except: %i[create]
-  before_action :find_user, except: %i[create]
+  skip_before_action :authenticate_request!, only: %i[create reset_password_request]
+  before_action :fail_if_unauthenticated!, except: %i[create reset_password_request]
+  before_action :find_user, except: %i[create reset_password_request]
 
   def create
     user = User.new(user_create_params)
     if user.save
-      auth_token = JsonWebToken.encode(user_id: user.id)
       render json: UserSerializer.new(user, root: false).to_json,
              message: 'User created successfully',
              status: 201
