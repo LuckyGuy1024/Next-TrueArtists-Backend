@@ -9,14 +9,15 @@ gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
-gem 'figaro'
-gem 'active_model_serializers'
 gem 'active_storage_validations'
 gem 'figaro'
+gem 'searchkick'
+gem 'kaminari'
+
+# Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'
-gem 'will_paginate', '~> 3.0'
 
 group :development, :test do
   gem 'rspec_api_documentation'
