@@ -15,12 +15,14 @@ Rails.application.routes.draw do
       resources :users
       resources :artists do
         resources :tattoos
+        member do
+          delete 'delete-image/:image_id' => 'artists#remove_image'
+        end
       end
       resources :studios do
         resources :tattoos
         member do
-          put :upload
-          delete 'delete-image/:image_id' => 'studios#destroy_image'
+          delete 'delete-image/:image_id' => 'studios#remove_image'
         end
       end
 
@@ -31,7 +33,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :tattoos, only: %i[index show]
+      resources :tattoos, only: %i[index show] do
+        collection do
+          post 'batch-create' => 'tattoos#batch_create'
+        end
+      end
       resources :articles
     end
   end

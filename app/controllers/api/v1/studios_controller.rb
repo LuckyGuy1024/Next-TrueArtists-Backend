@@ -15,9 +15,7 @@ class Api::V1::StudiosController < ApplicationController
   end
 
   def create
-    studio = Studio.new(studio_params)
-    studio.user_id = current_user&.id
-    studio.studio_images.attach(studio_params[:studio_images])
+    studio = current_user.build_studio(studio_params)
 
     if studio.save
       render json: StudioSerializer.new(studio).to_json, status: :created
@@ -27,10 +25,29 @@ class Api::V1::StudiosController < ApplicationController
   end
 
   def update
-    if @studio.update(studio_params)
+    studio = StudioForm.new(@studio, studio_params).update
+
+    if studio
       render json: StudioSerializer.new(@studio).to_json, status: :ok
     else
       render_api_error(status: 422, errors: @studio.errors)
+    end
+  end
+
+  def invite_artist
+    if @studio.invite_artist(artist_invite_params)
+      head(:ok)
+    else
+      render_api_error(status: 422, errors: @studio.errors)
+    end
+  end
+
+  def remove_image
+    attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
+    if attachment.blank?
+      head(:ok)
+    else
+      render_api_error(status: 422, errors: 'We could not delete resource')
     end
   end
 
@@ -77,7 +94,8 @@ class Api::V1::StudiosController < ApplicationController
       :country,
       :seeking_guest_spot,
       :guest_studio,
-      studio_images: []
+      :avatar,
+      :hero_banner
     )
   end
 end
