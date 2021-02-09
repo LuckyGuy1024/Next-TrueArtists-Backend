@@ -1,4 +1,4 @@
-class Api::V1::Admin::AdminController < ApplicationController
+class Api::V1::Admin::BaseController < ApplicationController
   before_action :check_user_role
 
   private

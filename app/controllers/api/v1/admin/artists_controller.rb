@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api::V1::Admin
-  class ArtistsController < AdminController
+  class ArtistsController < BaseController
     before_action :find_artist, except: %i[index create accept_artist_invite]
 
     def index

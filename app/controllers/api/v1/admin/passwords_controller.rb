@@ -1,6 +1,6 @@
 
 module Api::V1::Admin
-  class PasswordsController < AdminController
+  class PasswordsController < BaseController
     def update
       user = User.find(@user_id)
 

@@ -1,2 +1,4 @@
-class Api::V1::Admin::MessagesController < AdminController
+module Api::V1::Admin
+  class MessagesController < BaseController
+  end
 end

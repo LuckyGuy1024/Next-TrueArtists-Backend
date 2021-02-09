@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api::V1::Admin
-  class StudioInvitesController < AdminController
+  class StudioInvitesController < BaseController
     before_action :find_studio, except: %i[accept_studio_invite]
     before_action :find_studio_invite, only: %i[accept_studio_invite]
 
