@@ -16,7 +16,6 @@ class Api::V1::StudiosController < ApplicationController
 
   def create
     studio = current_user.build_studio(studio_params)
-
     if studio.save
       render json: StudioSerializer.new(studio).to_json, status: :created
     else
