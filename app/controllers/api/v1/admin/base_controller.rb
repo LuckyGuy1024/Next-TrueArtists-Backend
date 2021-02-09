@@ -4,7 +4,7 @@ class Api::V1::Admin::BaseController < ApplicationController
   private
 
   def check_user_role
-    return if current_user.admin?
+    return if current_user&.admin?
     render json: {
       errors: 'You\'re not authorised to access this page.'
     }, status: :unauthorized
