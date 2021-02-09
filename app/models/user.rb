@@ -29,7 +29,7 @@ class User < ApplicationRecord
   after_initialize :assign_basic_role
 
   def assign_basic_role
-    role = User.roles[:regular]
+    self.role = User.roles[:regular]
   end
 
   def downcase_email
@@ -49,7 +49,7 @@ class User < ApplicationRecord
   end
 
   def assign_role(role)
-    user.update(role: User.roles[role.to_sym])
+    update(role: User.roles[role.to_sym])
   end
 
   def admin?
