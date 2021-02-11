@@ -4,29 +4,10 @@ class StudioSearch < BaseSearch
   end
 
   def filter
-    constraints = {
-      page: options[:page] || 1,
-      per_page: options[:per_page] || PER_PAGE
-    }
+    search_results = base_filter
 
-    constraints[:order] = order
-
-    search_object = if options[:lat] && options[:lon]
-                      search_class.search(query, where: {
-                                            location: {
-                                              near: {
-                                                lat: options[:lat],
-                                                lon: options[:lon]
-                                              },
-                                              within: options[:within]
-                                            }
-                                          })
-                    else
-                      search_class.search(query, constraints)
-                    end
-
-    self.results = search_object.results
-    self.meta = pagination_info(search_object)
+    self.results = search_results.results
+    self.meta = pagination_info(search_results)
 
     {
       studios: ActiveModel::Serializer::CollectionSerializer.new(results,

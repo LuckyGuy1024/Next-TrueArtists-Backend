@@ -8,7 +8,7 @@ class BaseSearch
     @options = options
   end
 
-  def filter
+  def base_filter
     constraints = {
       page: options[:page] || 1,
       per_page: options[:per_page] || PER_PAGE
@@ -16,24 +16,34 @@ class BaseSearch
 
     constraints[:order] = order
 
-    if options[:lat]
-      search_object = if options[:lat] && options[:lon]
-                        search_class.search(query, where: {
-                                              location: {
-                                                near: {
-                                                  lat: options[:lat],
-                                                  lon: options[:lon]
-                                                },
-                                                within: options[:within]
-                                              }
-                                            })
-                      else
-                        search_class.search(query, constraints)
-                      end
-    end
 
-    self.results ||= search_object.results
-    self.meta = pagination_info(search_object)
+    if options[:near] && location
+      search_class.search(query,
+                          page: options[:page] || 1,
+                          per_page: options[:per_page] || PER_PAGE,
+                          boost_by_distance: {
+                            location: {
+                              origin: location
+                            }
+                          },
+                          where: {
+                            location: {
+                              near: location,
+                              within: options[:within]
+                            }
+                          })
+    else
+      search_class.search(query, constraints)
+    end
+  end
+
+  def location
+    return nil unless location = Geocoder.search(options[:near]).first
+
+    {
+      lat: location.latitude,
+      lon: location.longitude
+    }
   end
 
   def pagination_info(resource)

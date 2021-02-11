@@ -2,7 +2,7 @@
 
 module Api::V1
   class StudiosController < ApplicationController
-    before_action :find_studio, except: %i[create index search]
+    before_action :find_studio, except: %i[create index]
 
     def index
       @results = StudioSearch.new(
@@ -65,8 +65,7 @@ module Api::V1
         page: params[:page] || 1,
         per_page: params[:per_page] || BaseSearch::PER_PAGE,
         status: params[:status],
-        lat: params[:lat],
-        lon: params[:lon],
+        near: params[:near],
         within: params[:within]
       }.delete_if { |_k, v| v.nil? }
     end

@@ -18,11 +18,20 @@ class Studio < ApplicationRecord
 
   after_commit :upgrade_user_role, on: :create
 
-  # send email to artist after accepting them
-  # to acknowledge that they have been added to studio
+  geocoded_by :address, latitude: :lat, longitude: :lon
+  after_validation :geocode, if: :address_changed?
+
 
   def search_data
     attributes.merge(location: { lat: lat, lon: lon })
+  end
+
+  def address
+    [street_address, city, state, country].compact.join(', ')
+  end
+
+  def address_changed?
+    street_address_changed? || city_changed? || state_changed? || country_changed?
   end
 
   def add_artist(artist_id)

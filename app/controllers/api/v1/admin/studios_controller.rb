@@ -5,10 +5,12 @@ module Api::V1::Admin
     before_action :find_studio, except: %i[create index]
 
     def index
-      @studios = Studio.paginate(page: params[:page], per_page: 10)
-      render json: ActiveModel::Serializer::CollectionSerializer.new(@studios,
-                                                                     serializer: StudioSerializer),
-             status: :ok
+      @results = StudioSearch.new(
+        query: params[:query],
+        options: search_options
+      ).filter
+
+      render json: @results, status: :ok
     end
 
     def show
@@ -46,6 +48,16 @@ module Api::V1::Admin
 
     def find_studio
       @studio = Studio.find(params[:id])
+    end
+
+    def search_options
+      {
+        page: params[:page] || 1,
+        per_page: params[:per_page] || BaseSearch::PER_PAGE,
+        status: params[:status],
+        near: params[:near],
+        within: params[:within]
+      }.delete_if { |_k, v| v.nil? }
     end
 
     def studio_params
