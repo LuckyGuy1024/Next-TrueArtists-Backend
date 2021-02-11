@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_29_230129) do
+ActiveRecord::Schema.define(version: 2021_02_12_161611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 2021_01_29_230129) do
     t.boolean "guest_artist", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "lat", precision: 15, scale: 10
+    t.decimal "lon", precision: 15, scale: 10
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 

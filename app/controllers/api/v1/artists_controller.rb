@@ -5,10 +5,12 @@ module Api::V1
     before_action :find_artist, except: %i[index create accept_artist_invite]
 
     def index
-      @artists = Artist.paginate(page: params[:page], per_page: 10)
-      render json: ActiveModel::Serializer::CollectionSerializer.new(@artists,
-                                                                     serializer: ArtistSerializer),
-             status: :ok
+      @results = ArtistSearch.new(
+        query: params[:query],
+        options: search_options
+      ).filter
+
+      render json: @results, status: :ok
     end
 
     def show
@@ -48,9 +50,18 @@ module Api::V1
       @artist = Artist.find(params[:id])
     end
 
+    def search_options
+      {
+        page: params[:page] || 1,
+        per_page: params[:per_page] || BaseSearch::PER_PAGE,
+        status: params[:status],
+        near: params[:near],
+        within: params[:within]
+      }.delete_if { |_k, v| v.nil? }
+    end
+
     def artist_params
       params.permit(
-        :user_id,
         :slug,
         :licensed,
         :years_of_experience,

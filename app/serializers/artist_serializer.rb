@@ -5,6 +5,7 @@ class ArtistSerializer < ActiveModel::Serializer
 
   attributes :id,
              :user_id,
+             :name,
              :slug,
              :licensed,
              :years_of_experience,
@@ -24,6 +25,10 @@ class ArtistSerializer < ActiveModel::Serializer
              :guest_artist,
              :avatar,
              :hero_banner
+
+  def name
+    object.user.full_name
+  end
 
   def avatar
     if object.avatar.attached?
