@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Studio < ApplicationRecord
+  searchkick word_start: %i[name bio city country specialty services], locations: [:location]
+
   include AssetExtension
   belongs_to :user
   has_many :studio_invites, dependent: :destroy
@@ -16,8 +18,21 @@ class Studio < ApplicationRecord
 
   after_commit :upgrade_user_role, on: :create
 
-  # send email to artist after accepting them
-  # to acknowlege that they have been added to studio
+  geocoded_by :address, latitude: :lat, longitude: :lon
+  after_validation :geocode, if: :address_changed?
+
+
+  def search_data
+    attributes.merge(location: { lat: lat, lon: lon })
+  end
+
+  def address
+    [street_address, city, state, country].compact.join(', ')
+  end
+
+  def address_changed?
+    street_address_changed? || city_changed? || state_changed? || country_changed?
+  end
 
   def add_artist(artist_id)
     studio_artists.create(artist_id: artist_id)
@@ -26,6 +41,6 @@ class Studio < ApplicationRecord
   private
 
   def upgrade_user_role
-    user.assign_role(User.roles[:studio])
+    user.assign_role(User.roles[:studio_manager])
   end
 end

@@ -53,6 +53,6 @@ class User < ApplicationRecord
   end
 
   def admin?
-    role ==  User.roles[:admin]
+    role == User.roles[:admin]
   end
 end
