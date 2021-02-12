@@ -8,6 +8,7 @@ class Studio < ApplicationRecord
   has_many :studio_invites, dependent: :destroy
   has_many :studio_artists
   has_many :artists, through: :studio_artists
+  has_many :tattoos
   has_one_attached :avatar
   has_one_attached :hero_banner
 

@@ -7,8 +7,11 @@ class TattooSerializer < ActiveModel::Serializer
              :styles,
              :categories,
              :placement,
+             :description,
+             :tattoo_style,
              :color,
              :size,
+             :tags,
              :image
 
   def image
@@ -19,5 +22,11 @@ class TattooSerializer < ActiveModel::Serializer
         name: object.image.filename
       }
     end
+  end
+
+  def tags
+    return [] if object.tag_list.nil?
+
+    object.tag_list.split(',')
   end
 end
