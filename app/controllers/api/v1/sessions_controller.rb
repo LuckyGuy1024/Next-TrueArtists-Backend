@@ -5,7 +5,6 @@ class Api::V1::SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: user_login_params[:email])
-
     if user&.authenticate(user_login_params[:password])
       auth_token = JsonWebToken.encode(user_id: user.id)
       render json: { auth_token: auth_token }, status: :ok
@@ -20,6 +19,6 @@ class Api::V1::SessionsController < ApplicationController
   private
 
   def user_login_params
-    params.permit(:email, :password)
+    params.require(:user).permit(:email, :password)
   end
 end

@@ -2,7 +2,6 @@
 
 require 'faker'
 
-
 5.times do |i|
   User.create(
     email: "admin#{i + 1}@example.com",
@@ -12,7 +11,6 @@ require 'faker'
     password_confirmation: 'pass1234'
   )
 end
-
 
 1500.times do |i|
   User.create(
@@ -77,7 +75,6 @@ end
     filename: 'hero_banner.jpg'
   )
 end
-
 
 250.times do |i|
   StudioArtist.create(
