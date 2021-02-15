@@ -12,7 +12,9 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users
+      get 'me' => 'users#show'
+      resources :users, only: %i[create show update destroy]
+
       resources :passwords do
         collection do
           put 'change_password' => 'passwords#update'

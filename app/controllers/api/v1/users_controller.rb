@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate_request!, only: %i[create reset_password_request]
-  before_action :fail_if_unauthenticated!, except: %i[create reset_password_request]
-  before_action :find_user, except: %i[create reset_password_request]
+  skip_before_action :authenticate_request!, only: %i[create]
+  before_action :fail_if_unauthenticated!, except: %i[create]
+  before_action :find_user, except: %i[create]
 
   def create
     user = User.new(user_create_params)
@@ -39,7 +39,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_update_params
@@ -48,7 +48,6 @@ class Api::V1::UsersController < ApplicationController
 
   def user_create_params
     params.permit(:email,
-                  :role,
                   :full_name,
                   :status,
                   :password,
