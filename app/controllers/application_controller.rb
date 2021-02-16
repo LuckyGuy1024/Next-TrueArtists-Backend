@@ -51,6 +51,20 @@ class ApplicationController < ActionController::API
     render json: { errors: errors }.to_json, status: status
   end
 
+  def paginate(resource)
+    resource = resource.page(params[:page] || 1)
+    resource.per(params[:per_page] || 25)
+  end
+
+  def pagination_info(resource)
+    {
+      current_page: resource.current_page,
+      total_pages: resource.total_pages,
+      last_page?: resource.last_page?,
+      next_page: resource.next_page || resource.current_page
+    }
+  end
+
   private
 
   def json_api_error_format(errors)
