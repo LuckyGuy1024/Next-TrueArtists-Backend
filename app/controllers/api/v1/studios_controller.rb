@@ -72,10 +72,7 @@ module Api::V1
 
     def studio_params
       params.permit(
-        :user_id,
         :email,
-        :lat,
-        :lon,
         :accepting_guest_artist,
         :piercings,
         :cosmetic_tattoos,
