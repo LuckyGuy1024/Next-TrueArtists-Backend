@@ -3,8 +3,7 @@ class Api::V1::TattoosController < ApplicationController
   before_action :find_tattoo, except: %i[create index batch_create]
 
   def index
-    @tattoos = Tattoo.paginate(page: params[:page], per_page: 10)
-    # @tattoos = paginate(Tattoo.unscoped.includes(:variant_mappings, :data_sources))
+    @tattoos = paginate(Tattoo.unscoped)
     render json: ActiveModel::Serializer::CollectionSerializer.new(@tattoos,
                                                                    serializer: TattooSerializer),
            status: :ok

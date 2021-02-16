@@ -3,7 +3,7 @@ module Api::V1::Admin
     before_action :find_tattoo, except: %i[index]
 
     def index
-      @tattoos = Tattoo.paginate(page: params[:page], per_page: 10)
+      @tattoos = paginate(Tattoo.unscoped)
       render json: ActiveModel::Serializer::CollectionSerializer.new(@tattoos,
                                                                      serializer: TattooSerializer),
              status: :ok

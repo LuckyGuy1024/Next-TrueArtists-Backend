@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  enum status: {
+    active: 'active',
+    inactive: 'inactive',
+    suspended: 'suspended',
+    closed: 'closed'
+  }
+
   enum role: {
     admin: 'admin',
     artist: 'artist',
@@ -30,6 +37,7 @@ class User < ApplicationRecord
 
   def assign_basic_role
     self.role = User.roles[:regular]
+    self.status = User.statuses[:active]
   end
 
   def downcase_email
