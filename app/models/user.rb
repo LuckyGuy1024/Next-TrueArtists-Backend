@@ -26,7 +26,7 @@ class User < ApplicationRecord
                             message: 'password does match confirmation',
                             on: :create
 
-  after_initialize :assign_basic_role
+  after_initialize :assign_basic_role, if: :new_record?
 
   def assign_basic_role
     self.role = User.roles[:regular]
