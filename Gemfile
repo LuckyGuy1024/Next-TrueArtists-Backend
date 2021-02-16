@@ -18,6 +18,7 @@ gem 'faker' #, :git => 'https://github.com/faker-ruby/faker.git', :branch => 'ma
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'
+gem 'twilio-ruby'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'
