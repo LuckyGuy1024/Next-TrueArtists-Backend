@@ -26,5 +26,5 @@ config/database.yml
 config/application.yml
 
 .idea
-
+.DS_Store
 /storage

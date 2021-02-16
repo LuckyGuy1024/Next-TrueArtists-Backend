@@ -6,6 +6,14 @@ module Api::V1::Admin
     before_action :fail_if_unauthenticated!, except: %i[create reset_password_request]
     before_action :find_user, except: %i[create reset_password_request]
 
+    def index
+      @users = paginate(User.unscoped)
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@users,
+                                                                     serializer: UserSerializer),
+             status: :ok
+
+    end
+
     def create
       user = User.new(user_create_params)
       if user.save
