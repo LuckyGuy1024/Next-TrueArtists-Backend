@@ -2,7 +2,7 @@
 
 module Api::V1
   class StudiosController < ApplicationController
-    before_action :find_studio, except: %i[create index]
+    before_action :find_studio, except: %i[create index verify_phone]
 
     def index
       @results = StudioSearch.new(
@@ -45,6 +45,16 @@ module Api::V1
       end
     end
 
+    def verify_phone
+      studio = current_user.studio.verify_phone(phone_verification_params[:code])
+
+      if studio
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
     def remove_image
       attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
       if attachment.blank?
@@ -68,6 +78,10 @@ module Api::V1
         near: params[:near],
         within: params[:within]
       }.delete_if { |_k, v| v.nil? }
+    end
+
+    def phone_verification_params
+      params.permit(:code)
     end
 
     def studio_params
