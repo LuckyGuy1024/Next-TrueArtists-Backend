@@ -2,7 +2,7 @@
 
 module Api::V1::Admin
   class StudiosController < BaseController
-    before_action :find_studio, except: %i[create index]
+    before_action :find_studio, except: %i[index]
 
     def index
       @results = StudioSearch.new(

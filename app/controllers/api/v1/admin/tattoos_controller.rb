@@ -1,6 +1,6 @@
 module Api::V1::Admin
   class TattoosController < BaseController
-    before_action :find_tattoo, except: %i[index batch_create]
+    before_action :find_tattoo, except: %i[index]
 
     def index
       @tattoos = Tattoo.paginate(page: params[:page], per_page: 10)
@@ -11,31 +11,6 @@ module Api::V1::Admin
 
     def show
       render json: TattooSerializer.new(@tattoo).to_json, status: :ok
-    end
-
-    def batch_create
-      errors = []
-      processed = []
-
-      params['tattoos'].each do |tattoo_params|
-        permitted_params = tattoo_params.permit(permitted_attributes)
-        tattoo = Tattoo.new(permitted_params)
-        tattoo.image.attach(permitted_params[:image])
-
-        if tattoo.save
-          processed << {
-            body: TattooSerializer.new(tattoo),
-            status: :created
-          }
-        else
-          errors << {
-            body: tattoo.attributes.except('id', 'created_at', 'updated_at'),
-            errors: tattoo.errors,
-            status: 422
-          }
-        end
-      end
-      render json: { results: processed, errors: errors }, status: 200
     end
 
     def update

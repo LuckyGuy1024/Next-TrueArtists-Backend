@@ -2,7 +2,7 @@
 
 module Api::V1::Admin
   class ArtistsController < BaseController
-    before_action :find_artist, except: %i[index create accept_artist_invite]
+    before_action :find_artist, except: %i[index]
 
     def index
       @results = ArtistSearch.new(

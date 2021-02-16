@@ -2,9 +2,7 @@
 
 module Api::V1::Admin
   class UsersController < BaseController
-    skip_before_action :authenticate_request!, only: %i[create reset_password_request]
-    before_action :fail_if_unauthenticated!, except: %i[create reset_password_request]
-    before_action :find_user, except: %i[create reset_password_request]
+    before_action :find_user, except: %i[index]
 
     def index
       @users = paginate(User.unscoped)
