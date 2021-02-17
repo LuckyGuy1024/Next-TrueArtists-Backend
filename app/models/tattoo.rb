@@ -1,5 +1,5 @@
 class Tattoo < ApplicationRecord
-  searchkick word_start: %i[styles placement size color categories tattoo_style tag_list description],
+  searchkick word_start: %i[styles placement size color categories tag_list description],
              locations: [:location]
 
   include AssetExtension
