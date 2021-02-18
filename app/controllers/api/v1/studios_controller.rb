@@ -13,6 +13,10 @@ module Api::V1
       render json: @results, status: :ok
     end
 
+    def city
+      Studio.near(params[:city], 500)
+    end
+
     def show
       render json: StudioSerializer.new(@studio).to_json, status: :ok
     end
@@ -65,7 +69,7 @@ module Api::V1
         page: params[:page] || 1,
         per_page: params[:per_page] || BaseSearch::PER_PAGE,
         status: params[:status],
-        near: params[:near],
+        near: params[:city] || params[:near],
         within: params[:within]
       }.delete_if { |_k, v| v.nil? }
     end

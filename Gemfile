@@ -14,7 +14,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 gem 'searchkick'
 gem 'kaminari'
 gem 'geocoder'
-gem 'faker' #, :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'faker'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'

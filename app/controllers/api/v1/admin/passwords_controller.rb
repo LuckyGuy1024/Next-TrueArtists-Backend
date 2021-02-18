@@ -2,7 +2,7 @@
 module Api::V1::Admin
   class PasswordsController < BaseController
     def update
-      user = User.find(@user_id)
+      user = User.find(params[:user_id])
 
       if user.set_new_password(change_password_params)
         head(:ok)

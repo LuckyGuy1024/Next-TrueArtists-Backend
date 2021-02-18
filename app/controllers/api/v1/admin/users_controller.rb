@@ -2,7 +2,7 @@
 
 module Api::V1::Admin
   class UsersController < BaseController
-    before_action :find_user, except: %i[index]
+    before_action :find_user, except: %i[index create]
 
     def index
       @users = paginate(User.unscoped)
