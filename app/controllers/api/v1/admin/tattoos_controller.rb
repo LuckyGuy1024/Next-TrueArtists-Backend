@@ -3,10 +3,12 @@ module Api::V1::Admin
     before_action :find_tattoo, except: %i[index]
 
     def index
-      @tattoos = paginate(Tattoo.unscoped)
-      render json: ActiveModel::Serializer::CollectionSerializer.new(@tattoos,
-                                                                     serializer: TattooSerializer),
-             status: :ok
+      @results = TattooSearch.new(
+        query: params[:query],
+        options: search_options
+      ).filter
+
+      render json: @results, status: :ok
     end
 
     def show
@@ -41,6 +43,7 @@ module Api::V1::Admin
         color
         size
         image
+        tags
       ]
     end
   end
