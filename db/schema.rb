@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_161611) do
+ActiveRecord::Schema.define(version: 2021_02_17_180000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,11 +176,14 @@ ActiveRecord::Schema.define(version: 2021_02_12_161611) do
     t.string "size"
     t.string "color"
     t.string "categories"
-    t.string "tattoo_style"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "artist_id"
     t.integer "studio_id"
+    t.string "tag_list"
+    t.string "description"
+    t.decimal "lat", precision: 15, scale: 10
+    t.decimal "lon", precision: 15, scale: 10
   end
 
   create_table "users", force: :cascade do |t|

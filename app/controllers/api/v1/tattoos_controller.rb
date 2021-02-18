@@ -1,12 +1,14 @@
 class Api::V1::TattoosController < ApplicationController
-  before_action :find_parent_object, only: %i[create update destroy]
+  before_action :find_parent_object, only: %i[create batch_create destroy]
   before_action :find_tattoo, except: %i[create index batch_create]
 
   def index
-    @tattoos = paginate(Tattoo.unscoped)
-    render json: ActiveModel::Serializer::CollectionSerializer.new(@tattoos,
-                                                                   serializer: TattooSerializer),
-           status: :ok
+    @results = TattooSearch.new(
+      query: params[:query],
+      options: search_options
+    ).filter
+
+    render json: @results, status: :ok
   end
 
   def show
@@ -19,10 +21,12 @@ class Api::V1::TattoosController < ApplicationController
 
     params['tattoos'].each do |tattoo_params|
       permitted_params = tattoo_params.permit(permitted_attributes)
-      tattoo = Tattoo.new(permitted_params)
-      tattoo.image.attach(permitted_params[:image])
+      tattoo = @parent_object.tattoos.new(permitted_params.except(:tags))
+      tattoo&.import_tag_list(tattoo_params[:tags])
 
       if tattoo.save
+        tattoo.image.attach(permitted_params[:image])
+
         processed << {
           body: TattooSerializer.new(tattoo),
           status: :created
@@ -38,18 +42,10 @@ class Api::V1::TattoosController < ApplicationController
     render json: { results: processed, errors: errors }, status: 200
   end
 
-  def create
-    tattoo = @parent_object.tattoos.new(tattoo_params)
-
-    if tattoo.save
-      render json: TattooSerializer.new(tattoo).to_json, status: :created
-    else
-      render_api_error(status: 422, errors: tattoo.errors)
-    end
-  end
-
   def update
     if @tattoo.update(tattoo_params)
+      @tattoo.image.attach(tattoo_params[:image]) if tattoo_params[:image]
+
       render json: TattooSerializer.new(@tattoo).to_json, status: :ok
     else
       render_api_error(status: 422, errors: @tattoo.errors)
@@ -59,16 +55,8 @@ class Api::V1::TattoosController < ApplicationController
   private
 
   def find_parent_object
-    @parent_object = @artist || @studio
+    @parent_object = current_user.artist || current_user.studio
     head(:not_found) unless @parent_object
-  end
-
-  def find_artist
-    @artist = Artist.find(tattoo_params[:artist_id])
-  end
-
-  def find_studio
-    @studio = Studio.find(params[:studio_id])
   end
 
   def find_tattoo
@@ -76,19 +64,35 @@ class Api::V1::TattoosController < ApplicationController
   end
 
   def tattoo_params
-    params.permit(*permitted_attributes)
+    params.permit(
+      :styles,
+      :categories,
+      :placement,
+      :color,
+      :size,
+      :image,
+      tags: []
+    )
   end
 
   def permitted_attributes
-    %i[
-      studio_id
-      artist_id
-      styles
-      categories
-      placement
-      color
-      size
-      image
-    ]
+    %i[ styles
+        categories
+        placement
+        color
+        size
+        image
+        tags
+      ]
+  end
+
+  def search_options
+    {
+      page: params[:page] || 1,
+      per_page: params[:per_page] || BaseSearch::PER_PAGE,
+      status: params[:status],
+      near: params[:near],
+      within: params[:within]
+    }.delete_if { |_k, v| v.nil? }
   end
 end

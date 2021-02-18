@@ -89,8 +89,7 @@ end
     artist_id: i + 1,
     placement: 'back',
     size: 'small',
-    color: Faker::Color.color_name,
-    tattoo_style: 'tribal'
+    color: Faker::Color.color_name
   )
 
   artist_tattoo.image.attach(
@@ -104,8 +103,7 @@ end
     studio_id: i + 251,
     placement: 'back',
     size: 'small',
-    color: Faker::Color.color_name,
-    tattoo_style: 'tribal'
+    color: Faker::Color.color_name
   )
 
   studio_tattoo.image.attach(

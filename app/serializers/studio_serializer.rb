@@ -2,6 +2,7 @@ class StudioSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
   has_many :artists
+  has_many :tattoos
 
   attributes :id,
              :user_id,
