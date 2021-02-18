@@ -55,7 +55,6 @@ module Api::V1::Admin
 
     def user_create_params
       params.permit(:email,
-                    :role,
                     :full_name,
                     :status,
                     :password,
