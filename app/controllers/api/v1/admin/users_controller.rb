@@ -57,6 +57,7 @@ module Api::V1::Admin
       params.permit(:email,
                     :full_name,
                     :status,
+                    :role,
                     :password,
                     :password_confirmation)
     end
