@@ -27,7 +27,7 @@ module Api::V1
     end
 
     def update
-      artist = ArtistForm.new(@artist, artist_params).update
+      artist = BaseForm.new(@artist, artist_params).update
       if artist
         render json: ArtistSerializer.new(@artist).to_json, status: :ok
       else
@@ -41,7 +41,7 @@ module Api::V1
       if artist
         head(:ok)
       else
-        render_api_error(status: 422, errors: @studio.errors)
+        render_api_error(status: 422, errors: @artist.errors)
       end
     end
 

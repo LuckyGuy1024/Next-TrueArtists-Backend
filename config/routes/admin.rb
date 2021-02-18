@@ -22,6 +22,11 @@ Rails.application.routes.draw do
             delete 'delete-image/:image_id' => 'studios#remove_image'
           end
         end
+        resources :locations do
+          member do
+            delete 'delete-image/:image_id' => 'locations#remove_image'
+          end
+        end
 
         resources :studio_invites, path: 'studio-invites' do
           collection do
