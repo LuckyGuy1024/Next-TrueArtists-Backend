@@ -40,6 +40,12 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :favorites, only: %i[create] do
+        collection do
+          :delete
+        end
+      end
+
       resources :tattoos, only: %i[index show update] do
         collection do
           post 'batch-create' => 'tattoos#batch_create'

@@ -3,6 +3,7 @@ class Tattoo < ApplicationRecord
              locations: [:location]
 
   include AssetExtension
+  acts_as_favoritable
   belongs_to :studio, optional: true
   belongs_to :artist, optional: true
 
