@@ -16,6 +16,7 @@ class User < ApplicationRecord
   }
 
   require 'json_web_token'
+  acts_as_favoritor
   before_save :downcase_email
   has_secure_password
 

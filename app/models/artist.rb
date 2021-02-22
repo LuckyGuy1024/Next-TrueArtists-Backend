@@ -5,6 +5,7 @@ class Artist < ApplicationRecord
              locations: [:location]
 
   include AssetExtension
+  acts_as_favoritable
   belongs_to :user
   has_many :tattoos
   has_many :studio_artists

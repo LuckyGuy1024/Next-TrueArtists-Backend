@@ -4,6 +4,7 @@ class Studio < ApplicationRecord
   searchkick word_start: %i[name bio city country specialty services], locations: [:location]
 
   include AssetExtension
+  acts_as_favoritable
   belongs_to :user
   has_many :studio_invites, dependent: :destroy
   has_many :studio_artists
