@@ -71,7 +71,7 @@ module Api::V1
     private
 
     def find_studio
-      @studio = Studio.find(params[:id])
+      @studio = Studio.friendly.find(params[:id])
     end
 
     def search_options
@@ -104,7 +104,6 @@ module Api::V1
         :languages,
         :name,
         :bio,
-        :slug,
         :services,
         :specialty,
         :website_url,

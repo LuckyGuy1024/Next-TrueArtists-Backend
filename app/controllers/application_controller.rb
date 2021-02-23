@@ -28,7 +28,7 @@ class ApplicationController < ActionController::API
 
   # Sets the @current_user with the user_id from payload
   def current_user
-    @current_user = User.find_by(id: @current_user_id)
+    @current_user = User.friendly.find_by(id: @current_user_id)
   end
 
   def fail_if_unauthenticated!

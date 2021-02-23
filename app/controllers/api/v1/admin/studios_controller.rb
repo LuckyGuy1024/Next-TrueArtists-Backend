@@ -76,7 +76,6 @@ module Api::V1::Admin
         :languages,
         :name,
         :bio,
-        :slug,
         :services,
         :specialty,
         :website,

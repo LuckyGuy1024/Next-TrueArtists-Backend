@@ -53,7 +53,6 @@ module Api::V1::Admin
 
     def artist_params
       params.permit(
-        :slug,
         :licensed,
         :years_of_experience,
         :styles,

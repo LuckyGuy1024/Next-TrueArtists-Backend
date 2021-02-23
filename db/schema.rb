@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_120753) do
+ActiveRecord::Schema.define(version: 2021_02_25_130631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,14 @@ ActiveRecord::Schema.define(version: 2021_02_18_120753) do
     t.integer "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "tag_list"
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -79,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_120753) do
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
     t.string "state"
+    t.boolean "phone_verified", default: false
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
@@ -108,6 +112,17 @@ ActiveRecord::Schema.define(version: 2021_02_18_120753) do
     t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
     t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor_type_and_favoritor_id"
     t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -194,6 +209,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_120753) do
     t.decimal "minimum_spend"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "phone_verified", default: false
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
 
@@ -221,6 +237,8 @@ ActiveRecord::Schema.define(version: 2021_02_18_120753) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
