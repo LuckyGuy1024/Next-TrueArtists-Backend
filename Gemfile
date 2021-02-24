@@ -19,6 +19,7 @@ gem 'faker'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'
+gem 'twilio-ruby'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'

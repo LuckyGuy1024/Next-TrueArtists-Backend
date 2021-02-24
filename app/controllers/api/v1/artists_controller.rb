@@ -2,7 +2,7 @@
 
 module Api::V1
   class ArtistsController < ApplicationController
-    before_action :find_artist, except: %i[index create accept_artist_invite]
+    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone]
 
     def index
       @results = ArtistSearch.new(
@@ -32,6 +32,16 @@ module Api::V1
         render json: ArtistSerializer.new(@artist).to_json, status: :ok
       else
         render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def verify_phone
+      artist = current_user.artist.verify_phone(phone_verification_params[:code])
+
+      if artist
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
       end
     end
 

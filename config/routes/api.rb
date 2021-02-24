@@ -21,12 +21,18 @@ Rails.application.routes.draw do
         end
       end
       resources :artists do
+        collection do
+          put 'verify-phone' => 'studios#verify_phone'
+        end
         resources :tattoos
         member do
           delete 'delete-image/:image_id' => 'artists#remove_image'
         end
       end
       resources :studios do
+        collection do
+          put 'verify-phone' => 'studios#verify_phone'
+        end
         resources :tattoos
         member do
           delete 'delete-image/:image_id' => 'studios#remove_image'

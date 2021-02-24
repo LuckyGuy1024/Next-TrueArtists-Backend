@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+
+  sms:
+    new_user_verification: "Please use %{verification_code} to verify your phone number on TrueArtists"
