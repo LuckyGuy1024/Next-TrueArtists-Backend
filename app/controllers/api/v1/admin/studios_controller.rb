@@ -18,7 +18,7 @@ module Api::V1::Admin
     end
 
     def update
-      studio = StudioForm.new(@studio, studio_params).update
+      studio = BaseForm.new(@studio, studio_params).update
 
       if studio
         render json: StudioSerializer.new(@studio).to_json, status: :ok

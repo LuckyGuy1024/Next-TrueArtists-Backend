@@ -32,7 +32,7 @@ module Api::V1
     end
 
     def update
-      studio = StudioForm.new(@studio, studio_params).update
+      studio = BaseForm.new(@studio, studio_params).update
 
       if studio
         render json: StudioSerializer.new(@studio).to_json, status: :ok
@@ -107,7 +107,7 @@ module Api::V1
         :slug,
         :services,
         :specialty,
-        :website,
+        :website_url,
         :facebook_url,
         :twitter_url,
         :instagram_url,

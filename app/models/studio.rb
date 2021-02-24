@@ -3,7 +3,7 @@
 class Studio < ApplicationRecord
   searchkick word_start: %i[name bio city country specialty services], locations: [:location]
 
-  include AssetExtension
+  include AddressExtension
   acts_as_favoritable
   belongs_to :user
   has_many :studio_invites, dependent: :destroy
@@ -19,26 +19,15 @@ class Studio < ApplicationRecord
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
-
-  geocoded_by :address, latitude: :lat, longitude: :lon
-  after_validation :geocode, if: :address_changed?
+  after_validation :save_location_data, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
-
-
-  def search_data
-    attributes.merge(location: { lat: lat, lon: lon })
-  end
-
-  def address
-    [street_address, city, state, country].compact.join(', ')
-  end
-
-  def address_changed?
-    street_address_changed? || city_changed? || state_changed? || country_changed?
-  end
 
   def add_artist(artist_id)
     studio_artists.create(artist_id: artist_id)
+  end
+
+  def search_data
+    attributes.merge(location: { lat: lat, lon: lon })
   end
 
   def verify_phone(code)
