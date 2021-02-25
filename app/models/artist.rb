@@ -6,7 +6,7 @@ class Artist < ApplicationRecord
 
   include AddressExtension
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: :history
   acts_as_favoritable
   belongs_to :user
   has_many :tattoos

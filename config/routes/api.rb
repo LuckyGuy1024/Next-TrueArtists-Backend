@@ -59,6 +59,8 @@ Rails.application.routes.draw do
         end
       end
       resources :articles, only: %i[index show]
+
+      resources :categories, only: %i[index show]
     end
   end
 end

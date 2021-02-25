@@ -8,10 +8,12 @@ class Article < ApplicationRecord
   searchkick word_start: %i[title page_title slug meta_description introduction content tag_list]
 
   belongs_to :user
+  belongs_to :category
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :title, use: :history
 
-  validates :title, :page_title, :meta_description, :introduction, :content, :slug, :status, presence: true
+  validates_uniqueness_of :title, :page_title
+  validates :meta_description, :introduction, :content, :status, presence: true
 
   before_validation :assign_status, only: %i[create update]
   before_validation :import_tag_list, only: %i[create update]
