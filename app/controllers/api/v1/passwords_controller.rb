@@ -1,4 +1,3 @@
-
 module Api::V1
   class PasswordsController < ApplicationController
     before_action :validate_confirmation_token, only: %i[update]
@@ -21,7 +20,6 @@ module Api::V1
       else
         render_api_error(status: 422, errors: 'We could not delete resource')
       end
-
     end
 
     private

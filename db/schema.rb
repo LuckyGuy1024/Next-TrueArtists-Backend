@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_120753) do
+ActiveRecord::Schema.define(version: 2021_02_19_141252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_120753) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
+    t.boolean "phone_verified", default: false
     t.string "state"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
@@ -194,6 +195,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_120753) do
     t.decimal "minimum_spend"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "phone_verified", default: false
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
 
