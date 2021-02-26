@@ -35,6 +35,15 @@ module Api::V1
       end
     end
 
+    def submit_for_review
+      @artist.pending_review
+      if @artist.save
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
     def verify_phone
       artist = current_user.artist.verify_phone(phone_verification_params[:code])
 

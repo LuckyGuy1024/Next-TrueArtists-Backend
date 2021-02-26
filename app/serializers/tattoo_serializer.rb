@@ -11,6 +11,7 @@ class TattooSerializer < ActiveModel::Serializer
              :color,
              :size,
              :tags,
+             :status,
              :image
 
   def image

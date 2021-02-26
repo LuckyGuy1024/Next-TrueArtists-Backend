@@ -44,6 +44,22 @@ module Api::V1::Admin
       end
     end
 
+    def approve
+      if @studio.approve!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
+    def reject
+      if @studio.reject!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
     private
 
     def find_studio
