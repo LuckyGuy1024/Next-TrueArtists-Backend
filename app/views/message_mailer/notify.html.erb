@@ -1,0 +1,13 @@
+<p>Hello <%= @receiver.full_name %>,</p>
+
+<p>
+  <%= @sender.full_name %> has sent a message to you. See below for the message content.
+  <br />
+  You can reply to this message by responding directly to this email.
+</p>
+
+<hr />
+
+<div>
+  <%= @content %>
+</div>

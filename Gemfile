@@ -19,11 +19,13 @@ gem 'faker'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'
+gem 'mail_extract'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
+  gem 'pry-rails'
   gem 'rspec_api_documentation'
   gem 'rspec-rails'
 end

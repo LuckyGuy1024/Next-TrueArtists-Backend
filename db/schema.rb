@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_163404) do
+ActiveRecord::Schema.define(version: 2021_03_07_183341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,18 +119,28 @@ ActiveRecord::Schema.define(version: 2021_02_25_163404) do
     t.index ["scope"], name: "index_favorites_on_scope"
   end
 
+  create_table "message_mails", force: :cascade do |t|
+    t.integer "message_id", null: false
+    t.integer "user_id", null: false
+    t.string "thread_id"
+    t.string "mail_message_id", null: false
+    t.text "references"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.string "sender_id"
+    t.integer "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "room_id"
+    t.string "thread_id"
   end
 
   create_table "studio_artists", force: :cascade do |t|

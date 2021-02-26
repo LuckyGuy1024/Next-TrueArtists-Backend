@@ -139,6 +139,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mail_extract (0.1.4)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
@@ -157,6 +158,8 @@ GEM
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (4.0.6)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -264,8 +267,10 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen (~> 3.2)
+  mail_extract
   pg (>= 0.18, < 2.0)
   pry
+  pry-rails
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.1)

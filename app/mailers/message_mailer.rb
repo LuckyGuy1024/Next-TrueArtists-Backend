@@ -1,24 +1,28 @@
-class MessageMailer < ActionMailer::Base
-  default from: 'message@trueartists.com'
+class MessageMailer < ApplicationMailer
 
-  def landing_email(opts)
-    @body = opts[:body]
+  MAIL_DOMAIN = '@trueartists.xyz'
+
+  default from: "Message <message#{MAIL_DOMAIN}>"
+
+  def notify(message, mail_references = nil)
+    @content = message.content
+    @sender = message.sender
+    @receiver = message.receiver
+
     mail(
-      to: opts[:to],
-      subject: opts[:subject],
-      body: opts[:body],
-      content_type: "text/html"
+      from: "#{@sender.full_name} <message@trueartists.xyz>",
+      to: @receiver.email,
+      reply_to: "#{@sender.full_name} <message-#{message.thread_id}@trueartists.xyz>",
+      subject: message.subject,
+      references: mail_references
     )
   end
 
-  def landing_email_reply(opts)
-    @body = opts[:body]
+  def sender_not_exist(mail_obj)
     mail(
-      to: opts[:to],
-      subject: opts[:subject],
-      body: opts[:body],
-      references: opts[:message_id],
-      content_type: "text/html"
+      to: mail_obj.from.first,
+      subject: "Re: #{mail_obj.subject}",
+      content: "You don't exist on our system."
     )
   end
 end
