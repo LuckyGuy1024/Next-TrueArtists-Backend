@@ -40,6 +40,7 @@ Rails.application.routes.draw do
           end
         end
         resources :articles
+        resources :landing_pages
       end
     end
   end

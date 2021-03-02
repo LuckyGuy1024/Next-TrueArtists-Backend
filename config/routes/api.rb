@@ -58,7 +58,8 @@ Rails.application.routes.draw do
           post 'batch-create' => 'tattoos#batch_create'
         end
       end
-      resources :articles
+      resources :articles, only: %i[show index]
+      resources :landing_pages, only: %i[show index]
     end
   end
 end

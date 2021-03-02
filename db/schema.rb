@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_141252) do
+ActiveRecord::Schema.define(version: 2021_03_02_011106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,20 @@ ActiveRecord::Schema.define(version: 2021_02_19_141252) do
     t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
     t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor_type_and_favoritor_id"
     t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
+  create_table "landing_pages", force: :cascade do |t|
+    t.string "page_key"
+    t.string "page_url"
+    t.string "page_title"
+    t.string "meta_description"
+    t.string "title"
+    t.text "content"
+    t.string "status"
+    t.integer "last_updated_by"
+    t.string "moved_to"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "locations", force: :cascade do |t|

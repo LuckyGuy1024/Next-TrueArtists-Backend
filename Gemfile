@@ -20,6 +20,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'
 gem 'twilio-ruby'
+# gem 'aasm'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'
