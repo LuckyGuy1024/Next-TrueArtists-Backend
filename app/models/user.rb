@@ -16,12 +16,15 @@ class User < ApplicationRecord
   }
 
   require 'json_web_token'
+  extend FriendlyId
+  friendly_id :full_name, use: :slugged
   acts_as_favoritor
   before_save :downcase_email
   has_secure_password
 
   has_one :artist, dependent: :destroy
   has_one :studio, dependent: :destroy
+  has_many :articles, dependent: :destroy
 
   STRONG_PASSWORD = /(?=.*[a-zA-Z])(?=.*[0-9]).{6,10}/.freeze
 

@@ -2,6 +2,7 @@
 
 module Api::V1
   class StudiosController < ApplicationController
+    skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_studio, except: %i[create index verify_phone]
 
     def index
@@ -28,6 +29,15 @@ module Api::V1
         render json: StudioSerializer.new(studio).to_json, status: :created
       else
         render_api_error(status: 422, errors: studio.errors)
+      end
+    end
+
+    def submit_for_review
+      @studio.pending_review
+      if @studio.save
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
       end
     end
 
@@ -71,7 +81,7 @@ module Api::V1
     private
 
     def find_studio
-      @studio = Studio.find(params[:id])
+      @studio = Studio.friendly.find(params[:id])
     end
 
     def search_options
@@ -104,7 +114,6 @@ module Api::V1
         :languages,
         :name,
         :bio,
-        :slug,
         :services,
         :specialty,
         :website_url,

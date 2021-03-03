@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         resources :tattoos
         member do
           delete 'delete-image/:image_id' => 'artists#remove_image'
+          put :submit_for_review
         end
       end
       resources :studios do
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
         resources :tattoos
         member do
           delete 'delete-image/:image_id' => 'studios#remove_image'
+          put :submit_for_review
         end
       end
       resources :locations, only: %i[index show]
@@ -57,8 +59,13 @@ Rails.application.routes.draw do
         collection do
           post 'batch-create' => 'tattoos#batch_create'
         end
+        member do
+          put :flag
+        end
       end
-      resources :articles, only: %i[show index]
+      resources :articles, only: %i[index show]
+      resources :styles
+      resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]
     end
   end
