@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   require 'json_web_token'
   extend FriendlyId
-  friendly_id :full_name, use: :slugged
+  friendly_id :full_name, use: :history
   acts_as_favoritor
   before_save :downcase_email
   has_secure_password

@@ -23,6 +23,6 @@ class Article < ApplicationRecord
   end
 
   def import_tag_list
-    self.tag_list = JSON.parse(tag_list).uniq.join(',')
+    self.tag_list = JSON.parse(tag_list).uniq.join(',') if tag_list
   end
 end

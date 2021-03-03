@@ -98,11 +98,12 @@ module Api::V1
         :state,
         :zip_code,
         :country,
+        :street_address,
         :seeking_guest_spot,
         :guest_artist,
         :avatar,
         :hero_banner,
-        style_ids: [],
+        style_ids: []
       )
     end
   end

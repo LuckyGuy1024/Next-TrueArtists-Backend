@@ -15,6 +15,7 @@ class Studio < ApplicationRecord
   has_many :studio_artists
   has_many :artists, through: :studio_artists
   has_many :tattoos
+  has_many :guest_artist_applications
   has_one_attached :avatar
   has_one_attached :hero_banner
 

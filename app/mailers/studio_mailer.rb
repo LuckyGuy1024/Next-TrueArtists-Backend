@@ -35,4 +35,12 @@ class StudioMailer < ApplicationMailer
 
     mail(to: email, subject: subject)
   end
+
+  def notify_guest_artist(message, email)
+    @message = message
+
+    subject = format('Guest Artist Response')
+
+    mail(to: email, subject: subject)
+  end
 end

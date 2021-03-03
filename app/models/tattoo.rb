@@ -23,10 +23,10 @@ class Tattoo < ApplicationRecord
   validates :image, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
   before_validation :add_location_data, on: :create
-  before_commit :import_tag_list, only: %i[batch_create update]
+  before_validation :import_tag_list, only: %i[batch_create update]
 
   def import_tag_list
-    self.tag_list = JSON.parse(tag_list).uniq.join(',')
+    self.tag_list = JSON.parse(tag_list).uniq.join(',') if tag_list
   end
 
   def search_data

@@ -51,7 +51,16 @@ module Api::V1::Admin
     end
 
     def article_params
-      params.permit(:title, :page_title, :meta_description, :introduction, :content, :status, :category_id, tag_list: [])
+      params.permit(
+        :title,
+        :page_title,
+        :meta_description,
+        :introduction,
+        :content,
+        :status,
+        :category_id,
+        tag_list: []
+      )
     end
 
     def search_options

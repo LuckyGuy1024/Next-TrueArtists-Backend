@@ -21,18 +21,16 @@ class ArtistSerializer < ActiveModel::Serializer
              :minimum_spend,
              :price_per_hour,
              :currency_code,
-             :city,
+             :street_address,
              :zip_code,
+             :city,
+             :state,
              :country,
              :seeking_guest_spot,
              :guest_artist,
              :avatar,
              :hero_banner,
              :styles
-
-  def name
-    object.user.full_name
-  end
 
   def avatar
     if object.avatar.attached?
