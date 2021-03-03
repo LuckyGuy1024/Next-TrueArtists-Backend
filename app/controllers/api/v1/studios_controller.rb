@@ -32,6 +32,15 @@ module Api::V1
       end
     end
 
+    def submit_for_review
+      @studio.pending_review
+      if @studio.save
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
     def update
       studio = BaseForm.new(@studio, studio_params).update
 

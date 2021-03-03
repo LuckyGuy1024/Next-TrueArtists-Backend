@@ -2,9 +2,11 @@
 
 require 'faker'
 
- ['Free Style', 'Free Hand', 'Black & White', 'Color', 'Japanase', 'Freehand'].each do |s|
-   Style.create(name: s)
- end
+puts '== Seeding the database =='
+puts "\n== Creating Admin user data =="
+['Free Style', 'Free Hand', 'Black & White', 'Color', 'Japanase', 'Freehand'].each do |s|
+  Style.create(name: s)
+end
 
 if ENV['RUN_ALL'] == 1
   5.times do |i|
@@ -17,6 +19,8 @@ if ENV['RUN_ALL'] == 1
     )
   end
 
+  puts "\n== Creating regular_user data =="
+
   1500.times do |i|
     User.create(
       email: "ta#{i + 1}@example.com",
@@ -26,13 +30,14 @@ if ENV['RUN_ALL'] == 1
     )
   end
 
+  puts "\n== Creating studio data =="
+
   500.times do |i|
     studio = Studio.create(
       user_id: i + 6,
       email: Faker::Internet.safe_email,
       name: Faker::Name.name,
       bio: Faker::Lorem.sentence,
-      slug: Faker::Internet.slug,
       website_url: Faker::Internet.url,
       facebook_url: Faker::Internet.url(host: 'facebook.com'),
       twitter_url: Faker::Internet.url(host: 'twitter.com'),
@@ -53,13 +58,14 @@ if ENV['RUN_ALL'] == 1
     )
   end
 
+  puts "\n== Creating artist data =="
+
   500.times do |i|
     artist = Artist.create(
       user_id: i + 506,
       licensed: true,
       years_of_experience: Faker::Number.number(digits: 1),
       bio: Faker::Lorem.sentence,
-      slug: Faker::Internet.slug,
       website: Faker::Internet.url,
       facebook_url: Faker::Internet.url(host: 'facebook.com'),
       twitter_url: Faker::Internet.url(host: 'twitter.com'),
@@ -81,6 +87,8 @@ if ENV['RUN_ALL'] == 1
     )
   end
 
+  puts "\n== Creating studio_artist data =="
+
   250.times do |i|
     StudioArtist.create(
       artist_id: i + 1,
@@ -88,6 +96,8 @@ if ENV['RUN_ALL'] == 1
       start_date: Time.now
     )
   end
+
+  puts "\n== Creating artist tattoos data =="
 
   250.times do |i|
     artist_tattoo = Tattoo.create(
@@ -103,6 +113,8 @@ if ENV['RUN_ALL'] == 1
     )
   end
 
+  puts "\n== Creating studio tattoos data =="
+
   250.times do |i|
     studio_tattoo = Tattoo.create(
       studio_id: i + 251,
@@ -117,3 +129,5 @@ if ENV['RUN_ALL'] == 1
     )
   end
 end
+
+puts "\n== Finished =="

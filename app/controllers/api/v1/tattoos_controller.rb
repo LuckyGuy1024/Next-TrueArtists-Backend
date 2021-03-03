@@ -20,10 +20,9 @@ class Api::V1::TattoosController < ApplicationController
     errors = []
     processed = []
 
-    params['tattoos'].each do |tattoo_params|
-      permitted_params = tattoo_params.permit(permitted_attributes)
-      tattoo = @parent_object.tattoos.new(permitted_params.except(:tags))
-      tattoo&.import_tag_list(tattoo_params[:tags])
+    params['tattoos'].each do |tattoo_object|
+      permitted_params = tattoo_object.permit(permitted_attributes)
+      tattoo = @parent_object.tattoos.new(permitted_params)
 
       if tattoo.save
         tattoo.image.attach(permitted_params[:image])
@@ -44,10 +43,20 @@ class Api::V1::TattoosController < ApplicationController
   end
 
   def update
+    tattoo_params = params.permit(permitted_attributes)
     if @tattoo.update(tattoo_params)
       @tattoo.image.attach(tattoo_params[:image]) if tattoo_params[:image]
 
       render json: TattooSerializer.new(@tattoo).to_json, status: :ok
+    else
+      render_api_error(status: 422, errors: @tattoo.errors)
+    end
+  end
+
+  def flag
+    @tattoo.flag
+    if @tattoo.save
+      head(:ok)
     else
       render_api_error(status: 422, errors: @tattoo.errors)
     end
@@ -64,27 +73,14 @@ class Api::V1::TattoosController < ApplicationController
     @tattoo = Tattoo.find(params[:id])
   end
 
-  def tattoo_params
-    params.permit(
-      :styles,
-      :categories,
-      :placement,
-      :color,
-      :size,
-      :image,
-      tags: []
-    )
-  end
-
   def permitted_attributes
-    %i[ styles
-        categories
-        placement
-        color
-        size
-        image
-        tags
-      ]
+    [:styles,
+     :categories,
+     :placement,
+     :color,
+     :size,
+     :image,
+     { tag_list: [] }]
   end
 
   def search_options

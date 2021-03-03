@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class Studio < ApplicationRecord
+  include AASM
+
   searchkick word_start: %i[name bio city country specialty services], locations: [:location]
 
   include AddressExtension
+  include StatusManagement
   acts_as_favoritable
   belongs_to :user
   has_many :studio_invites, dependent: :destroy

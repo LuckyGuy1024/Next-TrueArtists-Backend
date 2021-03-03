@@ -10,6 +10,7 @@ class ArtistSerializer < ActiveModel::Serializer
              :bio,
              :slug,
              :licensed,
+             :status,
              :years_of_experience,
              :styles,
              :website,

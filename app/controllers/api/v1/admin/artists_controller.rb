@@ -35,6 +35,22 @@ module Api::V1::Admin
       end
     end
 
+    def approve
+      if @artist.approve!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def reject
+      if @artist.reject!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
     private
 
     def find_artist
