@@ -66,6 +66,7 @@ Rails.application.routes.draw do
       resources :articles, only: %i[index show]
       resources :styles
       resources :categories, only: %i[index show]
+      resources :landing_pages, only: %i[show index]
     end
   end
 end
