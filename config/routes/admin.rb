@@ -44,6 +44,7 @@ Rails.application.routes.draw do
           end
         end
         resources :articles
+        resources :landing_pages
         resources :styles
         resources :categories
       end
