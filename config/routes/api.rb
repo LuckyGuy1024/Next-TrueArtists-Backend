@@ -63,8 +63,9 @@ Rails.application.routes.draw do
           put :flag
         end
       end
-      resources :articles
+      resources :articles, only: %i[index show]
       resources :styles
+      resources :categories, only: %i[index show]
     end
   end
 end

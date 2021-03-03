@@ -67,7 +67,7 @@ module Api::V1
     private
 
     def find_artist
-      @artist = Artist.find(params[:id])
+      @artist = Artist.friendly.find(params[:id])
     end
 
     def search_options
@@ -82,7 +82,6 @@ module Api::V1
 
     def artist_params
       params.permit(
-        :slug,
         :licensed,
         :bio,
         :years_of_experience,

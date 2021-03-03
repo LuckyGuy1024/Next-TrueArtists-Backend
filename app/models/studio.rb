@@ -6,6 +6,8 @@ class Studio < ApplicationRecord
   searchkick word_start: %i[name bio city country specialty services], locations: [:location]
 
   include AddressExtension
+  extend FriendlyId
+  friendly_id :name, use: :history
   include StatusManagement
   acts_as_favoritable
   belongs_to :user

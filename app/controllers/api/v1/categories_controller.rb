@@ -2,11 +2,11 @@
 
 module Api
   module V1
-    class ArticlesController < ApplicationController
-      before_action :find_article, except: %i[index]
+    class CategoriesController < BaseController
+      before_action :find_category, except: %i[index create]
 
       def index
-        @results = ArticleSearch.new(
+        @results = CategorySearch.new(
           query: params[:query],
           options: search_options
         ).filter
@@ -15,13 +15,13 @@ module Api
       end
 
       def show
-        render json: ArticleSerializer.new(@article).to_json, status: :ok
+        render json: CategorySerializer.new(@category).to_json, status: :ok
       end
 
       private
 
-      def find_article
-        @article = Article.friendly.find(params[:id])
+      def find_category
+        @category = Category.friendly.find(params[:id])
       end
 
       def search_options

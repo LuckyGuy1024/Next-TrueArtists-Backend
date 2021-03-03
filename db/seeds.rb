@@ -128,6 +128,16 @@ if ENV['RUN_ALL'] == 1
       filename: 'image.jpg'
     )
   end
-end
 
-puts "\n== Finished =="
+  500.times do
+    Article.create(
+      user_id: [1, 2, 3, 4, 5].sample,
+      title: Faker::Lorem.sentence,
+      page_title: Faker::Lorem.sentence,
+      meta_description: Faker::Lorem.sentence,
+      introduction: Faker::Lorem.sentence,
+      content: Faker::Lorem.paragraph(sentence_count: 4),
+      status: %w[draft published].sample
+    )
+  end
+end

@@ -8,6 +8,10 @@ class Artist < ApplicationRecord
 
   include AddressExtension
   include StatusManagement
+
+  extend FriendlyId
+  friendly_id :name, use: :history
+
   acts_as_favoritable
   belongs_to :user
   has_many :tattoos

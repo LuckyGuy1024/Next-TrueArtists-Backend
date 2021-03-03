@@ -45,6 +45,7 @@ Rails.application.routes.draw do
         end
         resources :articles
         resources :styles
+        resources :categories
       end
     end
   end
