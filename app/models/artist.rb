@@ -8,6 +8,8 @@ class Artist < ApplicationRecord
   acts_as_favoritable
   belongs_to :user
   has_many :tattoos
+  has_many :artist_styles
+  has_many :styles, through: :artist_styles
   has_many :studio_artists
   has_many :studios, through: :studio_artists
   has_one_attached :avatar

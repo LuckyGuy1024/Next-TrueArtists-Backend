@@ -1,4 +1,5 @@
 class Api::V1::TattoosController < ApplicationController
+  skip_before_action :authenticate_request!, only: %i[index show]
   before_action :find_parent_object, only: %i[create batch_create destroy]
   before_action :find_tattoo, except: %i[create index batch_create]
 

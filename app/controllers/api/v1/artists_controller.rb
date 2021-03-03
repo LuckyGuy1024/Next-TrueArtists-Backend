@@ -2,6 +2,7 @@
 
 module Api::V1
   class ArtistsController < ApplicationController
+    skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_artist, except: %i[index create accept_artist_invite verify_phone]
 
     def index
@@ -74,8 +75,8 @@ module Api::V1
       params.permit(
         :slug,
         :licensed,
+        :bio,
         :years_of_experience,
-        :styles,
         :website,
         :facebook_url,
         :twitter_url,
@@ -92,7 +93,8 @@ module Api::V1
         :seeking_guest_spot,
         :guest_artist,
         :avatar,
-        :hero_banner
+        :hero_banner,
+        style_ids: [],
       )
     end
   end

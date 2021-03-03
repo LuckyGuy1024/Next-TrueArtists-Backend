@@ -2,6 +2,7 @@
 
 module Api::V1
   class LocationsController < ApplicationController
+    skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_location, only: %i[show]
 
     def index

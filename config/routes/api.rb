@@ -59,6 +59,7 @@ Rails.application.routes.draw do
         end
       end
       resources :articles
+      resources :styles
     end
   end
 end

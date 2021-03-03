@@ -2,6 +2,7 @@
 
 module Api::V1
   class StudiosController < ApplicationController
+    skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_studio, except: %i[create index verify_phone]
 
     def index

@@ -5,12 +5,8 @@ module Api::V1::Admin
     before_action :find_location, except: %i[create index]
 
     def index
-      @results = LocationSearch.new(
-        query: params[:query],
-        options: search_options
-      ).filter
-
-      render json: @results, status: :ok
+      @styles = Styles.all
+      render json: @styles, status: :ok
     end
 
     def show
@@ -44,16 +40,7 @@ module Api::V1::Admin
         render_api_error(status: 422, errors: 'We could not delete resource')
       end
     end
-
-    def remove_image
-      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
-      if attachment.blank?
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: 'We could not delete resource')
-      end
-    end
-
+    
     private
 
     def find_location

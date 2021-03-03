@@ -2,10 +2,12 @@ class ArtistSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
   has_many :tattoos
+  has_many :styles
 
   attributes :id,
              :user_id,
              :name,
+             :bio,
              :slug,
              :licensed,
              :years_of_experience,
@@ -24,7 +26,8 @@ class ArtistSerializer < ActiveModel::Serializer
              :seeking_guest_spot,
              :guest_artist,
              :avatar,
-             :hero_banner
+             :hero_banner,
+             :styles
 
   def name
     object.user.full_name
