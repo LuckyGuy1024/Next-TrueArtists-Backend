@@ -8,9 +8,12 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.new(user_create_params)
     if user.save
-      render json: UserSerializer.new(user, root: false).to_json,
-             message: 'User created successfully',
-             status: 201
+      auth_token = JsonWebToken.encode(user_id: user.id)
+
+      render json: {
+        user: UserSerializer.new(result.user, root: false),
+        auth_token: auth_token
+      }, status: :created
     else
       render_api_error(status: 422, errors: user.errors)
     end

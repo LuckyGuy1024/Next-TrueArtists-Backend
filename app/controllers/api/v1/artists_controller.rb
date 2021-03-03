@@ -2,6 +2,7 @@
 
 module Api::V1
   class ArtistsController < ApplicationController
+    skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_artist, except: %i[index create accept_artist_invite verify_phone]
 
     def index
@@ -30,6 +31,15 @@ module Api::V1
       artist = BaseForm.new(@artist, artist_params).update
       if artist
         render json: ArtistSerializer.new(@artist).to_json, status: :ok
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def submit_for_review
+      @artist.pending_review
+      if @artist.save
+        head(:ok)
       else
         render_api_error(status: 422, errors: @artist.errors)
       end
@@ -73,8 +83,8 @@ module Api::V1
     def artist_params
       params.permit(
         :licensed,
+        :bio,
         :years_of_experience,
-        :styles,
         :website,
         :facebook_url,
         :twitter_url,
@@ -91,7 +101,8 @@ module Api::V1
         :seeking_guest_spot,
         :guest_artist,
         :avatar,
-        :hero_banner
+        :hero_banner,
+        style_ids: [],
       )
     end
   end

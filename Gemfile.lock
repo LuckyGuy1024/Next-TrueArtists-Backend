@@ -9,6 +9,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.1.1)
+      concurrent-ruby (~> 1.0)
     actioncable (6.0.3.2)
       actionpack (= 6.0.3.2)
       nio4r (~> 2.0)
@@ -256,6 +258,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   active_model_serializers
   active_storage_validations
   acts_as_favoritor

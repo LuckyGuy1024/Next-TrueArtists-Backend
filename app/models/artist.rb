@@ -1,15 +1,22 @@
 # frozen_string_literal: true
 
 class Artist < ApplicationRecord
+  include AASM
+
   searchkick word_start: %i[bio slug website facebook_url twitter_url instagram_url city country specialty services],
              locations: [:location]
 
   include AddressExtension
+  include StatusManagement
+
   extend FriendlyId
   friendly_id :name, use: :history
+
   acts_as_favoritable
   belongs_to :user
   has_many :tattoos
+  has_many :artist_styles
+  has_many :styles, through: :artist_styles
   has_many :studio_artists
   has_many :studios, through: :studio_artists
   has_one_attached :avatar

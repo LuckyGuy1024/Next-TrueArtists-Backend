@@ -9,7 +9,6 @@ module Api::V1::Admin
       render json: ActiveModel::Serializer::CollectionSerializer.new(@users,
                                                                      serializer: UserSerializer),
              status: :ok
-
     end
 
     def create
@@ -57,9 +56,9 @@ module Api::V1::Admin
       params.permit(:email,
                     :full_name,
                     :status,
-                    :role,
-                    :password,
-                    :password_confirmation)
+                    :role).tap do |whitelisted|
+        whitelisted[:password] = whitelisted[:password_confirmation] = Devise.friendly_token.first(8)
+      end
     end
   end
 end

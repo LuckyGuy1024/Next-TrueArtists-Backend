@@ -14,12 +14,16 @@ Rails.application.routes.draw do
           resources :tattoos
           member do
             delete 'delete-image/:image_id' => 'artists#remove_image'
+            put :approve
+            put :reject
           end
         end
         resources :studios do
           resources :tattoos
           member do
             delete 'delete-image/:image_id' => 'studios#remove_image'
+            put :approve
+            put :reject
           end
         end
         resources :locations do
@@ -40,7 +44,7 @@ Rails.application.routes.draw do
           end
         end
         resources :articles
-
+        resources :styles
         resources :categories
       end
     end
