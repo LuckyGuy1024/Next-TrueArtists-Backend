@@ -13,4 +13,6 @@ class Message < ApplicationRecord
   belongs_to :receiver, class_name: 'User', foreign_key: 'receiver_id', validate: true
 
   has_many :message_mails
+
+  has_many_attached :attachments
 end

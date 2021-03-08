@@ -9,6 +9,12 @@ class MessageMailer < ApplicationMailer
     @sender = message.sender
     @receiver = message.receiver
 
+    if message.attachments.attached?
+      message.attachments.each do |attachment|
+        attachments[attachment.filename.to_s] = attachment.download
+      end
+    end
+
     mail(
       from: "#{@sender.full_name} <message@trueartists.xyz>",
       to: @receiver.email,

@@ -1,6 +1,6 @@
 class MessageMailbox < ApplicationMailbox
 
-  RECIPIENT_FORMAT = /message\-(.+)@trueartists.xyz/i
+  RECIPIENT_FORMAT = /message\-(.+)@#{ENV.fetch("INBOUND_EMAIL_DOMAIN", "example.com")}\Z/i
 
   before_processing :find_user
 
@@ -28,7 +28,8 @@ class MessageMailbox < ApplicationMailbox
     )
 
     if new_message.save
-      # Save mail object
+      attach_files new_message
+
       MessageMail.create(
         message_id:      new_message.id,
         user_id:         @user.id,
@@ -53,15 +54,14 @@ class MessageMailbox < ApplicationMailbox
     @user ||= User.find_by(email: mail.from.first)
   end
 
-  def mail_body
-    @mail_body ||= begin
-      if mail.multipart?
-        mail.parts[0].body.decoded
-      else
-        mail.decoded
+  def attach_files(message)
+    if mail.has_attachments?
+      mail.attachments.map do |attachment|
+        message.attachments.attach(:io => StringIO.new(attachment.decoded),
+                                   :filename => attachment.filename,
+                                   :content_type => attachment.content_type)
+        message.save!
       end
     end
-
-    MailExtract.new(@mail_body, only_head: true)
   end
 end

@@ -28,7 +28,7 @@ class MessageMailingService
     MessageMail.create(
       message_id: @message.id,
       thread_id: @message.thread_id,
-      receiver_id: @message.receiver_id,
+      user_id: @message.receiver_id,
       mail_message_id: mail.message_id,
       references: mail.references.try(:join, ',')
     )
