@@ -18,7 +18,7 @@ module Api::V1::Admin
     end
 
     def update
-      studio = StudioForm.new(@studio, studio_params).update
+      studio = BaseForm.new(@studio, studio_params).update
 
       if studio
         render json: StudioSerializer.new(@studio).to_json, status: :ok
@@ -41,6 +41,22 @@ module Api::V1::Admin
         head(:ok)
       else
         render_api_error(status: 422, errors: 'We could not delete resource')
+      end
+    end
+
+    def approve
+      if @studio.approve!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
+    def reject
+      if @studio.reject!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
       end
     end
 
@@ -76,7 +92,6 @@ module Api::V1::Admin
         :languages,
         :name,
         :bio,
-        :slug,
         :services,
         :specialty,
         :website,

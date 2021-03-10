@@ -21,17 +21,28 @@ Rails.application.routes.draw do
         end
       end
       resources :artists do
+        collection do
+          put 'verify-phone' => 'studios#verify_phone'
+        end
         resources :tattoos
         member do
           delete 'delete-image/:image_id' => 'artists#remove_image'
+          put :submit_for_review
         end
       end
       resources :studios do
+        collection do
+          put 'verify-phone' => 'studios#verify_phone'
+        end
         resources :tattoos
         member do
           delete 'delete-image/:image_id' => 'studios#remove_image'
+          put :submit_for_review
+          get :guest_artist_applications
+          get 'guest_artist_applications/:id' => 'studios#application'
         end
       end
+      resources :locations, only: %i[index show]
 
       resources :studio_invites, path: 'studio-invites' do
         collection do
@@ -50,8 +61,19 @@ Rails.application.routes.draw do
         collection do
           post 'batch-create' => 'tattoos#batch_create'
         end
+        member do
+          put :flag
+        end
       end
-      resources :articles
+      resources :articles, only: %i[index show]
+      resources :styles
+      resources :categories, only: %i[index show]
+      resources :landing_pages, only: %i[show index]
+      resources :guest_artist_applications, only: %i[create update destroy] do
+        member do
+          post :respond
+        end
+      end
     end
   end
 end

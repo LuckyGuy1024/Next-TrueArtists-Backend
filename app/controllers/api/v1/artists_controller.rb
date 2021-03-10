@@ -2,7 +2,8 @@
 
 module Api::V1
   class ArtistsController < ApplicationController
-    before_action :find_artist, except: %i[index create accept_artist_invite]
+    skip_before_action :authenticate_request!, only: %i[index show]
+    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone]
 
     def index
       @results = ArtistSearch.new(
@@ -27,9 +28,28 @@ module Api::V1
     end
 
     def update
-      artist = ArtistForm.new(@artist, artist_params).update
+      artist = BaseForm.new(@artist, artist_params).update
       if artist
         render json: ArtistSerializer.new(@artist).to_json, status: :ok
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def submit_for_review
+      @artist.pending_review
+      if @artist.save
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def verify_phone
+      artist = current_user.artist.verify_phone(phone_verification_params[:code])
+
+      if artist
+        head(:ok)
       else
         render_api_error(status: 422, errors: @artist.errors)
       end
@@ -47,7 +67,7 @@ module Api::V1
     private
 
     def find_artist
-      @artist = Artist.find(params[:id])
+      @artist = Artist.friendly.find(params[:id])
     end
 
     def search_options
@@ -62,10 +82,9 @@ module Api::V1
 
     def artist_params
       params.permit(
-        :slug,
         :licensed,
+        :bio,
         :years_of_experience,
-        :styles,
         :website,
         :facebook_url,
         :twitter_url,
@@ -79,11 +98,14 @@ module Api::V1
         :state,
         :zip_code,
         :country,
+        :street_address,
         :seeking_guest_spot,
         :guest_artist,
         :avatar,
         :hero_banner
-      )
+      ).tap do |whitelisted|
+        whitelisted[:style_ids] = params[:styles]
+      end
     end
   end
 end

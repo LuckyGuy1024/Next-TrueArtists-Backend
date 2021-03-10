@@ -18,7 +18,7 @@ module Api::V1::Admin
     end
 
     def update
-      artist = ArtistForm.new(@artist, artist_params).update
+      artist = BaseForm.new(@artist, artist_params).update
       if artist
         render json: ArtistSerializer.new(@artist).to_json, status: :ok
       else
@@ -32,6 +32,22 @@ module Api::V1::Admin
         head(:ok)
       else
         render_api_error(status: 422, errors: 'We could not delete resource')
+      end
+    end
+
+    def approve
+      if @artist.approve!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def reject
+      if @artist.reject!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @artist.errors)
       end
     end
 
@@ -53,7 +69,6 @@ module Api::V1::Admin
 
     def artist_params
       params.permit(
-        :slug,
         :licensed,
         :years_of_experience,
         :styles,
@@ -70,6 +85,7 @@ module Api::V1::Admin
         :state,
         :zip_code,
         :country,
+        :street_address,
         :seeking_guest_spot,
         :guest_artist,
         :avatar,

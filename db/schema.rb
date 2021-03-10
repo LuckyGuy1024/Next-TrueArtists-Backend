@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_183341) do
+ActiveRecord::Schema.define(version: 2021_03_10_080506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,20 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.integer "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "tag_list"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_articles_on_category_id"
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "artist_styles", force: :cascade do |t|
+    t.bigint "artist_id"
+    t.bigint "style_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id"], name: "index_artist_styles_on_artist_id"
+    t.index ["style_id"], name: "index_artist_styles_on_style_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -77,7 +90,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.decimal "minimum_spend"
     t.decimal "price_per_hour"
     t.string "currency_code"
-    t.integer "status"
+    t.string "status"
     t.string "country"
     t.string "zip_code"
     t.string "city"
@@ -88,6 +101,12 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
+    t.boolean "phone_verified", default: false
+    t.string "state"
+    t.string "name"
+    t.string "street_address"
+    t.index ["guest_artist"], name: "index_artists_on_guest_artist"
+    t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
@@ -100,6 +119,22 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.integer "image_file_size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.text "meta_description"
+    t.text "description"
+    t.string "status"
+    t.integer "parent_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["description"], name: "index_categories_on_description"
+    t.index ["meta_description"], name: "index_categories_on_meta_description"
+    t.index ["name"], name: "index_categories_on_name"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -117,6 +152,63 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
     t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor_type_and_favoritor_id"
     t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "guest_artist_application_responses", force: :cascade do |t|
+    t.bigint "guest_artist_application_id"
+    t.bigint "user_id"
+    t.text "message"
+    t.index ["guest_artist_application_id"], name: "index_application_responses_on_application"
+    t.index ["user_id"], name: "index_guest_artist_application_responses_on_user_id"
+  end
+
+  create_table "guest_artist_applications", force: :cascade do |t|
+    t.bigint "studio_id"
+    t.bigint "artist_id"
+    t.string "phone_number"
+    t.text "message"
+    t.string "duration"
+    t.date "expected_start_date"
+    t.boolean "archive", default: false
+    t.datetime "mark_as_read"
+    t.index ["artist_id"], name: "index_guest_artist_applications_on_artist_id"
+    t.index ["studio_id"], name: "index_guest_artist_applications_on_studio_id"
+  end
+
+  create_table "landing_pages", force: :cascade do |t|
+    t.string "page_key"
+    t.string "page_url"
+    t.string "page_title"
+    t.string "meta_description"
+    t.string "title"
+    t.text "content"
+    t.string "status"
+    t.integer "last_updated_by"
+    t.string "moved_to"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_key"], name: "index_landing_pages_on_page_key"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.integer "studio_count"
+    t.integer "artist_count"
+    t.decimal "lat", precision: 15, scale: 10
+    t.decimal "lon", precision: 15, scale: 10
   end
 
   create_table "message_mails", force: :cascade do |t|
@@ -204,7 +296,16 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.decimal "minimum_spend"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "phone_verified", default: false
+    t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
+  end
+
+  create_table "styles", force: :cascade do |t|
+    t.string "slug"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tattoos", force: :cascade do |t|
@@ -221,6 +322,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.string "description"
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
+    t.string "status"
   end
 
   create_table "users", force: :cascade do |t|
@@ -231,7 +333,12 @@ ActiveRecord::Schema.define(version: 2021_03_07_183341) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.string "social_id"
+    t.index ["slug"], name: "index_users_on_slug", unique: true
+    t.index ["social_id"], name: "index_users_on_social_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "guest_artist_application_responses", "guest_artist_applications"
 end

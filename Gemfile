@@ -3,11 +3,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
+gem 'aasm'
 gem 'active_model_serializers'
 gem 'active_storage_validations'
 gem 'acts_as_favoritor'
 gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
+gem 'friendly_id', '~> 5.4.0'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
@@ -20,6 +22,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'
 gem 'mail_extract'
+gem 'twilio-ruby'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'

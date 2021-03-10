@@ -1,15 +1,25 @@
 # frozen_string_literal: true
 
 class Artist < ApplicationRecord
+  include AASM
+
   searchkick word_start: %i[bio slug website facebook_url twitter_url instagram_url city country specialty services],
              locations: [:location]
 
-  include AssetExtension
+  include AddressExtension
+  include StatusManagement
+
+  extend FriendlyId
+  friendly_id :name, use: :history
+
   acts_as_favoritable
   belongs_to :user
   has_many :tattoos
+  has_many :artist_styles
+  has_many :styles, through: :artist_styles
   has_many :studio_artists
   has_many :studios, through: :studio_artists
+  has_many :guest_artist_applications
   has_one_attached :avatar
   has_one_attached :hero_banner
 
@@ -17,24 +27,32 @@ class Artist < ApplicationRecord
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
+  after_save :send_phone_verification_code, if: :phone_number_changed?
 
-  geocoded_by :address, latitude: :lat, longitude: :lon
-  after_validation :geocode, if: :address_changed?
-
+  after_validation :save_location_data, if: :address_changed?
+  before_validation :add_name
 
   def search_data
     attributes.merge(location: { lat: lat, lon: lon })
   end
 
-  def address
-    [city, country].compact.join(', ')
-  end
+  private
 
-  def address_changed?
-    city_changed? || country_changed?
+  def add_name
+    self.name = user.full_name
   end
 
   def upgrade_user_role
     user.assign_role(User.roles[:artist])
+  end
+
+  def verify_phone(code)
+    status = PhoneNumberVerifier.new(code: code, phone_number: phone_number).status
+
+    update(phone_verified: true) if status == 'approved'
+  end
+
+  def send_phone_verification_code
+    PhoneNumberVerifier.new(phone_number: phone_number).verify
   end
 end

@@ -27,4 +27,20 @@ class StudioMailer < ApplicationMailer
 
     mail(to: email, subject: subject)
   end
+
+  def notify_on_account_status(email, status)
+    @status = status
+
+    subject = format('Account Status')
+
+    mail(to: email, subject: subject)
+  end
+
+  def notify_guest_artist(message, email)
+    @message = message
+
+    subject = format('Guest Artist Response')
+
+    mail(to: email, subject: subject)
+  end
 end
