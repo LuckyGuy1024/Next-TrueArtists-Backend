@@ -4,6 +4,7 @@ module Api::V1
   class StudiosController < ApplicationController
     skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_studio, except: %i[create index verify_phone]
+    before_action :find_application, only: %i[application]
 
     def index
       @results = StudioSearch.new(
@@ -78,10 +79,26 @@ module Api::V1
       end
     end
 
+    def guest_artist_applications
+      @applications = current_user.studio.guest_artist_applications.page(params[:page] || 1)
+
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@applications,
+                                                                     serializer: GuestArtistApplicationSerializer),
+             status: :ok
+    end
+
+    def application
+      render json: GuestArtistApplicationSerializer.new(@application).to_json, status: :ok
+    end
+
     private
 
     def find_studio
       @studio = Studio.friendly.find(params[:id])
+    end
+
+    def find_application
+      @application = current_user.studio.guest_artist_applications.find(params[:id])
     end
 
     def search_options

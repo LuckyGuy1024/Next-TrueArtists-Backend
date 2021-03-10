@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_03_10_080506) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -93,6 +94,10 @@ ActiveRecord::Schema.define(version: 2021_03_10_080506) do
     t.decimal "lon", precision: 15, scale: 10
     t.boolean "phone_verified", default: false
     t.string "state"
+    t.string "name"
+    t.string "street_address"
+    t.index ["guest_artist"], name: "index_artists_on_guest_artist"
+    t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
@@ -149,6 +154,27 @@ ActiveRecord::Schema.define(version: 2021_03_10_080506) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "guest_artist_application_responses", force: :cascade do |t|
+    t.bigint "guest_artist_application_id"
+    t.bigint "user_id"
+    t.text "message"
+    t.index ["guest_artist_application_id"], name: "index_application_responses_on_application"
+    t.index ["user_id"], name: "index_guest_artist_application_responses_on_user_id"
+  end
+
+  create_table "guest_artist_applications", force: :cascade do |t|
+    t.bigint "studio_id"
+    t.bigint "artist_id"
+    t.string "phone_number"
+    t.text "message"
+    t.string "duration"
+    t.date "expected_start_date"
+    t.boolean "archive", default: false
+    t.datetime "mark_as_read"
+    t.index ["artist_id"], name: "index_guest_artist_applications_on_artist_id"
+    t.index ["studio_id"], name: "index_guest_artist_applications_on_studio_id"
   end
 
   create_table "landing_pages", force: :cascade do |t|
@@ -251,6 +277,7 @@ ActiveRecord::Schema.define(version: 2021_03_10_080506) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
+    t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
 
@@ -293,4 +320,5 @@ ActiveRecord::Schema.define(version: 2021_03_10_080506) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "guest_artist_application_responses", "guest_artist_applications"
 end

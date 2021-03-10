@@ -4,11 +4,12 @@ require 'faker'
 
 puts '== Seeding the database =='
 puts "\n== Creating Admin user data =="
+
 ['Free Style', 'Free Hand', 'Black & White', 'Color', 'Japanase', 'Freehand'].each do |s|
   Style.create(name: s)
 end
 
-if ENV['RUN_ALL'] == 1
+if ENV['RUN_ALL'] == '1'
   5.times do |i|
     User.create(
       email: "admin#{i + 1}@example.com",
@@ -104,7 +105,8 @@ if ENV['RUN_ALL'] == 1
       artist_id: i + 1,
       placement: 'back',
       size: 'small',
-      color: Faker::Color.color_name
+      color: Faker::Color.color_name,
+      tag_list: ['artist', 'tattoo', 'artist tattoo']
     )
 
     artist_tattoo.image.attach(
@@ -120,7 +122,8 @@ if ENV['RUN_ALL'] == 1
       studio_id: i + 251,
       placement: 'back',
       size: 'small',
-      color: Faker::Color.color_name
+      color: Faker::Color.color_name,
+      tag_list: ['studio', 'tattoo', 'studio tattoo']
     )
 
     studio_tattoo.image.attach(

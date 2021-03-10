@@ -8,11 +8,11 @@ module AddressExtension
   end
 
   def address
-    [city, state, country].compact.join(', ')
+    [street_address, city, state, country].compact.join(', ')
   end
 
   def address_changed?
-    city_changed? || state_changed? || country_changed?
+    street_address_changed? unless instance_of?(Location) || city_changed? || state_changed? || country_changed?
   end
 
   def save_location_data

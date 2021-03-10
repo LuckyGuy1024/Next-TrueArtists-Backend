@@ -47,6 +47,7 @@ Rails.application.routes.draw do
         resources :landing_pages
         resources :styles
         resources :categories
+        resources :guest_artist_applications
       end
     end
   end

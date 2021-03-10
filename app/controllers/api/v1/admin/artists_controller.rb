@@ -85,6 +85,7 @@ module Api::V1::Admin
         :state,
         :zip_code,
         :country,
+        :street_address,
         :seeking_guest_spot,
         :guest_artist,
         :avatar,

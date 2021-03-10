@@ -38,6 +38,8 @@ Rails.application.routes.draw do
         member do
           delete 'delete-image/:image_id' => 'studios#remove_image'
           put :submit_for_review
+          get :guest_artist_applications
+          get 'guest_artist_applications/:id' => 'studios#application'
         end
       end
       resources :locations, only: %i[index show]
@@ -67,6 +69,11 @@ Rails.application.routes.draw do
       resources :styles
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]
+      resources :guest_artist_applications, only: %i[create update destroy] do
+        member do
+          post :respond
+        end
+      end
     end
   end
 end
