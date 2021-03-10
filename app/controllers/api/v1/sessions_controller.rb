@@ -2,11 +2,11 @@
 
 class Api::V1::SessionsController < ApplicationController
   skip_before_action :authenticate_request!, only: %i[create]
+  before_action :find_user
 
   def create
-    user = User.find_by(email: user_login_params[:email])
-    if user&.authenticate(user_login_params[:password])
-      auth_token = JsonWebToken.encode(user_id: user.id)
+    if social_authentication || password_authentication
+      auth_token = JsonWebToken.encode(user_id: @user.id)
       render json: { auth_token: auth_token }, status: :ok
     else
       render json: { errors: 'Invalid email / password' }, status: :unauthorized
@@ -18,7 +18,24 @@ class Api::V1::SessionsController < ApplicationController
 
   private
 
-  def user_login_params
+  def password_authentication
+    true if session_params[:password] && @user&.authenticate(session_params[:password])
+  end
+
+  def social_authentication
+    true if social_params[:social_id] && @user
+  end
+
+  def find_user
+    @user = User.find_by(email: session_params[:email]) ||
+            User.find_by(social_id: social_params[:social_id])
+  end
+
+  def session_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def social_params
+    params.require(:user).permit(:social_id)
   end
 end

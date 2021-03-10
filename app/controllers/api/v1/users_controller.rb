@@ -52,8 +52,11 @@ class Api::V1::UsersController < ApplicationController
   def user_create_params
     params.permit(:email,
                   :full_name,
+                  :social_id,
                   :status,
                   :password,
-                  :password_confirmation)
+                  :password_confirmation).tap do |whitelisted|
+      whitelisted[:password] = whitelisted[:password_confirmation] = SecureRandom.hex(8) if params[:social_id].present?
+    end
   end
 end
