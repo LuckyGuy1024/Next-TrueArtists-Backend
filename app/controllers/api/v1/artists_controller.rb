@@ -102,9 +102,10 @@ module Api::V1
         :seeking_guest_spot,
         :guest_artist,
         :avatar,
-        :hero_banner,
-        style_ids: []
-      )
+        :hero_banner
+      ).tap do |whitelisted|
+        whitelisted[:style_ids] = params[:styles]
+      end
     end
   end
 end
