@@ -2,7 +2,10 @@
 
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  include Pundit
   require 'json_web_token'
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found!
 
@@ -34,7 +37,7 @@ class ApplicationController < ActionController::API
   def fail_if_unauthenticated!
     unless user_signed_in?
       render json: {
-        error: 'Unauthorised. Sign in to access this resource.'
+        errors: 'Unauthorised. Sign in to access this resource.'
       }, status: :unauthorized
     end
   end
@@ -76,5 +79,9 @@ class ApplicationController < ActionController::API
           attrs << { attribute: attribute, message: e }
         end
     end
+  end
+
+  def user_not_authorized
+    render json: { errors: 'You are not authorized to perform this action.' }, status: :unauthorized
   end
 end
