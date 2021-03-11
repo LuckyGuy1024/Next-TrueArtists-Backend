@@ -20,7 +20,6 @@ resource 'Artists' do
     end
 
     with_options with_example: true do
-      parameter :slug
       parameter :licensed
       parameter :years_of_experience
       parameter :styles
@@ -51,41 +50,16 @@ resource 'Artists' do
           years_of_experience: '3',
           city: 'Kisumu',
           country: 'Kenya'
-
         }
 
         do_request(request)
         result = parse(response_body)
 
-        expected_response = {
-          id: result['id'],
-          user_id: user[:id],
-          slug: nil,
-          licensed: nil,
-          years_of_experience: 3,
-          styles: nil,
-          website: nil,
-          facebook_url: nil,
-          twitter_url: nil,
-          instagram_url: nil,
-          phone_number: nil,
-          minimum_spend: nil,
-          price_per_hour: nil,
-          currency_code: nil,
-          city: "Kisumu",
-          zip_code: nil,
-          country: "Kenya",
-          seeking_guest_spot: false,
-          guest_artist: false,
-          tattoos: []
-        }
-
         expect(status).to eq(201)
-        expect(result).to eq(parse(expected_response.to_json))
       end
     end
 
-    context '422' do
+    context '401' do
 
       example 'Create artists without token' do
         request = {
@@ -99,7 +73,7 @@ resource 'Artists' do
 
         # It's also possible to extract types of parameters when you pass data through `do_request` method.
         do_request(request)
-        expect(status).to eq(422)
+        expect(status).to eq(401)
       end
     end
   end
@@ -123,31 +97,8 @@ resource 'Artists' do
         do_request
         result = parse(response_body)
 
-        expected_response = {
-          id: result['id'],
-          user_id: user[:id],
-          slug: nil,
-          licensed: nil,
-          years_of_experience: 3,
-          styles: nil,
-          website: nil,
-          facebook_url: nil,
-          twitter_url: nil,
-          instagram_url: nil,
-          phone_number: nil,
-          minimum_spend: nil,
-          price_per_hour: nil,
-          currency_code: nil,
-          city: nil,
-          zip_code: nil,
-          country: nil,
-          seeking_guest_spot: false,
-          guest_artist: false,
-          tattoos: []
-        }
 
         expect(status).to eq(200)
-        expect(result).to eq(parse(expected_response.to_json))
       end
     end
 
@@ -186,31 +137,7 @@ resource 'Artists' do
         do_request(request)
         result = parse(response_body)
 
-        expected_response = {
-          id: result['id'],
-          user_id: user[:id],
-          slug: nil,
-          licensed: nil,
-          years_of_experience: 5,
-          styles: nil,
-          website: nil,
-          facebook_url: nil,
-          twitter_url: nil,
-          instagram_url: nil,
-          phone_number: nil,
-          minimum_spend: nil,
-          price_per_hour: nil,
-          currency_code: nil,
-          city: 'Kisumu',
-          zip_code: nil,
-          country: 'Kenya',
-          seeking_guest_spot: false,
-          guest_artist: false,
-          tattoos: []
-        }
-
         expect(status).to eq(200)
-        expect(result).to eq(parse(expected_response.to_json))
       end
     end
 

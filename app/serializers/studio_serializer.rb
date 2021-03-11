@@ -45,7 +45,7 @@ class StudioSerializer < ActiveModel::Serializer
     if object.avatar.attached?
       {
         id: object.avatar.id,
-        image_url: rails_blob_path(object.avatar, only_path: true),
+        image_url: ENV['HOST'] + rails_blob_path(object.avatar, only_path: true),
         name: object.avatar.filename
       }
     end
@@ -55,7 +55,7 @@ class StudioSerializer < ActiveModel::Serializer
     if object.hero_banner.attached?
       {
         id: object.hero_banner.id,
-        image_url: rails_blob_path(object.hero_banner, only_path: true),
+        image_url: ENV['HOST'] + rails_blob_path(object.hero_banner, only_path: true),
         name: object.hero_banner.filename
       }
     end

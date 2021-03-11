@@ -20,6 +20,7 @@ module Api::V1
 
     def create
       artist = current_user.build_artist(artist_params)
+
       if artist.save
         render json: ArtistSerializer.new(artist).to_json, status: :created
       else
@@ -28,6 +29,7 @@ module Api::V1
     end
 
     def update
+      authorize @artist
       artist = BaseForm.new(@artist, artist_params).update
       if artist
         render json: ArtistSerializer.new(@artist).to_json, status: :ok
@@ -37,6 +39,7 @@ module Api::V1
     end
 
     def submit_for_review
+      authorize @artist
       @artist.pending_review
       if @artist.save
         head(:ok)
@@ -56,6 +59,7 @@ module Api::V1
     end
 
     def remove_image
+      authorize @artist
       attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
       if attachment.blank?
         head(:ok)

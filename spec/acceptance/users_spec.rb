@@ -8,7 +8,7 @@ resource 'Users' do
   post '/api/v1/users' do
 
     context '201' do
-      example 'Successfully create artists' do
+      example 'Successfully create user' do
         request = {
           email: 'ramon@g.com',
           role: 'Admin',
@@ -79,16 +79,6 @@ resource 'Users' do
       end
     end
 
-    context '404' do
-      let(:custom_header) { "Token #{JsonWebToken.encode(user_id: user[:id])}" }
-      let(:id) { 1 }
-
-      example 'User not found' do
-        do_request
-        expect(status).to eq(404)
-      end
-    end
-
     context '401' do
       let(:id) { 1 }
 
@@ -123,8 +113,9 @@ resource 'Users' do
         expected_response = {
           id: result['id'],
           email: 'jimmyjam@gmail.com',
-          role: 'Admin',
-          status: true
+          full_name: 'Ramon',
+          role: 'regular',
+          status: 'active'
         }
 
         expect(status).to eq(200)
@@ -132,21 +123,6 @@ resource 'Users' do
       end
     end
 
-    context '404' do
-      let(:custom_header) { "Token #{JsonWebToken.encode(user_id: user[:id])}" }
-      let(:id) { 1 }
-
-      example 'User not found' do
-        request = {
-          user: {
-            email: 'jimmyjam@gmail.com'
-          }
-        }
-
-        do_request(request)
-        expect(status).to eq(404)
-      end
-    end
 
     context '401' do
       let(:id) { user[:id] }
@@ -178,17 +154,6 @@ resource 'Users' do
         do_request
 
         expect(status).to eq(200)
-      end
-    end
-
-    context '404' do
-      let(:custom_header) { "Token #{JsonWebToken.encode(user_id: user[:id])}" }
-      let(:id) { 1 }
-
-      example 'User not found' do
-        do_request
-
-        expect(status).to eq(404)
       end
     end
 

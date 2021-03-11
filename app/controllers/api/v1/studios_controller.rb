@@ -34,6 +34,7 @@ module Api::V1
     end
 
     def submit_for_review
+      authorize @studio
       @studio.pending_review
       if @studio.save
         head(:ok)
@@ -43,6 +44,7 @@ module Api::V1
     end
 
     def update
+      authorize @studio
       studio = BaseForm.new(@studio, studio_params).update
 
       if studio
@@ -53,6 +55,7 @@ module Api::V1
     end
 
     def invite_artist
+      authorize @studio
       if @studio.invite_artist(artist_invite_params)
         head(:ok)
       else
@@ -71,6 +74,7 @@ module Api::V1
     end
 
     def remove_image
+      authorize @studio
       attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
       if attachment.blank?
         head(:ok)
