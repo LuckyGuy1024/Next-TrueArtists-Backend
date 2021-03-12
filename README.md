@@ -35,6 +35,7 @@ https://actionmailbox:INGRESS_PASSWORD@SERVER_PUBLIC_URL/rails/action_mailbox/se
 For example:
 > https://actionmailbox:TrueArtists@3a61d.ngrok.io/rails/action_mailbox/sendgrid/inbound_emails
 
+
 #### Sending/Receiving emails
 - bundle exec rails c
 - Create sending, receiving users
@@ -50,8 +51,7 @@ The original sender recipient of this thread will receive reply email.
 Also, you can check **Message** and **MessageMail** records in rails console.
 
 
+
 For more details, read these articles.
-
 [https://dev.to/rob__race/using-action-mailbox-in-rails-6-to-receive-mail-2nje](https://dev.to/rob__race/using-action-mailbox-in-rails-6-to-receive-mail-2nje)
-
 [blog.saeloun.com/2019/11/11/rails-6-action-mailbox-tryout.html](blog.saeloun.com/2019/11/11/rails-6-action-mailbox-tryout.html)
