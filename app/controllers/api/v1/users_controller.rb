@@ -53,6 +53,7 @@ class Api::V1::UsersController < ApplicationController
     params.permit(:email,
                   :full_name,
                   :social_id,
+                  :provider,
                   :status,
                   :password,
                   :password_confirmation).tap do |whitelisted|

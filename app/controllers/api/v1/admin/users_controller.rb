@@ -49,7 +49,7 @@ module Api::V1::Admin
     end
 
     def user_update_params
-      params.require(:user).permit(:email)
+      params.require(:user).permit(:email, :status)
     end
 
     def user_create_params
