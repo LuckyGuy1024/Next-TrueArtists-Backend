@@ -50,16 +50,6 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'trueartists.com' }
 
-  # SMTP settings for gmail
-  # config.action_mailer.smtp_settings = {
-  #   address: 'smtp.gmail.com',
-  #   port: 587,
-  #   authentication: :plain,
-  #   user_name: ENV.fetch('GMAIL_USERNAME'),
-  #   password: ENV.fetch('GMAIL_PASSWORD'),
-  #   enable_starttls_auto: true
-  # }
-
   # SMTP settings for Sendgrid
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
@@ -68,7 +58,7 @@ Rails.application.configure do
     domain: 'trueartists.xyz',
     authentication: :plain,
     user_name: 'apikey',
-    password: ENV.fetch('SENDGRID_APIKEY')
+    password: Rails.application.credentials[:SENDGRID_APIKEY]
   }
 
   # Prepare the ingress controller used to receive mail
