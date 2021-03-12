@@ -7,7 +7,11 @@ class Api::V1::SessionsController < ApplicationController
   def create
     if social_authentication || password_authentication
       auth_token = JsonWebToken.encode(user_id: @user.id)
-      render json: { auth_token: auth_token }, status: :ok
+
+      render json: {
+        user: UserSerializer.new(@user, root: false),
+        auth_token: auth_token
+      }, status: :ok
     else
       render json: { errors: 'Invalid email / password' }, status: :unauthorized
     end
@@ -36,6 +40,6 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def social_params
-    params.require(:user).permit(:social_id)
+    params.require(:user).permit(:social_id, :provider)
   end
 end
