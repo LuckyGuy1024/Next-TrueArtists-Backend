@@ -26,8 +26,10 @@ config.action_mailbox.ingress = :sendgrid
 3. Install ngrok and run it.
 4. Go to [SendGrid Inbound Parse](https://app.sendgrid.com/settings/parse) page and add Host & URL.
 ```
-https://actionmailbox:**INGRESS_PASSWORD**@**SERVER_PUBLIC_URL**/rails/action_mailbox/sendgrid/inbound_emails
+https://actionmailbox:INGRESS_PASSWORD@SERVER_PUBLIC_URL/rails/action_mailbox/sendgrid/inbound_emails
 ```
+- You can read **INGRESS_PASSWORD** from credentials file.
+- **SERVER_PUBLIC_URL** is ngrok forwarding URL.
 * Check **POST the raw, full MIME message** option.
 
 For example:
@@ -49,5 +51,7 @@ Also, you can check **Message** and **MessageMail** records in rails console.
 
 
 For more details, read these articles.
+
 [https://dev.to/rob__race/using-action-mailbox-in-rails-6-to-receive-mail-2nje](https://dev.to/rob__race/using-action-mailbox-in-rails-6-to-receive-mail-2nje)
+
 [blog.saeloun.com/2019/11/11/rails-6-action-mailbox-tryout.html](blog.saeloun.com/2019/11/11/rails-6-action-mailbox-tryout.html)
