@@ -18,7 +18,7 @@ class TattooSerializer < ActiveModel::Serializer
     if object.image.attached?
       {
         id: object.image.id,
-        image_url: rails_blob_path(object.image, only_path: true),
+        image_url: ENV['HOST'] + rails_blob_path(object.image, only_path: true),
         name: object.image.filename
       }
     end

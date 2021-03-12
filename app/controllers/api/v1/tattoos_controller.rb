@@ -43,6 +43,7 @@ class Api::V1::TattoosController < ApplicationController
   end
 
   def update
+    authorize @tattoo
     tattoo_params = params.permit(permitted_attributes)
     if @tattoo.update(tattoo_params)
       @tattoo.image.attach(tattoo_params[:image]) if tattoo_params[:image]
