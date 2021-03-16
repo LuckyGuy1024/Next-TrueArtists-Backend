@@ -73,7 +73,7 @@ module Api::V1
     def application_response_params
       params.permit(
         :message,
-      :_destroy
+        :_destroy
       )
     end
   end

@@ -23,6 +23,15 @@ module Api::V1::Admin
       end
     end
 
+    def flag
+      @tattoo.flag
+      if @tattoo.save
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @tattoo.errors)
+      end
+    end
+
     private
 
     def find_tattoo
@@ -31,6 +40,16 @@ module Api::V1::Admin
 
     def tattoo_params
       params.permit(*permitted_attributes)
+    end
+
+    def search_options
+      {
+        page: params[:page] || 1,
+        per_page: params[:per_page] || BaseSearch::PER_PAGE,
+        status: params[:status],
+        near: params[:near],
+        within: params[:within]
+      }.delete_if { |_k, v| v.nil? }
     end
 
     def permitted_attributes
