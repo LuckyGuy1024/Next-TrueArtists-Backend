@@ -25,7 +25,7 @@ class Api::V1::TattoosController < ApplicationController
       tattoo = @parent_object.tattoos.new(permitted_params)
 
       if tattoo.save
-        tattoo.image.attach(permitted_params[:image])
+        tattoo.image.attach(permitted_params[:image]) if permitted_params[:image]
 
         processed << {
           body: TattooSerializer.new(tattoo),
