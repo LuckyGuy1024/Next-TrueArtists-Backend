@@ -1,7 +1,8 @@
 class Api::V1::TattoosController < ApplicationController
   skip_before_action :authenticate_request!, only: %i[index show]
-  before_action :find_parent_object, only: %i[create batch_create destroy]
+  before_action :find_parent_object, only: %i[batch_create destroy]
   before_action :find_tattoo, except: %i[create index batch_create]
+  before_action :build_tattoos_object, only: %i[batch_create]
 
   def index
     @results = TattooSearch.new(
@@ -20,8 +21,9 @@ class Api::V1::TattoosController < ApplicationController
     errors = []
     processed = []
 
-    params['tattoos'].each do |tattoo_object|
-      permitted_params = tattoo_object.permit(permitted_attributes)
+    @tattoos.each do |tattoo_object|
+      tattoo = ActionController::Parameters.new(tattoo_object)
+      permitted_params = tattoo.permit(permitted_attributes)
       tattoo = @parent_object.tattoos.new(permitted_params)
 
       if tattoo.save
@@ -72,6 +74,15 @@ class Api::V1::TattoosController < ApplicationController
 
   def find_tattoo
     @tattoo = Tattoo.find(params[:id])
+  end
+
+  def build_tattoos_object
+    meta_data = JSON.parse(params['meta_data'])
+    params['images'].each_with_index do |image, index|
+      meta_data[index]['image'] = image
+    end
+
+    @tattoos = meta_data
   end
 
   def permitted_attributes

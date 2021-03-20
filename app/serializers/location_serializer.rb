@@ -15,7 +15,8 @@ class LocationSerializer < ActiveModel::Serializer
       {
         id: object.avatar.id,
         image_url: ENV['HOST'] + rails_blob_path(object.avatar, only_path: true),
-        name: object.avatar.filename
+        name: object.avatar.filename,
+        status: object.avatar.status
       }
     end
   end
@@ -25,7 +26,8 @@ class LocationSerializer < ActiveModel::Serializer
       {
         id: object.hero_banner.id,
         image_url: ENV['HOST'] + rails_blob_path(object.hero_banner, only_path: true),
-        name: object.hero_banner.filename
+        name: object.hero_banner.filename,
+        status: object.hero_banner.status
       }
     end
   end
