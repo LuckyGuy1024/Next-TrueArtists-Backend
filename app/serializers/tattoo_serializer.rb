@@ -12,7 +12,8 @@ class TattooSerializer < ActiveModel::Serializer
              :size,
              :tags,
              :status,
-             :image
+             :image,
+             :created_at
 
   def image
     if object.image.attached?
