@@ -1,20 +1,25 @@
 
 module Api::V1::Admin
   class PasswordsController < BaseController
-    def update
-      user = User.find(params[:user_id])
+    before_action :find_user, only: %i[create]
 
-      if user.set_new_password(change_password_params)
+    def create
+      if @user.reset_password_request
         head(:ok)
       else
-        render_api_error(status: 422, errors: user.errors)
+        render_api_error(status: 422, errors: 'Request could not be made.')
       end
     end
 
     private
 
-    def change_password_params
-      params.permit(:password, :password_confirmation)
+    def find_user
+      @user = User.find_by(email: change_password_request[:email])
+      head(:not_found) unless @user
+    end
+
+    def change_password_request
+      params.permit(:email)
     end
   end
 end

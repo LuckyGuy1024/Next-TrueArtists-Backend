@@ -26,7 +26,7 @@ class Tattoo < ApplicationRecord
   before_validation :import_tag_list, only: %i[batch_create update]
 
   def import_tag_list
-    self.tag_list = JSON.parse(tag_list).uniq.join(',') if tag_list
+    self.tag_list = JSON.parse(tag_list).uniq.join(',') if tag_list_changed?
   end
 
   def search_data
