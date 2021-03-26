@@ -28,7 +28,8 @@ class TattooSearch < BaseSearch
           near: location_data,
           within: options[:within]
         }
-      }.merge(filter_options))
+      }.merge(filter_options)
+    )
 
     self.results = search_results.results
     self.meta = pagination_info(search_results)

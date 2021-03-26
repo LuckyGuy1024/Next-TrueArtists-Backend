@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_124421) do
+ActiveRecord::Schema.define(version: 2021_03_26_065439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,26 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "conventions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "link_to_official_site"
+    t.string "facebook_link"
+    t.text "description"
+    t.integer "created_by"
+    t.boolean "verified", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal "lat", precision: 15, scale: 10
+    t.decimal "lon", precision: 15, scale: 10
+    t.string "slug"
   end
 
   create_table "favorites", force: :cascade do |t|
