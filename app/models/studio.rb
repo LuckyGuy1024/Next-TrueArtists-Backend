@@ -23,6 +23,7 @@ class Studio < ApplicationRecord
 
   validates :email, presence: true, on: create
   validates :user_id, uniqueness: true
+  before_validation :validate_studio_time
 
   after_commit :upgrade_user_role, on: :create
   after_validation :save_location_data, if: :address_changed?
@@ -42,6 +43,12 @@ class Studio < ApplicationRecord
     update(phone_verified: true) if status == 'approved'
   end
 
+  def self.create_studio(user, params)
+    studio_params = params.merge(params[:working_hours]).delete_if { |k, _v| k == 'working_hours' }
+
+    user.build_studio(studio_params)
+  end
+
   private
 
   def send_phone_verification_code
@@ -50,5 +57,15 @@ class Studio < ApplicationRecord
 
   def upgrade_user_role
     user.assign_role(User.roles[:studio_manager])
+  end
+
+  def validate_studio_time
+    %w[monday tuesday wednesday thursday friday saturday sunday].each do |time|
+      next unless self["#{time}_start".to_sym] || self["#{time}_end".to_sym]
+
+      validates_time "#{time}_start".to_sym,
+                     before: "#{time}_end".to_sym,
+                     before_message: "must be before #{time} end date"
+    end
   end
 end

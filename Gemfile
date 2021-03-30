@@ -25,6 +25,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 gem 'searchkick'
 gem 'sprockets', '~>3.0'
 gem 'twilio-ruby'
+gem 'validates_timeliness'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'

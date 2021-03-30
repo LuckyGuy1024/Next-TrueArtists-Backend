@@ -39,7 +39,8 @@ class StudioSerializer < ActiveModel::Serializer
              :lgbt_friendly,
              :price_per_hour,
              :avatar,
-             :hero_banner
+             :hero_banner,
+             :working_hours
 
   def avatar
     if object.avatar.attached?
@@ -63,5 +64,65 @@ class StudioSerializer < ActiveModel::Serializer
         status: object.hero_banner.status
       }
     end
+  end
+
+  def working_hours
+    [
+      {
+        id: 1,
+        day: 'Monday',
+        opened: object.monday,
+        from: format_time(object.monday_start),
+        to: format_time(object.monday_end)
+      },
+      {
+        id: 2,
+        day: 'Tuesday',
+        opened: object.tuesday,
+        from: format_time(object.tuesday_start),
+        to: format_time(object.tuesday_end)
+      },
+      {
+        id: 3,
+        day: 'Wednesday',
+        opened: object.wednesday,
+        from: format_time(object.wednesday_start),
+        to: format_time(object.wednesday_end)
+      },
+      {
+        id: 4,
+        day: 'Thursday',
+        opened: object.thursday,
+        from: format_time(object.thursday_start),
+        to: format_time(object.thursday_end)
+      },
+      {
+        id: 5,
+        day: 'Friday',
+        opened: object.friday,
+        from: format_time(object.friday_start),
+        to: format_time(object.friday_end)
+      },
+      {
+        id: 6,
+        day: 'Saturday',
+        opened: object.saturday,
+        from: format_time(object.saturday_start),
+        to: format_time(object.saturday_end)
+      },
+      {
+        id: 7,
+        day: 'Sunday',
+        opened: object.sunday,
+        from: format_time(object.sunday_start),
+        to: format_time(object.sunday_end)
+      }
+    ]
+  end
+
+  def format_time(time)
+    return nil unless time
+
+    time.strftime("%I:%M %p")
   end
 end
