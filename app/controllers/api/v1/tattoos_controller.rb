@@ -1,10 +1,19 @@
 class Api::V1::TattoosController < ApplicationController
-  skip_before_action :authenticate_request!, only: %i[index show]
+  skip_before_action :authenticate_request!, only: %i[index filter show]
   before_action :find_parent_object, only: %i[batch_create destroy]
-  before_action :find_tattoo, except: %i[create index batch_create]
+  before_action :find_tattoo, except: %i[create index filter batch_create]
   before_action :build_tattoos_object, only: %i[batch_create]
 
   def index
+    @results = TattooSearch.new(
+      query: params[:query],
+      options: search_options
+    ).search_tattoos
+
+    render json: @results, status: :ok
+  end
+
+  def filter
     @results = TattooSearch.new(
       query: params[:query],
       options: search_options
@@ -100,6 +109,9 @@ class Api::V1::TattoosController < ApplicationController
       page: params[:page] || 1,
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
       status: params[:status],
+      placement: params[:placement],
+      styles: params[:styles],
+      color: params[:color],
       near: params[:near],
       within: params[:within]
     }.delete_if { |_k, v| v.nil? }
