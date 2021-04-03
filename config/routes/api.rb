@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
       resources :studio_invites, path: 'studio-invites' do
         collection do
-          post 'invite-artist' => 'studio_invites#create'
+          post 'invite-artist/:id' => 'studio_invites#create'
           get 'accept-invite' => 'studio_invites#accept_studio_invite'
         end
       end

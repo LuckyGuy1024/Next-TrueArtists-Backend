@@ -32,8 +32,7 @@ module Api::V1
     end
 
     def find_studio
-      @studio = current_user.studio
-      head(:not_found) unless @studio
+      @studio = Studio.find(params[:id])
     end
 
     def find_studio_invite

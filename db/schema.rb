@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
