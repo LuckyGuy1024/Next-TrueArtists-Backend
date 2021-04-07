@@ -20,12 +20,12 @@ class Studio < ApplicationRecord
     Italian
     Turkish
   ].freeze
-  
+
   SERVICES = ['Tattoo Consultation', 'Aftercare Consultation',
               'Basic Body Modification', 'Piercing', 'Scarification',
               'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
 
-  searchkick word_start: %i[name bio city country specialty services], locations: [:location]
+  searchkick word_start: %i[name bio city country specialty services languages], locations: [:location]
 
   include AddressExtension
   extend FriendlyId
