@@ -136,7 +136,6 @@ module Api::V1
         :name,
         :bio,
         :services,
-        :specialty,
         :website_url,
         :facebook_url,
         :twitter_url,

@@ -3,6 +3,28 @@
 class Studio < ApplicationRecord
   include AASM
 
+  LANGUAGES = %w[
+    Mandarin
+    Spanish
+    English
+    Dutch
+    Hindi
+    Arabic
+    Portuguese
+    Russian
+    Japanese
+    German
+    French
+    Vietnamese
+    Korean
+    Italian
+    Turkish
+  ].freeze
+  
+  SERVICES = ['Tattoo Consultation', 'Aftercare Consultation',
+              'Basic Body Modification', 'Piercing', 'Scarification',
+              'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
+
   searchkick word_start: %i[name bio city country specialty services], locations: [:location]
 
   include AddressExtension

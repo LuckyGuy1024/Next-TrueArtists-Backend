@@ -2,7 +2,8 @@
 
 class Artist < ApplicationRecord
   include AASM
-
+  SPECIALTY = %w[Flash Freehand].freeze
+                
   searchkick word_start: %i[bio slug website facebook_url twitter_url instagram_url city country specialty services],
              locations: [:location]
 
