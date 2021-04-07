@@ -150,8 +150,6 @@ module Api::V1
         :state,
         :zip_code,
         :country,
-        :seeking_guest_spot,
-        :guest_studio,
         :avatar,
         :hero_banner
       )
