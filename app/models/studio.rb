@@ -29,8 +29,10 @@ class Studio < ApplicationRecord
 
   include AddressExtension
   extend FriendlyId
-  friendly_id :name, use: :history
+  friendly_id :slug_candidates, use: :history
+
   include StatusManagement
+
   acts_as_favoritable
   belongs_to :user
   has_many :studio_invites, dependent: :destroy
@@ -49,6 +51,15 @@ class Studio < ApplicationRecord
   after_commit :upgrade_user_role, on: :create
   after_validation :save_location_data, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
+
+  def slug_candidates
+    [
+      :name,
+      %i[name city],
+      %i[name city state],
+      %i[name city country]
+    ]
+  end
 
   def add_artist(artist_id)
     studio_artists.create(artist_id: artist_id)
