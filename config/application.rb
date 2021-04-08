@@ -37,5 +37,8 @@ module Dropshypify
         resource '*', headers: :any, methods: %i[get post put patch delete options head]
       end
     end
+
+    # Handle Pundit::NotAuthorizedError's by having rails handle them as a 403 error
+    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
   end
 end

@@ -15,6 +15,15 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "action_mailbox_inbound_emails", force: :cascade do |t|
+    t.integer "status", default: 0, null: false
+    t.string "message_id", null: false
+    t.string "message_checksum", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -202,17 +212,28 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
+  create_table "message_mails", force: :cascade do |t|
+    t.integer "message_id", null: false
+    t.integer "user_id", null: false
+    t.string "thread_id"
+    t.string "mail_message_id", null: false
+    t.text "references"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.string "sender_id"
+    t.integer "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "thread_id"
   end
 
   create_table "studio_artists", force: :cascade do |t|

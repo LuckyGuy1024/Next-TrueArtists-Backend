@@ -28,3 +28,12 @@ config/application.yml
 .idea
 .DS_Store
 /storage
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+.browserslistrc

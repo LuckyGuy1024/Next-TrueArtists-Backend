@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       put 'change_password' => 'passwords#update'
     end
   end
-  resources :artists do
+  resources :artists, controller: "frontend/artists" do
     collection do
       put 'verify-phone' => 'studios#verify_phone'
     end
