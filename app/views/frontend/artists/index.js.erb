@@ -1,0 +1,10 @@
+<% if @artists.size > 0 %>
+  $('.artists-lists').append('<%= escape_javascript(render(:partial => @artists)) %>');
+
+  <% if @meta[:last_page] %>
+    $('.see-more-section').hide();
+  <% else %>
+    $('#page').val('<%= @meta[:current_page] + 1 %>');
+    $('#per_page').val('<%= @meta[:limit_value] %>');
+  <% end %>
+<% end %>

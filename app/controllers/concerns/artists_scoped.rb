@@ -11,10 +11,10 @@ module ArtistsScoped
   private
 
   def search
-    ArtistSearch.new(
+    @search ||= ArtistSearch.new(
       query: params[:query],
       options: search_options
-    ).filter
+    )
   end
 
   def search_options

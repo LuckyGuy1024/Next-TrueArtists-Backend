@@ -1,0 +1,24 @@
+<div class="col-lg-4 col-md-4">
+  <div class="listing-widget shadow">
+    <a href="#">
+      <div class="list-image">
+        <% if artist.tattoos.size > 0 %>
+          <img data-src="<%= url_for(artist.tattoos.first.image) %>" class="lazyload" />
+        <% end %>
+      </div>
+      <div class="list-content d-flex align-items-center">
+        <div class="list-left flex-grow-1">
+          <div class="d-flex align-items-center">
+            <div class="profile-img">
+              <img data-src="<%= url_for(artist.avatar) %>" class="lazyload" />
+            </div>
+            <div class="profile-info">
+                <h5><%= artist.slug %></h5>
+                <p><%= artist.bio %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

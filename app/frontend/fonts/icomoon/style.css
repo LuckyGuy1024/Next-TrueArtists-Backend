@@ -1,0 +1,263 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('icomoon.eot?tvgzhp');
+  src:  url('icomoon.eot?tvgzhp#iefix') format('embedded-opentype'),
+    url('icomoon.ttf?tvgzhp') format('truetype'),
+    url('icomoon.woff?tvgzhp') format('woff'),
+    url('icomoon.svg?tvgzhp#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ta-icon-"], [class*=" ta-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ta-icon-plus:before {
+  content: "\e934";
+}
+.ta-icon-check-circle-fill:before {
+  content: "\e935";
+}
+.ta-icon-check:before {
+  content: "\e936";
+}
+.ta-icon-filter:before {
+  content: "\e937";
+  color: #47b4bb;
+}
+.ta-icon-check-square-fill:before {
+  content: "\e938";
+}
+.ta-icon-map-pin-location:before {
+  content: "\e900";
+}
+.ta-icon-casebasic-_-case:before {
+  content: "\e901";
+}
+.ta-icon-shop .path1:before {
+  content: "\e902";
+  color: rgb(200, 229, 230);
+}
+.ta-icon-shop .path2:before {
+  content: "\e903";
+  margin-left: -1em;
+  color: rgb(232, 254, 255);
+}
+.ta-icon-shop .path3:before {
+  content: "\e904";
+  margin-left: -1em;
+  color: rgb(200, 229, 230);
+}
+.ta-icon-shop .path4:before {
+  content: "\e905";
+  margin-left: -1em;
+  color: rgb(232, 254, 255);
+}
+.ta-icon-shop .path5:before {
+  content: "\e906";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.ta-icon-shop .path6:before {
+  content: "\e907";
+  margin-left: -1em;
+  color: rgb(200, 229, 230);
+}
+.ta-icon-shop .path7:before {
+  content: "\e908";
+  margin-left: -1em;
+  color: rgb(200, 229, 230);
+}
+.ta-icon-shop .path8:before {
+  content: "\e909";
+  margin-left: -1em;
+  color: rgb(200, 229, 230);
+}
+.ta-icon-shop .path9:before {
+  content: "\e90a";
+  margin-left: -1em;
+  color: rgb(232, 237, 252);
+}
+.ta-icon-shop .path10:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(200, 229, 230);
+}
+.ta-icon-shop .path11:before {
+  content: "\e90c";
+  margin-left: -1em;
+  color: rgb(111, 198, 204);
+}
+.ta-icon-shop .path12:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(200, 229, 230);
+}
+.ta-icon-shop .path13:before {
+  content: "\e90e";
+  margin-left: -1em;
+  color: rgb(111, 198, 204);
+}
+.ta-icon-shop .path14:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.ta-icon-shop .path15:before {
+  content: "\e910";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.ta-icon-shop .path16:before {
+  content: "\e911";
+  margin-left: -1em;
+  color: rgb(71, 180, 187);
+}
+.ta-icon-shop .path17:before {
+  content: "\e912";
+  margin-left: -1em;
+  color: rgb(71, 180, 187);
+}
+.ta-icon-snake .path1:before {
+  content: "\e913";
+  color: rgb(232, 254, 255);
+}
+.ta-icon-snake .path2:before {
+  content: "\e914";
+  margin-left: -1em;
+  color: rgb(255, 239, 236);
+}
+.ta-icon-snake .path3:before {
+  content: "\e915";
+  margin-left: -1em;
+  color: rgb(124, 68, 195);
+}
+.ta-icon-snake .path4:before {
+  content: "\e916";
+  margin-left: -1em;
+  color: rgb(107, 200, 206);
+}
+.ta-icon-snake .path5:before {
+  content: "\e917";
+  margin-left: -1em;
+  color: rgb(131, 202, 206);
+}
+.ta-icon-snake .path6:before {
+  content: "\e918";
+  margin-left: -1em;
+  color: rgb(107, 200, 206);
+}
+.ta-icon-snake .path7:before {
+  content: "\e919";
+  margin-left: -1em;
+  color: rgb(124, 68, 195);
+}
+.ta-icon-snake .path8:before {
+  content: "\e91a";
+  margin-left: -1em;
+  color: rgb(255, 239, 236);
+}
+.ta-icon-snake .path9:before {
+  content: "\e91b";
+  margin-left: -1em;
+  color: rgb(200, 229, 231);
+}
+.ta-icon-snake .path10:before {
+  content: "\e91c";
+  margin-left: -1em;
+  color: rgb(131, 202, 206);
+}
+.ta-icon-snake .path11:before {
+  content: "\e91d";
+  margin-left: -1em;
+  color: rgb(200, 229, 231);
+}
+.ta-icon-snake .path12:before {
+  content: "\e91e";
+  margin-left: -1em;
+  color: rgb(131, 202, 206);
+}
+.ta-icon-snake .path13:before {
+  content: "\e91f";
+  margin-left: -1em;
+  color: rgb(200, 229, 231);
+}
+.ta-icon-snake .path14:before {
+  content: "\e920";
+  margin-left: -1em;
+  color: rgb(200, 229, 231);
+}
+.ta-icon-snake .path15:before {
+  content: "\e921";
+  margin-left: -1em;
+  color: rgb(71, 180, 187);
+}
+.ta-icon-snake .path16:before {
+  content: "\e922";
+  margin-left: -1em;
+  color: rgb(71, 180, 187);
+}
+.ta-icon-eye-fill:before {
+  content: "\e923";
+}
+.ta-icon-eye-slash-fill:before {
+  content: "\e924";
+}
+.ta-icon-eye-slash:before {
+  content: "\e925";
+}
+.ta-icon-eye:before {
+  content: "\e926";
+}
+.ta-icon-facebook:before {
+  content: "\e927";
+}
+.ta-icon-google:before {
+  content: "\e928";
+}
+.ta-icon-star-fill:before {
+  content: "\e929";
+}
+.ta-icon-star:before {
+  content: "\e92a";
+}
+.ta-icon-angle-left:before {
+  content: "\e92b";
+}
+.ta-icon-angle-right:before {
+  content: "\e92c";
+}
+.ta-icon-angle-up:before {
+  content: "\e92d";
+}
+.ta-icon-angle-bottom:before {
+  content: "\e92e";
+}
+.ta-icon-arrow-left:before {
+  content: "\e92f";
+}
+.ta-icon-arrow-right:before {
+  content: "\e930";
+}
+.ta-icon-heart:before {
+  content: "\e931";
+}
+.ta-icon-search:before {
+  content: "\e932";
+}
+.ta-icon-x:before {
+  content: "\e933";
+}

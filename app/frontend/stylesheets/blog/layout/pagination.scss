@@ -1,0 +1,53 @@
+.pagination-style {
+  text-align: center;
+  position: relative;
+  margin: 50 * $rem 0;
+
+  ul {
+    list-style: none;
+    padding: 0 180 * $rem;
+    margin: 0;
+
+    a, span {
+      margin: 0 14 * $rem;
+      height: 45 * $rem;
+      width: 45 * $rem;
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 100%;
+      border: 1px solid #B6B6B6;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 42 * $rem;
+      text-align: center;
+      color: #343434;
+    }
+
+    span {
+      &.current {
+        background: #faf1f2;
+        border-color: #faf1f2;
+      }
+      &.gap {
+        display: inline-block;
+        margin: 0 0.875rem;
+      }
+    }
+  }
+
+  .btn, .next_page {
+    width: 170 * $rem;
+    background: #faf1f2;
+    border-color: #faf1f2;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    color: #CB4D4D;
+    padding: 0.75rem 1.25rem;
+    line-height: 1.2;
+  }
+}

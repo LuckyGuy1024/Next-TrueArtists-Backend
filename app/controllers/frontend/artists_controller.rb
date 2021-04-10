@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 module Frontend
@@ -5,7 +6,15 @@ module Frontend
     include ArtistsScoped
 
     def index
-      @results = search
+      search_results = search.base_filter
+
+      @artists = search_results.results
+      @meta = search.pagination_info(search_results)
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     def show

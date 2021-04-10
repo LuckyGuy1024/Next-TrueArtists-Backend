@@ -12,9 +12,12 @@
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+const images = require.context('../images', true)
+const imagePath = (name) => images(name, true)
 
-import 'bootstrap/js/src/collapse' 
-import 'bootstrap/js/src/dropdown'
-import 'bootstrap/js/src/scrollspy'
+require("jquery-ujs")
+require("lazysizes")
+require("turbolinks").start()
+
+require("javascripts/desktop_head")
+require("javascripts/desktop_footer")

@@ -1,0 +1,85 @@
+.promo-banner-top {
+  @keyframes gradient {
+    0% {
+      background-position: 0 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0 50%;
+    }
+  }
+
+  a {
+    display: block;
+    height: $top-promo-height * $rem;
+    color: $white;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #50009b);
+    background-size: 400% 400%;
+    animation: gradient 30s ease infinite;
+    font-size: 16px;
+  }
+
+  .content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .caption {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 0.8em 0;
+
+    b {
+      display: inline-block;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-right: 1px solid #fff;
+      margin-right: 1em;
+      padding-right: 1em;
+    }
+  }
+
+  .cta {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    border-left: 1px solid #fff;
+    white-space: nowrap;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.8em 0 0.8em 2em;
+  }
+}
+@media (max-width: 760px) {
+  .promo-banner-top {
+    a {
+      font-size: 14px;
+    }
+
+    .caption {
+      b {
+        display: none;
+      }
+    }
+
+    .cta {
+      padding: 0.8em 0 0.8em 2em;
+    }
+  }
+}
+@media (min-width: 767px) {
+  .promo-banner-top {
+    .caption b {
+      margin-bottom: 0;
+    }
+  }
+}

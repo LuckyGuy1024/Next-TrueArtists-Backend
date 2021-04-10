@@ -1,0 +1,6 @@
+// require("javascripts/default/jquery-migrate.min")
+require("javascripts/plugin/slick-carousel/slick.min")
+require("javascripts/plugin/slick-nav/jquery.slicknav.min")
+require("javascripts/plugin/isotop-pakage-min")
+require("javascripts/plugin/imagesloaded.pkgd.min")
+require("javascripts/scripts")
