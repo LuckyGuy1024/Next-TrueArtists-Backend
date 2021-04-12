@@ -9,7 +9,7 @@
                         <%= link_to image_pack_tag("media/images/logo.svg"), "#" %>
                     </div>
                     <div class="main-menu d-none d-lg-block">
-                        <ul id="nav">
+                        <ul>
                             <li><%= link_to "Artists", artists_path, class: "active" %></li>
                             <li><%= link_to "Studios", studios_path %></li>
                             <li><%= link_to "Tattos", tattoos_path %></li>
@@ -43,6 +43,20 @@
                 </div>
             </div>
             <div class="col-md-12">
+                <ul id="mobile-nav">
+                    <li><%= link_to "Artists", artists_path, class: "active" %></li>
+                    <li><%= link_to "Studios", studios_path %></li>
+                    <li><%= link_to "Tattos", tattoos_path %></li>
+                    <li><%= link_to "Articles", articles_path %></li>
+                    <li>
+                        User Profile
+                        <ul>
+                            <li><a href="#">View profile</a></li>
+                            <li><a href="#">Edit account</a></li>
+                            <li><a href="#">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <div class="mobile-menu d-block d-lg-none"></div>
             </div>
         </div>

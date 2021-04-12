@@ -6,17 +6,20 @@
 
         let $checkbox = $(this).parent().find('input');
         $checkbox.prop('checked', !$checkbox.prop('checked'));
+        $(this).parent().toggleClass('checked');
       });
 
       $('.multi-filter .multi-filter__selected').on('click', function(e) {
         e.preventDefault();
         $(this).parents('.multi-filter').toggleClass('active');
+        $('body').toggleClass('filter-open');
       });
 
       $('.multi-filter__close').on('click', function(e) {
         e.preventDefault();
 
         $(this).parents('.multi-filter').toggleClass('active');
+        $('body').toggleClass('filter-open');
       });
 
       $('.multi-filter__clear').on('click', function(e) {

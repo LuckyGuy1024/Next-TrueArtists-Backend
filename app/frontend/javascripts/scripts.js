@@ -219,7 +219,7 @@ $(document).ready(function() {
 
 
     // Mobile Menu
-    $('#nav').slicknav({
+    $('#mobile-nav').slicknav({
         label: '',
         duration: 700,
         prependTo: '.mobile-menu'

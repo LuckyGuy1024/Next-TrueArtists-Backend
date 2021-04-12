@@ -5,8 +5,6 @@
     display: flex;
     align-items: center;
 
-    .logo {}
-
     .main-menu {
       flex: 1;
 
@@ -239,7 +237,6 @@
   }
 }
 //Responsive
-@media (max-width: 1199px) {}
 @media (max-width: 991px) {
   .header {
     padding: 30px 0 40px;
@@ -253,7 +250,7 @@
 
   .user-profile-search {
     flex: 1;
-    justify-content: end;
+    justify-content: flex-end;
 
     .search {
       margin-right: 25px !important;
@@ -267,11 +264,16 @@
     width: 100%;
     left: 0;
     top: 5px;
+    padding: 10px 12px;
   }
 
   .slicknav_menu {
     background: transparent;
     padding: 0;
+
+    ul {
+      list-style: none;
+    }
 
     .slicknav_btn {
       display: none;
@@ -280,22 +282,34 @@
     .slicknav_nav {
       padding-bottom: 10px;
 
+      li {
+        margin: 10px 0;
+      }
+
       a {
         color: $dark-color;
-        font-size: 16px;
-        font-weight: 700;
+        font-size: 20px;
+        padding: 5px 0;
 
         &:hover {
           background: transparent;
           color: $secondary-color;
         }
       }
+
+      ul li {
+        margin: 5px 0 5px 10px;
+      }
     }
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .header {
-    padding: 15px 0 20px;
+    padding: 25px 0;
+  }
+
+  .user-profile {
+    display: none !important;
   }
 
   .user-profile-search .search {
@@ -320,6 +334,20 @@
       font-size: 15px;
       width: 35px;
       height: 35px;
+    }
+  }
+
+  .logo {
+    img {
+      max-width: 200px;
+    }
+  }
+}
+
+@media (max-width: 475px) {
+  .sub-header {
+    h2 {
+      font-size: 20px;
     }
   }
 }
