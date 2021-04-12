@@ -1,4 +1,12 @@
 GIT
+  remote: git@github.com:jwachira/ta-assets.git
+  revision: 4ede23acd7954960a137e7b6998844b7e2a2f8e6
+  branch: master
+  specs:
+    ta-assets (0.1.0)
+      rails (>= 4.2)
+
+GIT
   remote: https://github.com/jejacks0n/apitome.git
   revision: 5b856800e746b21fcfc57bbe75cfffc71f11df50
   specs:
@@ -288,6 +296,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets (~> 3.0)
+  ta-assets!
   twilio-ruby
   tzinfo-data
 
