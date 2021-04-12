@@ -27,12 +27,12 @@
 }
 
 .btn-primary {
-  background: $primary-color;
+  background: $btn-primary-color;
   color: $text-white;
 }
 .btn-secondary {
-  border-color: $primary-color;
-  color: $primary-color;
+  border-color: $btn-primary-color;
+  color: $btn-primary-color;
   background-color: transparent;
 }
 .btn-with-icon {
@@ -40,6 +40,20 @@
   color: $primary-color;
   background-color: transparent;
 }
+
+.btn-primary,
+.btn-secondary,
+.btn-with-icon {
+  &:hover {
+    background: $btn-primary-hover-color;
+  }
+
+  &:active {
+    background: $btn-primary-hover-color; 
+    color: $text-color;
+  }
+}
+
 .btn-alternative {
   background-color: $secondary-color;
   color: $text-white;

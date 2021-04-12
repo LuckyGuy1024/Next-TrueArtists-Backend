@@ -131,14 +131,13 @@
             allfunction.search()
             allfunction.searchTyping()
             allfunction.userDropdown()
-
-
         },
     }
 })(jQuery);
 
 $(document).ready(function() {
     allfunction.init();
+    Filters.init();
 
 
     $(".top-city-carousel").slick({
@@ -235,7 +234,12 @@ $(document).ready(function() {
         $(this).parent().toggleClass('active');
     });
 
-    $('.see-more-section a').on('click', function(evt) {
-        $(this).parent('form').submit();
+    $('.see-more-section button').on('click', function(e) {
+        e.preventDefault();
+
+        $form = $(this).parents('form');
+        $form.find('#page').val(parseInt($form.find('#page').val()) + 1);
+
+        $form.submit();
     })
 });

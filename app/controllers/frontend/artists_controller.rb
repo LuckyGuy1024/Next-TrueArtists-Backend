@@ -11,6 +11,8 @@ module Frontend
       @artists = search_results.results
       @meta = search.pagination_info(search_results)
 
+      @styles = Style.all
+
       respond_to do |format|
         format.html
         format.js

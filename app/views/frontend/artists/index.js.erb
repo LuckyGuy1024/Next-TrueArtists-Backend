@@ -4,7 +4,7 @@
   <% if @meta[:last_page] %>
     $('.see-more-section').hide();
   <% else %>
-    $('#page').val('<%= @meta[:current_page] + 1 %>');
+    $('#page').val('<%= @meta[:current_page] %>');
     $('#per_page').val('<%= @meta[:limit_value] %>');
   <% end %>
 <% end %>
