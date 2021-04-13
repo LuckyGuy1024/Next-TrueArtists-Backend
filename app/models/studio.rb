@@ -45,7 +45,8 @@ class Studio < ApplicationRecord
 
   validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
-  validates :email, presence: true, on: create
+  validates :email, presence: true, on: :create
+  validates :name, presence: true
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
