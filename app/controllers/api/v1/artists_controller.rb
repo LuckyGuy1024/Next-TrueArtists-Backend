@@ -98,6 +98,7 @@ module Api::V1
         :price_per_hour,
         :currency_code,
         :street_address,
+        :specialty,
         :city,
         :state,
         :zip_code,

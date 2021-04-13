@@ -3,12 +3,36 @@
 class Studio < ApplicationRecord
   include AASM
 
-  searchkick word_start: %i[name bio city country specialty services], locations: [:location]
+  LANGUAGES = %w[
+    Mandarin
+    Spanish
+    English
+    Dutch
+    Hindi
+    Arabic
+    Portuguese
+    Russian
+    Japanese
+    German
+    French
+    Vietnamese
+    Korean
+    Italian
+    Turkish
+  ].freeze
+
+  SERVICES = ['Tattoo Consultation', 'Aftercare Consultation',
+              'Basic Body Modification', 'Piercing', 'Scarification',
+              'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
+
+  searchkick word_start: %i[name bio city country services languages], locations: [:location]
 
   include AddressExtension
   extend FriendlyId
-  friendly_id :name, use: :history
+  friendly_id :slug_candidates, use: :history
+
   include StatusManagement
+
   acts_as_favoritable
   belongs_to :user
   has_many :studio_invites, dependent: :destroy
@@ -21,12 +45,22 @@ class Studio < ApplicationRecord
 
   validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
-  validates :email, presence: true, on: create
+  validates :email, presence: true, on: :create
+  validates :name, presence: true
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
   after_validation :save_location_data, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
+
+  def slug_candidates
+    [
+      :name,
+      %i[name city],
+      %i[name city state],
+      %i[name city country]
+    ]
+  end
 
   def add_artist(artist_id)
     studio_artists.create(artist_id: artist_id)

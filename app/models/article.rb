@@ -10,13 +10,20 @@ class Article < ApplicationRecord
   belongs_to :user
   belongs_to :category
   extend FriendlyId
-  friendly_id :title, use: :history
+  friendly_id :slug_candidates, use: :history
 
   validates_uniqueness_of :title, :page_title
   validates :meta_description, :introduction, :content, :status, presence: true
 
   before_validation :assign_status, only: %i[create update]
   before_validation :import_tag_list, only: %i[create update]
+
+  def slug_candidates
+    [
+      :title,
+      %i[title id]
+    ]
+  end
 
   def assign_status
     self.status = Article.statuses[status] || Article.statuses[:draft]

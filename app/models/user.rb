@@ -17,7 +17,8 @@ class User < ApplicationRecord
 
   require 'json_web_token'
   extend FriendlyId
-  friendly_id :full_name, use: :history
+  friendly_id :slug_candidates, use: :history
+
   acts_as_favoritor
   before_save :downcase_email
   has_secure_password
@@ -38,6 +39,13 @@ class User < ApplicationRecord
                             on: :create
 
   after_initialize :assign_basic_role, if: :new_record?
+
+  def slug_candidates
+    [
+      :full_name,
+      %i[full_name id]
+    ]
+  end
 
   def assign_basic_role
     self.role = User.roles[:regular]

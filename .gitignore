@@ -17,7 +17,7 @@
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
-
+node_modules
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.

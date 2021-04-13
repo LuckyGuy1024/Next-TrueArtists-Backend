@@ -2,6 +2,7 @@
 
 class Artist < ApplicationRecord
   include AASM
+  SPECIALTY = %w[Flash Freehand].freeze
 
   searchkick word_start: %i[bio slug website facebook_url twitter_url instagram_url city country specialty services],
              locations: [:location]
@@ -10,7 +11,7 @@ class Artist < ApplicationRecord
   include StatusManagement
 
   extend FriendlyId
-  friendly_id :name, use: :history
+  friendly_id :slug_candidates, use: :history
 
   acts_as_favoritable
   belongs_to :user
@@ -34,6 +35,15 @@ class Artist < ApplicationRecord
 
   def search_data
     attributes.merge(location: { lat: lat, lon: lon })
+  end
+
+  def slug_candidates
+    [
+      :name,
+      %i[name city],
+      %i[name city state],
+      %i[name city country]
+    ]
   end
 
   private

@@ -121,7 +121,21 @@ module Api::V1
 
     def studio_params
       params.permit(
+        :name,
         :email,
+        :phone_number,
+        :bio,
+        :avatar,
+        :hero_banner,
+        :street_address,
+        :city,
+        :state,
+        :zip_code,
+        :country,
+        :website_url,
+        :facebook_url,
+        :twitter_url,
+        :instagram_url,
         :accepting_guest_artist,
         :piercings,
         :cosmetic_tattoos,
@@ -133,27 +147,10 @@ module Api::V1
         :parking,
         :lgbt_friendly,
         :languages,
-        :name,
-        :bio,
         :services,
-        :specialty,
-        :website_url,
-        :facebook_url,
-        :twitter_url,
-        :instagram_url,
-        :phone_number,
         :minimum_spend,
         :price_per_hour,
-        :currency_code,
-        :street_address,
-        :city,
-        :state,
-        :zip_code,
-        :country,
-        :seeking_guest_spot,
-        :guest_studio,
-        :avatar,
-        :hero_banner
+        :currency_code
       )
     end
   end

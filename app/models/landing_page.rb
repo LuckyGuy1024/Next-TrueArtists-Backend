@@ -11,7 +11,6 @@ class LandingPage < ApplicationRecord
   validates :page_key, :page_url, :page_title, :meta_description, :title, :content, presence: true
   validates :page_key, :page_url, :page_title, uniqueness: true
 
-
   aasm column: 'status' do
     state :pending, initial: true
     state :pending_approval
