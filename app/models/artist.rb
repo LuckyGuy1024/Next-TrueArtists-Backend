@@ -50,6 +50,10 @@ class Artist < ApplicationRecord
     format('%s %s', city, state)
   end
 
+  def current_studio
+    studios.first
+  end
+
   def search_profile_image
     tattoos.first.image
   end

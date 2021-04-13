@@ -1,0 +1,29 @@
+<% set_meta_tags title: 'Best Tattoo Studios Near You',
+              description: 'Find the certified tattoo studios near your city today. Browse from over 1000+ tattoo shops near you.' %>
+
+<!-- Latest Studio -->
+<div class="page-section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-header mb-30">
+          <h1>Find Best Tattoo Shops Near You!</h1>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="latest-studios-lists grid-gap-30 row">
+          <%= render @studios %>
+        </div>
+      </div>
+
+      <div class="col-md-12 text-center">
+        <% unless @meta[:last_page] %>
+          <div class="see-more-section">
+            <button class="btn btn-alternative btn-lg">See More</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // -->

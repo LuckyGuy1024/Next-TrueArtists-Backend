@@ -2,15 +2,38 @@
   background: $white-bg;
   padding: 30px 20px;
   border-radius: 16px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,.03),0 0 1px 0 rgba(0,0,0,.03);;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,.03),0 0 1px 0 rgba(0,0,0,.03);
+  border: 1px solid rgb(221, 221, 221);
+  .artist-p-info {
+    img {
+      max-width: 96px;
+    }
+
+    h1 {
+      margin: 10px 0 5px;
+      line-height: 1.56;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
 }
+
 .artist-p-location {
+  p {
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+    color: $gray-text-color;
+    display: flex;
+    justify-content: center;
+  }
+
   ul {
     margin: 0;
     padding: 0;
     list-style: none;
     display: flex;
-   justify-content: center;
+    justify-content: center;
 
     li {
       display: flex;
@@ -27,9 +50,11 @@
 
 .artist-p-style {
   margin-top: 30px;
+
   h4 {
     margin-bottom: 20px;
   }
+
   a {
     margin-left: 0 !important;
     margin-right: 10px;
@@ -38,9 +63,9 @@
 }
 
 .artist-p-work-locations {
-
   .artist-p-map {
     border-radius: 12px;
+
     iframe {
       border-radius: 12px;
     }
@@ -53,6 +78,7 @@
     h2 {
       margin-bottom: 10px;
     }
+
     p {
       margin-bottom: 20px;
     }

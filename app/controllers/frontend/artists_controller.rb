@@ -3,7 +3,7 @@
 
 module Frontend
   class ArtistsController < FrontendController
-    include ArtistsScoped
+    include ArtistScoped
 
     def index
       search_results = search.base_filter
@@ -18,7 +18,6 @@ module Frontend
         format.js
       end
     end
-
 
     def show
       respond_to do |format|

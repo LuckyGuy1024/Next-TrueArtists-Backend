@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ArtistsScoped
+module ArtistScoped
   extend ActiveSupport::Concern
 
   included do
@@ -23,7 +23,8 @@ module ArtistsScoped
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
       status: params[:status],
       near: params[:near],
-      within: params[:within]
+      within: params[:within],
+      studio_id: params[:studio_id],
     }.delete_if { |_k, v| v.nil? }
   end
 

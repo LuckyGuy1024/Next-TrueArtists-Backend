@@ -46,11 +46,13 @@
 .btn-with-icon {
   &:hover {
     background: $btn-primary-hover-color;
+    border-color: $btn-primary-hover-color;
   }
 
   &:active {
-    background: $btn-primary-hover-color; 
+    background: $btn-primary-hover-color;
     color: $text-color;
+    border-color: $btn-primary-hover-color;
   }
 }
 

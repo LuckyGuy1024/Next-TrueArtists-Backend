@@ -1,0 +1,16 @@
+<% set_meta_tags title: "#{@studio.name} - Tattoo Work Portfolio & Ideas",
+                 description: "Browse tattoo work and ideas from #{@studio.name} - #{@studio.city_state}. Book an appointment today" %>
+
+<%= render 'frontend/studios/header' %>
+
+<!-- Portfolio -->
+<div class="page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <%= render 'frontend/artists/gallery', tattoos: @studio.tattoos %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // -->

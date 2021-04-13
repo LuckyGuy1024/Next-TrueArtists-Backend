@@ -110,6 +110,8 @@ class Api::V1::TattoosController < ApplicationController
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
       status: params[:status],
       placement: params[:placement],
+      studio_id: params[:studio_id],
+      artist_id: params[:artist_id],
       styles: params[:styles],
       color: params[:color],
       near: params[:near],
