@@ -19,8 +19,12 @@ module Frontend
       end
     end
 
+
     def show
-      render json: ArtistSerializer.new(@artist).to_json, status: :ok
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 end

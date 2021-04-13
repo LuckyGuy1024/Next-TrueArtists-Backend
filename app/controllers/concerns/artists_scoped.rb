@@ -26,4 +26,8 @@ module ArtistsScoped
       within: params[:within]
     }.delete_if { |_k, v| v.nil? }
   end
+
+  def find_artist
+    @artist = Artist.friendly.find(params[:id])
+  end
 end

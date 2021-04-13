@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Api::V1
-  class LandingPagesController < ApplicationController
-    before_action :find_landing_page, except: %i[create index]
+module Frontend
+  class LandingPagesController < FrontendController
+    before_action :find_landing_page, except: %i[home index]
 
     def index
       @results = LandingPageSearch.new(
@@ -11,6 +11,9 @@ module Api::V1
       ).filter
 
       render json: @results, status: :ok
+    end
+
+    def home
     end
 
     def show

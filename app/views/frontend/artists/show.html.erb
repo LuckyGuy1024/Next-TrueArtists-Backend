@@ -1,0 +1,50 @@
+<% set_meta_tags title: "#{@artist.name} - Tattoo Artist - #{@artist.city_state} ",
+              description: "Browse tattoo artist #{@artist.name} from #{@artist.city_state} portfolio today. Book a tattoo appointment today." %>
+
+<div class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="artist-left-sidebar">
+                  <div class="artist-p-info text-center">
+                      <img data-src="<%= url_for(@artist.avatar) %>" class="lazyload" />
+                      <h3><%= @artist.name %></h3>
+                  </div>
+                  <div class="artist-p-location my-4">
+                    <p><%= @artist.city_state %></p>
+                      <ul>
+                        <li><img src="assets/case.png" alt="" /> Taiko Gallery</li>
+                        <li><img src="assets/map.png" alt="" /> Berlin, Germany</li>
+                      </ul>
+                  </div>
+                  <div class="artist-p-btn d-flex justify-content-center">
+                      <a href="#" class="btn btn-secondary">Save</a>
+                      <a href="#" class="btn btn-primary ml-4">Book</a>
+                  </div>
+
+                  <div class="artist-p-style">
+                      <h4>Styles</h4>
+                      <div class="artists-style d-flex flex-wrap">
+                        <% @artist.styles.each do |style| %>
+                          <%= link_to style.name, tattoos_path(query: style.name), class: 'tag tag-cloud' %>
+                        <% end %>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="artist-p-right-content">
+                  <div class="sub-nav d-flex justify-content-start">
+                      <a class="active" href="#">Tattoo</a>
+                      <a href="#">About</a>
+                      <a href="#">Work Loction</a>
+                  </div>
+
+                  <div class="artist-p-sub-content pt-5">
+                    <%= render 'frontend/artists/gallery' %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -46,6 +46,14 @@ class Artist < ApplicationRecord
     ]
   end
 
+  def city_state
+    format('%s %s', city, state)
+  end
+
+  def search_profile_image
+    tattoos.first.image
+  end
+
   private
 
   def add_name

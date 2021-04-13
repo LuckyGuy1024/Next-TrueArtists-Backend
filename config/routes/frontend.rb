@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       put 'change_password' => 'passwords#update'
     end
   end
-  resources :artists, controller: "frontend/artists" do
+  resources :artists, controller: 'frontend/artists' do
     collection do
       put 'verify-phone' => 'studios#verify_phone'
     end
@@ -73,4 +73,6 @@ Rails.application.routes.draw do
       post :respond
     end
   end
+
+  root to: 'frontend/landing_pages#home'
 end
