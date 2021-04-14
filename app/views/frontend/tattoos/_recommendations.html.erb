@@ -7,8 +7,8 @@
       </div>
       <div class="col-md-12">
         <div class="image-gallery grid row">
-          <% 32.times do %>
-          <%= partial 'tattoo_image' %>
+          <% similar_tattoos.each do |tattoo| %>
+            <%= render 'tattoo_image', tattoo: tattoo %>
           <% end %>
         </div>
       </div>

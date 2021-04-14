@@ -18,6 +18,7 @@ module Frontend
     end
 
     def show
+      @similar_tattoos = @tattoo.similar(fields: [:placement])
       respond_to do |format|
         format.html
         format.js

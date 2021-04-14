@@ -55,6 +55,6 @@ Rails.application.routes.draw do
     resources :styles
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]
-    root to: 'frontend/landing_pages#home'
+    root to: 'landing_pages#home'
   end
 end
