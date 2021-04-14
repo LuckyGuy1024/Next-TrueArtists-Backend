@@ -24,7 +24,7 @@ node_modules
 /config/master.key
 config/database.yml
 config/application.yml
-
+public/packs
 .idea
 .DS_Store
 /storage

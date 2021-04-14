@@ -14,7 +14,6 @@ class StudioSerializer < ActiveModel::Serializer
              :zip_code,
              :country,
              :phone_number,
-             :specialty,
              :accepted_payment_methods,
              :appointment_only,
              :languages,
