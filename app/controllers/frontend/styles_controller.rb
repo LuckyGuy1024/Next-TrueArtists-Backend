@@ -1,27 +1,40 @@
-# frozen_string_literal: true
+ # frozen_string_literal: true
 
-module Api::V1
-  class StylesController < ApplicationController
+module Frontend
+  class StylesController < FrontendController
     skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_style, except: %i[index]
 
     def index
       @styles = Style.all
-      render json: @styles.as_json, status: :ok
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     def show
-      render json: @style.to_json, status: :ok
+      @search ||= TattooSearch.new(
+        query: @style.name,
+        options: search_options
+      )
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
+    def search_options
+      {
+        page: params[:page] || 1,
+        per_page: params[:per_page] || BaseSearch::PER_PAGE
+      }.delete_if { |_k, v| v.nil? }
     end
 
     private
 
     def find_style
-      @style = Studio.find(params[:id])
-    end
-
-    def style_params
-      params.permit(:name)
+      @style = Style.friendly.find(params[:id])
     end
   end
 end

@@ -42,16 +42,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tattoos, only: %i[index show update] do
-      collection do
-        post 'batch-create' => 'tattoos#batch_create'
-        get 'filter' => 'tattoos#filter'
-      end
-      member do
-        put :flag
-      end
-    end
-
+    resources :tattoos, only: %i[index show] 
     resources :articles, only: %i[index show]
     resources :styles
     resources :categories, only: %i[index show]
