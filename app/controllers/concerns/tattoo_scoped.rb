@@ -33,7 +33,7 @@ module TattooScoped
     }.delete_if { |_k, v| v.nil? }
   end
 
-  def find_studio
-    @tattoo = Tattoo.friendly.find(params[:id])
+  def find_tattoo
+    @tattoo = Tattoo.find(params[:id])
   end
 end

@@ -12,7 +12,7 @@ module Frontend
       @studios = search_results.results
       @meta = search.pagination_info(search_results)
 
-      # @styles = Style.all
+      @styles = Style.all
 
       respond_to do |format|
         format.html

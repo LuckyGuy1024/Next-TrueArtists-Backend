@@ -9,7 +9,7 @@
         $(this).parent().toggleClass('checked');
       });
 
-      $('.multi-filter .multi-filter__selected').on('click', function(e) {
+      $('.filter-section .multi-filter .multi-filter__selected').on('click', function(e) {
         e.preventDefault();
         $(this).parents('.multi-filter').toggleClass('active');
         $('body').toggleClass('filter-open');
@@ -37,17 +37,26 @@
         if ($selected_checkboxes.length > 0) {
           if ($all_checkboxes.length != $selected_checkboxes.length) {
 
-            let selected_values = [];
+            let selected_values = {};
+            let filterUrl = ""
 
             $selected_checkboxes.each(function(idx) {
-              selected_values.push($($selected_checkboxes[idx]).val());
+              if(selected_values[$($selected_checkboxes[idx]).attr("name")] === undefined) {
+                selected_values[$($selected_checkboxes[idx]).attr("name")] = [$($selected_checkboxes[idx]).val()]
+              } else {
+                selected_values[$($selected_checkboxes[idx]).attr("name")].push($($selected_checkboxes[idx]).val());
+              }
             });
+            
+            for (k in selected_values){
+              filterUrl += "&" + k + "=" + selected_values[k].join("%2C")
+            };
+            console.log(filterUrl);
 
-            filter_label = selected_values.join(', ');
           }
         }
 
-        $('.multi-filter__selected').text(filter_label);
+        // $('.multi-filter__selected').text(filter_label);
 
         $('.multi-filter__close').click();
 

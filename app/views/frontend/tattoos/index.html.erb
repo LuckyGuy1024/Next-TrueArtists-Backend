@@ -10,9 +10,12 @@
           <h1>Find Tattoo Ideas</h1>
         </div>
         <div class="search-tattoos-form row">
-          <div class="col-md-8"></div>
-          <div class="col-md-2"></div>
-          <div class="col-md-2"></div>
+          <div class="col-md-9">
+            <%= render 'layouts/search' %>
+          </div>
+          <div class="col-md-3">
+            <%= render 'frontend/tattoos/filter' %>
+          </div>
         </div>
       </div>
     </div>
@@ -21,7 +24,7 @@
 <!-- // -->
 
 <!-- Tattoos -->
-<div class="page-section">
+<div class="page-section gray-bg">
   <div class="container">
     <div class="row">
       <div class="col-md-12">

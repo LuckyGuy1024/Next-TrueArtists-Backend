@@ -10,6 +10,9 @@ module Frontend
 
       @tattoos = search_results.results
       @meta = search.pagination_info(search_results)
+      @styles = Style.all
+      @colors = Tattoo::COLORS
+      @placements = Tattoo::PLACEMENTS
 
       respond_to do |format|
         format.html
@@ -18,7 +21,7 @@ module Frontend
     end
 
     def show
-      @similar_tattoos = @tattoo.similar(fields: [:placement])
+      @similar_tattoos = @tattoo.similar(fields: [:placement]).first(12)
       respond_to do |format|
         format.html
         format.js

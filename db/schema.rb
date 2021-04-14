@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_124421) do
+ActiveRecord::Schema.define(version: 2021_04_07_161029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "action_mailbox_inbound_emails", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
-    t.string "message_id", null: false
-    t.string "message_checksum", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
-  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -106,6 +97,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.string "state"
     t.string "name"
     t.string "street_address"
+    t.string "specialty"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
@@ -212,28 +204,17 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
-  create_table "message_mails", force: :cascade do |t|
-    t.integer "message_id", null: false
-    t.integer "user_id", null: false
-    t.string "thread_id"
-    t.string "mail_message_id", null: false
-    t.text "references"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.integer "sender_id"
+    t.string "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "thread_id"
   end
 
   create_table "studio_artists", force: :cascade do |t|
@@ -270,7 +251,6 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.string "zip_code"
     t.string "country"
     t.string "phone_number"
-    t.text "specialty"
     t.text "accepted_payment_methods"
     t.boolean "appointment_only", default: false
     t.text "languages"
@@ -298,6 +278,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
+    t.string "currency_code"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
