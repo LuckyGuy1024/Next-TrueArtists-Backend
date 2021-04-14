@@ -1,0 +1,37 @@
+<!-- Artists -->
+<% @studio.artists.each do |artist| %>
+  <div class="page-section pt-0">
+    <div class="container">
+      <div class="row align-items-center sub-header">
+        <div class="col-lg-3 col-md-4">
+          <%= link_to artist_path(artist) do %>
+            <div class="artists-profile d-flex align-items-center">
+              <div class="artists-profile-img">
+                <img data-src="<%= url_for(artist.avatar) %>" class="lazyload" />
+              </div>
+              <div class="artists-profile-info">
+                <h4><%= link_to artist.name %></h4>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <% if artist.styles.present? %>
+          <div class="col-lg-9 col-md-8">
+            <div class="artists-style d-flex align-items-center justify-content-end">
+              <span class="btn btn-style-alt">Style:</span>
+              <% artist.styles.each do |style| %>
+                <%= link_to style.name, tattoos_path(query: style.name), class: 'tag tag-cloud' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= render 'frontend/artists/gallery', tattoos: artist.tattoos %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!-- // -->

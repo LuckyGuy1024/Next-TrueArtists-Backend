@@ -1,0 +1,60 @@
+.footer {
+  position: relative;
+  .footer-top {
+    background: $footer-bg;
+    padding: 56px 0 40px;
+    box-shadow: inset 0 1px 0 0 rgba(147, 147, 147, 0.25);
+
+    .single-footer {
+      h3 {
+        margin-bottom: 20px;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          a {
+            display: block;
+            padding: 10px 0;
+            color: $text-color;
+            &:hover {
+              color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+  .footer-bottom {
+    background: $lightgray;
+    padding: 10px 0;
+
+    .footer-copyright {
+      p {
+        font-size: 14px;
+        color: $gray-text-color;
+        a {
+          padding: 0 15px;
+          color: $gray-text-color;
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+
+    .footer-logo {
+      margin-left: 40px;
+      img {
+        max-width: 100px;
+      }
+    }
+
+
+  }
+
+}

@@ -1,0 +1,64 @@
+<% set_meta_tags title: 'The Best Tattoo Artists Near You',
+              description: 'Find the certified tattoo artists near your city today.' %>
+<div class="page-section pt-0">
+  <div class="container">
+    <%= form_for artists_path, html: { remote: true, method: :get } do |f| %>
+    <%= hidden_field_tag 'page', @meta[:current_page] %>
+    <%= hidden_field_tag 'per_page', @meta[:limit_value] %>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-header align-items-center">
+          <div>
+            <h1>Find Tattoo Artists Near You</h1>
+          </div>
+          <div class="filter-section">
+            <div class="multi-filter">
+              <label>Art Style</label>
+              <div class="multi-filter__selected">All Styles</div>
+              <div class="multi-filter__select">
+                <div class="multi-filter__header">
+                  Filters
+                  <a href="#" class="multi-filter__close"></a>
+                </div>
+                <div class="multi-filter__main">
+                  <div class="group">
+                    <div class="multi-filter__title">Art Style</div>
+                    <ul class="multi-filter__filter">
+                      <% @styles.each do |style| %>
+                      <li class="filter">
+                        <label class="filter-checkbox">
+                          <%= style.name %>
+                          <input type="checkbox" name="styles" value="<%= style.name %>">
+                          <span class="checkmark"></span>
+                        </label>
+                      </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <div class="multi-filter__actions">
+                    <button class="btn btn-secondary multi-filter__clear">Clear</button>
+                    <button class="btn btn-primary multi-filter__apply">Apply</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="artists-lists grid-gap-30 row">
+          <%= render @artists %>
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <% unless @meta[:last_page] %>
+        <div class="see-more-section">
+          <button class="btn btn-alternative btn-lg">See More</button>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

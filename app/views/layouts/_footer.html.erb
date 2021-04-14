@@ -1,0 +1,70 @@
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="single-footer">
+            <h3>Explore TrueArtists</h3>
+            <ul>
+              <li>
+                <%= link_to 'Tattoo Ideas', tattoos_path %>
+              </li>
+              <li>
+                <%= link_to 'Find Tattoo Artist', artists_path %>
+              </li>
+              <li>
+                <%= link_to 'Find Tattoo Shop', studios_path %>
+              </li>
+              <li>
+                <%= link_to 'Learn About Tattoos', articles_path %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="single-footer">
+            <h3>TrueArtists</h3>
+            <ul>
+              <li>
+                <a href="#">About</a>
+              </li>
+              <li>
+                <a href="#">Contact Us</a>
+              </li>
+              <li>
+                <a href="#">Help</a>
+              </li>
+              <li>
+                <a href="#">Terms & Conditions</a>
+              </li>
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="single-footer">
+            <h3>For Artists & Studios</h3>
+            <%= link_to 'Join as an Artist or Studio', '#', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center text-md-right">
+          <div class="footer-content d-flex align-items-center justify-content-center justify-content-md-end">
+            <div class="footer-copyright">
+              <p>&copy; <%= 2021 %> TrueArtists</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<%#= javascript_tag "desktop_footer" %>

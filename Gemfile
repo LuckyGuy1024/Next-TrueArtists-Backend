@@ -24,6 +24,9 @@ gem 'rack-cors'
 gem 'sprockets', '~>3.0'
 gem 'twilio-ruby'
 gem 'ta-assets',  git: 'git@github.com:jwachira/ta-assets.git', branch: 'master'
+gem 'webpacker', '~> 5.0'
+gem 'browser'
+gem 'meta-tags'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'

@@ -1,0 +1,38 @@
+<!-- profile head -->
+<div class="profile-head-area">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="s-profiles d-flex align-items-center">
+          <div class="s-profile-img">
+            <%= link_to studio_path(@studio) do %>
+              <img data-src="<%= url_for(@studio.avatar) %>" class="lazyload" />
+            <% end %>
+          </div>
+          <div class="s-profile-info">
+            <h1><%= link_to @studio.name, studio_path(@studio) %></h1>
+            <div class="s-rating">
+              <span><%= @studio.city_state %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head-btn d-flex justify-content-center justify-content-md-end">
+          <a href="#" class="btn btn-secondary btn-lg">Save</a>
+          <a href="#" class="btn btn-primary btn-lg ml-4">Book</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-nav d-flex justify-content-center">
+          <%= link_to 'Studio', studio_path(@studio), class: 'active' %>
+          <%= link_to 'Portfolio', tattoos_studio_path(@studio) %>
+          <%= link_to 'Studio Artists', artists_studio_path(@studio) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // -->

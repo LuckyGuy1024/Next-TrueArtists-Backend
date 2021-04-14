@@ -1,0 +1,35 @@
+<% set_meta_tags title: 'Find Tattoo Ideas from Artists Near You',
+              description: 'Browse from thousands of amazing tattoo photos and galleries from tattoo artists near you' %>
+
+<!-- Tattoos Search -->
+<div class="page-section gray-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-header">
+          <h1>Find Tattoo Ideas</h1>
+        </div>
+        <div class="search-tattoos-form row">
+          <div class="col-md-8"></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // -->
+
+<!-- Tattoos -->
+<div class="page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="image-gallery grid row">
+          <%= render @tattoos %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // -->

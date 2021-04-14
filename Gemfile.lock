@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:jwachira/ta-assets.git
-  revision: 4ede23acd7954960a137e7b6998844b7e2a2f8e6
+  revision: dea76a9de1f9018f770e7e91e08d91d10349f4f4
   branch: master
   specs:
     ta-assets (0.1.0)
@@ -88,6 +88,7 @@ GEM
     bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
+    browser (5.3.1)
     builder (3.2.4)
     byebug (11.1.3)
     case_transform (0.2)
@@ -153,6 +154,8 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
+    meta-tags (2.14.0)
+      actionpack (>= 3.2.0, < 6.2)
     method_source (1.0.0)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
@@ -177,6 +180,8 @@ GEM
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-proxy (0.6.5)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.3.2)
@@ -240,6 +245,7 @@ GEM
       activemodel (>= 5)
       elasticsearch (>= 6)
       hashie
+    semantic_range (3.0.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -259,6 +265,11 @@ GEM
       nokogiri (>= 1.6, < 2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    webpacker (5.2.1)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -275,6 +286,7 @@ DEPENDENCIES
   apitome!
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
+  browser
   byebug
   faker
   figaro
@@ -284,6 +296,7 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen (~> 3.2)
+  meta-tags
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 4.1)
@@ -299,6 +312,7 @@ DEPENDENCIES
   ta-assets!
   twilio-ruby
   tzinfo-data
+  webpacker (~> 5.0)
 
 RUBY VERSION
    ruby 2.7.1p83

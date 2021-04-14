@@ -1,0 +1,29 @@
+<div class="col-lg-4 col-md-6">
+  <%= link_to studio_path(studio) do %>
+  <div class="listing-widget shadow">
+    <div class="list-image">
+      <div class="list-image-carousel">
+        <div class="list-img-item">
+          <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
+        </div>
+      </div>
+      <!-- <div class="list-reviews">
+        <span><i class="ta-icon-star-fill"></i> <strong>5.0</strong> (2314)</span>
+      </div> -->
+    </div>
+    <div class="list-content d-flex align-items-center">
+      <div class="list-left flex-grow-1">
+        <div class="d-flex align-items-center">
+          <div class="profile-img">
+            <img data-src="<%= url_for(studio.avatar) %>" class="lazyload" />
+          </div>
+          <div class="profile-info">
+            <h5><%= studio.name %></h5>
+            <p><%= studio.city_state %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

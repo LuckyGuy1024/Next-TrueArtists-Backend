@@ -1,0 +1,53 @@
+<% set_meta_tags title: 'Best Tattoo Studios Near You',
+              description: 'Find the certified tattoo studios near your city today. Browse from over 1000+ tattoo shops near you.' %>
+
+<!-- Tattoos Details -->
+<div class="page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tattoos-details-full gray-bg">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="tattoos-details-img">
+                <% if tattoo.image.present? %>
+                  <img data-src="<%= url_for(tattoo.image) %>" class="lazyload" />
+                <% end %>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="details-header">
+                <div class="d-flex align-items-center">
+                  <!-- <div class="single-user-img mr-3">
+                    <a href="#">
+                      <img src="assets/profile.png" alt="">
+                    </a>
+                  </div>
+                  <div class="single-user-name">
+                    <h3>Emerson Dias</h3>
+                  </div> -->
+                </div>
+              </div>
+              <div class="details-content">
+                <p>Hand tattoos by Clinton Lee #ClintonLee #geometrictattoos #geometric #sacredgeometry #sacredgeometrytattoo #pattern #line #linework #shapes #ornamental #dotwork #handtattoo</p>
+              </div>
+              <div class="details-like">
+                <div class="d-flex justify-content-between">
+                  <!-- <div class="like">
+                    <i class="bi bi-heart"></i> <span>200k</span>
+                  </div> -->
+                  <!-- <div class="meta-info">
+                    <span>Posted 10 Months ago</span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'recommendations', similar_tattoos: @similar_tattoos %>
+<!-- // -->

@@ -1,0 +1,35 @@
+@import '../../common/base/colors';
+
+/* --- BASE ---*/
+@import '../../common/base/normalize';
+
+/* --- FONTS ---*/
+@import "../../common/fonts/icomoon.scss";
+
+
+/* --- COMPONENTS ---*/
+@import "../../common/component/slick.scss";
+@import "../../common/component/reset.scss";
+@import "../../common/component/grid.scss";
+@import "../../common/component/text-position.scss";
+@import '../../common/component/alerts.scss';
+@import '../../common/component/table.scss';
+@import '../../common/component/tooltip.scss';
+@import '../../common/component/cookie-bar.scss';
+
+// desktop components
+@import "component/button";
+@import "component/header";
+@import "component/footer";
+@import "component/filter";
+
+@import "layout/artists";
+@import "layout/artist-profile";
+
+@import "layout/studios";
+@import "layout/studios-city";
+@import "layout/studio-profile";
+
+@import "layout/tattoos";
+@import "layout/tattoos-details";
+@import "layout/common";

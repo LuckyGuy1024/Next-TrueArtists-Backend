@@ -1,0 +1,25 @@
+.form-group {
+	margin-bottom: 15 * $rem;
+}
+
+.form-control {
+	border: 1px solid #D8D8D8;
+	border-radius: 0;
+	height: 50 * $rem;
+	font-size: 16 * $rem;
+	padding: 16 * $rem;
+}
+
+textarea.form-control {
+	height: 174 * $rem;
+}
+
+.form-style {
+	h3 {
+		margin-bottom: 58 * $rem;
+	}
+
+	.btn {
+		margin-top: 5 * $rem;
+	}
+}

@@ -70,6 +70,18 @@ class Studio < ApplicationRecord
     attributes.merge(location: { lat: lat, lon: lon })
   end
 
+  def search_profile_image
+    tattoos.first&.image || hero_banner
+  end
+
+  def city_state
+    format('%s %s', city, state)
+  end
+
+  def full_address
+    format('%s %s %s %s %s', street_address, city, state, country, zip_code)
+  end
+
   def verify_phone(code)
     status = PhoneNumberVerifier.new(code: code, phone_number: phone_number).status
 
