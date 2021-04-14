@@ -9,7 +9,7 @@
         $(this).parent().toggleClass('checked');
       });
 
-      $('.multi-filter .multi-filter__selected').on('click', function(e) {
+      $('.filter-section .multi-filter .multi-filter__selected').on('click', function(e) {
         e.preventDefault();
         $(this).parents('.multi-filter').toggleClass('active');
         $('body').toggleClass('filter-open');
@@ -42,7 +42,6 @@
             $selected_checkboxes.each(function(idx) {
               selected_values.push($($selected_checkboxes[idx]).val());
             });
-
             filter_label = selected_values.join(', ');
           }
         }

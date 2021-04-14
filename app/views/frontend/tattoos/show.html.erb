@@ -10,26 +10,32 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="tattoos-details-img">
-                <% if tattoo.image.present? %>
-                  <img data-src="<%= url_for(tattoo.image) %>" class="lazyload" />
+                <% if @tattoo.image.present? %>
+                  <img data-src="<%= url_for(@tattoo.image) %>" class="lazyload" />
                 <% end %>
               </div>
             </div>
             <div class="col-lg-5">
               <div class="details-header">
                 <div class="d-flex align-items-center">
-                  <!-- <div class="single-user-img mr-3">
-                    <a href="#">
-                      <img src="assets/profile.png" alt="">
-                    </a>
-                  </div>
-                  <div class="single-user-name">
-                    <h3>Emerson Dias</h3>
-                  </div> -->
+                    <% object = @tattoo.studio || @tattoo.artist %>
+                      <%= link_to object, class: 'gallery-item' do %>
+<!--                        <div class="single-user-img mr-3">-->
+<!--                          <img data-src="<%#= url_for(object.avatar) %>" class="lazyload" />-->
+<!--                        </div>-->
+                        <div class="single-user-name">
+                          <h3><%= object.name %></h3>
+                        </div>
+                      <% end %>
+                    <% %>
                 </div>
               </div>
               <div class="details-content">
-                <p>Hand tattoos by Clinton Lee #ClintonLee #geometrictattoos #geometric #sacredgeometry #sacredgeometrytattoo #pattern #line #linework #shapes #ornamental #dotwork #handtattoo</p>
+                <% if @tattoo.tag_list.present? %>
+                  <% @tattoo.tag_list.split(',').each do |tag| %>
+                    <span>#<%= tag %></span>
+                  <% end %>
+                <% end %>
               </div>
               <div class="details-like">
                 <div class="d-flex justify-content-between">
