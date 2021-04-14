@@ -1,5 +1,5 @@
-<% set_meta_tags title: "Best Tattoo Shops & Studios in #{@location_name}",
-              description: "Find top certified tattoo studios and shops in #{@location_name}." %>
+<% set_meta_tags title: "Best Tattoo Shops & Studios in #{@city_state}",
+              description: "Find top certified tattoo studios and shops in #{@city_state}." %>
 
 <!-- Latest Studio -->
 <div class="page-section pt-0">
@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="sub-header mb-30">
-            <h1>Tattoo Studios in <%= @location_name %></h1>
+            <h1>Tattoo Studios in <%= @city_state %></h1>
           </div>
         </div>
         <div class="col-md-12">
@@ -18,7 +18,7 @@
             <%= render @studios %>
           </div>
         </div>
-        
+
         <div class="col-md-12 text-center">
           <% unless @meta[:last_page] %>
             <div class="see-more-section">
