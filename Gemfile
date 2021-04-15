@@ -43,5 +43,17 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :deployment do
+  gem 'capistrano', '~> 3.14.1', require: false
+  # gem 'capistrano-bundler' # for capistrano/bundler
+  gem 'capistrano-maintenance'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rails' # for capistrano/rails/*
+  gem 'capistrano-rails-db'
+  gem 'capistrano-rvm'
+  gem 'capistrano-sidekiq'
+  gem 'sshkit-sudo'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
