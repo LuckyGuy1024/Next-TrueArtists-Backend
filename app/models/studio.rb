@@ -29,7 +29,7 @@ class Studio < ApplicationRecord
 
   include AddressExtension
   extend FriendlyId
-  friendly_id :slug_candidates, use: :history
+  friendly_id :slug_candidates, use: %i[slugged history]
 
   include StatusManagement
 
@@ -55,10 +55,8 @@ class Studio < ApplicationRecord
 
   def slug_candidates
     [
-      :name,
-      %i[name city],
       %i[name city state],
-      %i[name city country]
+      %i[name city state country]
     ]
   end
 
