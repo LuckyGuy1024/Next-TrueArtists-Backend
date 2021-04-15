@@ -137,6 +137,7 @@ module Api::V1
         :twitter_url,
         :instagram_url,
         :accepting_guest_artist,
+        :accepted_payment_methods,
         :piercings,
         :cosmetic_tattoos,
         :appointment_only,
