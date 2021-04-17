@@ -2,6 +2,7 @@ class ArticleSerializer < ActiveModel::Serializer
   attributes :id,
              :category_id,
              :title,
+             :slug,
              :page_title,
              :meta_description,
              :introduction,
