@@ -25,16 +25,18 @@ Rails.application.routes.draw do
           put 'verify-phone' => 'studios#verify_phone'
         end
         resources :tattoos
+        resources :clients
         member do
           delete 'delete-image/:image_id' => 'artists#remove_image'
           put :submit_for_review
         end
       end
       resources :studios do
+        resources :tattoos
+        resources :clients
         collection do
           put 'verify-phone' => 'studios#verify_phone'
         end
-        resources :tattoos
         member do
           delete 'delete-image/:image_id' => 'studios#remove_image'
           put :submit_for_review
