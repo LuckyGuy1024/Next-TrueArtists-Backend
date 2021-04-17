@@ -5,5 +5,5 @@ class Style < ApplicationRecord
   has_many :artists, through: :artist_styles
   validates :name, presence: true, uniqueness: true
 
-  friendly_id :name, use: %i[slugged history]
+  friendly_id :name, use: %i[slugged history finders]
 end
