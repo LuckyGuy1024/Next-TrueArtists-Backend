@@ -58,6 +58,8 @@ class Api::V1::ClientsController < ApplicationController
     params.permit(
       :name,
       :email,
+      :artist_id,
+      :studio_id,
       :phone_number,
       :category,
       :date_of_birth,
