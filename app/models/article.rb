@@ -10,7 +10,7 @@ class Article < ApplicationRecord
   belongs_to :user
   belongs_to :category
   extend FriendlyId
-  friendly_id :slug_candidates, use: :history
+  friendly_id :slug_candidates, use: %i[slugged history]
 
   validates_uniqueness_of :title, :page_title
   validates :meta_description, :introduction, :content, :status, presence: true

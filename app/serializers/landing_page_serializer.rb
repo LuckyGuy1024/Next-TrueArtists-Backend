@@ -6,6 +6,7 @@ class LandingPageSerializer < ActiveModel::Serializer
              :page_title,
              :meta_description,
              :title,
+             :slug,
              :content,
              :moved_to,
              :status,

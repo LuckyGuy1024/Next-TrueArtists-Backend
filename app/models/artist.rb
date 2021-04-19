@@ -11,10 +11,11 @@ class Artist < ApplicationRecord
   include StatusManagement
 
   extend FriendlyId
-  friendly_id :slug_candidates, use: :history
+  friendly_id :slug_candidates, use: %i[slugged history]
 
   acts_as_favoritable
   belongs_to :user
+  has_many :clients
   has_many :tattoos
   has_many :artist_styles
   has_many :styles, through: :artist_styles
@@ -39,10 +40,8 @@ class Artist < ApplicationRecord
 
   def slug_candidates
     [
-      :name,
-      %i[name city],
       %i[name city state],
-      %i[name city country]
+      %i[name city state country]
     ]
   end
 

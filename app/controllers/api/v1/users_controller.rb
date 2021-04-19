@@ -11,7 +11,7 @@ class Api::V1::UsersController < ApplicationController
       auth_token = JsonWebToken.encode(user_id: user.id)
 
       render json: {
-        user: UserSerializer.new(user, root: false),
+        user: UserSerializer.new(user),
         auth_token: auth_token
       }, status: :created
     else

@@ -12,6 +12,7 @@ class ArtistSerializer < ActiveModel::Serializer
              :licensed,
              :status,
              :years_of_experience,
+             :specialty,
              :styles,
              :website,
              :facebook_url,
