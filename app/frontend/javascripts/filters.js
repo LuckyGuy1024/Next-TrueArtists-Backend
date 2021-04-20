@@ -37,30 +37,42 @@
         if ($selected_checkboxes.length > 0) {
           if ($all_checkboxes.length != $selected_checkboxes.length) {
 
-            let selected_values = {};
-            let filterUrl = ""
+            let selected_values = [];
 
             $selected_checkboxes.each(function(idx) {
-              if(selected_values[$($selected_checkboxes[idx]).attr("name")] === undefined) {
-                selected_values[$($selected_checkboxes[idx]).attr("name")] = [$($selected_checkboxes[idx]).val()]
-              } else {
-                selected_values[$($selected_checkboxes[idx]).attr("name")].push($($selected_checkboxes[idx]).val());
-              }
+              selected_values.push($($selected_checkboxes[idx]).val());
             });
             
-            for (k in selected_values){
-              filterUrl += "&" + k + "=" + selected_values[k].join("%2C")
-            };
-            console.log(filterUrl);
-
           }
         }
 
-        // $('.multi-filter__selected').text(filter_label);
-
         $('.multi-filter__close').click();
 
-        $(this).parents('form').submit();
+        $(".search-form").children('form').submit();
+      });
+
+
+      $('.multi-filter__apply').on('click', function(e) {
+        e.preventDefault();
+
+        let $all_checkboxes = $(this).parents('.multi-filter').find('input[type="checkbox"]');
+        let $selected_checkboxes = $(this).parents('.multi-filter').find('input:checked');
+
+        let filter_label = 'All Styles';
+
+        if ($selected_checkboxes.length > 0) {
+          if ($all_checkboxes.length != $selected_checkboxes.length) {
+
+            let selected_values = [];
+
+            $selected_checkboxes.each(function(idx) {
+              selected_values.push($($selected_checkboxes[idx]).val());
+            });
+            
+          }
+        }
+
+        $(".search-form").children('form').submit();
       });
     }
   }

@@ -21,7 +21,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: $text-color;
 }
 h1 {
-  font-size: 42px;
+  font-size: 30px;
 }
 h2 {
   font-size: 28px;
@@ -207,7 +207,43 @@ img {
 }
 
 .page-section {
-  padding: 50px 0;
+  padding: 30px 0;
+
+  .selected-filters {
+    margin: 10px 0 -5px 0;
+
+    .selected-filters__items {
+      margin: 10px -3px 0 5px;
+      padding: 6.5px 28px 6.5px 10px;
+      border-radius: 6px;
+      border: solid 1px #242424;
+    }
+
+    .selected-filters__close {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+
+      &:before,
+      &:after {
+        position: absolute;
+        left: 10px;
+        top: 5px;
+        content: ' ';
+        height: 12px;
+        width: 2px;
+        background-color: #333;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
 }
 
 .see-more-section {

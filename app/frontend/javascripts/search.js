@@ -2,18 +2,8 @@
     window.Search = {
         init: function() {
             $('.search .search-box').on('click', function(e) {
+                console.log("ian");
                 e.preventDefault();
-            });
-
-            $('#search-input').on("keypress", function(e) {
-                let searchParams;
-                let baseUrl = $(location).attr("href").split("?")[0]
-
-                if (e.keyCode === 13) {
-                    searchParams = $(this).val();
-                    let url = baseUrl + "?query=" + searchParams
-                    window.location.replace(url);
-                }
             });
 
             $('.search__close').on('click', function(e) {

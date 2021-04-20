@@ -6,10 +6,7 @@ module Frontend
     include ArtistScoped
 
     def index
-      search_results = search.base_filter
-
-      @artists = search_results.results
-      @meta = search.pagination_info(search_results)
+      @artists  = search.base_filter
 
       @styles = Style.all
 

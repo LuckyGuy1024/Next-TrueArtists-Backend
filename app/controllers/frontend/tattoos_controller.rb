@@ -6,10 +6,8 @@ module Frontend
     before_action :find_tattoo, except: %i[create index filter batch_create]
 
     def index
-      search_results = search.base_filter
+      @tattoos = search.base_filter
 
-      @tattoos = search_results.results
-      @meta = search.pagination_info(search_results)
       @styles = Style.all
       @colors = Tattoo::COLORS
       @placements = Tattoo::PLACEMENTS

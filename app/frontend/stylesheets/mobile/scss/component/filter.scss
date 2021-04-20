@@ -9,6 +9,7 @@ body.filter-open {
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
   min-width: 150px;
   cursor: pointer;
+  height: 48px;
 
   > label {
     position: absolute;
@@ -22,7 +23,7 @@ body.filter-open {
     content: '\e92e';
     font-family: "icomoon";
     position: absolute;
-    right: 3px;
+    right: 14px;
     font-size: 20px;
     top: 5px;
     transition: 0.4s all ease;

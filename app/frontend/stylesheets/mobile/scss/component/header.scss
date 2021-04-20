@@ -25,13 +25,12 @@
           text-decoration: none;
           color: $text-color;
           padding: 15px;
-          border-bottom: 5px solid transparent;
           text-transform: uppercase;
 
-          &.active,
-          &:hover {
+          a:active,
+          a:hover {
             color: $primary-color;
-            border-color: $secondary-color;
+            border-bottom: 5px solid #FDCD3F;
           }
         }
       }
