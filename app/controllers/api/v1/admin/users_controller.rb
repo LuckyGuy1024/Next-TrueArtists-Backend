@@ -2,7 +2,6 @@
 
 module Api::V1::Admin
   class UsersController < BaseController
-    skip_before_action :check_user_role
     before_action :find_user, except: %i[index create]
 
     def index
