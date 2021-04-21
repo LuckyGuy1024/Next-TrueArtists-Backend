@@ -2,10 +2,15 @@
 
 module Api::V1::Admin
   class UsersController < BaseController
+    skip_before_action :check_user_role
     before_action :find_user, except: %i[index create]
 
     def index
-      @users = paginate(User)
+      @users = paginate(if params[:query]
+                          User.where('email LIKE :query OR full_name LIKE :query', query: "%#{params[:query]}%")
+                        else
+                          User
+                        end.where(search_filter))
       render json: ActiveModel::Serializer::CollectionSerializer.new(@users,
                                                                      serializer: UserSerializer),
              status: :ok
@@ -50,6 +55,13 @@ module Api::V1::Admin
 
     def user_update_params
       params.require(:user).permit(:email, :role, :status)
+    end
+
+    def search_filter
+      {
+        role: params[:role],
+        status: params[:status]
+      }.delete_if { |_k, v| v.nil? }
     end
 
     def user_create_params
