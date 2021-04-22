@@ -46,7 +46,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_update_params
-    params.require(:user).permit(:email)
+    params.permit(:email,
+                  :full_name,
+                  :social_id,
+                  :provider,
+                  :password,
+                  :password_confirmation)
   end
 
   def user_create_params
@@ -54,7 +59,6 @@ class Api::V1::UsersController < ApplicationController
                   :full_name,
                   :social_id,
                   :provider,
-                  :status,
                   :password,
                   :password_confirmation).tap do |whitelisted|
       whitelisted[:password] = whitelisted[:password_confirmation] = SecureRandom.hex(8) if params[:social_id].present?

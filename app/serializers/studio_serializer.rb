@@ -23,8 +23,6 @@ class StudioSerializer < ActiveModel::Serializer
              :twitter_url,
              :instagram_url,
              :website_url,
-             :lat,
-             :lon,
              :status,
              :slug,
              :accepting_guest_artist,
