@@ -25,7 +25,7 @@ module Api::V1::Admin
 
     def flag
       @tattoo.flag!
-      head(:ok)
+      render json: TattooSerializer.new(@tattoo.reload).to_json, status: :ok
     end
 
     private
