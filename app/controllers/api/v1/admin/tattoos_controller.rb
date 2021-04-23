@@ -24,12 +24,8 @@ module Api::V1::Admin
     end
 
     def flag
-      @tattoo.flag
-      if @tattoo.save
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: @tattoo.errors)
-      end
+      @tattoo.flag!
+      head(:ok)
     end
 
     private
