@@ -6,20 +6,20 @@ module StatusManagement
   included do
     aasm column: 'status' do
       state :pending, initial: true
-      state :pending_approval
+      state :pending_review
       state :approved
       state :rejected
 
       event :pending_review do
-        transitions from: :pending, to: :pending_approval
+        transitions from: :pending, to: :pending_review
       end
 
       event :approve, after_commit: :send_status_notification do
-        transitions from: :pending_approval, to: :approved
+        transitions from: [:pending_review, :pending], to: :approved
       end
 
       event :reject, after_commit: :send_status_notification do
-        transitions from: :pending_approval, to: :rejected
+        transitions from: [:pending_review, :pending], to: :rejected
       end
     end
   end
