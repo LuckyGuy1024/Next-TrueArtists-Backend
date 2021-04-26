@@ -1,33 +1,46 @@
 <% set_meta_tags title: 'The Best Tattoo Artists Near You',
               description: 'Find the certified tattoo artists near your city today.' %>
-
-<div class="page-section pt-0">
-  <div class="container">
-    <%= form_for artists_path, html: { remote: true, method: :get } do |f| %>
-    <%= hidden_field_tag 'page', @meta[:current_page] %>
-    <%= hidden_field_tag 'per_page', @meta[:limit_value] %>
+  <div class="page-section gray-bg">
+    <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <div class="sub-header align-items-center">
-            <div>
+        <div class="col-md-12 search-form">
+          <%= form_for artists_path, html: { method: :get } do |f| %>
+            <div class="sub-header">
               <h1>Find Tattoo Artists Near You</h1>
             </div>
-          </div>
+            <div class="search-artists-form row">
+              <div class="col-md-9">
+                <div class="search-section">
+                    <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search artists by zip code, city or style' %>
+                    <button type="submit" class="search search-box">
+                      <i class="ta-icon-search basic-search"></i>
+                    </button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <%= render 'frontend/artists/filter' %>
+              </div>
+            </div>
+            <div class="selected-filters">
+              <%= render 'frontend/artists/selected_filters' %>
+            </div>
+          <% end %>
         </div>
-        <%= render 'filter' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
         <div class="col-md-12">
           <div class="artists-lists grid-gap-30 row">
             <%= render @artists %>
           </div>
         </div>
         <div class="col-md-12 text-center">
-          <% unless @meta[:last_page] %>
-          <div class="see-more-section">
-            <button class="btn btn-alternative btn-lg">See More</button>
-          </div>
-          <% end %>
+          <%= paginate @artists %>
         </div>
       </div>
-    <% end %>
   </div>
 </div>

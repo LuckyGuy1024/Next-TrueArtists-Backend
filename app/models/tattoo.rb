@@ -1,6 +1,10 @@
 class Tattoo < ApplicationRecord
   include AASM
 
+  COLORS = ['Show All', 'Color', 'Black & Grey'].freeze
+  PLACEMENTS = ['Show All', 'Head', 'Neck', 'Shoulder', 'Chest', 'Back', 'Arm', 'Forearm', 'Ribs', 'Hip', 'Thigh',
+                'Lower Leg', 'Foot'].freeze
+
   aasm column: 'status' do
     state :approved, initial: true
     state :flagged

@@ -27,13 +27,13 @@
           text-decoration: none;
           color: $text-color;
           padding: 15px;
-          border-bottom: 5px solid transparent;
           text-transform: uppercase;
 
-          &.active,
-          &:hover {
+          &:active,
+          &:hover,
+          &:focus {
             color: $primary-color;
-            border-color: $secondary-color;
+            border-bottom: 5px solid #FDCD3F;
           }
         }
       }
@@ -58,7 +58,7 @@
 }
 // User profile
 .user-profile {
-  background: #fafafa;
+  background: $default-bg-color;
   padding: 3px 3px 1px 5px;
   border-radius: 35px;
   border: 1px solid #f2f2f2;

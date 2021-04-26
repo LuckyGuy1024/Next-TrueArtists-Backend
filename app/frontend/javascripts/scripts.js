@@ -138,6 +138,7 @@
 $(document).ready(function() {
     allfunction.init();
     Filters.init();
+    Search.init()
 
 
     $(".top-city-carousel").slick({

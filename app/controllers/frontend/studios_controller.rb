@@ -7,10 +7,7 @@ module Frontend
     include StudioScoped
 
     def index
-      search_results = search.base_filter
-
-      @studios = search_results.results
-      @meta = search.pagination_info(search_results)
+      @studios  = search.base_filter
 
       @styles = Style.all
 
