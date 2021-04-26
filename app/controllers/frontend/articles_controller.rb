@@ -14,6 +14,7 @@ module Frontend
     end
 
     def show
+      @similar_articles = @article.similar(fields: [:tag_list]).first(12)
       respond_to do |format|
         format.html
         format.js

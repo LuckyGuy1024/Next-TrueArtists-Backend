@@ -5,9 +5,24 @@
     border-radius: 5px;
   }
 
+
   .article-content {
+    margin: 10px;
+
     h3 {
       margin: 15px 0;
     }
+
+    p {
+      line-height: 35px;
+    }
+
+    .article-body {
+      margin: 25px 0;
+    }
   }
+}
+
+.image-item {
+  margin: 20px 0;
 }
