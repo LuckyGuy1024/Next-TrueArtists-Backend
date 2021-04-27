@@ -5,16 +5,38 @@
     border-radius: 5px;
   }
 
+  .article-meta-data {
+    display: flex;
+    margin-bottom: 20px;
+    color: $gray-text-color;
+
+    .article-author {
+      margin-right: 10px;
+    }
+
+    .article-created-date {
+      margin-left: 10px;
+    }
+  }
 
   .article-content {
     margin: 10px;
 
-    h3 {
+    h1 {
       margin: 15px 0;
     }
 
     p {
       line-height: 40px;
+    }
+
+    .sharethis-inline-share-buttons {
+      margin-bottom: 15px;
+
+      .st-btn {
+        margin-right: 15px !important;
+        border-radius: 5px;
+      }
     }
 
     .article-body {
