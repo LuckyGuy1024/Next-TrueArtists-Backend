@@ -1,5 +1,5 @@
-<% set_meta_tags title: "#{@article.title}.",
-                 description: "Get to read #{@article.title} found under #{@article.category.name}." %>
+<% set_meta_tags title: @article.title,
+                 description: @article.meta_description %>
 
 <div class="page-section gray-bg">
   <div class="container article-container">
@@ -13,7 +13,7 @@
             <img data-src="<%= url_for(@article.image) %>" class="lazyload" />
           </div>
           <div class="article-body">
-            <p><%= @article.content %></p>
+            <%= @article.content.html_safe %>
           </div>
       </div>
       <div class="col-md-2"></div>
