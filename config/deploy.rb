@@ -34,15 +34,13 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :keep_releases, 5
 
 set :linked_files, fetch(:linked_files, []).push('config/database.yml',
-  '.env',
   'config/storage.yml',
-  'config/secrets.yml'
+  'config/application.yml'
 )
 append :linked_files,
   'config/database.yml',
-  '.env',
-  'config/amazon_s3.yml',
-  'config/secrets.yml'
+  'config/storage.yml'
+  'config/application.yml'
 
 set :linked_dirs, fetch(:linked_dirs, []).push(
   'tmp/pids',
