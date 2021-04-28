@@ -30,6 +30,7 @@ gem 'browser'
 gem 'meta-tags'
 gem 'whenever'
 gem 'rollbar'
+gem 'apitome', github: 'jejacks0n/apitome'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'
