@@ -10,9 +10,7 @@ default: &default
 
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
-  additional_paths: ['app/assets']
-  resolved_paths: ['app/frontend']
-
+  additional_paths: ['app/assets', 'app/frontend']
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
 
@@ -91,7 +89,7 @@ staging:
 
   # Cache manifest.json for performance
   cache_manifest: true
-  
+
 production:
   <<: *default
 
