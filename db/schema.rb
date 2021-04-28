@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_161029) do
+ActiveRecord::Schema.define(version: 2021_04_27_233003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2021_04_07_161029) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -128,6 +127,27 @@ ActiveRecord::Schema.define(version: 2021_04_07_161029) do
     t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.bigint "artist_id"
+    t.bigint "studio_id"
+    t.string "name"
+    t.string "phone_number"
+    t.string "email"
+    t.string "category"
+    t.date "date_of_birth"
+    t.boolean "email_notifications", default: false
+    t.boolean "phone_notifications", default: false
+    t.boolean "marketing_emails", default: false
+    t.boolean "inactive", default: false
+    t.string "zip_code"
+    t.string "referral_source"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id"], name: "index_clients_on_artist_id"
+    t.index ["studio_id"], name: "index_clients_on_studio_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -213,6 +233,16 @@ ActiveRecord::Schema.define(version: 2021_04_07_161029) do
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "slug"
+    t.string "title"
+    t.text "content"
+    t.integer "parent_id"
+    t.boolean "active", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -305,6 +335,8 @@ ActiveRecord::Schema.define(version: 2021_04_07_161029) do
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
     t.string "status"
+    t.string "caption"
+    t.boolean "featured", default: false
   end
 
   create_table "users", force: :cascade do |t|

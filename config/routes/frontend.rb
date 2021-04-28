@@ -42,8 +42,9 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tattoos, only: %i[index show] 
+    resources :tattoos, only: %i[index show]
     resources :articles, only: %i[index show]
+    resources :pages, only: %i[index show]
     resources :styles
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]
