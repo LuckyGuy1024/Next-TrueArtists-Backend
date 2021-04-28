@@ -108,6 +108,8 @@ GEM
       capistrano (>= 3.9.0)
       capistrano-bundler
       sidekiq (>= 6.0)
+    capistrano-webpacker-precompile (0.2)
+      capistrano (~> 3.1)
     case_transform (0.2)
       activesupport
     chronic (0.10.2)
@@ -335,6 +337,7 @@ DEPENDENCIES
   capistrano-rails-db
   capistrano-rvm
   capistrano-sidekiq
+  capistrano-webpacker-precompile
   faker
   figaro
   friendly_id (~> 5.4.0)

@@ -50,6 +50,7 @@ end
 
 group :deployment do
   gem 'capistrano', '~> 3.14.1', require: false
+  gem 'capistrano-webpacker-precompile', require: false
   # gem 'capistrano-bundler' # for capistrano/bundler
   gem 'capistrano-maintenance'
   gem 'capistrano-passenger'
