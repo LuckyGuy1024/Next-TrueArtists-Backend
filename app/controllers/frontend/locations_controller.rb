@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Api::V1
-  class LocationsController < ApplicationController
+module Frontend
+  class LocationsController < FrontendController
     skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_location, only: %i[show]
 
@@ -15,7 +15,6 @@ module Api::V1
     end
 
     def show
-      render json: LocationSerializer.new(@location).to_json, status: :ok
     end
 
     private

@@ -98,6 +98,8 @@ class Api::V1::TattoosController < ApplicationController
     [:styles,
      :categories,
      :placement,
+     :caption,
+     :featured,
      :color,
      :size,
      :image,

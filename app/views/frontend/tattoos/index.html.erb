@@ -5,18 +5,34 @@
 <div class="page-section gray-bg">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <div class="sub-header">
-          <h1>Find Tattoo Ideas</h1>
-        </div>
-        <div class="search-tattoos-form row">
-          <div class="col-md-8"></div>
-          <div class="col-md-2"></div>
-          <div class="col-md-2"></div>
+        <div class="col-md-12 search-form">
+          <%= form_for tattoos_path, html: { method: :get } do |f| %>
+            <div class="sub-header">
+              <h1>Find Tattoo Ideas</h1>
+            </div>
+            <div class="search-tattoos-form row">
+              <div class="col-md-9">
+                <div class="search-section">
+                    <%#= hidden_field_tag 'page', @meta[:current_page] %>
+                    <%#= hidden_field_tag 'per_page', @meta[:limit_value] %>
+                    <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search Tattoos by Style, Color, and Placement' %>
+                    <%#= submit_tag "Search" %>
+                    <button type="submit" class="search search-box">
+                      <i class="ta-icon-search basic-search"></i>
+                    </button>
+                </div>
+                </div>
+                <div class="col-md-3">
+                  <%= render 'frontend/tattoos/filter' %>
+                </div>
+            </div>
+            <div class="selected-filters">
+              <%= render 'frontend/tattoos/selected_filters' %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-  </div>
 </div>
 <!-- // -->
 
@@ -28,6 +44,9 @@
         <div class="image-gallery grid row">
           <%= render @tattoos %>
         </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <%= paginate @tattoos %>
       </div>
     </div>
   </div>

@@ -22,8 +22,8 @@ Rails.application.routes.draw do
     resources :artists do
       member do
         get :tattoos
-        get :artists
       end
+      get ':city_state' => 'artists#city', as: :city_state_artists
     end
 
     resources :studios do
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         get :tattoos
         get :artists
       end
+      get ':city_state' => 'studios#city', as: :city_state_studios
     end
 
     resources :locations, only: %i[index show]
@@ -41,17 +42,9 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tattoos, only: %i[index show update] do
-      collection do
-        post 'batch-create' => 'tattoos#batch_create'
-        get 'filter' => 'tattoos#filter'
-      end
-      member do
-        put :flag
-      end
-    end
-
+    resources :tattoos, only: %i[index show]
     resources :articles, only: %i[index show]
+    resources :pages, only: %i[index show]
     resources :styles
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]

@@ -58,6 +58,7 @@ module Api::V1::Admin
         :introduction,
         :content,
         :status,
+        :image,
         :category_id,
         tag_list: []
       )

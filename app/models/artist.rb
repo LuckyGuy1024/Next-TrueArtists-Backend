@@ -15,6 +15,7 @@ class Artist < ApplicationRecord
 
   acts_as_favoritable
   belongs_to :user
+  has_many :clients
   has_many :tattoos
   has_many :artist_styles
   has_many :styles, through: :artist_styles

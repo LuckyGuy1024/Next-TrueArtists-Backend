@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_124421) do
+ActiveRecord::Schema.define(version: 2021_04_27_233003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "action_mailbox_inbound_emails", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
-    t.string "message_id", null: false
-    t.string "message_checksum", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
-  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,7 +67,6 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -106,6 +96,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.string "state"
     t.string "name"
     t.string "street_address"
+    t.string "specialty"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
@@ -136,6 +127,27 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.bigint "artist_id"
+    t.bigint "studio_id"
+    t.string "name"
+    t.string "phone_number"
+    t.string "email"
+    t.string "category"
+    t.date "date_of_birth"
+    t.boolean "email_notifications", default: false
+    t.boolean "phone_notifications", default: false
+    t.boolean "marketing_emails", default: false
+    t.boolean "inactive", default: false
+    t.string "zip_code"
+    t.string "referral_source"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id"], name: "index_clients_on_artist_id"
+    t.index ["studio_id"], name: "index_clients_on_studio_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -212,28 +224,27 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
-  create_table "message_mails", force: :cascade do |t|
-    t.integer "message_id", null: false
-    t.integer "user_id", null: false
-    t.string "thread_id"
-    t.string "mail_message_id", null: false
-    t.text "references"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.integer "sender_id"
+    t.string "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "thread_id"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "slug"
+    t.string "title"
+    t.text "content"
+    t.integer "parent_id"
+    t.boolean "active", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "studio_artists", force: :cascade do |t|
@@ -270,7 +281,6 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.string "zip_code"
     t.string "country"
     t.string "phone_number"
-    t.text "specialty"
     t.text "accepted_payment_methods"
     t.boolean "appointment_only", default: false
     t.text "languages"
@@ -298,6 +308,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
+    t.string "currency_code"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
@@ -324,6 +335,8 @@ ActiveRecord::Schema.define(version: 2021_03_16_124421) do
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
     t.string "status"
+    t.string "caption"
+    t.boolean "featured", default: false
   end
 
   create_table "users", force: :cascade do |t|

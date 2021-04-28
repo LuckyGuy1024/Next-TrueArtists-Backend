@@ -15,6 +15,10 @@ class Article < ApplicationRecord
   validates_uniqueness_of :title, :page_title
   validates :meta_description, :introduction, :content, :status, presence: true
 
+  has_one_attached :image
+
+  validates :image, size: { less_than: 10.megabytes, message: 'is not given between size' }
+
   before_validation :assign_status, only: %i[create update]
   before_validation :import_tag_list, only: %i[create update]
 
@@ -30,6 +34,6 @@ class Article < ApplicationRecord
   end
 
   def import_tag_list
-    self.tag_list = JSON.parse(tag_list).uniq.join(',') if tag_list
+    self.tag_list = JSON.parse(tag_list).uniq.join(',') if tag_list_changed?
   end
 end

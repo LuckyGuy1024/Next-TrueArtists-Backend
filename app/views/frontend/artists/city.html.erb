@@ -1,0 +1,32 @@
+<% set_meta_tags title: "Best Tattoo Artists in #{@city_state}",
+              description: "Find top certified tattoo artists in #{@city_state}. Book an appointment today." %>
+
+<div class="page-section pt-0">
+  <div class="container">
+    <%= form_for artists_path, html: { remote: true, method: :get } do |f| %>
+    <%= hidden_field_tag 'page', @meta[:current_page] %>
+    <%= hidden_field_tag 'per_page', @meta[:limit_value] %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sub-header align-items-center">
+            <div>
+              <h1>Top Tattoo Artists in <%= @city_state %></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="artists-lists grid-gap-30 row">
+            <%= render @artists %>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <% unless @meta[:last_page] %>
+            <div class="see-more-section">
+              <button class="btn btn-alternative btn-lg">See More</button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

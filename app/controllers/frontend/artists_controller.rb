@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 module Frontend
@@ -6,10 +5,7 @@ module Frontend
     include ArtistScoped
 
     def index
-      search_results = search.base_filter
-
-      @artists = search_results.results
-      @meta = search.pagination_info(search_results)
+      @artists  = search.base_filter
 
       @styles = Style.all
 
@@ -17,6 +13,11 @@ module Frontend
         format.html
         format.js
       end
+    end
+
+    def city
+      @city_state = params[:city_state].split('-').titleize
+      @artists = Studio.near(@city_state, 500)
     end
 
     def show

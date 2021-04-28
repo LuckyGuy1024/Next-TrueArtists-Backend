@@ -7,12 +7,9 @@ module Frontend
     include StudioScoped
 
     def index
-      search_results = search.base_filter
+      @studios  = search.base_filter
 
-      @studios = search_results.results
-      @meta = search.pagination_info(search_results)
-
-      # @styles = Style.all
+      @styles = Style.all
 
       respond_to do |format|
         format.html
@@ -21,7 +18,8 @@ module Frontend
     end
 
     def city
-      @studios = Studio.near(params[:city], 500)
+      @city_state = params[:city_state].split('-').titleize
+      @studios = Studio.near(@city_state, 500)
     end
 
     def artists

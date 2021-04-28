@@ -1,0 +1,19 @@
+.pagination {
+  span {
+    a, .current {
+      background-color: $default-bg-color;
+      margin: 2px;
+      padding: 6px;
+      padding: 6px 10px;
+      border: 1px solid $gray-text-color;
+      border-radius: 5px;
+    }
+    &.current, a:hover {
+      background-color: $primary-color;
+      color: $text-white;
+      border: 1px solid $primary-color;
+      padding: 6px 10px;
+      margin: 0 4px;
+    }
+  }
+}

@@ -4,53 +4,81 @@
   box-sizing: border-box;
   text-decoration: none;
 }
+
 body {
   font-family: $font-stack;
   font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
-  -webkit-font-smoothing: antialiased; /* Chrome, Safari */
-  -moz-osx-font-smoothing: grayscale; /* Firefox */
+  -webkit-font-smoothing: antialiased;
+  /* Chrome, Safari */
+  -moz-osx-font-smoothing: grayscale;
+  /* Firefox */
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   line-height: 1.1;
   font-weight: 700;
 }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
   color: $text-color;
 }
+
 h1 {
   font-size: 42px;
 }
+
 h2 {
   font-size: 28px;
 }
+
 h3 {
   font-size: 24px;
 }
+
 h4 {
   font-size: 18px;
 }
+
 h5 {
   font-size: 16px;
 }
+
 p {
   margin-bottom: 25px;
 }
-p:last-child, p:last-of-type {
+
+p:last-child,
+p:last-of-type {
   margin-bottom: 0;
 }
-a, a:hover {
-  transition: .4s all ease;
+
+a,
+a:hover {
+  transition: 0.4s all ease;
 }
+
 :focus {
   outline: none;
 }
+
 img {
   max-width: 100%;
   height: auto;
 }
+
 .container {
   max-width: 100% !important;
 }
@@ -58,8 +86,9 @@ img {
 .shadow {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
 }
+
 .gray-bg {
-  background-color: $footer-bg;
+  background-color: $default-bg-color;
 }
 
 .slick-arrow {
@@ -71,9 +100,11 @@ img {
   border: 0;
   z-index: 9;
   cursor: pointer;
+
   i {
     font-size: 20px;
   }
+
   &:hover {
     background-color: $secondary-color;
     color: $text-white;
@@ -92,6 +123,7 @@ img {
   li {
     line-height: 1;
     margin: 0 3px;
+
     button {
       background: #8a8a8a;
       width: 8px;
@@ -102,6 +134,7 @@ img {
       border: 0;
       cursor: pointer;
     }
+
     &.slick-active {
       button {
         background: $white-bg;
@@ -110,23 +143,24 @@ img {
   }
 }
 
-
 .sub-header {
   margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
 }
-
 /*== Listing Widget ==*/
 .listing-widget {
   border-radius: 6px;
+
   .list-image {
     position: relative;
+
     img {
       border-radius: 6px 6px 0 0;
     }
+
     a:hover {
-      opacity: .7;
+      opacity: 0.7;
     }
   }
 
@@ -143,9 +177,11 @@ img {
       font-size: 14px;
       display: block;
       color: $gray-text-color;
+
       i {
         color: $secondary-color;
       }
+
       strong {
         color: $text-color;
       }
@@ -162,10 +198,12 @@ img {
       box-shadow: 0 4px 4px 0 rgba(156, 153, 153, 0.15);
       border: solid 2.6px #e9e9e9;
       margin-right: 10px;
+
       img {
         border-radius: 50%;
+
         &:hover {
-          opacity: .7;
+          opacity: 0.7;
         }
       }
     }
@@ -174,20 +212,20 @@ img {
       h5 {
         a {
           color: $text-color;
+
           &:hover {
             color: $primary-color;
           }
         }
       }
+
       p {
         font-size: 14px;
         color: $gray-text-color;
       }
     }
   }
-
 }
-
 
 .grid-gap-30 {
   .listing-widget {
@@ -197,8 +235,47 @@ img {
 
 .page-section {
   padding: 50px 0;
+
   .gray {
-    background: $footer-bg;
+    background: $default-bg-color;
+  }
+
+  .selected-filters {
+    margin-top: 20px;
+
+    .selected-filters__items {
+      text-align: left;
+      height: 40px;
+      margin: 18px 8px 0 5px;
+      padding: 6.5px 28px 6.5px 10px;
+      border-radius: 6px;
+      border: solid 1px #242424;
+    }
+
+    .selected-filters__close {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+
+      &:after,
+      &:before {
+        position: absolute;
+        left: 10px;
+        top: 5px;
+        content: ' ';
+        height: 12px;
+        width: 2px;
+        background-color: #333;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
   }
 }
 
@@ -207,7 +284,6 @@ img {
 }
 
 .image-gallery {
-
   .gallery-item {
     display: flex;
     margin-bottom: 30px;
@@ -218,21 +294,20 @@ img {
       height: 100%;
       object-fit: cover;
     }
+
     &:hover {
-      opacity: .7;
+      opacity: 0.7;
     }
   }
-
-
 }
 
 .ta-icon-star-fill {
   color: $secondary-color;
 }
+
 .ta-icon-star {
   color: $border-color;
 }
-
 // Tag
 .tag {
   border-radius: 6px;
@@ -252,7 +327,6 @@ img {
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.15);
   }
 }
-
 @media (max-width: 767px) {
   .btn-lg {
     min-width: auto;
