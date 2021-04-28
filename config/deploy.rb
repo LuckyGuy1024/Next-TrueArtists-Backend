@@ -58,8 +58,8 @@ set :rollbar_role, Proc.new { :app }
 set :passenger_restart_with_touch, true
 set :passenger_restart_options, -> { "#{deploy_to} --ignore-app-not-running --rolling-restart" }
 
-set :rvm_ruby_version, '2.6.1@261'
-set :bundle_flags, '--deployment'
+set :rvm_ruby_version, '2.7.1@271'
+# set :bundle_flags, '--deployment'
 set :maintenance_roles, -> { roles([:web]) }
 set :maintenance_template_path, File.expand_path("../../app/views/layouts/maintenance.html.erb", __FILE__)
 set :maintenance_dirname, -> { "#{current_path}/public/system" }
