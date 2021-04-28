@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: 'root'
+  password:
+
+development:
+  <<: *default
+  database: 'ta_dev'
+
+test:
+  <<: *default
+  database: 'ta_test'
+
+production:
+  <<: *default
+  database: 'ta_prod'

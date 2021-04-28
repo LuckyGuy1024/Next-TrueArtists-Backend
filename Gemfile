@@ -28,6 +28,8 @@ gem 'twilio-ruby'
 gem 'webpacker', '~> 5.0'
 gem 'browser'
 gem 'meta-tags'
+gem 'whenever'
+gem 'rollbar'
 
 group :development, :test do
   gem 'apitome', github: 'jejacks0n/apitome'
