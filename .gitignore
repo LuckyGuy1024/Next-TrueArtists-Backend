@@ -35,5 +35,6 @@ public/packs
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-
 .browserslistrc
+config/credentials.yml.enc
+.env
