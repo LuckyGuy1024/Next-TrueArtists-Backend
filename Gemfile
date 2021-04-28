@@ -31,12 +31,13 @@ gem 'meta-tags'
 gem 'whenever'
 gem 'rollbar'
 gem 'apitome', github: 'jejacks0n/apitome'
+gem 'rspec_api_documentation'
 
 group :development, :test do
-  gem 'apitome', github: 'jejacks0n/apitome'
+  # gem 'apitome', github: 'jejacks0n/apitome'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
-  gem 'rspec_api_documentation'
+  # gem 'rspec_api_documentation'
   gem 'rspec-rails'
 end
 
