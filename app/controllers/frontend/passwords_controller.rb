@@ -1,5 +1,5 @@
-module Api::V1
-  class PasswordsController < ApplicationController
+module Frontend
+  class PasswordsController < FrontendController
     before_action :validate_confirmation_token, only: %i[update]
     before_action :find_user, only: %i[create]
 

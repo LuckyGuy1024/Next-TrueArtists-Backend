@@ -1,7 +1,6 @@
 # frozen_string_literal: true
-
-module Api::V1
-  class StudioInvitesController < ApplicationController
+module Frontend
+  class StudioInvitesController < FrontendController
     before_action :find_studio, except: %i[accept_studio_invite]
     before_action :find_studio_invite, only: %i[accept_studio_invite]
     before_action :find_artist, only: %i[accept_studio_invite]
