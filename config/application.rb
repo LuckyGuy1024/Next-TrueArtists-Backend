@@ -39,6 +39,5 @@ module TrueArtists
 
     # Handle Pundit::NotAuthorizedError's by having rails handle them as a 403 error
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
-    config.autoloader = :classic
   end
 end
