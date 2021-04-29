@@ -3,7 +3,7 @@
 module Api::V1
   class ArtistsController < ApplicationController
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone studios]
+    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone]
 
     def index
       @results = ArtistSearch.new(
