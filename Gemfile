@@ -49,6 +49,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :staging, :development do
+  gem 'pry-rails'
+end
+
 group :deployment do
   gem 'capistrano', '~> 3.14.1', require: false
   gem 'capistrano-webpacker-precompile', require: false

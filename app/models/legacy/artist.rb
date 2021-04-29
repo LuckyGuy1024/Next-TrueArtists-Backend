@@ -3,8 +3,7 @@ module Legacy
     find_each do |artist|
       # find user
       user = User.find_by(id: artist.user_id)
-
-
+      next unless user 
       new_artist = Artist.find_or_initialize_by(user_id: artist.user_id)
       new_artist.bio = artist.bio
       new_artist.slug = artist.slug
