@@ -8,7 +8,9 @@ module Legacy
            binding.pry
            new_user.full_name = "#{user.first_name} #{user.last_name}"
            new_user.password_digest = user.encrypted_password
-           new_user.save
+           new_user.created_at = user.created_at
+           new_user.updated_at = user.updated_at
+           new_user.save(validate: false)
           end
         end
       end
