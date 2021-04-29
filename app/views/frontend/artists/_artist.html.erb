@@ -1,5 +1,10 @@
-<div class="col-lg-4 col-md-6 col-sm-12">
-  <div class="listing-widget shadow">
+<!-- Artists -->
+<div class="col-lg-3 col-md-6 col-sm-12">
+  <div class="location-section">
+    <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
+    <p><%= artist.city_state %></p>
+  </div>
+  <div class="listing-widget">
     <%= link_to artist_path(artist) do %>
       <div class="list-image">
         <% if artist.tattoos.present? %>
@@ -22,3 +27,4 @@
     <% end %>
   </div>
 </div>
+<!-- // -->

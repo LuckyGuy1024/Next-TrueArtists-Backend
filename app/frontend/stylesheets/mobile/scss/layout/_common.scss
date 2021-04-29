@@ -199,6 +199,15 @@ img {
 
 }
 
+.location-section {
+  display: flex;
+  margin: 10px 0;
+  color: $gray-text-color;
+
+  img {
+    margin-right: 8px;
+  }
+}
 
 .grid-gap-30 {
   .listing-widget {

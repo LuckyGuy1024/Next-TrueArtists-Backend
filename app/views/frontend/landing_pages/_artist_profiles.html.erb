@@ -1,0 +1,32 @@
+<!-- Artists -->
+<% @artists.each do |artist| %>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="location-section">
+      <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
+      <p><%= artist.city_state %></p>
+    </div>
+    <div class="listing-widget">
+      <%= link_to artist_path(artist) do %>
+        <div class="list-image">
+          <% if artist.tattoos.present? %>
+            <img data-src="<%= url_for(artist.search_profile_image) %>" class="lazyload" />
+          <% end %>
+        </div>
+        <div class="list-content d-flex align-items-center">
+          <div class="list-left flex-grow-1">
+            <div class="d-flex align-items-center">
+              <div class="profile-img">
+                <img data-src="<%= url_for(artist.avatar) %>" class="lazyload" />
+              </div>
+              <div class="profile-info">
+                <h5><%= artist.name %></h5>
+                <p><%= artist.city_state %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<!-- // -->

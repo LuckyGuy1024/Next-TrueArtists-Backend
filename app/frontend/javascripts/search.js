@@ -2,7 +2,6 @@
     window.Search = {
         init: function() {
             $('.search .search-box').on('click', function(e) {
-                console.log("ian");
                 e.preventDefault();
             });
 

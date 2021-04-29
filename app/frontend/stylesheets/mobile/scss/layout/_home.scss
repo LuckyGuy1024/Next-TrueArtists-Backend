@@ -1,0 +1,106 @@
+.home-page{
+  .home-bg-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px 8px 25px 25px;
+    }
+
+    .home-text-section {
+      font-size: large;
+      width: 100%;
+      text-align: center;
+      margin-top: -140px;
+
+      .home-text {
+        color: $white;
+        margin: auto;
+      }
+
+      .search-section {
+        margin: 20px auto;
+
+        input[type="text"] {
+          border-radius: 25px;
+          width: 98%;
+        }
+
+        button {
+          position: absolute;
+          color: $primary-color;
+          background-color: $secondary-color;
+          margin-top: 3px;
+          height: 45px;
+          margin-left: -102px;
+          border-radius: 25px;
+          width: 100px;
+          font-size: 15px;
+          border: none;
+        }
+      }
+    }
+  }
+
+  .artists-near-you {
+    margin-top: 40px;
+
+    .home-section-header {
+      margin-bottom: 22px;
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+
+    .see-more-section {
+      button {
+        border-radius: 25px;
+      }
+    }
+  }
+
+  .studios-near-you {
+    margin-top: 10px;
+
+    .studio-lists {
+      overflow-x: auto;
+      overflow-y: hidden;
+      cursor: pointer;
+      display: flex;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .listing-widget {
+        width: 240px;
+        height: 200px;
+      }
+    }
+
+    .home-section-header {
+      margin-bottom: 22px;
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .chevron-navigation {
+        display: none;
+      }
+    }
+
+    .see-more-section {
+      button {
+        border-radius: 25px;
+      }
+    }
+  }
+}

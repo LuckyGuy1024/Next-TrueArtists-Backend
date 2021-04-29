@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
 
     resources :artists do
+      root to: 'artists#home'
       member do
         get :tattoos
       end

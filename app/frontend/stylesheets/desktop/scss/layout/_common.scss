@@ -156,7 +156,7 @@ img {
     position: relative;
 
     img {
-      border-radius: 6px 6px 0 0;
+      border-radius: 6px;
     }
 
     a:hover {
@@ -224,6 +224,16 @@ img {
         color: $gray-text-color;
       }
     }
+  }
+}
+
+.location-section {
+  display: flex;
+  margin: 10px 0;
+  color: $gray-text-color;
+
+  img {
+    margin-right: 8px;
   }
 }
 

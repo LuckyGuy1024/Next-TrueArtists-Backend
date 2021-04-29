@@ -1,0 +1,114 @@
+.home-page {
+  .home-bg-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .home-text-section {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      font-size: large;
+      width: 100%;
+      text-align: center;
+
+      .home-text {
+        color: $white;
+        width: 700px;
+        margin: auto;
+      }
+
+      .search-section {
+        width: 700px;
+        margin: 30px auto;
+
+        input[type="text"] {
+          border-radius: 25px;
+        }
+
+        button {
+          position: absolute;
+          color: $primary-color;
+          background-color: $secondary-color;
+          margin-top: 3px;
+          height: 50px;
+          margin-left: -102px;
+          border-radius: 25px;
+          width: 100px;
+          font-size: 15px;
+          border: none;
+        }
+      }
+    }
+  }
+
+  .artists-near-you {
+    margin-top: 40px;
+
+    .home-section-header {
+      margin-bottom: 22px;
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+
+    .see-more-section {
+      button {
+        border-radius: 25px;
+      }
+    }
+  }
+
+  .studios-near-you {
+    margin-top: 40px;
+
+    .studio-lists {
+      overflow-x: auto;
+      overflow-y: hidden;
+      cursor: pointer;
+      display: flex;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .home-section-header {
+      margin-bottom: 22px;
+
+      h1 {
+        font-size: 50px;
+      }
+
+      .chevron-navigation {
+        float: right;
+        margin: 35px 15px 0 0;
+
+        button {
+          width: 46px;
+          height: 46px;
+          border: 1px solid $gray-text-color;
+          border-radius: 23px;
+          background-color: $white;
+        }
+      }
+    }
+
+    .see-more-section {
+      button {
+        border-radius: 25px;
+      }
+    }
+  }
+
+}

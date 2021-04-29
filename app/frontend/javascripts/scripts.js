@@ -218,6 +218,20 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#rightClick').click(function(e) {
+        e.preventDefault();
+        $('.studio-lists').animate({
+            scrollLeft: "+=300px"
+        }, "slow");
+    });
+
+    $('#leftClick').click(function(e) {
+        e.preventDefault();
+        $('.studio-lists').animate({
+            scrollLeft: "-=300px"
+        }, "slow");
+    });
+
 
     // Mobile Menu
     $('#mobile-nav').slicknav({
