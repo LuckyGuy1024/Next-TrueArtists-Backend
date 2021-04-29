@@ -1,4 +1,10 @@
 {
+  "licenses" : [
+   {
+     "type": "MIT",
+     "url": "https://www.opensource.org/licenses/mit-license.php"
+   }
+  ],
   "dependencies": {
     "@rails/webpacker": "5.2.1",
     "bootstrap": "4.5.0",
