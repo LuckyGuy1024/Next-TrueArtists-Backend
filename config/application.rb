@@ -25,7 +25,6 @@ module TrueArtists
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    config.api_only = true
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
@@ -40,5 +39,6 @@ module TrueArtists
 
     # Handle Pundit::NotAuthorizedError's by having rails handle them as a 403 error
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
+    config.autoloader = :classic
   end
 end
