@@ -20,9 +20,14 @@ Rails.application.routes.draw do
           put 'change_password' => 'passwords#update'
         end
       end
+
       resources :artists do
         resources :tattoos
         resources :clients
+
+        member do
+          get :studios
+        end
 
         collection do
           put 'verify-phone' => 'studios#verify_phone'
@@ -34,6 +39,7 @@ Rails.application.routes.draw do
           put :submit_for_review
         end
       end
+
       resources :studios do
         resources :tattoos
         resources :clients
@@ -74,6 +80,7 @@ Rails.application.routes.draw do
           put :flag
         end
       end
+
       resources :articles, only: %i[index show]
       resources :styles
       resources :categories, only: %i[index show]

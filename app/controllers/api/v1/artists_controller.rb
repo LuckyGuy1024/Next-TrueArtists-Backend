@@ -3,7 +3,7 @@
 module Api::V1
   class ArtistsController < ApplicationController
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone]
+    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone studios]
 
     def index
       @results = ArtistSearch.new(
@@ -17,6 +17,13 @@ module Api::V1
     def show
       render json: ArtistSerializer.new(@artist).to_json, status: :ok
     end
+
+    def studios
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@artist.studios,
+                                                                     serializer: StudioSerializer),
+             status: :ok
+    end
+
 
     def create
       artist = current_user.build_artist(artist_params)
