@@ -7,8 +7,6 @@ module Legacy
         find_each do |style|
           connected_to(role: :writing) do
             new_style = Style.find_or_initialize_by(name: style.name)
-
-            new_style.save
           end
         end
       end

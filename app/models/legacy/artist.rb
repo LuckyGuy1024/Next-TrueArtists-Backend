@@ -8,7 +8,8 @@ module Legacy
             user = ::User.find_by(id: artist.user_id)
             next unless user
 
-            new_artist = Artist.find_or_initialize_by(user_id: artist.user_id)
+            new_artist = ::Artist.find_or_initialize_by(user_id: artist.user_id)
+            new_artist.name = "#{user.first_name} #{user.last_name}"
             new_artist.bio = artist.bio
             new_artist.slug = artist.slug
             new_artist.licensed = artist.licensed
@@ -28,9 +29,9 @@ module Legacy
             new_artist.zip_code = artist.zip_code
             new_artist.lat = artist.lat
             new_artist.lon = artist.lon
-            new_artist.styles = artist.tattoo_styles
+            new_artist.styles = ::Style.where(name: artist.tattoo_styles.map(&:name))
+            new_artist.specialty = artist.specialities.to_a.map(&:name).join(",")
             new_artist.phone_verified = artist.phone_verified
-            new_artist.name = "#{user.first_name} #{user.last_name}"
             new_artist.status = if artist.admin_approved
                                   'approved'
                                 else
