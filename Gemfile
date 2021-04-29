@@ -28,10 +28,10 @@ gem 'twilio-ruby'
 gem 'webpacker', '~> 5.0'
 gem 'browser'
 gem 'meta-tags'
-gem 'whenever'
 gem 'rollbar'
 gem 'apitome', github: 'jejacks0n/apitome'
 gem 'rspec_api_documentation'
+gem 'whenever', require: false
 
 group :development, :test do
   # gem 'apitome', github: 'jejacks0n/apitome'
