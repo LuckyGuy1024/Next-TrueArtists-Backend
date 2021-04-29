@@ -5,9 +5,10 @@ module Legacy
     def self.migrate
       connected_to(role: :reading) do
         find_each do |category|
-          new_category = Category.find_or_initialize_by(name: category.name)
-
-          new_category.save
+          connected_to(role: :writing) do
+            new_category = ::Category.find_or_initialize_by(name: category.name)
+            new_category.save(validate: false)
+          end
         end
       end
     end
