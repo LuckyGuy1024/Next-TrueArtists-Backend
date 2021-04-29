@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include IdentityCache
   enum status: {
     active: 'active',
     inactive: 'inactive',

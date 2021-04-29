@@ -21,6 +21,8 @@ module Frontend
     end
 
     def show
+      @tattoos = @artist.tattoos.page(params[:page] || 1).per(BaseSearch::PER_PAGE)
+
       respond_to do |format|
         format.html
         format.js
