@@ -23,6 +23,12 @@ module Api::V1
       render json: StudioSerializer.new(@studio).to_json, status: :ok
     end
 
+    def artists
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@studio.artists,
+                                                                     serializer: ArtistSerializer),
+             status: :ok
+    end
+
     def create
       studio = current_user.build_studio(studio_params)
 

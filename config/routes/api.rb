@@ -21,12 +21,15 @@ Rails.application.routes.draw do
         end
       end
       resources :artists do
+        resources :tattoos
+        resources :clients
+
         collection do
           put 'verify-phone' => 'studios#verify_phone'
         end
-        resources :tattoos
-        resources :clients
+
         member do
+          get :artists
           delete 'delete-image/:image_id' => 'artists#remove_image'
           put :submit_for_review
         end
@@ -34,9 +37,11 @@ Rails.application.routes.draw do
       resources :studios do
         resources :tattoos
         resources :clients
+
         collection do
           put 'verify-phone' => 'studios#verify_phone'
         end
+
         member do
           delete 'delete-image/:image_id' => 'studios#remove_image'
           put :submit_for_review
@@ -44,6 +49,7 @@ Rails.application.routes.draw do
           get 'guest_artist_applications/:id' => 'studios#application'
         end
       end
+
       resources :locations, only: %i[index show]
 
       resources :studio_invites, path: 'studio-invites' do
