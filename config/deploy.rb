@@ -51,6 +51,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
   'log'
 )
 
+set :keep_releases, 2
+
 set :rollbar_token, 'bf76b421739a47288ce7eefbcaafd9aa'
 set :rollbar_env, Proc.new { fetch :stage }
 set :rollbar_role, Proc.new { :app }
@@ -63,3 +65,16 @@ set :rvm_ruby_version, '2.7.1@271'
 set :maintenance_roles, -> { roles([:web]) }
 set :maintenance_template_path, File.expand_path("../../app/views/layouts/maintenance.html.erb", __FILE__)
 set :maintenance_dirname, -> { "#{current_path}/public/system" }
+# after 'deploy:updated', 'webpacker:precompile'
+# before "webpacker:precompile", "deploy:yarn_install"
+before "deploy:assets:precompile", "deploy:yarn_install"
+namespace :deploy do
+  desc "Run rake yarn install"
+  task :yarn_install do
+    on roles(:web) do
+      within release_path do
+        execute("cd #{release_path} && yarn install --silent --no-progress --no-audit --no-optional")
+      end
+    end
+  end
+end
