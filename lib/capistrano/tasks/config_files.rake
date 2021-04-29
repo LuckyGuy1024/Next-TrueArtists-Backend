@@ -73,5 +73,5 @@ namespace :deploy do
     end
   end
 
-  before :check, :upload_shared_config_files
+  # before :check, :upload_shared_config_files
 end
