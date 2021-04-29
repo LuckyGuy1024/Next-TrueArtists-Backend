@@ -3,6 +3,7 @@
 module Api
   module V1
     class ArticlesController < ApplicationController
+      skip_before_action :authenticate_request!, only: %i[index show]
       before_action :find_article, except: %i[index]
 
       def index

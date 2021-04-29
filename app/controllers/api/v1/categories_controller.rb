@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class CategoriesController < BaseController
+    class CategoriesController < ApplicationController
       before_action :find_category, except: %i[index create]
 
       def index

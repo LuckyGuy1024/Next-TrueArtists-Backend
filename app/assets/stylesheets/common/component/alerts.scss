@@ -1,0 +1,147 @@
+.alert-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  padding: 100px 10px;
+  background: rgba(0,0,0,.8);
+}
+
+.alert {
+  padding: 15px;
+  font-weight: normal;
+  font-size: 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  z-index: 3px;
+  text-align: center;
+
+  h4 {
+    margin-top: 0;
+    color: inherit;
+  }
+
+  .alert-link {
+    font-weight: bold;
+  }
+
+  > {
+    p,
+    ul {
+      margin-bottom: 0;
+    }
+
+    p + p {
+      margin-top: 5px;
+    }
+  }
+}
+
+.alert-dismissable,
+.alert-dismissible {
+  padding-right: 35px;
+}
+
+.alert-dismissable .close,
+.alert-dismissible .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  color: inherit;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+
+  hr {
+    border-top-color: #c9e2b3;
+  }
+
+  .alert-link {
+    color: #2b542c;
+  }
+}
+
+.alert-inverse {
+  background-color: #212121;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.16), 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+  border-color: #000;
+  color: #fff;
+
+  .alert-link {
+    color: #fff;
+  }
+
+  .close {
+    color: #fff !important;
+  }
+}
+
+.alert-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #31708f;
+
+  hr {
+    border-top-color: #a6e1ec;
+  }
+
+  .alert-link {
+    color: #245269;
+  }
+
+  .close {
+    color: #fff;
+  }
+}
+
+.alert-warning {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+
+  hr {
+    border-top-color: #f7e1b5;
+  }
+
+  .alert-link {
+    color: #66512c;
+  }
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  color: #a94442;
+
+  .alert-link {
+    color: #843534;
+  }
+
+  &.inverse {
+    background-color: #000;
+    color: #a94442;
+
+    .close {
+      color: #a94442 !important;
+    }
+  }
+}
+
+.alert .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: inherit;
+  float: right;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+}
