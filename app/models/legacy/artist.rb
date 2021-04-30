@@ -45,11 +45,11 @@ module Legacy
             if new_artist.save && artist.logo_file_name
               image_file_name = artist.logo_file_name
               image_extension = File.extname(image_file_name)
-              optimized_file_name = "tattoo-artist-#{artist.name}".slugorize.escape
+              optimized_file_name = "tattoo-artist-#{new_artist.name}".slugorize.escape
 
               new_file_name = "#{optimized_file_name}#{image_extension}"
 
-              s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{artist.id}/original/#{image_file_name}"
+              s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{new_artist.id}/original/#{image_file_name}"
               new_artist.avatar.attach(io: URI.open(s3_image_url),
                                        filename: new_file_name,
                                        key: "avatars/artists/#{new_artist.id}/#{new_file_name}",
