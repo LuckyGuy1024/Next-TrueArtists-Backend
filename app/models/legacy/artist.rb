@@ -49,10 +49,10 @@ module Legacy
 
               new_file_name = "#{optimized_file_name}#{image_extension}"
 
-              s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{new_artist.id}/original/#{image_file_name}"
-              new_artist.avatar.attach(io: URI.open(s3_image_url),
+              s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{new_artist.id}/original/#{image_file_name.escape}"
+              new_artist.avatar.attach(key: "avatars/artists/#{new_artist.id}/#{new_file_name}",
+                                       io: URI.open(s3_image_url),
                                        filename: new_file_name,
-                                       key: "avatars/artists/#{new_artist.id}/#{new_file_name}",
                                        content_type: artist.logo_content_type)
             end
           end
