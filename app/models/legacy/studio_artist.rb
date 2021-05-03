@@ -7,12 +7,14 @@ module Legacy
 
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
+        progress_bar = ProgressBar.new(Legacy::StudioArtist.count)
         find_each do |studio_artist|
           ActiveRecord::Base.connected_to(role: :writing) do
             new_studio_artist = ::StudioArtist.find_or_initialize_by(studio_id: studio_artist.studio_id,
                                                                      artist_id: studio_artist.artist_id)
 
             new_studio_artist.save
+            progress_bar.increment
           end
         end
       end

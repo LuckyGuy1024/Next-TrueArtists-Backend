@@ -1,3 +1,4 @@
+#RAILS_ENV=staging nohup bundle exec rails import:legacy_data --trace
 namespace :import do
   task legacy_data: :environment do
     puts "Starting Tattoo Style"

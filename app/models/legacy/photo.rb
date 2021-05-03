@@ -6,8 +6,14 @@ module Legacy
     self.table_name = 'photos'
     connects_to database: { reading: :legacy, writing: :primary }
 
+    def self.logger
+      @logger ||=
+        Logger.new(Rails.root.join('log', 'photos.log'))
+    end
+
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
+        progress_bar = ProgressBar.new(Legacy::Photo.count)
         where(photoable_type: 'Artist').find_each do |photo|
           ActiveRecord::Base.connected_to(role: :writing) do
             new_tattoo = ::Tattoo.find_or_initialize_by(id: photo.id, artist_id: photo.photoable_id)
@@ -31,6 +37,9 @@ module Legacy
                 io: URI.open(s3_image_url)
               )
             end
+            progress_bar.increment
+          rescue StandardError => e
+            logger.error("Photos[#{photo.id}] \n\n -------------------- #{e.inspect}\n\n\n")
           end
         end
       end

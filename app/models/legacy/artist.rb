@@ -1,3 +1,4 @@
+require 'logger'
 module Legacy
   class Artist < Base
     self.abstract_class = true
@@ -16,10 +17,17 @@ module Legacy
     has_many :artist_tattoo_styles, class_name: 'Legacy::ArtistTattooStyle'
     has_many :tattoo_styles, through: :artist_tattoo_styles
 
+    def self.logger
+      @logger ||=
+        Logger.new(Rails.root.join('log', 'artists.log'))
+    end
+
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
+        progress_bar = ProgressBar.new(Legacy::Artist.count)
         find_each do |artist|
           # find user
+
           tattoo_style_ids = artist.tattoo_style_ids
           specialty = artist.specialities.to_a.map(&:name).join(',')
 
@@ -75,13 +83,14 @@ module Legacy
                 content_type: artist.logo_content_type
               }
 
-              if new_artist.avatar.present?
-                new_artist.avatar.purge
-              end
+              new_artist.avatar.purge if new_artist.avatar.present?
 
               new_artist.avatar.attach(options)
             end
+            progress_bar.increment
           end
+        rescue StandardError => e
+          logger.error("Artist[#{artist.id}] \n\n -------------------- #{e.inspect}\n\n\n")
         end
       end
     end

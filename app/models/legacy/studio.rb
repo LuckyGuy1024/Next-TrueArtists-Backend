@@ -1,11 +1,17 @@
 module Legacy
   class Studio < Base
     self.abstract_class = true
-    self.table_name = "studios"
+    self.table_name = 'studios'
     connects_to database: { reading: :legacy, writing: :primary }
+
+    def self.logger
+      @logger ||=
+        Logger.new(Rails.root.join('log', 'studios.log'))
+    end
 
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
+        progress_bar = ProgressBar.new(Legacy::Studio.count)
         find_each do |studio|
           languages = studio.languages.to_a.map(&:name).join(',').presence
           specialty = studio.specialities.to_a.map(&:name).join(',').presence
@@ -50,7 +56,11 @@ module Legacy
                                        io: URI.open(s3_image_url),
                                        filename: new_file_name,
                                        content_type: studio.logo_content_type)
+
             end
+            progress_bar.increment
+          rescue StandardError => e
+            logger.error("Studio[#{studio.id}] \n\n -------------------- #{e.inspect}\n\n\n")
           end
         end
       end
