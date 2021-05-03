@@ -38,6 +38,13 @@ module TrueArtists
     end
 
     # Handle Pundit::NotAuthorizedError's by having rails handle them as a 403 error
-    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
+    config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
+    config.active_storage.web_image_content_types = %w[
+      image/jpg
+      image/jpeg
+      image/gif
+      image/png
+      image/webp
+    ]
   end
 end

@@ -19,6 +19,7 @@ gem 'rails'
 gem 'searchkick'
 gem 'sassc-rails'
 gem 'kaminari'
+gem "mini_magick"
 gem 'geocoder'
 gem 'faker'
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -33,6 +34,7 @@ gem 'rollbar'
 gem 'apitome', github: 'jejacks0n/apitome'
 gem 'rspec_api_documentation'
 gem 'whenever', require: false
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # gem 'apitome', github: 'jejacks0n/apitome'

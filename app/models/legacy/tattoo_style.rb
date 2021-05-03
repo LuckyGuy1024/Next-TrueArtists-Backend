@@ -2,11 +2,20 @@
 
 module Legacy
   class TattooStyle < Base
+    self.abstract_class = true
+    self.table_name = "tattoo_styles"
+    connects_to database: { reading: :legacy, writing: :primary }
+
+    has_many :artist_tattoo_styles
+
+    # connects_to database: { reading: :legacy, writing: :primary }
+
     def self.migrate
-      connected_to(role: :reading) do
+      ActiveRecord::Base.connected_to(role: :reading) do
         find_each do |style|
-          connected_to(role: :writing) do
-            new_style = Style.find_or_initialize_by(name: style.name)
+          ActiveRecord::Base.connected_to(role: :writing) do
+            new_style = ::Style.find_or_initialize_by(id: style.id, name: style.name)
+            new_style.save
           end
         end
       end

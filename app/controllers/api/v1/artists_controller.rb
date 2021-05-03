@@ -15,7 +15,6 @@ module Api::V1
     end
 
     def show
-      binding.pry
       render json: ArtistSerializer.new(@artist).to_json, status: :ok
     end
 

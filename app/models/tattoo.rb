@@ -22,7 +22,9 @@ class Tattoo < ApplicationRecord
   belongs_to :studio, optional: true
   belongs_to :artist, optional: true
 
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.format :webp
+  end
 
   validates :image, size: { less_than: 10.megabytes, message: 'is not given between size' }
 

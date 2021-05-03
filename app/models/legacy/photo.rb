@@ -2,30 +2,34 @@
 
 module Legacy
   class Photo < Base
+    self.abstract_class = true
+    self.table_name = 'photos'
+    connects_to database: { reading: :legacy, writing: :primary }
+
     def self.migrate
-      connected_to(role: :reading) do
-        find_each do |tattoo|
-          connected_to(role: :writing) do
-            new_tattoo = ::Tattoo.find_or_initialize_by(artist_id: tattoo.photoable_id, description: tattoo.description)
+      ActiveRecord::Base.connected_to(role: :reading) do
+        where(photoable_type: 'Artist').find_each do |photo|
+          ActiveRecord::Base.connected_to(role: :writing) do
+            new_tattoo = ::Tattoo.find_or_initialize_by(id: photo.id, artist_id: photo.photoable_id)
+            new_tattoo.placement = photo.tattoo_placements
+            new_tattoo.color = photo.tattoo_colors
+            new_tattoo.size = photo.tattoo_sizes
+            new_tattoo.caption = photo.description
+            new_tattoo.description = photo.description
 
-            new_tattoo.styles = tattoo.tattoo_styles
-            new_tattoo.categories = tattoo.tattoo_categories
-            new_tattoo.placement = tattoo.tattoo_placements
-            new_tattoo.color = tattoo.tattoo_colors
-            new_tattoo.size = tattoo.tattoo_sizes
-            new_tattoo.tag_list = tattoo.tags
+            if new_tattoo.save && photo.attachment_file_name
+              new_tattoo.image.purge if new_tattoo.image.present?
+              image_file_name = photo.attachment_file_name
+              image_extension = File.extname(image_file_name)
+              optimized_file_name = "#{photo.tattoo_sizes} #{photo.tattoo_colors} #{photo.tattoo_placements} tattoo".slugorize.escape
+              new_file_name = "#{optimized_file_name}"
 
-            new_tattoo.save
-
-            if new_tattoo.save && tattoo.attachment_file_name
-              image = tattoo.attachment_file_name
-              ext = File.extname(image)
-              image_original = CGI.unescape(image.gsub(ext, "_original#{ext}"))
-
-              attachment_url = "https://s3.amazonaws.com/trueartists_production/attachments/#{tattoo.id}/original/#{image_original}"
-              new_tattoo.image.attach(io: open(attachment_url),
-                                      filename: tattoo.attachment_file_name,
-                                      content_type: tattoo.attachment_content_type)
+              s3_image_url = "https://s3.amazonaws.com/trueartists_production/attachments/#{photo.id}/original/#{image_file_name.escape}"
+              new_tattoo.image.attach(
+                key: "artists/#{photo.photoable_id}/tattoos/#{new_tattoo.id}/#{new_file_name}",
+                filename: new_file_name,
+                io: URI.open(s3_image_url)
+              )
             end
           end
         end
