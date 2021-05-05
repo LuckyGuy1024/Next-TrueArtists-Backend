@@ -4,8 +4,10 @@
 @import '../../common/base/normalize';
 
 /* --- FONTS ---*/
+@import "../../common/fonts/noto_sans.scss";
 @import "../../common/fonts/icomoon.scss";
 
+@import '../../common/base/variables.scss';
 
 /* --- COMPONENTS ---*/
 @import "../../common/component/slick.scss";

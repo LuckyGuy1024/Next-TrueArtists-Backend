@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: $font-stack;
+  font-family: $default-font;
   font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
@@ -24,7 +24,7 @@ h5,
 h6 {
   margin: 0;
   line-height: 1.1;
-  font-weight: 700;
+  font-family: $default-font-bold;
 }
 
 h1 a,
