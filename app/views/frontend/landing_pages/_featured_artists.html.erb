@@ -1,0 +1,24 @@
+<div class="artists-near-you">
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="home-section-header">
+            <h2>Tattoo Artists near you - <%= link_to "San Fransisco, CA" %></h2>
+          </div>
+          <div class="artists-lists grid-gap-30 row">
+            <%= render 'frontend/landing_pages/artists' %>
+          </div>
+          <div class="col-md-12 text-center">
+            <div class="see-more-section">
+              <%= link_to artists_path(near: nil) do %>
+                <span class="btn btn-alternative">See More</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of row -->
+    </div>
+  </div>
+</div>

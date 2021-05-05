@@ -1,62 +1,10 @@
-<div class="home-page">
-  <div class="home-bg-image">
-    <%= image_pack_tag("media/images/home-bg.jpeg") %>
-    <div class="home-text-section">
-      <div class="home-text">
-        <h1>Find a Certified Artist Your Skin Won't Regret</h1>
-      </div>
-      <%= form_for studios_path, html: { method: :get } do |f| %>
-        <div class="search-section">
-          <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search for TrueArtists' %>
-          <button type="submit">Search</button>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="artists-near-you">
-    <div class="page-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="home-section-header">
-              <h1>Artists near you</h1>
-            </div>
-            <div class="artists-lists grid-gap-30 row">
-              <%= render 'frontend/landing_pages/artist_profiles' %>
-            </div>
-            <div class="col-md-12 text-center">
-              <%# unless @meta[:last_page] %>
-                <div class="see-more-section">
-                  <button class="btn btn-alternative">See More</button>
-                </div>
-              <%# end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<% set_meta_tags title: "Best Tattoo Studios & Artists Near You",
+              description: "Find Certified Tattoo Studios & Artists in a city near. Book a tattoo appointment today." %>
 
-  <div class="studios-near-you">
-    <div class="page-section">
-      <div class="container">
-        <div class="row">
-            <div class="col-md-2 home-section-header">
-              <h1>Studios near you</h1>
-              <div class="chevron-navigation">
-                <button type="button" id="leftClick">
-                  <%= image_pack_tag("media/images/chevron-left.svg") %>
-                </button>
-                <button type="button" id="rightClick">
-                  <%= image_pack_tag("media/images/chevron-right.svg") %>
-                </button>
-              </div>
-            </div>
-            <div class="col-md-10 studio-lists grid-gap-30">
-              <%= render 'frontend/landing_pages/studios' %>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<%= render 'frontend/landing_pages/hero_banner' %>
+
+<div class="home-page">
+  <%= render 'frontend/landing_pages/featured_artists' %>
+  <%= render 'frontend/landing_pages/featured_studios' %>
 </div>

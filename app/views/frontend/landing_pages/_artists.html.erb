@@ -2,8 +2,10 @@
 <% @artists.each do |artist| %>
   <div class="col-lg-3 col-md-6 col-sm-12">
     <div class="location-section">
-      <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
-      <p><%= artist.city_state %></p>
+      <%= link_to '#' do %>
+        <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
+        <h4><%= artist.city_state %></h4>
+      <% end %>
     </div>
     <div class="listing-widget">
       <%= link_to artist_path(artist) do %>
@@ -16,11 +18,15 @@
           <div class="list-left flex-grow-1">
             <div class="d-flex align-items-center">
               <div class="profile-img">
-                <img data-src="<%= url_for(artist.avatar) %>" class="lazyload" />
+                <% if artist.avatar.present? %>
+                  <img data-src="<%= url_for(artist&.avatar) %>" class="lazyload" />
+                <% end %>
               </div>
               <div class="profile-info">
                 <h5><%= artist.name %></h5>
-                <p><%= artist.city_state %></p>
+                <p>
+                  <%= artist.city_state %>
+                </p>
               </div>
             </div>
           </div>

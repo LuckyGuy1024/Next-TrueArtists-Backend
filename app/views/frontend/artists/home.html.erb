@@ -1,6 +1,6 @@
 <div class="home-page">
   <div class="home-bg-image">
-    <%= image_pack_tag("media/images/home-bg.jpeg") %>
+    <%= image_tag("home-bg.jpeg") %>
     <div class="home-text-section">
       <div class="home-text">
         <h1>Join the world's largest tattoo community</h1>
@@ -16,8 +16,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="why-us-header text-center">
-              <h3>WHY CHOOSE TRUEARTISTS?</h3>
-              <h1>Even more features to benefit you</h1>
+              <h2>WHY CHOOSE TRUEARTISTS?</h2>
+              <h3>Even more features to benefit you</h3>
             </div>
             <div class="why-us-content">
 
@@ -34,7 +34,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="home-section-header">
-              <h1>Artists near you</h1>
+              <h2>Tattoo Artists near you</h2>
             </div>
             <%= form_for artists_path, html: { method: :get } do |f| %>
               <div class="artists-lists grid-gap-30 row">
@@ -59,7 +59,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 home-section-header">
-            <h1>Studios near you</h1>
+            <h2>Tattoo Studios near you</h2>
             <div class="chevron-navigation">
               <button type="button" id="leftClick">
                 <%= image_pack_tag("media/images/chevron-left.svg") %>
@@ -83,8 +83,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="testimonials-header text-center">
-              <h3>TESTIMONIALS</h3>
-              <h1>What Our Members think..</h1>
+              <h2>Customer testimonials</h2>
+              <h3>What Our Members think..</h3>
             </div>
             <div class="row">
               <%= render 'frontend/artists/testimonials' %>

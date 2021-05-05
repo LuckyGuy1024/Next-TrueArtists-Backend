@@ -19,7 +19,8 @@ module Frontend
       @styles = Style.all.map(&:name)
       @placement = Tattoo::PLACEMENTS
       respond_to do |format|
-        format.html
+        format.html.mobile
+        format.html.none
         format.js
       end
     end

@@ -1,0 +1,15 @@
+default: &default
+  adapter: mysql2
+  host: localhost
+  pool: 5
+  timeout: 5000
+  username: 'root'
+  password: 'root'
+
+development:
+  primary:
+    <<: *default
+    database: 'ta_dev'
+  legacy:
+    <<: *default
+    database: ta_prod

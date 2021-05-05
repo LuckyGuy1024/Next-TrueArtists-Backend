@@ -1,0 +1,11 @@
+<div class='hero-banner'>
+  <div class='hero-banner-wrapper'>
+    <h1>Find a Certified Tattoo Studio or Artist or Studio Your Skin Won't Regret</h1>
+    <%= form_for studios_path, html: { method: :get } do |f| %>
+      <div class="hero-search">
+        <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search by city or zip code' %>
+        <button type="submit">Search</button>
+      </div>
+    <% end %>
+  </div>
+</div>

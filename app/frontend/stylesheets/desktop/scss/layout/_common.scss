@@ -231,9 +231,19 @@ img {
   display: flex;
   margin: 10px 0;
   color: $gray-text-color;
-
+  a {
+    h4 {
+      font-size: 15px;
+      color: $gray-text-color;
+      font-weight: normal;
+      display: inline;
+      &:hover {
+        color: $secondary-color !important;
+      }
+    }
+  }
   img {
-    margin-right: 8px;
+    margin-right: 4px;
   }
 }
 

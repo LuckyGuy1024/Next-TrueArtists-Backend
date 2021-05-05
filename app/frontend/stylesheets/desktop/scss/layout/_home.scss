@@ -1,114 +1,91 @@
-.home-page {
-  .home-bg-image {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
+.hero-banner {
+  width: 100%;
+  margin: 0 auto;
+  background: url("http://localhost:3001/packs/media/images/home-bg-246956eb3b14b64ef06b4495cf8a1169.jpeg") no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  height: 300px;
+  .hero-banner-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    h1 {
+      color: $white;
+      font-size: 42px;
+      max-width: 50%;
+      vertical-align: center;
     }
+    .hero-search {
+      width: 700px;
+      margin: 30px auto;
 
-    .home-text-section {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      font-size: large;
-      width: 100%;
-      text-align: center;
-
-      .home-text {
-        color: $white;
-        width: 700px;
-        margin: auto;
+      input[type="text"] {
+        border-radius: 25px;
       }
 
-      .search-section {
-        width: 700px;
-        margin: 30px auto;
-
-        input[type="text"] {
-          border-radius: 25px;
-        }
-
-        button {
-          position: absolute;
-          color: $primary-color;
-          background-color: $secondary-color;
-          margin-top: 3px;
-          height: 50px;
-          margin-left: -102px;
-          border-radius: 25px;
-          width: 100px;
-          font-size: 15px;
-          border: none;
-        }
+      button {
+        position: absolute;
+        color: $primary-color;
+        background-color: $secondary-color;
+        margin-top: 3px;
+        height: 50px;
+        margin-left: -102px;
+        border-radius: 25px;
+        width: 100px;
+        font-size: 15px;
+        border: none;
       }
     }
   }
-
+}
+.home-page {
+  h2 {
+    font-size: 24px;
+    a {
+      color: $secondary-color;
+      margin-left: 10px;
+      font-size: 20px;
+      text-decoration: underline;
+    }
+  }
   .artists-near-you {
     margin-top: 40px;
 
     .home-section-header {
       margin-bottom: 22px;
-
-      h1 {
-        font-size: 24px;
-      }
-    }
-
-    .see-more-section {
-      button {
-        border-radius: 25px;
-      }
     }
   }
 
   .studios-near-you {
     margin-top: 40px;
 
-    .studio-lists {
-      overflow-x: auto;
-      overflow-y: hidden;
-      cursor: pointer;
-      display: flex;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
     .home-section-header {
       margin-bottom: 22px;
-
-      h1 {
-        font-size: 50px;
-      }
 
       .chevron-navigation {
         float: right;
         margin: 35px 15px 0 0;
-
-        button {
-          width: 46px;
-          height: 46px;
-          border: 1px solid $gray-text-color;
-          border-radius: 23px;
-          background-color: $white;
-        }
-      }
-    }
-
-    .see-more-section {
-      button {
-        border-radius: 25px;
       }
     }
   }
 
+  .scrolling-widget-list {
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: pointer;
+    display: flex;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

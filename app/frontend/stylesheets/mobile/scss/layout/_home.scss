@@ -1,56 +1,77 @@
-.home-page{
-  .home-bg-image {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.hero-banner {
+  width: 100%;
+  margin: 0 auto;
+  background: url("http://localhost:3001/packs/media/images/home-bg-246956eb3b14b64ef06b4495cf8a1169.jpeg") no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  height: 50%;
 
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px 8px 25px 25px;
+  .hero-banner-wrapper {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    h1 {
+      color: $white;
+      font-size: 24px;
+      max-width: 100%;
+      vertical-align: center;
     }
 
-    .home-text-section {
-      font-size: large;
+    form {
       width: 100%;
-      text-align: center;
-      margin-top: -140px;
+      margin: 5% 0;
+    }
 
-      .home-text {
-        color: $white;
-        margin: auto;
+    .hero-search {
+      width: 98%;
+      margin: 0 auto;
+
+      input[type="text"] {
+        border-radius: 25px;
       }
 
-      .search-section {
-        margin: 20px auto;
-
-        input[type="text"] {
-          border-radius: 25px;
-          width: 98%;
-        }
-
-        button {
-          position: absolute;
-          color: $primary-color;
-          background-color: $secondary-color;
-          margin-top: 3px;
-          height: 45px;
-          margin-left: -102px;
-          border-radius: 25px;
-          width: 100px;
-          font-size: 15px;
-          border: none;
-        }
+      input[type="text"] {
+        height: 40px;
+        padding: 0 20px 0 8px;
       }
+
+      button {
+        position: absolute;
+        color: $primary-color;
+        background-color: $secondary-color;
+        margin-top: 0s;
+        height: 40px;
+        margin-left: -99px;
+        border-radius: 25px;
+        width: 100px;
+        font-size: 15px;
+        border: none;
+      }
+    }
+  }
+}
+
+.home-page {
+  h2 {
+    font-size: 18px;
+
+    a {
+      color: $secondary-color;
+      font-size: 16px;
+      text-decoration: underline;
     }
   }
 
   .artists-near-you {
-    margin-top: 40px;
-
     .home-section-header {
-      margin-bottom: 22px;
-
       h1 {
         font-size: 20px;
       }
@@ -65,25 +86,6 @@
 
   .studios-near-you {
     margin-top: 10px;
-
-    .studio-lists {
-      overflow-x: auto;
-      overflow-y: hidden;
-      cursor: pointer;
-      display: flex;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      .listing-widget {
-        width: 240px;
-        height: 200px;
-      }
-    }
 
     .home-section-header {
       margin-bottom: 22px;
@@ -101,6 +103,25 @@
       button {
         border-radius: 25px;
       }
+    }
+  }
+
+  .scrolling-widget-list {
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: pointer;
+    display: flex;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .listing-widget {
+      width: 240px;
+      height: 200px;
     }
   }
 }
