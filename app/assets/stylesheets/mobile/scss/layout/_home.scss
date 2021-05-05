@@ -25,6 +25,22 @@
       width: 700px;
       margin: 30px auto;
 
+
+      ul {
+        margin-bottom: 0px;
+padding-left: 64px;
+padding-right: 64px;
+width: auto;
+left: auto;
+z-index: 1;
+-webkit-box-pack: center;
+justify-content: center;
+display: flex;
+box-shadow: rgb(0 0 0 / 20%) 0px 1px 6px 2px;
+border-radius: 8px;
+background-color: rgb(255, 255, 255);
+      }
+
       input[type="text"] {
         border-radius: 25px;
       }

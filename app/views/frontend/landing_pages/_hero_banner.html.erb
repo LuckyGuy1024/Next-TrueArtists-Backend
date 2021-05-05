@@ -1,8 +1,18 @@
 <div class='hero-banner'>
   <div class='hero-banner-wrapper'>
-    <h1>Find a Certified Tattoo Studio or Artist or Studio Your Skin Won't Regret</h1>
+    <h1>Find a Certified Tattoo Studio or Artist Your Skin Won't Regret</h1>
     <%= form_for studios_path, html: { method: :get } do |f| %>
       <div class="hero-search">
+        <div class="search-options">
+          <input type="radio" id="search-bar-artists" for="artists" name="search_path" for="artists" role="tab" aria-selected="true" value="/artists" checked>
+          <label for="search-bar-artists">Artists</label>
+
+          <input type="radio" id="search-bar-studios" for="studios" name="search_path" for="studios" role="tab" aria-selected="true" value="/studios">
+          <label for="search-bar-studios">Studios</label>
+
+          <input type="radio" id="search-bar-tattoos" for="tattoos" name="search_path" for="tattoos" role="tab" aria-selected="true" value="/tattoos">
+          <label for="search-bar-tattoos">Tattoos</label>
+        </div>
         <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search by city or zip code' %>
         <button type="submit">Search</button>
       </div>
