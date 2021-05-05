@@ -26,5 +26,6 @@ class CreateArtists < ActiveRecord::Migration[6.0]
       t.boolean 'guest_artist', default: false
       t.timestamps
     end
+    add_index :artists, :studio_id
   end
 end
