@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :styles
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]
+    resources :global_search_redirector, only: [:index]
     root to: 'landing_pages#home'
   end
 end

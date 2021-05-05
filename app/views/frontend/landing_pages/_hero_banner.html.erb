@@ -1,7 +1,7 @@
 <div class='hero-banner'>
   <div class='hero-banner-wrapper'>
     <h1>Find a Certified Tattoo Studio or Artist Your Skin Won't Regret</h1>
-    <%= form_for studios_path, html: { method: :get } do |f| %>
+    <%= form_tag global_search_redirector_index_path, method: :get do %>
       <div class="hero-search">
         <div class="search-options">
           <input type="radio" id="search-bar-artists" for="artists" name="search_path" for="artists" role="tab" aria-selected="true" value="/artists" checked>
