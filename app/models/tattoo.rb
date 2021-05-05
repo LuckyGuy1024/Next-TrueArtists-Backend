@@ -14,8 +14,7 @@ class Tattoo < ApplicationRecord
     end
   end
 
-  searchkick word_start: %i[styles placement size color categories tag_list description],
-             locations: [:location]
+  searchkick locations: [:location]
 
   include AssetExtension
   acts_as_favoritable

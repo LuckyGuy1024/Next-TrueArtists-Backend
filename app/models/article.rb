@@ -5,7 +5,7 @@ class Article < ApplicationRecord
     flagged: 'flagged'
   }
 
-  searchkick word_start: %i[title page_title slug meta_description introduction content tag_list]
+  searchkick
 
   belongs_to :user
   belongs_to :category

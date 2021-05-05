@@ -20,10 +20,14 @@ Rails.application.routes.draw do
     end
 
     resources :artists do
-      root to: 'artists#home'
       member do
         get :tattoos
       end
+
+      collection do
+        get 'register' => 'artists#home'
+      end
+
       get ':city_state' => 'artists#city', as: :city_state_artists
     end
 

@@ -25,7 +25,7 @@ class Studio < ApplicationRecord
               'Basic Body Modification', 'Piercing', 'Scarification',
               'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
 
-  searchkick word_start: %i[name bio city country services languages], locations: [:location]
+  searchkick locations: [:location]
 
   include AddressExtension
   extend FriendlyId

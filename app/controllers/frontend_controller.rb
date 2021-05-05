@@ -5,19 +5,37 @@ class FrontendController < ActionController::Base
 
   before_action :authenticate_request!
   before_action :set_request_variant
-  before_action :user_location
+
+  helper_method :current_user_location,
+                :current_user_city,
+                :current_user_city_state,
+                :current_user_coordinates
+
+  def current_user_city_state
+    if current_user_location.country_code == 'US'
+      "#{current_user_location.city}, #{current_user.state}"
+    else
+      "#{current_user_location.city}, #{current_user.country}"
+    end
+  end
+
+  def current_user_city
+    @current_user_city = current_user_location.city
+  end
+
+  def current_user_coordinates
+    current_user_location.coordinates
+  end
+
+  def current_user_location
+    @current_user_location = request.location
+  end
+
 
   private
 
   # Validates the token and user and sets the @current_user scope
   def authenticate_request!; end
-
-  def user_location
-    city = request.location.city
-    country = request.location.country
-
-    city || country
-  end
 
   def set_request_variant
     request.variant = :mobile if browser.mobile? || browser.tablet?
