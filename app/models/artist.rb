@@ -2,6 +2,8 @@
 
 class Artist < ApplicationRecord
   include AASM
+  include IdentityCache
+
   SPECIALTY = %w[Flash Freehand].freeze
 
   searchkick locations: [:location]
@@ -23,6 +25,9 @@ class Artist < ApplicationRecord
   has_many :guest_artist_applications
   has_one_attached :avatar
   has_one_attached :hero_banner
+
+  cache_index :slug, unique: true
+  # cache_has_many :tattoos, embed: true
 
   validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true

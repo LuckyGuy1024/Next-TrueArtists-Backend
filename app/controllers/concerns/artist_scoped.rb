@@ -29,6 +29,6 @@ module ArtistScoped
   end
 
   def find_artist
-    @artist = Artist.friendly.find(params[:id])
+    @artist = Artist.fetch_by_slug(params[:id])
   end
 end

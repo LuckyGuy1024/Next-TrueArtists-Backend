@@ -2,6 +2,7 @@
 
 class Studio < ApplicationRecord
   include AASM
+  include IdentityCache
 
   LANGUAGES = %w[
     Mandarin
@@ -43,6 +44,9 @@ class Studio < ApplicationRecord
   has_many :guest_artist_applications
   has_one_attached :avatar
   has_one_attached :hero_banner
+
+  cache_index :slug, unique: true
+  cache_has_many :studio_artists, embed: true
 
   validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
 

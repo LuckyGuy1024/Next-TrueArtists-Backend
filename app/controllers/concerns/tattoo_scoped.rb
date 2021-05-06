@@ -34,6 +34,6 @@ module TattooScoped
   end
 
   def find_tattoo
-    @tattoo = Tattoo.find(params[:id])
+    @tattoo = Tattoo.fetch(params[:id])
   end
 end

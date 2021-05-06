@@ -21,7 +21,7 @@ module Frontend
     end
 
     def artists
-      @artists = @studio.artists.page(BaseSearch::PER_PAGE).per(params[:page])
+      @artists = @studio.artists
       respond_to do |format|
         format.html
         format.js
@@ -29,7 +29,7 @@ module Frontend
     end
 
     def tattoos
-      @tattoos = @studio.tattoos.page(BaseSearch::PER_PAGE).per(params[:page])
+      @tattoos = @studio.tattoos.page(params[:page]).per(BaseSearch::PER_PAGE)
       respond_to do |format|
         format.html
         format.js
