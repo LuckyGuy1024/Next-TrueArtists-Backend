@@ -26,9 +26,8 @@ Rails.application.routes.draw do
 
       collection do
         get 'register' => 'artists#home'
+        get ':city_state' => 'artists#city', as: :city_state
       end
-
-      get ':city_state' => 'artists#city', as: :city_state_artists
     end
 
     resources :studios do
@@ -36,7 +35,10 @@ Rails.application.routes.draw do
         get :tattoos
         get :artists
       end
-      get ':city_state' => 'studios#city', as: :city_state_studios
+
+      collection do
+        get ':city_state' => 'studios#city', as: :city_state
+      end
     end
 
     resources :locations, only: %i[index show]

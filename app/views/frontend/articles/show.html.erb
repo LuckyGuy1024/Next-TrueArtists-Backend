@@ -1,16 +1,16 @@
-<% set_meta_tags title: "#{@article.title}.",
-                 description: "Get to read #{@article.title} found under #{@article.category.name}." %>
+<% set_meta_tags title: @article.title,
+                 description: @article.meta_description %>
 
 <div class="page-section gray-bg">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-          <div class="sub-header">
-            <h3><%= @article.title %></h3>
-          </div>
-          <div>
-            <img data-src="<%= url_for(@article.image) %>" class="lazyload" />
-          </div>
+        <div class="sub-header">
+          <h1><%= @article.title %></h1>
+        </div>
+        <div>
+          <img data-src="<%= url_for(@article.image) %>" class="lazyload" />
+        </div>
       </div>
     </div>
   </div>

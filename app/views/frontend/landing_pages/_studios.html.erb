@@ -7,7 +7,7 @@
         <h4><%= studio.city_state %></h4>
       <% end %>
     </div>
-    <div class="listing-widget">
+    <div class="listing-widget shadow">
       <%= link_to studio_path(studio) do %>
         <div class="list-image">
           <% if studio.tattoos.present? %>
@@ -24,7 +24,6 @@
               </div>
               <div class="profile-info">
                 <h5><%= studio.name %></h5>
-                <p><%= image_pack_tag("media/images/geo-alt.svg") %><%= studio.city_state %></p>
               </div>
             </div>
           </div>

@@ -236,6 +236,7 @@ img {
       font-size: 15px;
       color: $gray-text-color;
       font-weight: normal;
+      font-family: $default-font;
       display: inline;
       &:hover {
         color: $secondary-color !important;

@@ -31,6 +31,26 @@ class FrontendController < ActionController::Base
     @current_user_location = request.location
   end
 
+  def account_service_sign_up_url
+    "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/login"
+  end
+  helper_method :account_service_sign_up_url
+
+  def account_service_login_url
+    "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/login"
+  end
+  helper_method :account_service_login_url
+
+  def account_service_user_profile_url
+    "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/dashboard"
+  end
+  helper_method :account_service_user_profile_url
+
+
+  def account_service_artist_signup_url
+    "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/register-selection"
+  end
+  helper_method :account_service_artist_signup_url
 
   private
 

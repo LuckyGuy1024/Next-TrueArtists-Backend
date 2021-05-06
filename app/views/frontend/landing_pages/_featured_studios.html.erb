@@ -4,10 +4,15 @@
       <div class="row">
         <div class="col-md-12">
           <div class="home-section-header">
-            <h2>Tattoo Studios near you - <%= link_to "San Fransisco, CA" %></h2>
+            <h2>
+              Tattoo Studios near you
+              <% if current_user_city.present? %>
+                - <%= link_to current_user_city_state, studios_path(near: current_user_coordinates)  %>
+              <% end %>
+            </h2>
           </div>
           <div class="artists-lists grid-gap-30 row">
-            <%= render 'frontend/landing_pages/studios' %>
+            <%= render 'studios' %>
           </div>
           <div class="col-md-12 text-center">
             <div class="see-more-section">
