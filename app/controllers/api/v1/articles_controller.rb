@@ -22,7 +22,7 @@ module Api
       private
 
       def find_article
-        @article = Article.friendly.find(params[:id])
+        @article = Article.fetch_by_slug(params[:id])
       end
 
       def search_options
