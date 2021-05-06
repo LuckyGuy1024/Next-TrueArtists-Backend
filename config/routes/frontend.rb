@@ -50,6 +50,8 @@ Rails.application.routes.draw do
         get "categories/:id" => 'categories#show', as: :blog_category
       end
     end
+    resources :pages, only: %i[index show]
+
 
     resources :styles
     resources :categories, only: %i[index show]

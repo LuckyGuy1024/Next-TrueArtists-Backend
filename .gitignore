@@ -23,6 +23,7 @@ node_modules
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 config/database.yml
+config/storage.yml
 config/application.yml
 public/packs
 .idea
@@ -35,5 +36,11 @@ public/packs
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-
 .browserslistrc
+config/credentials.yml.enc
+.env
+
+#ignore deploy config files
+config/deploy/config/:stage/*.yml
+config/deploy/config/*.yml
+public/assets

@@ -10,5 +10,6 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.boolean :status
       t.timestamps
     end
+    add_index :users, :email
   end
 end

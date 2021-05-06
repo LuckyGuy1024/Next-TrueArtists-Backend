@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_string_literal: true
-
 module Frontend
   class StudiosController < FrontendController
     include StudioScoped
@@ -23,7 +21,7 @@ module Frontend
     end
 
     def artists
-      @tattoos = @studio.artists.page(BaseSearch::PER_PAGE).per(params[:page])
+      @artists = @studio.artists.page(BaseSearch::PER_PAGE).per(params[:page])
       respond_to do |format|
         format.html
         format.js

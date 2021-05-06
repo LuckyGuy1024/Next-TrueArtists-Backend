@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Api::V1
-  class GuestArtistApplicationsController < ApplicationController
+module Frontend
+  class GuestArtistApplicationsController < FrontendController
     before_action :find_application, only: %i[update destroy]
     before_action :find_artist, only: %i[create]
     def create

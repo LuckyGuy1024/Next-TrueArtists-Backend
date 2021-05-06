@@ -1,0 +1,33 @@
+Artist/Studio
+-------------------
+ - Plan (Free, Pro)
+
+Subscription
+__________________
+- user_id
+- studio_id
+- artist_id
+- plan
+- start_date
+- status (active, closed, deactivated)
+- payment_frequency
+
+payments/statements/
+_____________________
+- subscription_id
+- amount
+- paid_by
+- datetime
+- payment_method ()
+- status (paid, unpaid, overdue)
+- response
+- (token or card stored in)
+
+
+Workflow
+---------
+- signup
+- choose account type
+- collect payment method
+- charge first month (schedule job to process payments monthly or yearly)
+- Email customer on successful charge/failure and when payment is close to happening. 
