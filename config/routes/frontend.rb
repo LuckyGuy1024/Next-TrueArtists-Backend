@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
       collection do
         get 'register' => 'artists#home'
-        get ':city_state' => 'artists#city', as: :city_state
+        get 'city/:city_state' => 'artists#city', as: :city_state
       end
     end
 
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       end
 
       collection do
-        get ':city_state' => 'studios#city', as: :city_state
+        get 'city/:city_state' => 'studios#city', as: :city_state
       end
     end
 
