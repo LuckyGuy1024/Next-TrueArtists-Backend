@@ -48,8 +48,5 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 
-  config.identity_cache_store = :mem_cache_store, ENV.fetch('MEM_SERVER_1'), ENV.fetch('MEM_SERVER_2'), {
-    expires_in: 6.hours.to_i, # in case of network errors when sending a cache invalidation
-    failover: false # avoids more cache consistency issues
-  }
+  config.identity_cache_store = :mem_cache_store
 end

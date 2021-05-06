@@ -28,7 +28,7 @@ class Artist < ApplicationRecord
   has_one_attached :hero_banner
 
   cache_index :slug, unique: true
-  cache_has_many :tattoos, embed: true
+  # cache_has_many :tattoos, embed: true
 
   validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true
