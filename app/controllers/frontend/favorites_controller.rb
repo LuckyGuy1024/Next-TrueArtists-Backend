@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Api::V1
-  class FavoritesController < ApplicationController
+module Frontend
+  class FavoritesController < FrontendController
     before_action :find_favoritable_object
 
     def create

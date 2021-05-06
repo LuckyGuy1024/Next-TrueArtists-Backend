@@ -1,0 +1,14 @@
+base: &base
+  host: localhost
+  port: 6699
+  adapter: mysql2
+  encoding: utf8
+  collation: utf8_unicode_ci
+  reconnect: true
+  username: admin
+  pool: 25
+  password: Whateverweantsir56!
+  wait_timeout: 300
+staging:
+  database: ta_staging
+  <<: *base

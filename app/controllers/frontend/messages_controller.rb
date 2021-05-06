@@ -1,2 +1,4 @@
-class Api::V1::MessagesController < ApplicationController
+module Frontend
+  class MessagesController < FrontendController
+  end
 end
