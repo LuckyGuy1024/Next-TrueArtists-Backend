@@ -220,6 +220,8 @@ if ENV['RUN_ALL'] == '1'
     )
   end
 
+  puts "\n== Creating categories =="
+
   20.times do
     Category.create(
       name: Faker::Lorem.sentence,
@@ -229,7 +231,9 @@ if ENV['RUN_ALL'] == '1'
     )
   end
 
-  10.times do
+  puts "\n== Creating articles =="
+
+  200.times do
     article = Article.create(
       user_id: [1, 2, 3, 4, 5].sample,
       title: Faker::Lorem.sentence,
@@ -248,7 +252,7 @@ if ENV['RUN_ALL'] == '1'
     )
   end
 
-  20.times do
+  200.times do
     article = Article.create(
       user_id: [1, 2, 3, 4, 5].sample,
       title: Faker::Lorem.sentence,

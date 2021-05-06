@@ -1,5 +1,5 @@
-<% set_meta_tags title: 'The Best Blog on Tattoos, Tattoo Artists & Tattoo Studios',
-                 description: 'Find inspiration on tattoos, tattooing and tattoo business.' %>
+<% set_meta_tags title: 'The Best Blog on Tattoos Ideas, Tattoo Artists & Tattoo Studios',
+                 description: "Find inspiration on tattoos, tattooing and tattoo business. Don't miss out on great content around tattoo lifestyle & culture" %>
 
 <div class="page-section gray-bg">
   <div class="container">
@@ -34,6 +34,10 @@
   <div class="container">
     <div class="articles-lists row">
       <%= render @articles %>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <%= paginate @articles %>
     </div>
   </div>
 </div>

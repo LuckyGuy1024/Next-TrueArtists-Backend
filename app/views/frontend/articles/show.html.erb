@@ -2,16 +2,28 @@
                  description: @article.meta_description %>
 
 <div class="page-section gray-bg">
-  <div class="container">
+  <div class="container article-container">
     <div class="row">
-      <div class="col-md-12">
-        <div class="sub-header">
-          <h1><%= @article.title %></h1>
-        </div>
-        <div>
-          <img data-src="<%= url_for(@article.image) %>" class="lazyload" />
-        </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-8 article-content">
+          <div class="sub-header">
+            <h1><%= @article.title %></h1>
+          </div>
+          <div class="article-meta-data">
+            <div class="article-author">By <%= @article.user.full_name %></div> |
+            <div class="article-created-date"><%= @article.created_at.strftime("%d-%m-%Y") %></div>
+          </div>
+          <div class="sharethis-inline-share-buttons"></div>
+          <div>
+            <img data-src="<%= url_for(@article.image) %>" class="lazyload" />
+          </div>
+          <div class="article-body">
+            <%= @article.content.html_safe %>
+          </div>
       </div>
+      <div class="col-md-2"></div>
     </div>
   </div>
 </div>
+
+<%= render 'recommendations', similar_articles: @similar_articles %>

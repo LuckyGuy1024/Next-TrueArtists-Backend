@@ -51,7 +51,7 @@
           &:focus,
           &:hover {
             color: $primary-color;
-            border-bottom: 5px solid #FDCD3F;
+            border-bottom: 5px solid $secondary-color;
           }
         }
       }
