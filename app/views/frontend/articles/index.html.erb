@@ -1,18 +1,18 @@
-<% set_meta_tags title: 'Articles',
-                 description: 'Find articles.' %>
+<% set_meta_tags title: "Tattoo Ideas, Guides & Advice",
+                 description: "Your go to blog for Tattoo Ideas, Guides & Advice. Don't miss out on great content around tattoo lifestyle & culture" %>
 
 <div class="page-section gray-bg">
   <div class="container">
     <div class="row">
       <div class="col-md-12 search-form">
-        <%= form_for artists_path, html: { method: :get } do |f| %>
+        <%= form_for articles_path, html: { method: :get } do |f| %>
           <div class="sub-header">
             <h1>Articles</h1>
           </div>
           <div class="search-artists-form row">
             <div class="col-md-12">
               <div class="search-section">
-                <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search Articles on TrueArtists' %>
+                <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search' %>
                 <button type="submit" class="search search-box">
                   <i class="ta-icon-search basic-search"></i>
                 </button>
@@ -34,6 +34,10 @@
   <div class="container">
     <div class="articles-lists row">
       <%= render @articles %>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <%= paginate @articles %>
     </div>
   </div>
 </div>
