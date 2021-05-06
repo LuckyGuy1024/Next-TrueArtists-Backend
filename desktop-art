@@ -19,18 +19,16 @@
     }
   }
 
+
   .article-content {
-    margin: 10px 0;
+    margin: 10px;
 
     h1 {
-      margin: 15px 0;
+      margin: 14px 0 10px 0;
     }
 
-    h3 {
-      margin: 15px 0;
-    }
     p {
-      line-height: 1.9em;
+      line-height: 35px;
     }
 
     .sharethis-inline-share-buttons {
@@ -45,22 +43,6 @@
     .article-body {
       margin: 25px 0;
     }
-  }
-}
-
-.article-widget {
-  margin-bottom: 30px;
-  .article-widget-title {
-    padding: 20px 0;
-    h3 {
-      font-size: 20px;
-    }
-  }
-}
-.article-featured-list {
-  padding: 20px 0;
-  h2 {
-    padding: 20px 0
   }
 }
 
