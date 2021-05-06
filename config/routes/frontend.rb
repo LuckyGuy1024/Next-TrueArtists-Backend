@@ -43,8 +43,16 @@ Rails.application.routes.draw do
     end
 
     resources :tattoos, only: %i[index show]
-    resources :articles, only: %i[index show]
+
+    resources :articles, only: %i[index show], path: 'blog' do
+      collection do
+        get "categories" => 'categories#index', as: :blog_categories
+        get "categories/:id" => 'categories#show', as: :blog_category
+      end
+    end
     resources :pages, only: %i[index show]
+
+
     resources :styles
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]

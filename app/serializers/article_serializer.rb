@@ -14,7 +14,12 @@ class ArticleSerializer < ActiveModel::Serializer
              :content,
              :tags,
              :status,
-             :image
+             :image,
+             :created_at
+
+  def created_at
+    object.created_at.strftime("%d-%m-%Y")
+  end
 
   def tags
     return [] if object.tag_list.nil?
