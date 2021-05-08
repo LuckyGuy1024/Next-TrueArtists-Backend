@@ -104,7 +104,7 @@ module Api::V1
     private
 
     def find_studio
-      @studio = Studio.fetch_by_slug(params[:id])
+      @studio = Studio.friendly.find(params[:id])
     end
 
     def find_application

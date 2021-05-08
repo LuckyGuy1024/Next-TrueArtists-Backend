@@ -12,7 +12,7 @@ class Artist < ApplicationRecord
   include StatusManagement
 
   extend FriendlyId
-  friendly_id :slug_candidates, use: %i[slugged history]
+  friendly_id :slug_candidates, use: %i[slugged finders]
 
   acts_as_favoritable
   belongs_to :user
