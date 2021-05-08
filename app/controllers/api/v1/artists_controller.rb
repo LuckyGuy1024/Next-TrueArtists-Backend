@@ -78,7 +78,7 @@ module Api::V1
     private
 
     def find_artist
-      @artist = Artist.fetch_by_slug(params[:id])
+      @artist = Artist.friendly.find(params[:id])
     end
 
     def search_options

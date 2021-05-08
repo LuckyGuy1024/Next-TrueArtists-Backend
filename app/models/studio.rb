@@ -30,7 +30,7 @@ class Studio < ApplicationRecord
 
   include AddressExtension
   extend FriendlyId
-  friendly_id :slug_candidates, use: %i[slugged history]
+  friendly_id :slug_candidates, use: %i[slugged finders]
 
   include StatusManagement
 

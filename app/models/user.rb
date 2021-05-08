@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   require 'json_web_token'
   extend FriendlyId
-  friendly_id :slug_candidates, use: %i[slugged history finders]
+  friendly_id :slug_candidates, use: %i[slugged finders]
 
   acts_as_favoritor
   before_save :downcase_email
