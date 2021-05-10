@@ -6,7 +6,9 @@ class Artist < ApplicationRecord
 
   SPECIALTY = %w[Flash Freehand].freeze
 
-  searchkick locations: [:location]
+  searchkick locations: [:location],
+             searchable: %i[name slug styles specialty],
+             filterable: %i[specialty styles]
 
   include AddressExtension
   include StatusManagement
@@ -39,7 +41,10 @@ class Artist < ApplicationRecord
   before_validation :add_name
 
   def search_data
-    attributes.merge(location: { lat: lat, lon: lon })
+    attributes.merge(
+      location: { lat: lat, lon: lon },
+      styles: styles.map(&:name)
+    )
   end
 
   def slug_candidates

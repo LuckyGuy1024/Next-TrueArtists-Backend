@@ -49,7 +49,12 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tattoos, only: %i[index show]
+    resources :tattoos, only: %i[index show] do
+      collection do
+        get 'placement/:name' => 'tattoos#placement', as: :placement
+        get 'style/:name' => 'tattoos#style', as: :style
+      end
+    end
 
     resources :articles, only: %i[index show], path: 'blog' do
       collection do
@@ -58,7 +63,6 @@ Rails.application.routes.draw do
       end
     end
     resources :pages, only: %i[index show]
-
 
     resources :styles
     resources :categories, only: %i[index show]

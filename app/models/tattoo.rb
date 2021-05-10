@@ -2,9 +2,10 @@ class Tattoo < ApplicationRecord
   include AASM
   include IdentityCache
 
-  COLORS = ['Show All', 'Color', 'Black & Grey'].freeze
-  PLACEMENTS = ['Show All', 'Head', 'Neck', 'Shoulder', 'Chest', 'Back', 'Arm', 'Forearm', 'Ribs', 'Hip', 'Thigh',
-                'Lower Leg', 'Foot'].freeze
+  COLORS = ['Color', 'Black & Grey']
+  PLACEMENTS = ['Head', 'Neck', 'Shoulder', 'Chest', 'Back',
+                'Arm', 'Forearm', 'Ribs', 'Hip', 'Thigh',
+                'Lower Leg', 'Foot']
 
   aasm column: 'status' do
     state :approved, initial: true
