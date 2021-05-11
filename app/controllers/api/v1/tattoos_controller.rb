@@ -74,6 +74,14 @@ class Api::V1::TattoosController < ApplicationController
     end
   end
 
+  def destroy
+    if @tattoo.destroy
+      head(:ok)
+    else
+      render_api_error(status: 422, errors: @tattoo.errors)
+    end
+  end
+
   private
 
   def find_parent_object
