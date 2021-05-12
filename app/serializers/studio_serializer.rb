@@ -37,10 +37,10 @@ class StudioSerializer < ActiveModel::Serializer
              :price_per_hour,
              :avatar,
              :hero_banner,
-             :has_styles?,
-             :has_social_profiles?,
-             :has_tattoo_gallery?,
-             :has_avatar?
+             :has_styles,
+             :has_social_profiles,
+             :has_tattoo_gallery,
+             :has_avatar
 
   def avatar
     if object.avatar.attached?
