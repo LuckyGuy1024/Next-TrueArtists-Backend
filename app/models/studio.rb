@@ -91,19 +91,19 @@ class Studio < ApplicationRecord
     update(phone_verified: true) if status == 'approved'
   end
 
-  def has_social_profiles?
+  def has_social_profiles
     instagram_url.present? || facebook_url.present? || twitter_url.present?
   end
 
-  def has_avatar?
+  def has_avatar
     avatar.present?
   end
 
-  def has_styles?
+  def has_styles
     styles.present?
   end
 
-  def has_tattoo_gallery?
+  def has_tattoo_gallery
     tattoos.present?
   end
 
