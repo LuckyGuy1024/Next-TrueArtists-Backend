@@ -18,6 +18,10 @@ module Frontend
       end
     end
 
+    def placement
+      
+    end
+
     def show
       @similar_tattoos = @tattoo.similar(fields: [:placement]).first(12)
       respond_to do |format|

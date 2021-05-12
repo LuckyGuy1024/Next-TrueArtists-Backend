@@ -7,16 +7,15 @@ class Article < ApplicationRecord
 
   searchkick
 
-  belongs_to :user
-  belongs_to :category
+  belongs_to :user, optional: true
+  belongs_to :category, optional: true
+  has_one_attached :image
+
   extend FriendlyId
   friendly_id :slug_candidates, use: %i[slugged history]
 
   validates_uniqueness_of :title, :page_title
   validates :meta_description, :introduction, :content, :status, presence: true
-
-  has_one_attached :image
-
   validates :image, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
   before_validation :assign_status, only: %i[create update]

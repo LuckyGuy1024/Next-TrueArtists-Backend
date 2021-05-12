@@ -23,6 +23,7 @@ module ArtistScoped
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
       status: params[:status],
       near: params[:near],
+      styles: params[:styles],
       within: params[:within],
       studio_id: params[:studio_id],
     }.delete_if { |_k, v| v.nil? }

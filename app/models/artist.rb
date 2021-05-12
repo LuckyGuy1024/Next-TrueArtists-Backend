@@ -66,6 +66,22 @@ class Artist < ApplicationRecord
     tattoos.first.image
   end
 
+  def has_social_profiles
+    instagram_url.present? || facebook_url.present? || twitter_url.present?
+  end
+
+  def has_avatar
+    avatar.present?
+  end
+
+  def has_styles
+    styles.present?
+  end
+
+  def has_tattoo_gallery
+    tattoos.present?
+  end
+
   private
 
   def add_name

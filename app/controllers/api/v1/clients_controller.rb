@@ -4,7 +4,13 @@ class Api::V1::ClientsController < ApplicationController
   before_action :find_client, only: %i[show update destroy]
 
   def index
-    @clients = paginate(@parent_object.clients)
+    clients = if params[:query]
+                @parent_object.clients.search(params[:query])
+              else
+                @parent_object.clients
+              end
+
+    @clients = paginate(clients)
     render json: ActiveModel::Serializer::CollectionSerializer.new(@clients,
                                                                    serializer: ClientSerializer),
            status: :ok
