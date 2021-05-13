@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_233003) do
+ActiveRecord::Schema.define(version: 2021_05_08_030058) do
 
-  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "articles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
     t.string "page_title"
@@ -53,7 +56,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
-  create_table "artist_styles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "artist_styles", force: :cascade do |t|
     t.bigint "artist_id"
     t.bigint "style_id"
     t.datetime "created_at", precision: 6, null: false
@@ -62,22 +65,20 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["style_id"], name: "index_artist_styles_on_style_id"
   end
 
-  create_table "artists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "artists", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
     t.boolean "cpr_certified"
     t.integer "years_of_experience"
-    t.string "styles"
     t.string "website"
     t.string "facebook_url"
     t.string "twitter_url"
     t.string "instagram_url"
     t.string "phone_number"
-    t.decimal "minimum_spend", precision: 10
-    t.decimal "price_per_hour", precision: 10
+    t.decimal "minimum_spend"
+    t.decimal "price_per_hour"
     t.string "currency_code"
     t.string "status"
     t.string "country"
@@ -97,11 +98,10 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.string "specialty"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
-    t.index ["studio_id"], name: "index_artists_on_studio_id"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
-  create_table "assets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "assets", force: :cascade do |t|
     t.integer "attachable_id"
     t.string "attachable_type"
     t.string "image_content_type"
@@ -110,10 +110,9 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.integer "image_file_size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type", length: { attachable_type: 20 }
   end
 
-  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "meta_description"
     t.text "description"
@@ -122,11 +121,14 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["description"], name: "index_categories_on_description"
+    t.index ["meta_description"], name: "index_categories_on_meta_description"
+    t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
-  create_table "clients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "clients", force: :cascade do |t|
     t.bigint "artist_id"
     t.bigint "studio_id"
     t.string "name"
@@ -147,7 +149,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["studio_id"], name: "index_clients_on_studio_id"
   end
 
-  create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "favorites", force: :cascade do |t|
     t.string "favoritable_type", null: false
     t.bigint "favoritable_id", null: false
     t.string "favoritor_type", null: false
@@ -164,18 +166,18 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["scope"], name: "index_favorites_on_scope"
   end
 
-  create_table "friendly_id_slugs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, length: { slug: 70, scope: 70 }
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "guest_artist_application_responses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "guest_artist_application_responses", force: :cascade do |t|
     t.bigint "guest_artist_application_id"
     t.bigint "user_id"
     t.text "message"
@@ -183,7 +185,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["user_id"], name: "index_guest_artist_application_responses_on_user_id"
   end
 
-  create_table "guest_artist_applications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "guest_artist_applications", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "artist_id"
     t.string "phone_number"
@@ -196,7 +198,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["studio_id"], name: "index_guest_artist_applications_on_studio_id"
   end
 
-  create_table "landing_pages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "landing_pages", force: :cascade do |t|
     t.string "page_key"
     t.string "page_url"
     t.string "page_title"
@@ -211,7 +213,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["page_key"], name: "index_landing_pages_on_page_key"
   end
 
-  create_table "locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "locations", force: :cascade do |t|
     t.string "country"
     t.string "state"
     t.string "city"
@@ -221,7 +223,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
-  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
@@ -232,11 +234,9 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
-  create_table "pages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pages", force: :cascade do |t|
     t.string "slug"
     t.string "title"
     t.text "content"
@@ -246,7 +246,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "studio_artists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "studio_artists", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "artist_id"
     t.date "start_date"
@@ -257,7 +257,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.index ["studio_id"], name: "index_studio_artists_on_studio_id"
   end
 
-  create_table "studio_invites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "studio_invites", force: :cascade do |t|
     t.bigint "studio_id"
     t.string "invite_code"
     t.string "email"
@@ -267,12 +267,10 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone_number"
     t.index ["artist_id"], name: "index_studio_invites_on_artist_id"
-    t.index ["email"], name: "index_studio_invites_on_email"
-    t.index ["invite_code"], name: "index_studio_invites_on_invite_code"
     t.index ["studio_id"], name: "index_studio_invites_on_studio_id"
   end
 
-  create_table "studios", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "studios", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
     t.text "bio"
@@ -304,24 +302,24 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.boolean "wheelchair_access", default: false
     t.boolean "parking", default: false
     t.boolean "lgbt_friendly", default: true
-    t.decimal "price_per_hour", precision: 10
-    t.decimal "minimum_spend", precision: 10
+    t.decimal "price_per_hour"
+    t.decimal "minimum_spend"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
     t.string "currency_code"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
-    t.index ["user_id"], name: "index_studios_on_user_id"
+    t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
 
-  create_table "styles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "styles", force: :cascade do |t|
     t.string "slug"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tattoos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tattoos", force: :cascade do |t|
     t.text "styles"
     t.string "placement"
     t.string "size"
@@ -340,7 +338,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.boolean "featured", default: false
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "email"
     t.string "role"
@@ -351,7 +349,6 @@ ActiveRecord::Schema.define(version: 2021_04_27_233003) do
     t.string "slug"
     t.string "social_id"
     t.string "provider"
-    t.index ["email"], name: "index_users_on_email"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["social_id"], name: "index_users_on_social_id"

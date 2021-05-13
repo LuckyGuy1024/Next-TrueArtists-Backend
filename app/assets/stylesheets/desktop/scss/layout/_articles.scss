@@ -5,9 +5,56 @@
     border-radius: 5px;
   }
 
-  .article-content {
-    h3 {
-      margin: 15px 0;
+  .article-meta-data {
+    display: flex;
+    margin-bottom: 20px;
+    color: $gray-text-color;
+
+    .article-author {
+      margin-right: 10px;
+    }
+
+    .article-created-date {
+      margin-left: 10px;
     }
   }
+
+  .article-content {
+    p {
+      line-height: 35px;
+    }
+
+    .sharethis-inline-share-buttons {
+      margin-bottom: 15px;
+
+      .st-btn {
+        margin-right: 15px !important;
+        border-radius: 5px;
+      }
+    }
+
+    .article-body {
+      margin: 25px 0;
+    }
+  }
+}
+
+.article-widget {
+  margin-bottom: 30px;
+  .article-widget-title {
+    padding: 20px 0;
+    h3 {
+      font-size: 20px;
+    }
+  }
+}
+.article-featured-list {
+  padding: 20px 0;
+  h2 {
+    padding: 20px 0
+  }
+}
+
+.image-item {
+  margin: 20px 0;
 }

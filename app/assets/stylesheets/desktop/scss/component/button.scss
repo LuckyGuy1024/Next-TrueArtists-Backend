@@ -1,6 +1,5 @@
 .btn {
   font-size: 16px;
-  font-weight: 700;
   padding: 14px 42px;
   border-radius: 6px;
   display: inline-block;
@@ -58,7 +57,7 @@
 
 .btn-alternative {
   background-color: $secondary-color;
-  color: $text-white;
+  color: $black;
 }
 .btn-sm {
   padding: 6px 15px;

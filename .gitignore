@@ -44,3 +44,5 @@ config/credentials.yml.enc
 config/deploy/config/:stage/*.yml
 config/deploy/config/*.yml
 public/assets
+app/.DS_Store
+.DS_Store

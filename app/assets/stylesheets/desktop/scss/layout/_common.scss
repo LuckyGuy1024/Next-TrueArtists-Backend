@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: $font-stack;
+  font-family: $default-font;
   font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
@@ -24,7 +24,7 @@ h5,
 h6 {
   margin: 0;
   line-height: 1.1;
-  font-weight: 700;
+  font-family: $default-font-bold;
 }
 
 h1 a,
@@ -156,7 +156,7 @@ img {
     position: relative;
 
     img {
-      border-radius: 6px 6px 0 0;
+      border-radius: 6px;
     }
 
     a:hover {
@@ -224,6 +224,27 @@ img {
         color: $gray-text-color;
       }
     }
+  }
+}
+
+.location-section {
+  display: flex;
+  margin: 10px 0;
+  color: $gray-text-color;
+  a {
+    h4 {
+      font-size: 15px;
+      color: $gray-text-color;
+      font-weight: normal;
+      font-family: $default-font;
+      display: inline;
+      &:hover {
+        color: $secondary-color !important;
+      }
+    }
+  }
+  img {
+    margin-right: 4px;
   }
 }
 

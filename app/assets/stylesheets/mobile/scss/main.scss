@@ -4,7 +4,11 @@
 @import '../../common/base/normalize';
 
 /* --- FONTS ---*/
+@import "../../common/fonts/noto_sans.scss";
 @import "../../common/fonts/icomoon.scss";
+
+/* --- VARIABLES ---*/
+@import '../../common/base/variables.scss';
 
 /* --- COMPONENTS ---*/
 @import "../../common/component/slick.scss";
@@ -22,7 +26,9 @@
 @import "component/footer";
 @import "component/filter";
 @import "component/search";
+@import "../../common/component/pagination.scss";
 
+@import "layout/home";
 @import "layout/artists";
 @import "layout/artist-profile";
 

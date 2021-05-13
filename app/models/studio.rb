@@ -2,6 +2,7 @@
 
 class Studio < ApplicationRecord
   include AASM
+  include IdentityCache
 
   LANGUAGES = %w[
     Mandarin
@@ -25,11 +26,11 @@ class Studio < ApplicationRecord
               'Basic Body Modification', 'Piercing', 'Scarification',
               'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
 
-  searchkick word_start: %i[name bio city country services languages], locations: [:location]
+  searchkick locations: [:location]
 
   include AddressExtension
   extend FriendlyId
-  friendly_id :slug_candidates, use: %i[slugged history]
+  friendly_id :slug_candidates, use: %i[slugged finders]
 
   include StatusManagement
 
@@ -43,6 +44,9 @@ class Studio < ApplicationRecord
   has_many :guest_artist_applications
   has_one_attached :avatar
   has_one_attached :hero_banner
+
+  cache_index :slug, unique: true
+  cache_has_many :studio_artists, embed: true
 
   validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
@@ -84,6 +88,18 @@ class Studio < ApplicationRecord
     status = PhoneNumberVerifier.new(code: code, phone_number: phone_number).status
 
     update(phone_verified: true) if status == 'approved'
+  end
+
+  def has_social_profiles
+    instagram_url.present? || facebook_url.present? || twitter_url.present?
+  end
+
+  def has_avatar
+    avatar.present?
+  end
+
+  def has_tattoo_gallery
+    tattoos.present?
   end
 
   private

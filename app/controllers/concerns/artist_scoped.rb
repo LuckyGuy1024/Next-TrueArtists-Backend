@@ -5,7 +5,7 @@ module ArtistScoped
 
   included do
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone]
+    before_action :find_artist, except: %i[index create accept_artist_invite verify_phone home]
   end
 
   private
@@ -23,12 +23,13 @@ module ArtistScoped
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
       status: params[:status],
       near: params[:near],
+      styles: params[:styles],
       within: params[:within],
       studio_id: params[:studio_id],
     }.delete_if { |_k, v| v.nil? }
   end
 
   def find_artist
-    @artist = Artist.friendly.find(params[:id])
+    @artist = Artist.fetch_by_slug(params[:id])
   end
 end

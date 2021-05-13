@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  searchkick word_start: %i[name meta_description description]
+  searchkick
 
   extend FriendlyId
   friendly_id :slug_candidates, use: %i[slugged history]

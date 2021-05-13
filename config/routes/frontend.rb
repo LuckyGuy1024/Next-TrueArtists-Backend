@@ -23,7 +23,11 @@ Rails.application.routes.draw do
       member do
         get :tattoos
       end
-      get ':city_state' => 'artists#city', as: :city_state_artists
+
+      collection do
+        get 'register' => 'artists#home'
+        get 'city/:city_state' => 'artists#city', as: :city_state
+      end
     end
 
     resources :studios do
@@ -31,7 +35,10 @@ Rails.application.routes.draw do
         get :tattoos
         get :artists
       end
-      get ':city_state' => 'studios#city', as: :city_state_studios
+
+      collection do
+        get 'city/:city_state' => 'studios#city', as: :city_state
+      end
     end
 
     resources :locations, only: %i[index show]
@@ -42,12 +49,25 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tattoos, only: %i[index show]
-    resources :articles, only: %i[index show]
+    resources :tattoos, only: %i[index show] do
+      collection do
+        get 'placement/:name' => 'tattoos#placement', as: :placement
+        get 'style/:name' => 'tattoos#style', as: :style
+      end
+    end
+
+    resources :articles, only: %i[index show], path: 'blog' do
+      collection do
+        get "categories" => 'categories#index', as: :blog_categories
+        get "categories/:id" => 'categories#show', as: :blog_category
+      end
+    end
     resources :pages, only: %i[index show]
+
     resources :styles
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]
+    resources :global_search_redirector, only: [:index]
     root to: 'landing_pages#home'
   end
 end

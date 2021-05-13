@@ -55,6 +55,8 @@ class TattooSearch < BaseSearch
 
   def filter_options
     {
+      studio_id: options[:studio_id],
+      artist_id: options[:artist_id],
       placement: build_filter_params(options[:placement]),
       styles: build_filter_params(options[:styles]),
       color: build_filter_params(options[:color])

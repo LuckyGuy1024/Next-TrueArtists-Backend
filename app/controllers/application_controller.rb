@@ -34,6 +34,10 @@ class ApplicationController < ActionController::API
     @current_user = User.friendly.find_by(id: @current_user_id)
   end
 
+  def current_address
+    # TODO: implement
+  end
+
   def fail_if_unauthenticated!
     unless user_signed_in?
       render json: {
@@ -67,7 +71,7 @@ class ApplicationController < ActionController::API
       next_page: resource.next_page || resource.current_page
     }
   end
-
+  
   private
 
   def json_api_error_format(errors)

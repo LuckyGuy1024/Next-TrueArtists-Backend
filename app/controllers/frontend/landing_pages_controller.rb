@@ -14,6 +14,15 @@ module Frontend
     end
 
     def home
+      @artists = Artist.first(12)
+      @studios = Studio.first(12)
+      @styles = Style.all.map(&:name)
+      @placement = Tattoo::PLACEMENTS
+      respond_to do |format|
+        format.html.mobile
+        format.html.none
+        format.js
+      end
     end
 
     def show

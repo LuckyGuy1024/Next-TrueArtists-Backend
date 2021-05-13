@@ -8,9 +8,13 @@
     <div class="col-sm-8">
       <div class="article-content">
         <%= link_to article_path(article) do %>
-          <h3><%= article.title %></h3>
+         <h2><%= article.title %></h2>
         <% end %>
         <p><%= article.introduction %></p>
+      </div>
+      <div class="article-meta-data">
+        <div class="article-author">By <%= article.user.full_name %></div> |
+        <div class="article-created-date"><%= article.created_at.strftime("%d-%m-%Y") %></div>
       </div>
     </div>
   </div>
