@@ -21,7 +21,6 @@ gem 'jwt'
 gem 'kaminari'
 gem 'meta-tags'
 gem 'mysql2'
-gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'pundit'
 gem 'rack-cors'
@@ -37,6 +36,7 @@ gem 'whenever', require: false
 gem 'dalli'
 
 group :development, :test do
+  gem 'pg', '>= 0.18', '< 2.0'
   # gem 'apitome', github: 'jejacks0n/apitome'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
