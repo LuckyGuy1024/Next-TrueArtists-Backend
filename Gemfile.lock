@@ -1,12 +1,4 @@
 GIT
-  remote: git@github.com:jwachira/ta-assets.git
-  revision: 2332c9f9e237cf8e57354a8eaf94b59109e735e3
-  branch: master
-  specs:
-    ta-assets (0.1.0)
-      rails (>= 4.2)
-
-GIT
   remote: https://github.com/jejacks0n/apitome.git
   revision: 27487b66a57c3a4f33851b78b0ce09839fc278ef
   specs:
@@ -226,6 +218,8 @@ GEM
     nio4r (2.5.7)
     nokogiri (1.11.3-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.11.3-x86_64-linux)
+      racc (~> 1.4)
     pg (1.2.3)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -349,6 +343,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-linux
 
 DEPENDENCIES
   aasm
@@ -396,7 +391,6 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sprockets (~> 3.0)
   sshkit-sudo
-  ta-assets!
   twilio-ruby
   tzinfo-data
   webpacker (~> 5.0)

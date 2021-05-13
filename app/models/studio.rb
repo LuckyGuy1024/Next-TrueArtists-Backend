@@ -99,10 +99,6 @@ class Studio < ApplicationRecord
     avatar.present?
   end
 
-  def has_styles
-    styles.present?
-  end
-
   def has_tattoo_gallery
     tattoos.present?
   end
