@@ -52,6 +52,16 @@ class FrontendController < ActionController::Base
   end
   helper_method :account_service_artist_signup_url
 
+  def about_us_url
+    "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/about-us"
+  end
+  helper_method :about_us_url
+
+  def contact_us_url
+    "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/contact-us"
+  end
+  helper_method :contact_us_url
+
   private
 
   # Validates the token and user and sets the @current_user scope

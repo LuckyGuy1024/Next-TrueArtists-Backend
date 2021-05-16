@@ -2,7 +2,7 @@
 
 module Frontend
   class LandingPagesController < FrontendController
-    before_action :find_landing_page, except: %i[home index]
+    before_action :find_landing_page, except: %i[home index about_us contact_us]
 
     def index
       @results = LandingPageSearch.new(
@@ -27,6 +27,20 @@ module Frontend
 
     def show
       render json: LandingPageSerializer.new(@landing_page).to_json, status: :ok
+    end
+
+    def about_us
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
+    def contact_us
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     private
