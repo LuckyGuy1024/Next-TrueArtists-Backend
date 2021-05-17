@@ -17,13 +17,13 @@ namespace :import do
     # Legacy::Artist.migrate
     # puts "Finishing Artists"
 
-    puts "Starting Studios"
-    Legacy::Studio.migrate
-    puts "Finishing Studios"
-
-    puts "Starting Studio Artists"
-    Legacy::StudioArtist.migrate
-    puts "Finishing Studio Artists"
+    # puts "Starting Studios"
+    # Legacy::Studio.migrate
+    # puts "Finishing Studios"
+    #
+    # puts "Starting Studio Artists"
+    # Legacy::StudioArtist.migrate
+    # puts "Finishing Studio Artists"
 
     puts "Starting Photo Import"
     Legacy::Photo.migrate
