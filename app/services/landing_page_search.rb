@@ -10,7 +10,7 @@ class LandingPageSearch < BaseSearch
     self.meta = pagination_info(search_results)
 
     {
-      tattoos: ActiveModel::Serializer::CollectionSerializer.new(results,
+      landing_pages: ActiveModel::Serializer::CollectionSerializer.new(results,
                                                                  serializer: LandingPageSerializer),
       meta: meta
     }
