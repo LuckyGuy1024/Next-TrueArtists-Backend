@@ -270,4 +270,22 @@ if ENV['RUN_ALL'] == '1'
       filename: 'image.jpg'
     )
   end
+
+  200.times do
+    landing_page = LandingPage.create(
+      page_key: "/artists/#{Faker::FunnyName.name}",
+      page_url: "/artists/#{Faker::FunnyName.name}",
+      last_updated_by: [1, 2, 3, 4, 5].sample,
+      title: Faker::Lorem.sentence,
+      page_title: Faker::Lorem.sentence,
+      meta_description: Faker::Lorem.sentence,
+      content: Faker::Lorem.paragraph(sentence_count: 40),
+      status: %w[draft published flagged].sample,
+    )
+
+    landing_page.image.attach(
+      io: File.open('app/assets/tattoo2.jpg'),
+      filename: 'image.jpg'
+    )
+  end
 end
