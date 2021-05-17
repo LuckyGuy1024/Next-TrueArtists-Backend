@@ -25,7 +25,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_one :artist, dependent: :destroy
-  has_many :studios, dependent: :destroy
+  has_one :studio, dependent: :destroy
   has_many :articles, dependent: :destroy
 
   STRONG_PASSWORD = /(?=.*[a-zA-Z])(?=.*[0-9]).{6,10}/.freeze
