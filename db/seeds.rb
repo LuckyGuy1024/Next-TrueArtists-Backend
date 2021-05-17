@@ -283,7 +283,7 @@ if ENV['RUN_ALL'] == '1'
       status: %w[draft published flagged].sample,
     )
 
-    landing_page.image.attach(
+    landing_page.avatar.attach(
       io: File.open('app/assets/tattoo2.jpg'),
       filename: 'image.jpg'
     )
