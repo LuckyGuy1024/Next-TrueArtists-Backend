@@ -129,66 +129,72 @@
     </div>
   </div>
 
-  <div class="artists-near-you">
-    <div class="page-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="home-section-header">
-              <h2>Tattoo Artists near you</h2>
-            </div>
-            <div class="artists-lists grid-gap-30 row">
-              <%= render @artists %>
-            </div>
-            <div class="col-md-12 text-center">
-              <div class="see-more-section">
-                <%= link_to 'See more', artists_path, class: 'btn btn-alternative' %>
+  <% if @artists.present? %>
+    <div class="artists-near-you">
+      <div class="page-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="home-section-header">
+                <h2>Tattoo Artists near you</h2>
+              </div>
+              <div class="artists-lists grid-gap-30 row">
+                <%= render @artists %>
+              </div>
+              <div class="col-md-12 text-center">
+                <div class="see-more-section">
+                  <%= link_to 'See more', artists_path, class: 'btn btn-alternative' %>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
-  <div class="studios-near-you">
-    <div class="page-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-2 home-section-header">
-            <h2>Tattoo Studios near you</h2>
-            <div class="chevron-navigation">
-              <button type="button" id="leftClick">
-                <%= image_pack_tag("media/images/chevron-left.svg") %>
-              </button>
-              <button type="button" id="rightClick">
-                <%= image_pack_tag("media/images/chevron-right.svg") %>
-              </button>
+  <% if @studios.present? %>
+    <div class="studios-near-you">
+      <div class="page-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 home-section-header">
+              <h2>Tattoo Studios near you</h2>
+              <div class="chevron-navigation">
+                <button type="button" id="leftClick">
+                  <%= image_pack_tag("media/images/chevron-left.svg") %>
+                </button>
+                <button type="button" id="rightClick">
+                  <%= image_pack_tag("media/images/chevron-right.svg") %>
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="col-md-10 studio-lists grid-gap-30 scrolling-widget-list">
-            <%= render 'frontend/artists/studios' %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="testimonials gray-bg">
-    <div class="page-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="testimonials-header text-center">
-              <h2>Customer testimonials</h2>
-              <h3>What Our Members think..</h3>
-            </div>
-            <div class="row">
-              <%= render 'frontend/artists/testimonials' %>
+            <div class="col-md-10 studio-lists grid-gap-30 scrolling-widget-list">
+              <%= render 'frontend/artists/studios' %>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
+  <!-- show it when we have reviews -->
+  <% if false  %>
+    <div class="testimonials gray-bg">
+      <div class="page-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="testimonials-header text-center">
+                <h2>Customer testimonials</h2>
+                <h3>Don’t Just Take Our Word For It</h3>
+              </div>
+              <div class="row">
+                <%= render 'frontend/artists/testimonials' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
