@@ -280,7 +280,7 @@ if ENV['RUN_ALL'] == '1'
       page_title: Faker::Lorem.sentence,
       meta_description: Faker::Lorem.sentence,
       content: Faker::Lorem.paragraph(sentence_count: 40),
-      status: %w[draft published flagged].sample,
+      status: %w[draft published].sample,
     )
 
     landing_page.avatar.attach(
