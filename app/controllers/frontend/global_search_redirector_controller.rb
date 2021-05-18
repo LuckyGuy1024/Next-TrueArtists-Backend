@@ -4,8 +4,7 @@ module Frontend
     before_action :validate_search_path
 
     def index
-      binding.pry
-      redirect_to url_for(controller: "frontend#{params[:search_path]}",
+      redirect_to url_for(controller: params[:search_path].to_s,
                           action: 'index',
                           query: params[:query])
     end
