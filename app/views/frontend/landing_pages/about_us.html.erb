@@ -1,3 +1,6 @@
+<% set_meta_tags title: "Who is TrueArtists?",
+              description: "The largest Association of Certified Tattoo Artists in the world." %>
+
 <div class="about-us">
   <div class="page-section">
     <div class="container">
@@ -13,7 +16,8 @@
                 <%= image_pack_tag("media/images/g1.jpg") %>
               </div>
               <div class="col-lg-8">
-                <h3>We love Tattoo. We care for our community.</h3>
+                <h3>We love Tattoos. We care for our community.</h3>
+
                 <p>TrueArtists was founded in 2011 and quickly grew to become the largest Association of Certified Tattoo Artists in the world.  Membership is restricted to tattoo artists who exhibit not only artistic ability, but a good command of the craft of tattooing, from quality workmanship to clean safe work environments.</p>
 
                 <p>Our mission is to help professional quality artists stand out and be found.  In today’s over hyped digital marketing world it can be too hard to find quality tattoo artists easily.  TrueArtists certifies each member to make sure they do professional quality tattoo work.</p>
@@ -27,47 +31,49 @@
                 <p>Whether you are a tattoo artist or fan, the team here at TrueArtists is dedicated to promoting professional quality artists from cities around the world so fans can find artists that they can trust.</p>
               </div>
             </div>
-
-            <div class="about-us-stats">
-              <div class="row align-items-center">
-                <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                  <div>
-                    <%= image_pack_tag("media/images/icon_studio.svg") %>
+            <!-- add it when we have live data -->
+            <% if false %>
+              <div class="about-us-stats">
+                <div class="row align-items-center">
+                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                    <div>
+                      <%= image_pack_tag("media/images/icon_studio.svg") %>
+                    </div>
+                    <div>
+                      <h1>5K+</h1>
+                      <p>Coveted Studios</p>
+                    </div>
                   </div>
-                  <div>
-                    <h1>5K</h1>
-                    <p>Coveted Studios</p>
+                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                    <div>
+                      <%= image_pack_tag("media/images/icon_artist.svg") %>
+                    </div>
+                    <div>
+                      <h1>250K+</h1>
+                      <p>Badass Artists</p>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                  <div>
-                    <%= image_pack_tag("media/images/icon_artist.svg") %>
+                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                    <div>
+                      <%= image_pack_tag("media/images/icon_ig_fan.svg") %>
+                    </div>
+                    <div>
+                      <h1>100K+</h1>
+                      <p>Instagram Fans</p>
+                    </div>
                   </div>
-                  <div>
-                    <h1>250K</h1>
-                    <p>Badass Artists</p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                  <div>
-                    <%= image_pack_tag("media/images/icon_ig_fan.svg") %>
-                  </div>
-                  <div>
-                    <h1>100K</h1>
-                    <p>Instagram Fans</p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                  <div>
-                    <%= image_pack_tag("media/images/icon_fb_fans.svg") %>
-                  </div>
-                  <div>
-                    <h1>2.5M</h1>
-                    <p>Facebook Fans</p>
+                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                    <div>
+                      <%= image_pack_tag("media/images/icon_fb_fans.svg") %>
+                    </div>
+                    <div>
+                      <h1>2.5M</h1>
+                      <p>Facebook Fans</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
 
             <div class="how-it-works-section text-center gray-bg">
               <h1>How it works</h1>
