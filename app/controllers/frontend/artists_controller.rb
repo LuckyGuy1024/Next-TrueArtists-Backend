@@ -21,12 +21,12 @@ module Frontend
     end
 
     def register
-      search_results = search.base_filter
-      @artists = search_results.results
-
-      @meta = search.pagination_info(search_results)
-
-      @studios = Studio.page(params[:page || 1]).per(BaseSearch::PER_PAGE)
+      @artists = Artist.search(where: { location: { near: { lat: 37, lon: -114 },
+                                                    within: '500mi' } },
+                               limit: 6).results
+      @studios = Studio.search(where: { location: { near: { lat: 37, lon: -114 },
+                                                    within: '500mi' } },
+                               limit: 6)
 
       respond_to do |format|
         format.html

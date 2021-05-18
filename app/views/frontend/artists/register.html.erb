@@ -1,9 +1,12 @@
+<% set_meta_tags title: 'Join Tattoo Community - Get Certified',
+              description: 'Join a community of the best tattoo artists and studios from around the world.' %>
+
 <div class="home-page">
   <div class='hero-banner'>
     <div class='hero-banner-wrapper'>
       <h1>Join the world's largest tattoo community</h1>
       <div class="join-section">
-        <button type="button">Join as tattoo Artist</button>
+        <%= link_to 'Join as studio/artist', account_service_artist_signup_url, class: 'btn btn-alternative' %>
       </div>
     </div>
   </div>
@@ -14,7 +17,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="why-us-header text-center">
-              <h2>WHY CHOOSE TRUEARTISTS?</h2>
+              <h2>Why join TrueArtists?</h2>
               <h3>Even more features to benefit you</h3>
             </div>
             <div class="why-us-content text-center">
@@ -134,18 +137,14 @@
             <div class="home-section-header">
               <h2>Tattoo Artists near you</h2>
             </div>
-            <%= form_for artists_path, html: { method: :get } do |f| %>
-              <div class="artists-lists grid-gap-30 row">
-                <%= render @artists %>
+            <div class="artists-lists grid-gap-30 row">
+              <%= render @artists %>
+            </div>
+            <div class="col-md-12 text-center">
+              <div class="see-more-section">
+                <%= link_to 'See more', artists_path, class: 'btn btn-alternative' %>
               </div>
-              <div class="col-md-12 text-center">
-                <% unless @meta[:last_page] %>
-                  <div class="see-more-section">
-                    <button class="btn btn-alternative">See More</button>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
+            </div>
           </div>
         </div>
       </div>
