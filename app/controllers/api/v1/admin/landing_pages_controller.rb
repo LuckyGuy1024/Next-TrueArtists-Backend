@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api::V1::Admin
-  class LandingPagesController < ApplicationController
+  class LandingPagesController < BaseController
     before_action :find_landing_page, except: %i[create index]
 
     def index
