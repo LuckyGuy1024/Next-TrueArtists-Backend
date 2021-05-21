@@ -10,8 +10,8 @@ class PageSearch < BaseSearch
     self.meta = pagination_info(search_results)
 
     {
-      articles: ActiveModel::Serializer::CollectionSerializer.new(results,
-                                                                  serializer: PageSerializer),
+      pages: ActiveModel::Serializer::CollectionSerializer.new(results,
+                                                               serializer: PageSerializer),
       meta: meta
     }
   end

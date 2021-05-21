@@ -27,12 +27,11 @@ class BaseSearch
 
     if options[:near] && coordinates.present?
       location_info = { boost_by_distance: {
-          location: {
-            origin: coordinates
-          }
-        },
-        where: { location: { near: coordinates, within: options[:within] } }
-      }
+        location: {
+          origin: coordinates
+        }
+      },
+                        where: { location: { near: coordinates, within: options[:within] } } }
     end
 
     constraints.merge(location_info)
