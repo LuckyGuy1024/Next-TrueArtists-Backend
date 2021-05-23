@@ -11,8 +11,8 @@ class LandingPage < ApplicationRecord
 
   has_one_attached :avatar
   belongs_to :user, class_name: 'User', foreign_key: 'last_updated_by'
-  validates :page_key, :page_url, :page_title, :meta_description, :title, :content, presence: true
-  validates :page_key, :page_url, :page_title, uniqueness: true
+  validates :page_key, :page_title, :meta_description, :title, :content, presence: true
+  validates :page_key, :title, :page_title, uniqueness: true
 
   cache_index :page_key, unique: true
 end

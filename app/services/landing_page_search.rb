@@ -11,7 +11,7 @@ class LandingPageSearch < BaseSearch
 
     {
       landing_pages: ActiveModel::Serializer::CollectionSerializer.new(results,
-                                                                 serializer: LandingPageSerializer),
+                                                                       serializer: LandingPageSerializer),
       meta: meta
     }
   end

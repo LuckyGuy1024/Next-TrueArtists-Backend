@@ -49,7 +49,7 @@ module Api::V1::Admin
     private
 
     def find_landing_page
-      @landing_page = LandingPage.friendly.find(params[:id])
+      @landing_page = LandingPage.find(params[:id])
     end
 
     def search_options
@@ -63,7 +63,6 @@ module Api::V1::Admin
     def landing_page_params
       params.permit(
         :page_key,
-        :page_url,
         :avatar,
         :page_title,
         :meta_description,
