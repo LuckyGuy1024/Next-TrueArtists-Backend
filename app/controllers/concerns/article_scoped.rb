@@ -26,6 +26,6 @@ module ArticleScoped
   end
 
   def find_article
-    @article = Article.fetch_by_slug(params[:id])
+    @article = Article.friendly.find(params[:id])
   end
 end

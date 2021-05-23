@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  include IdentityCache
   enum status: {
     draft: 'draft',
     published: 'published',
@@ -20,6 +21,8 @@ class Article < ApplicationRecord
 
   before_validation :assign_status, only: %i[create update]
   before_validation :import_tag_list, only: %i[create update]
+
+  cache_index :slug, unique: true
 
   def slug_candidates
     [

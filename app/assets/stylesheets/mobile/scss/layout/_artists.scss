@@ -1,41 +1,19 @@
-.artists-page-area {
-  padding-bottom: 60px;
-}
+.join-section {
+  width: 700px;
+  margin: 30px;
 
-.sub-header {
-  .filter-section {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-  }
-}
-
-.home-text-section {
-  margin-bottom: 50px;
-
-  .home-text {
-    h1 {
-      font-size: 24px;
-    }
-  }
-
-  .join-section {
-    width: 700px;
-    margin: 30px auto;
-
-    button {
-      position: absolute;
-      color: #1E1E1E;
-      background-color: #FDCD3F;
-      margin-top: -26px;
-      height: 40px;
-      margin-left: -266px;
-      border-radius: 25px;
-      width: 200px;
-      font-size: 14px;
-      font-weight: 600;
-      border: none;
-    }
+  button {
+    position: absolute;
+    color: $primary-color;
+    background-color: $secondary-color;
+    margin-top: 3px;
+    height: 50px;
+    margin-left: -102px;
+    border-radius: 25px;
+    width: 200px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
   }
 }
 
@@ -51,6 +29,39 @@
       font-size: 12px;
       letter-spacing: 4px;
       margin-bottom: 12px;
+    }
+  }
+
+  .benefit {
+    margin-top: 30px;
+    padding: 0 30px;
+    line-height: 30px;
+
+    h4 {
+      color: $red-gradient;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 5px;
+    }
+
+    button {
+      color: $yellow-gradient;
+      background-color: $secondary-color;
+      opacity: 0.7;
+      height: 40px;
+      border-radius: 25px;
+      width: 170px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      margin: 10px auto;
     }
   }
 }

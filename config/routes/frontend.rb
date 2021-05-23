@@ -69,5 +69,8 @@ Rails.application.routes.draw do
     resources :landing_pages, only: %i[show index]
     resources :global_search_redirector, only: [:index]
     root to: 'landing_pages#home'
+    get '/register/artist' => 'artists#register'
+    get '/about-us' => 'landing_pages#about_us'
+    get '/contact-us' => 'landing_pages#contact_us'
   end
 end

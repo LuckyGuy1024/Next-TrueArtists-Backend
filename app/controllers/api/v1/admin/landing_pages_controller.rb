@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api::V1::Admin
-  class LandingPagesController < ApplicationController
+  class LandingPagesController < BaseController
     before_action :find_landing_page, except: %i[create index]
 
     def index
@@ -49,7 +49,7 @@ module Api::V1::Admin
     private
 
     def find_landing_page
-      @landing_page = LandingPage.find(params[:id])
+      @landing_page = LandingPage.friendly.find(params[:id])
     end
 
     def search_options
