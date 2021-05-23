@@ -1,0 +1,122 @@
+.about-us {
+  .about-us-header {
+    margin-bottom: 40px;
+
+    h3 {
+      font-size: 14px;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .about-us-content {
+    h3 {
+      color: $red-gradient;
+      font-size: 21px;
+      margin: 60px 0 20px;
+    }
+
+    p {
+      line-height: 35px;
+    }
+
+    .action-button {
+      margin: 30px auto;
+
+      button {
+        border-radius: 25px;
+        font-weight: 600;
+      }
+    }
+
+    .about-us-stats {
+      margin: 100px 0;
+
+      .stats {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+
+        img {
+          margin-right: 20px;
+        }
+
+        h1 {
+          font-size: 30px;
+          color: $secondary-color;
+        }
+
+        p {
+          font-size: 18px;
+          width: 100px;
+          line-height: 25px;
+        }
+      }
+    }
+
+    .how-it-works-section {
+      margin-top: 60px;
+      padding: 80px 20px 120px;
+      text-align: center;
+
+      h1 {
+        margin-bottom: 30px;
+      }
+
+      .steps {
+        display: flex;
+        margin: 16px 0;
+
+        img {
+          display: none;
+        }
+
+        p {
+          text-align: left;
+        }
+
+        .section-header {
+          display: flex;
+
+          h3 {
+            font-size: 15px;
+            margin: 10px 0;
+          }
+
+          .numbering {
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            color: $white;
+            background-color: $red-gradient;
+            margin-right: 10px;
+            padding: 5px;
+          }
+        }
+      }
+    }
+
+    .contact-form {
+      margin-top: 100px;
+
+      input[type="text"] {
+        margin: 10px;
+        width: 95%;
+        padding: 7px 14px 8px 10px;
+        border-radius: 5px;
+        background-color: $default-bg-color;
+      }
+
+      textarea {
+        margin: 10px;
+        width: 95%;
+        height: 200px;
+        font-size: 17px;
+        padding: 7px 14px 8px 10px;
+        border-radius: 6px;
+        border: 1px solid #e3e3e3;
+        background-color: $default-bg-color;
+      }
+    }
+  }
+}

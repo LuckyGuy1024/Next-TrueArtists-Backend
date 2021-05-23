@@ -20,19 +20,13 @@ module Frontend
       @artists = Studio.near(@city_state, 500)
     end
 
-    def home
-      location = user_location
-
-      search_results = search.base_filter
-      @artists = search_results.results
-
-      @meta = search.pagination_info(search_results)
-
-      @studios = if location
-                   Studio.near(location, 500)
-                 else
-                   Studio
-                 end.page(params[:page || 1]).per(BaseSearch::PER_PAGE)
+    def register
+      @artists = Artist.search(where: { location: { near: { lat: 37, lon: -114 },
+                                                    within: '500mi' } },
+                               limit: 6).results
+      @studios = Studio.search(where: { location: { near: { lat: 37, lon: -114 },
+                                                    within: '500mi' } },
+                               limit: 6)
 
       respond_to do |format|
         format.html

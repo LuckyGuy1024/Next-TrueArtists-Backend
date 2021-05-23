@@ -3,22 +3,7 @@
 module Frontend
   class LandingPagesController < FrontendController
     include LandingPageScoped
-
-    def index
-      @landing_pages = search.base_filter
-
-      respond_to do |format|
-        format.html
-        format.js
-      end
-    end
-
-    def show
-      respond_to do |format|
-        format.html
-        format.js
-      end
-    end
+    before_action :find_landing_page, except: %i[home index about_us contact_us]
 
     def home
       @artists = Artist.first(12)
@@ -28,6 +13,20 @@ module Frontend
       respond_to do |format|
         format.html.mobile
         format.html.none
+        format.js
+      end
+    end
+
+    def about_us
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
+    def contact_us
+      respond_to do |format|
+        format.html
         format.js
       end
     end

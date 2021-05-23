@@ -6,6 +6,14 @@ GIT
       kramdown
       railties
 
+GIT
+  remote: https://github.com/jwachira/ta-assets.git
+  revision: 2332c9f9e237cf8e57354a8eaf94b59109e735e3
+  branch: master
+  specs:
+    ta-assets (0.1.0)
+      rails (>= 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -404,6 +412,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sprockets (~> 3.0)
   sshkit-sudo
+  ta-assets!
   twilio-ruby
   tzinfo-data
   webpacker (~> 5.0)

@@ -272,6 +272,7 @@
   .slicknav_menu {
     background: transparent;
     padding: 0;
+    text-align: center;
 
     ul {
       list-style: none;
@@ -292,6 +293,7 @@
         color: $dark-color;
         font-size: 20px;
         padding: 5px 0;
+        font-weight: bold;
 
         &:hover {
           background: transparent;
