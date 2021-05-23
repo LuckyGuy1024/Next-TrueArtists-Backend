@@ -46,6 +46,14 @@ module Api::V1::Admin
       end
     end
 
+    def destroy
+      if @landing_page.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @landing_page.errors)
+      end
+    end
+
     private
 
     def find_landing_page
