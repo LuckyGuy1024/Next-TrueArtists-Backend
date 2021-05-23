@@ -63,7 +63,6 @@ module Api::V1::Admin
     def landing_page_params
       params.permit(
         :page_key,
-        :page_url,
         :avatar,
         :page_title,
         :meta_description,

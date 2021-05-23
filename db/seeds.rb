@@ -274,7 +274,6 @@ if ENV['RUN_ALL'] == '1'
   200.times do
     landing_page = LandingPage.create(
       page_key: "/artists/#{Faker::FunnyName.name}",
-      page_url: "/artists/#{Faker::FunnyName.name}",
       last_updated_by: [1, 2, 3, 4, 5].sample,
       title: Faker::Lorem.sentence,
       page_title: Faker::Lorem.sentence,
