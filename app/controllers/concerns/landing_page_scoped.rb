@@ -5,7 +5,7 @@ module LandingPageScoped
 
   included do
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_landing_page, except: %i[index]
+    before_action :find_landing_page, except: %i[index create home]
   end
 
   private
