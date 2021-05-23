@@ -1,0 +1,200 @@
+<% set_meta_tags title: 'Join Tattoo Community - Get Certified',
+              description: 'Join a community of the best tattoo artists and studios from around the world.' %>
+
+<div class="home-page">
+  <div class='hero-banner'>
+    <div class='hero-banner-wrapper'>
+      <h1>Join the world's largest tattoo community</h1>
+      <div class="join-section">
+        <%= link_to 'Join as studio/artist', account_service_artist_signup_url, class: 'btn btn-alternative' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="why-us">
+    <div class="page-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="why-us-header text-center">
+              <h2>Why join TrueArtists?</h2>
+              <h3>Even more features to benefit you</h3>
+            </div>
+            <div class="why-us-content text-center">
+              <div class="row align-items-center">
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_profile.svg") %>
+                  </div>
+                  <div>
+                    <h4>Get a professional profile</h4>
+                    <p>Make it easy for new customers to discover your work online.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_globe.svg") %>
+                  </div>
+                  <div>
+                    <h4>Get featured</h4>
+                    <p>Get featured on our social media outlets with over 20m+ followers, plus our weekly newsletter.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_certification.svg") %>
+                  </div>
+                  <div>
+                    <h4>Artist Certification</h4>
+                    <p>Artists are certified to ensure their high quality artwork to give you a peace of mind when searching for an artist.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_conventions.svg") %>
+                  </div>
+                  <div>
+                    <h4>Conventions</h4>
+                    <p>Discover what conventions are coming near you or to a town you are visiting and check out the TrueArtists attending.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_log.svg") %>
+                  </div>
+                  <div>
+                    <h4>Access new customers</h4>
+                    <p>Receive notifications when there are new customer inquiries in your area.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_featured.svg") %>
+                  </div>
+                  <div>
+                    <h4>Guest spots & more</h4>
+                    <p>Artists who join TrueArtists can search for the latest open guest spots around the world and permanent open studio spots.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_SEO.svg") %>
+                  </div>
+                  <div>
+                    <h4>Get SEO Exposure</h4>
+                    <p>Get found by potential customers on Google, Pinterest, and bing</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_ig.svg") %>
+                  </div>
+                  <div>
+                    <h4>Integrate Instagram</h4>
+                    <p>Get a unique link that allows your customers to sign up seamlessly</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_client_list.svg") %>
+                  </div>
+                  <div>
+                    <h4>Manage your client list</h4>
+                    <p>Manage your client list in one single location.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_booking.svg") %>
+                  </div>
+                  <div>
+                    <h4>Get new bookings</h4>
+                    <p>Get bookings from new customers</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 benefit">
+                  <div>
+                    <%= image_pack_tag("media/images/landing_pages/icons/icon_friendship.svg") %>
+                  </div>
+                  <div>
+                    <h4>Ready to get started?</h4>
+                    <button type="button">Join as tattoo Artist</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @artists.present? %>
+    <div class="artists-near-you">
+      <div class="page-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="home-section-header">
+                <h2>Tattoo Artists near you</h2>
+              </div>
+              <div class="artists-lists grid-gap-30 row">
+                <%= render @artists %>
+              </div>
+              <div class="col-md-12 text-center">
+                <div class="see-more-section">
+                  <%= link_to 'See more', artists_path, class: 'btn btn-alternative' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @studios.present? %>
+    <div class="studios-near-you">
+      <div class="page-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 home-section-header">
+              <h2>Tattoo Studios near you</h2>
+              <div class="chevron-navigation">
+                <button type="button" id="leftClick">
+                  <%= image_pack_tag("media/images/chevron-left.svg") %>
+                </button>
+                <button type="button" id="rightClick">
+                  <%= image_pack_tag("media/images/chevron-right.svg") %>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-10 studio-lists grid-gap-30 scrolling-widget-list">
+              <%= render 'frontend/artists/studios' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <!-- show it when we have reviews -->
+  <% if false  %>
+    <div class="testimonials gray-bg">
+      <div class="page-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="testimonials-header text-center">
+                <h2>Customer testimonials</h2>
+                <h3>Don’t Just Take Our Word For It</h3>
+              </div>
+              <div class="row">
+                <%= render 'frontend/artists/testimonials' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
