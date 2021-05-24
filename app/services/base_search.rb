@@ -21,9 +21,10 @@ class BaseSearch
     constraints[:where] = {
       specialty: options[:specialty],
       styles: options[:styles],
+      placement: options[:placement],
       studio_id: options[:studio_id],
-      artist_id: options[:artist_id],
-    }
+      artist_id: options[:artist_id]
+    }.delete_if { |_k, v| v.nil? }
 
     if options[:near] && coordinates.present?
       location_info = { boost_by_distance: {
