@@ -17,14 +17,32 @@
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
-
+node_modules
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 config/database.yml
+config/storage.yml
 config/application.yml
-
+public/packs
 .idea
 .DS_Store
 /storage
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+.browserslistrc
+config/credentials.yml.enc
+.env
+
+#ignore deploy config files
+config/deploy/config/:stage/*.yml
+config/deploy/config/*.yml
+public/assets
+app/.DS_Store
+.DS_Store

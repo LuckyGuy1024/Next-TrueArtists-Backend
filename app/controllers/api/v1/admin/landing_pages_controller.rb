@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api::V1::Admin
-  class LandingPagesController < ApplicationController
+  class LandingPagesController < BaseController
     before_action :find_landing_page, except: %i[create index]
 
     def index
@@ -46,6 +46,14 @@ module Api::V1::Admin
       end
     end
 
+    def destroy
+      if @landing_page.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @landing_page.errors)
+      end
+    end
+
     private
 
     def find_landing_page
@@ -63,7 +71,6 @@ module Api::V1::Admin
     def landing_page_params
       params.permit(
         :page_key,
-        :page_url,
         :avatar,
         :page_title,
         :meta_description,

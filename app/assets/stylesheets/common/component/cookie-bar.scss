@@ -1,0 +1,44 @@
+.cookie-bar {
+  box-sizing: border-box;
+  z-index: 99999;
+  min-height: 0;
+  color: #ddd;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #414141;
+  opacity: 1;
+  max-height: 999px;
+  min-height: 20px;
+  padding: 8px 20px;
+  font-size: 16px;
+  .content {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    position: relative;
+    a {
+      color: $secondary-color;
+    }
+  }
+  span {
+    margin: 0 10px;
+  }
+  .close-cookie-bar {
+    border: 1px solid $primary-color;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 5px 15px;
+    line-height: 22px;
+    cursor: pointer;
+    background: #fff;
+    outline: none;
+    text-align: center;
+    color: $primary-color;
+    font-style: none;
+  }
+}

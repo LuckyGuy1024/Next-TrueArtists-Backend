@@ -4,6 +4,7 @@ class CategorySerializer < ActiveModel::Serializer
 
   attributes :id,
              :name,
+             :slug,
              :meta_description,
              :status
 end

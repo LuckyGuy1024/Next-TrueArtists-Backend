@@ -11,6 +11,8 @@ class TattooSerializer < ActiveModel::Serializer
              :color,
              :size,
              :tags,
+             :caption,
+             :featured,
              :status,
              :image,
              :created_at

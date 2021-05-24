@@ -7,17 +7,19 @@ module Api::V1
 
     def index
       @styles = Style.all
-      render json: @styles.as_json, status: :ok
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@styles,
+                                                                     serializer: StyleSerializer),
+             status: :ok
     end
 
     def show
-      render json: @style.to_json, status: :ok
+      render json: StyleSerializer.new(@style).to_json, status: :ok
     end
 
     private
 
     def find_style
-      @style = Studio.find(params[:id])
+      @style = Style.friendly.find(params[:id])
     end
 
     def style_params

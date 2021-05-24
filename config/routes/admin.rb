@@ -30,6 +30,13 @@ Rails.application.routes.draw do
             put :reject
           end
         end
+
+        resources :landing_pages do
+          member do
+            delete 'delete-image/:image_id' => 'landing_pages#remove_image'
+          end
+        end
+
         resources :locations do
           member do
             delete 'delete-image/:image_id' => 'locations#remove_image'
@@ -52,7 +59,7 @@ Rails.application.routes.draw do
         end
         resources :articles
         resources :conventions
-        resources :landing_pages
+        resources :pages
         resources :styles
         resources :categories
         resources :guest_artist_applications

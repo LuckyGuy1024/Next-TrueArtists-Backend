@@ -1,0 +1,17 @@
+<!-- More Like this -->
+<div class="page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center sub-header">
+        <h2>More Like This</h2>
+      </div>
+      <div class="col-md-12">
+        <div class="image-gallery grid row">
+          <% similar_tattoos.each do |tattoo| %>
+            <%= render 'tattoo_image', tattoo: tattoo %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

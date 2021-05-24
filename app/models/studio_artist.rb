@@ -1,4 +1,5 @@
 class StudioArtist < ApplicationRecord
+  include IdentityCache
   require 'json_web_token'
   belongs_to :studio
   belongs_to :artist

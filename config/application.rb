@@ -21,11 +21,10 @@ require 'rails/test_unit/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Dropshypify
+module TrueArtists
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    config.api_only = true
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
@@ -37,5 +36,8 @@ module Dropshypify
         resource '*', headers: :any, methods: %i[get post put patch delete options head]
       end
     end
+
+    # Handle Pundit::NotAuthorizedError's by having rails handle them as a 403 error
+    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
   end
 end

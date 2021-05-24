@@ -67,13 +67,11 @@ ActiveRecord::Schema.define(version: 2021_03_30_074806) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
     t.boolean "cpr_certified"
     t.integer "years_of_experience"
-    t.string "styles"
     t.string "website"
     t.string "facebook_url"
     t.string "twitter_url"
@@ -97,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_074806) do
     t.string "state"
     t.string "name"
     t.string "street_address"
+    t.string "specialty"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
@@ -236,6 +235,16 @@ ActiveRecord::Schema.define(version: 2021_03_30_074806) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.string "slug"
+    t.string "title"
+    t.text "content"
+    t.integer "parent_id"
+    t.boolean "active", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "studio_artists", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "artist_id"
@@ -270,7 +279,6 @@ ActiveRecord::Schema.define(version: 2021_03_30_074806) do
     t.string "zip_code"
     t.string "country"
     t.string "phone_number"
-    t.text "specialty"
     t.text "accepted_payment_methods"
     t.boolean "appointment_only", default: false
     t.text "languages"
@@ -298,6 +306,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_074806) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
+    t.string "currency_code"
     t.boolean "monday", default: false
     t.boolean "tuesday", default: false
     t.boolean "wednesday", default: false
@@ -345,6 +354,8 @@ ActiveRecord::Schema.define(version: 2021_03_30_074806) do
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
     t.string "status"
+    t.string "caption"
+    t.boolean "featured", default: false
   end
 
   create_table "users", force: :cascade do |t|

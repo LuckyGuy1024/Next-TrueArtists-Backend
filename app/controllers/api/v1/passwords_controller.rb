@@ -4,12 +4,11 @@ module Api::V1
     before_action :find_user, only: %i[create]
 
     def update
-      user = User.find(@user_id)
-
-      if user.set_new_password(change_password_params)
+      @user = current_user
+      if @user.set_new_password(change_password_params)
         head(:ok)
       else
-        render_api_error(status: 422, errors: user.errors)
+        render_api_error(status: 422, errors: @user.errors)
       end
     end
 
@@ -34,12 +33,6 @@ module Api::V1
 
     def password_change_request_params
       params.permit(:email)
-    end
-
-    def validate_confirmation_token
-      jwt_payload = JsonWebToken.decode(params[:token]).first
-      @user_id = jwt_payload['user_id']
-      head(:unprocessable_entity) unless @user_id
     end
   end
 end

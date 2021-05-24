@@ -1,0 +1,46 @@
+<% set_meta_tags title: 'The Best Tattoo Artists Near You',
+              description: 'Find the certified tattoo artists near your city today.' %>
+  <div class="page-section gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 search-form">
+          <%= form_for artists_path, html: { method: :get } do |f| %>
+            <div class="sub-header">
+              <h1>Find Tattoo Artists Near You</h1>
+            </div>
+            <div class="search-artists-form row">
+              <div class="col-md-9">
+                <div class="search-section">
+                    <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search artists by zip code, city or style' %>
+                    <button type="submit" class="search search-box">
+                      <i class="ta-icon-search basic-search"></i>
+                    </button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <%= render 'frontend/artists/filter' %>
+              </div>
+            </div>
+            <div class="selected-filters">
+              <%= render 'frontend/artists/selected_filters' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="artists-lists grid-gap-30 row">
+            <%= render @artists %>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <%= paginate @artists %>
+        </div>
+      </div>
+  </div>
+</div>

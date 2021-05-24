@@ -2,7 +2,6 @@ class LandingPageSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id,
              :page_key,
-             :page_url,
              :page_title,
              :meta_description,
              :title,

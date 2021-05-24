@@ -1,0 +1,75 @@
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header-content">
+          <div class="logo">
+            <%= link_to image_pack_tag("media/images/logo.svg"), root_path %>
+          </div>
+          <div>
+            <div class="main-menu d-none d-lg-block">
+              <ul>
+                <li><%= link_to "Artists", artists_path %></li>
+                <li><%= link_to "Studios", studios_path %></li>
+                <li><%= link_to "Tattoos", tattoos_path %></li>
+                <li><%= link_to "Blog", articles_path %></li>
+                <li><%= link_to "Register", account_service_sign_up_url, target: '_blank' %></li>
+                <li><%= link_to 'Sign in', account_service_login_url, target: '_blank' %></li>
+                <li class='artist-signup'>
+                  <%= link_to 'Join as artist/studio', account_service_artist_signup_url, target: '_blank' %>
+                </li>
+              </ul>
+            </div>
+<!--            <div class="user-profile d-flex align-items-center">-->
+<!--              <a href="#">-->
+                <%#= image_pack_tag("media/images/profile.png") %>
+<!--                  <span>David</span>-->
+<!--                </a>-->
+
+<!--                <div class="user-dropdown">-->
+<!--                  <ul>-->
+<!--                    <li>-->
+<!--                      <a href="#">View profile</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                      <a href="#">Edit account</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                      <a href="#">Log out</a>-->
+<!--                    </li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+<!--              </div>-->
+            <div class="mobile-menu-icon d-block d-lg-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#000" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul id="mobile-nav" class="gray-bg">
+            <li><%= link_to "Artists", artists_path, class: "active" %></li>
+            <li><%= link_to "Studios", studios_path %></li>
+            <li><%= link_to "Tattoos", tattoos_path %></li>
+            <li><%= link_to "Blog", articles_path %></li>
+            <li class='artist-signup'>
+              <%= link_to 'Join as artist/studio', account_service_artist_signup_url, target: '_blank' %>
+            </li>
+            <!-- <li>-->
+            <!-- User Profile-->
+            <!-- <ul>-->
+            <!-- <li><a href="#">View profile</a></li>-->
+            <!-- <li><a href="#">Edit account</a></li>-->
+            <!-- <li><a href="#">Log out</a></li>-->
+            <!-- </ul>-->
+            <!-- </li>-->
+          </ul>
+          <div class="mobile-menu d-block d-lg-none"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- // -->

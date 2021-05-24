@@ -18,6 +18,13 @@ module Api::V1
       render json: ArtistSerializer.new(@artist).to_json, status: :ok
     end
 
+    def studios
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@artist.studios,
+                                                                     serializer: StudioSerializer),
+             status: :ok
+    end
+
+
     def create
       artist = current_user.build_artist(artist_params)
 
@@ -98,6 +105,7 @@ module Api::V1
         :price_per_hour,
         :currency_code,
         :street_address,
+        :specialty,
         :city,
         :state,
         :zip_code,

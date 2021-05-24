@@ -14,7 +14,6 @@ class StudioSerializer < ActiveModel::Serializer
              :zip_code,
              :country,
              :phone_number,
-             :specialty,
              :accepted_payment_methods,
              :appointment_only,
              :languages,
@@ -24,8 +23,6 @@ class StudioSerializer < ActiveModel::Serializer
              :twitter_url,
              :instagram_url,
              :website_url,
-             :lat,
-             :lon,
              :status,
              :slug,
              :accepting_guest_artist,
@@ -40,7 +37,10 @@ class StudioSerializer < ActiveModel::Serializer
              :price_per_hour,
              :avatar,
              :hero_banner,
-             :working_hours
+             :working_hours,
+             :has_social_profiles,
+             :has_tattoo_gallery,
+             :has_avatar
 
   def avatar
     if object.avatar.attached?

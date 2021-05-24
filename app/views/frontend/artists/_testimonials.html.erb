@@ -1,0 +1,27 @@
+<!-- Artists -->
+<% 3.times do %>
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="widget-quote-icon">
+      <%= image_pack_tag("media/images/quote.svg") %>
+    </div>
+    <div class="testimonial-widget">
+        <div class="list-content">
+          <p>I joined TrueArtists in May and, with TrueArtists’ promotional help, by December my business has grown so much that I am now booked for the next 12 months!! Thanks guys!</p>
+        </div>
+        <div class="list-content d-flex align-items-center">
+          <div class="list-left flex-grow-1">
+            <div class="d-flex align-items-center">
+              <div class="profile-img">
+                <%= image_pack_tag("media/images/avatar.png") %>
+              </div>
+              <div class="profile-info">
+                <h5>Nathan Smalls</h5>
+                <p>Member since <%= Date.today.year - 1 %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+<% end %>
+<!-- // -->

@@ -99,8 +99,7 @@ if ENV['RUN_ALL'] == '1'
   end
 
   puts "\n== Creating artist tattoos data =="
-
-  250.times do |i|
+  50.times do |i|
     artist_tattoo = Tattoo.create(
       artist_id: i + 1,
       placement: 'back',
@@ -110,16 +109,60 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/images/image.jpg'),
+      io: File.open('app/assets/tattoo1.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  50.times do |i|
+    artist_tattoo = Tattoo.create(
+      artist_id: i + 50,
+      placement: 'back',
+      size: 'small',
+      color: Faker::Color.color_name,
+      tag_list: ['artist', 'tattoo', 'artist tattoo']
+    )
+
+    artist_tattoo.image.attach(
+      io: File.open('app/assets/tattoo2.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  50.times do |i|
+    artist_tattoo = Tattoo.create(
+      artist_id: i + 100,
+      placement: 'back',
+      size: 'small',
+      color: Faker::Color.color_name,
+      tag_list: ['artist', 'tattoo', 'artist tattoo']
+    )
+
+    artist_tattoo.image.attach(
+      io: File.open('app/assets/tattoo3.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  50.times do |i|
+    artist_tattoo = Tattoo.create(
+      artist_id: i + 150,
+      placement: 'back',
+      size: 'small',
+      color: Faker::Color.color_name,
+      tag_list: ['artist', 'tattoo', 'artist tattoo']
+    )
+
+    artist_tattoo.image.attach(
+      io: File.open('app/assets/hawaian-tattoo.jpg'),
       filename: 'image.jpg'
     )
   end
 
   puts "\n== Creating studio tattoos data =="
-
-  250.times do |i|
+  50.times do |i|
     studio_tattoo = Tattoo.create(
-      studio_id: i + 251,
+      studio_id: i + 1,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -127,20 +170,121 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/images/image.jpg'),
+      io: File.open('app/assets/tattoo1.jpg'),
       filename: 'image.jpg'
     )
   end
 
-  500.times do
-    Article.create(
+  50.times do |i|
+    studio_tattoo = Tattoo.create(
+      studio_id: i + 50,
+      placement: 'back',
+      size: 'small',
+      color: Faker::Color.color_name,
+      tag_list: ['studio', 'tattoo', 'studio tattoo']
+    )
+
+    studio_tattoo.image.attach(
+      io: File.open('app/assets/tattoo2.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  50.times do |i|
+    studio_tattoo = Tattoo.create(
+      studio_id: i + 100,
+      placement: 'back',
+      size: 'small',
+      color: Faker::Color.color_name,
+      tag_list: ['studio', 'tattoo', 'studio tattoo']
+    )
+
+    studio_tattoo.image.attach(
+      io: File.open('app/assets/tattoo3.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  50.times do |i|
+    studio_tattoo = Tattoo.create(
+      studio_id: i + 150,
+      placement: 'back',
+      size: 'small',
+      color: Faker::Color.color_name,
+      tag_list: ['studio', 'tattoo', 'studio tattoo']
+    )
+
+    studio_tattoo.image.attach(
+      io: File.open('app/assets/hawaian-tattoo.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  puts "\n== Creating categories =="
+
+  20.times do
+    Category.create(
+      name: Faker::Lorem.sentence,
+      meta_description: Faker::Lorem.sentence,
+      description: Faker::Lorem.paragraph(sentence_count: 4),
+      status: %w[draft published flagged].sample
+    )
+  end
+
+  puts "\n== Creating articles =="
+
+  200.times do
+    article = Article.create(
       user_id: [1, 2, 3, 4, 5].sample,
       title: Faker::Lorem.sentence,
       page_title: Faker::Lorem.sentence,
       meta_description: Faker::Lorem.sentence,
-      introduction: Faker::Lorem.sentence,
-      content: Faker::Lorem.paragraph(sentence_count: 4),
-      status: %w[draft published].sample
+      tag_list: ['artist', 'tattoo', 'artist tattoo'],
+      introduction: Faker::Lorem.paragraph(sentence_count: 9),
+      content: Faker::Lorem.paragraph(sentence_count: 40),
+      status: %w[draft published flagged].sample,
+      category_id: [*1..20].sample
+    )
+
+    article.image.attach(
+      io: File.open('app/assets/tattoo1.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  200.times do
+    article = Article.create(
+      user_id: [1, 2, 3, 4, 5].sample,
+      title: Faker::Lorem.sentence,
+      page_title: Faker::Lorem.sentence,
+      meta_description: Faker::Lorem.sentence,
+      tag_list: ['artist', 'tattoo', 'artist tattoo'],
+      introduction: Faker::Lorem.paragraph(sentence_count: 9),
+      content: Faker::Lorem.paragraph(sentence_count: 40),
+      status: %w[draft published flagged].sample,
+      category_id: [*1..20].sample
+    )
+
+    article.image.attach(
+      io: File.open('app/assets/tattoo2.jpg'),
+      filename: 'image.jpg'
+    )
+  end
+
+  200.times do
+    landing_page = LandingPage.create(
+      page_key: "/artists/#{Faker::FunnyName.name}",
+      last_updated_by: [1, 2, 3, 4, 5].sample,
+      title: Faker::Lorem.sentence,
+      page_title: Faker::Lorem.sentence,
+      meta_description: Faker::Lorem.sentence,
+      content: Faker::Lorem.paragraph(sentence_count: 40),
+      status: %w[draft published].sample,
+    )
+
+    landing_page.avatar.attach(
+      io: File.open('app/assets/tattoo2.jpg'),
+      filename: 'image.jpg'
     )
   end
 end

@@ -74,6 +74,14 @@ class Api::V1::TattoosController < ApplicationController
     end
   end
 
+  def destroy
+    if @tattoo.destroy
+      head(:ok)
+    else
+      render_api_error(status: 422, errors: @tattoo.errors)
+    end
+  end
+
   private
 
   def find_parent_object
@@ -98,6 +106,8 @@ class Api::V1::TattoosController < ApplicationController
     [:styles,
      :categories,
      :placement,
+     :caption,
+     :featured,
      :color,
      :size,
      :image,
@@ -110,6 +120,8 @@ class Api::V1::TattoosController < ApplicationController
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
       status: params[:status],
       placement: params[:placement],
+      studio_id: params[:studio_id],
+      artist_id: params[:artist_id],
       styles: params[:styles],
       color: params[:color],
       near: params[:near],

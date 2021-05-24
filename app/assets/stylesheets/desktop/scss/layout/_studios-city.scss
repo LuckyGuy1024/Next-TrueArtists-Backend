@@ -1,0 +1,64 @@
+.city-banner-area {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding-top: 400px;
+
+  .city-banner-content {
+    background: rgba(255, 255, 255, .9);
+    padding: 36px 26px 50px 36px;
+    border-radius: 6px;
+    margin-bottom: -100px;
+
+    .page-title {
+      margin-bottom: 20px;
+
+      h1 {
+        text-transform: uppercase;
+      }
+    }
+
+    .banner-description {
+      padding-right: 50px;
+    }
+
+    .banner-button {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+.single-city-top-area {
+  padding-top: 150px;
+}
+
+.city-nav {
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 60px;
+
+  a {
+    color: $dark-color;
+    padding: 15px;
+    border-bottom: 3px solid transparent;
+    margin: 0 3px -1px;
+
+    &.active,
+    &:hover {
+      border-color: $dark-color;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .city-banner-area {
+    padding-top: 150px;
+  }
+
+  .description-with-button {
+    flex-direction: column;
+  }
+
+  .banner-description {
+    padding-right: 0 !important;
+    padding-bottom: 20px;
+  }
+}
