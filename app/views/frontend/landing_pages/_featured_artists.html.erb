@@ -1,0 +1,29 @@
+<div class="artists-near-you">
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="home-section-header">
+            <h2>
+              Tattoo Artists near you
+              <% if current_user_city.present? %>
+                - <%= link_to current_user_city_state, artists_path(near: current_user_coordinates)  %>
+              <% end %>
+            </h2>
+          </div>
+          <div class="artists-lists grid-gap-30 row">
+            <%= render 'artists' %>
+          </div>
+          <div class="col-md-12 text-center">
+            <div class="see-more-section">
+              <%= link_to artists_path(near: nil) do %>
+                <span class="btn btn-alternative">See More</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of row -->
+    </div>
+  </div>
+</div>

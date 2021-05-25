@@ -2,7 +2,7 @@
 
 module Api::V1::Admin
   class ArtistsController < BaseController
-    before_action :find_artist, except: %i[index]
+    before_action :find_artist, except: %i[index reject_image]
 
     def index
       @results = ArtistSearch.new(
@@ -26,15 +26,6 @@ module Api::V1::Admin
       end
     end
 
-    def remove_image
-      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
-      if attachment.blank?
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: 'We could not delete resource')
-      end
-    end
-
     def approve
       if @artist.approve!
         head(:ok)
@@ -48,6 +39,33 @@ module Api::V1::Admin
         head(:ok)
       else
         render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def destroy
+      if @artist.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @artist.errors)
+      end
+    end
+
+    def remove_image
+      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
+      if attachment.blank?
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: 'We could not delete resource')
+      end
+    end
+
+    def reject_image
+      attachment = ActiveStorageAttachment.find(params[:image_id])
+
+      if attachment.update(status: 'rejected')
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: 'Resource could not be rejected')
       end
     end
 
@@ -81,6 +99,7 @@ module Api::V1::Admin
         :price_per_hour,
         :currency_code,
         :street_address,
+        :street_address_2,
         :city,
         :state,
         :zip_code,

@@ -1,0 +1,129 @@
+.about-us {
+  .about-us-header {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 40px;
+
+    h1 {
+      line-height: 2em;
+    }
+    
+    h3 {
+      font-size: 14px;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .about-us-content {
+    .intro-content {
+      width: 80%;
+      margin: auto;
+
+      h3 {
+        color: $red-gradient;
+        font-size: 21px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        line-height: 35px;
+      }
+    }
+
+    .about-us-stats {
+      margin: 100px 0;
+
+      .stats {
+        display: flex;
+        justify-content: center;
+
+        img {
+          margin-right: 20px;
+        }
+
+        h1 {
+          font-size: 60px;
+          color: $secondary-color;
+        }
+
+        p {
+          font-size: 20px;
+          width: 100px;
+          line-height: 25px;
+        }
+      }
+    }
+
+    .action-button {
+      margin-top: 62px;
+      button {
+        border-radius: 25px;
+        font-weight: 600;
+      }
+    }
+
+    .how-it-works-section {
+      margin-top: 100px;
+      padding: 100px 20px 110px;
+      text-align: center;
+
+      h1 {
+        margin-bottom: 30px;
+      }
+
+      .steps {
+        display: flex;
+        justify-content: space-around;
+
+        img {
+          width: 60px;
+          height: 65px;
+          opacity: 0.2;
+        }
+
+        .section-header {
+          display: flex;
+
+          h3 {
+            font-size: 15px;
+            margin: 10px 0;
+          }
+
+          .numbering {
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            color: $white;
+            background-color: $red-gradient;
+            margin-right: 10px;
+            padding: 5px;
+          }
+        }
+      }
+    }
+
+    .contact-form {
+      margin: 100px auto 0;
+      width: 80%;
+
+      input[type="text"] {
+        margin: 10px;
+        width: 80%;
+        padding: 7px 14px 8px 15px;
+        background-color: $default-bg-color;
+      }
+
+      textarea {
+        margin: 10px;
+        width: 80%;
+        height: 200px;
+        font-size: 17px;
+        padding: 7px 14px 8px 15px;
+        border-radius: 6px;
+        border: 1px solid #e3e3e3;
+        background-color: $default-bg-color;
+      }
+    }
+  }
+}

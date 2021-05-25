@@ -11,5 +11,7 @@ class CreateMessages < ActiveRecord::Migration[6.0]
       t.string   'message_type'
       t.timestamps
     end
+    add_index :messages, :receiver_id
+    add_index :messages, :sender_id
   end
 end

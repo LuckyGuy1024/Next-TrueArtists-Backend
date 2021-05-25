@@ -5,7 +5,6 @@ class ArtistSearch < BaseSearch
 
   def filter
     search_results = base_filter
-
     self.results = search_results.results
     self.meta = pagination_info(search_results)
 

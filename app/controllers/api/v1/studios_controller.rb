@@ -23,8 +23,14 @@ module Api::V1
       render json: StudioSerializer.new(@studio).to_json, status: :ok
     end
 
+    def artists
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@studio.artists,
+                                                                     serializer: ArtistSerializer),
+             status: :ok
+    end
+
     def create
-      studio = current_user.build_studio(studio_params)
+      studio = Studio.create_studio(current_user, studio_params)
 
       if studio.save
         render json: StudioSerializer.new(studio).to_json, status: :created
@@ -121,8 +127,24 @@ module Api::V1
 
     def studio_params
       params.permit(
+        :name,
         :email,
+        :phone_number,
+        :bio,
+        :avatar,
+        :hero_banner,
+        :street_address,
+        :street_address_2,
+        :city,
+        :state,
+        :zip_code,
+        :country,
+        :website_url,
+        :facebook_url,
+        :twitter_url,
+        :instagram_url,
         :accepting_guest_artist,
+        :accepted_payment_methods,
         :piercings,
         :cosmetic_tattoos,
         :appointment_only,
@@ -133,15 +155,7 @@ module Api::V1
         :parking,
         :lgbt_friendly,
         :languages,
-        :name,
-        :bio,
         :services,
-        :specialty,
-        :website_url,
-        :facebook_url,
-        :twitter_url,
-        :instagram_url,
-        :phone_number,
         :minimum_spend,
         :price_per_hour,
         :currency_code,
@@ -153,7 +167,8 @@ module Api::V1
         :seeking_guest_spot,
         :guest_studio,
         :avatar,
-        :hero_banner
+        :hero_banner,
+        working_hours: {}
       )
     end
   end

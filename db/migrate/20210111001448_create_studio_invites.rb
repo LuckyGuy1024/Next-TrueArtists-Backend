@@ -8,5 +8,7 @@ class CreateStudioInvites < ActiveRecord::Migration[6.0]
       t.references :artist
       t.timestamps
     end
+    add_index :studio_invites, :invite_code
+    add_index :studio_invites, :email
   end
 end

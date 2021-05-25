@@ -9,6 +9,8 @@ class BaseSearch
   end
 
   def base_filter
+    location_info = {}
+
     constraints = {
       page: options[:page] || 1,
       per_page: options[:per_page] || PER_PAGE
@@ -16,29 +18,34 @@ class BaseSearch
 
     constraints[:order] = order
 
+    constraints[:where] = {
+      specialty: options[:specialty],
+      styles: options[:styles],
+      placement: options[:placement],
+      verified: options[:verified],
+      status: options[:status],
+      studio_id: options[:studio_id],
+      artist_id: options[:artist_id]
+    }.delete_if { |_k, v| v.nil? }
 
-    if options[:near] && location
-      search_class.search(query,
-                          page: options[:page] || 1,
-                          per_page: options[:per_page] || PER_PAGE,
-                          boost_by_distance: {
-                            location: {
-                              origin: location
-                            }
-                          },
-                          where: {
-                            location: {
-                              near: location,
-                              within: options[:within]
-                            }
-                          })
-    else
-      search_class.search(query, constraints)
+    if options[:near] && coordinates.present?
+      location_info = { boost_by_distance: {
+        location: {
+          origin: coordinates
+        }
+      },
+      where: { location: { near: coordinates, within: options[:within] } } }
     end
+
+    constraints.merge(location_info)
+
+    search_class.search(query, constraints)
   end
 
-  def location
-    return nil unless location = Geocoder.search(options[:near]).first
+  def coordinates
+    location = Geocoder.search(options[:near]).first
+
+    return nil unless location
 
     {
       lat: location.latitude,

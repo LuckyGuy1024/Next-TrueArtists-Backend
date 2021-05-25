@@ -20,28 +20,43 @@ Rails.application.routes.draw do
           put 'change_password' => 'passwords#update'
         end
       end
+
       resources :artists do
+        resources :tattoos
+        resources :clients
+
+        member do
+          get :studios
+        end
+
         collection do
           put 'verify-phone' => 'studios#verify_phone'
         end
-        resources :tattoos
+
         member do
+          get :artists
           delete 'delete-image/:image_id' => 'artists#remove_image'
           put :submit_for_review
         end
       end
+
       resources :studios do
+        resources :tattoos
+        resources :clients
+
         collection do
           put 'verify-phone' => 'studios#verify_phone'
         end
-        resources :tattoos
+
         member do
+          get :artists
           delete 'delete-image/:image_id' => 'studios#remove_image'
           put :submit_for_review
           get :guest_artist_applications
           get 'guest_artist_applications/:id' => 'studios#application'
         end
       end
+
       resources :locations, only: %i[index show]
 
       resources :studio_invites, path: 'studio-invites' do
@@ -60,12 +75,15 @@ Rails.application.routes.draw do
       resources :tattoos, only: %i[index show update] do
         collection do
           post 'batch-create' => 'tattoos#batch_create'
+          get 'filter' => 'tattoos#filter'
         end
         member do
           put :flag
         end
       end
+
       resources :articles, only: %i[index show]
+      resources :conventions, only: %i[index show]
       resources :styles
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]

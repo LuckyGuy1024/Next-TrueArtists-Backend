@@ -11,15 +11,20 @@ class TattooSerializer < ActiveModel::Serializer
              :color,
              :size,
              :tags,
+             :caption,
+             :featured,
              :status,
-             :image
+             :image,
+             :created_at
 
   def image
     if object.image.attached?
       {
         id: object.image.id,
         image_url: ENV['HOST'] + rails_blob_path(object.image, only_path: true),
-        name: object.image.filename
+        name: object.image.filename,
+        dimensions: ActiveStorage::Analyzer::ImageAnalyzer.new(object.image).metadata,
+        status: object.image.status
       }
     end
   end

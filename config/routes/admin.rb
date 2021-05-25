@@ -5,13 +5,14 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :admin do
         resources :users
-        resources :passwords do
-          collection do
-            put 'change_password' => 'passwords#update'
-          end
-        end
+
+        resources :passwords, only: %i[create]
+
         resources :artists do
           resources :tattoos
+          collection do
+            put 'reject-image/:image_id' => 'artists#reject_image'
+          end
           member do
             delete 'delete-image/:image_id' => 'artists#remove_image'
             put :approve
@@ -20,12 +21,22 @@ Rails.application.routes.draw do
         end
         resources :studios do
           resources :tattoos
+          collection do
+            put 'reject-image/:image_id' => 'studios#reject_image'
+          end
           member do
             delete 'delete-image/:image_id' => 'studios#remove_image'
             put :approve
             put :reject
           end
         end
+
+        resources :landing_pages do
+          member do
+            delete 'delete-image/:image_id' => 'landing_pages#remove_image'
+          end
+        end
+
         resources :locations do
           member do
             delete 'delete-image/:image_id' => 'locations#remove_image'
@@ -42,9 +53,13 @@ Rails.application.routes.draw do
           collection do
             post 'batch-create' => 'tattoos#batch_create'
           end
+          member do
+            put :flag
+          end
         end
         resources :articles
-        resources :landing_pages
+        resources :conventions
+        resources :pages
         resources :styles
         resources :categories
         resources :guest_artist_applications

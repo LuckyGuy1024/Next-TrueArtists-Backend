@@ -66,4 +66,5 @@ Rails.application.configure do
 
   # Add ngrok domain to test inbound emails
   config.hosts << ENV.fetch('DOMAIN')
+  config.identity_cache_store = :mem_cache_store
 end

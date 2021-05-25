@@ -5,7 +5,11 @@ module Api::V1::Admin
     before_action :find_user, except: %i[index create]
 
     def index
-      @users = paginate(User.unscoped)
+      @users = paginate(if params[:query]
+                          User.where('email LIKE :query OR full_name LIKE :query', query: "%#{params[:query]}%")
+                        else
+                          User
+                        end.where(search_filter))
       render json: ActiveModel::Serializer::CollectionSerializer.new(@users,
                                                                      serializer: UserSerializer),
              status: :ok
@@ -45,16 +49,24 @@ module Api::V1::Admin
     private
 
     def find_user
-      @user = User.find(params[:id])
+      @user = User.friendly.find(params[:id])
     end
 
     def user_update_params
-      params.require(:user).permit(:email)
+      params.require(:user).permit(:email, :role, :status)
+    end
+
+    def search_filter
+      {
+        role: params[:role],
+        status: params[:status]
+      }.delete_if { |_k, v| v.nil? }
     end
 
     def user_create_params
       params.permit(:email,
                     :full_name,
+                    :role,
                     :status,
                     :role).tap do |whitelisted|
         whitelisted[:password] = whitelisted[:password_confirmation] = Devise.friendly_token.first(8)

@@ -1,0 +1,35 @@
+<!-- Studios -->
+<% @studios.each do |studio| %>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="location-section">
+      <%= link_to '#' do %>
+        <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
+        <h4><%= studio.city_state %></h4>
+      <% end %>
+    </div>
+    <div class="listing-widget shadow">
+      <%= link_to studio_path(studio) do %>
+        <div class="list-image">
+          <% if studio.tattoos.present? %>
+            <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
+          <% end %>
+        </div>
+        <div class="list-content d-flex align-items-center">
+          <div class="list-left flex-grow-1">
+            <div class="d-flex align-items-center">
+              <div class="profile-img">
+                <% if studio.avatar.present? %>
+                  <img data-src="<%= url_for(studio.avatar) %>" class="lazyload" />
+                <% end %>
+              </div>
+              <div class="profile-info">
+                <h5><%= studio.name %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<!-- // -->

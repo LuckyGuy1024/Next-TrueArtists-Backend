@@ -23,6 +23,11 @@ module Api::V1::Admin
       end
     end
 
+    def flag
+      @tattoo.flag!
+      render json: TattooSerializer.new(@tattoo.reload).to_json, status: :ok
+    end
+
     private
 
     def find_tattoo
@@ -31,6 +36,16 @@ module Api::V1::Admin
 
     def tattoo_params
       params.permit(*permitted_attributes)
+    end
+
+    def search_options
+      {
+        page: params[:page] || 1,
+        per_page: params[:per_page] || BaseSearch::PER_PAGE,
+        status: params[:status],
+        near: params[:near],
+        within: params[:within]
+      }.delete_if { |_k, v| v.nil? }
     end
 
     def permitted_attributes

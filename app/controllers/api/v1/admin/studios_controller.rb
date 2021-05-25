@@ -2,7 +2,7 @@
 
 module Api::V1::Admin
   class StudiosController < BaseController
-    before_action :find_studio, except: %i[index]
+    before_action :find_studio, except: %i[index reject_image]
 
     def index
       @results = StudioSearch.new(
@@ -35,15 +35,6 @@ module Api::V1::Admin
       end
     end
 
-    def remove_image
-      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
-      if attachment.blank?
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: 'We could not delete resource')
-      end
-    end
-
     def approve
       if @studio.approve!
         head(:ok)
@@ -57,6 +48,33 @@ module Api::V1::Admin
         head(:ok)
       else
         render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
+    def destroy
+      if @studio.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
+    def remove_image
+      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
+      if attachment.blank?
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: 'We could not delete resource')
+      end
+    end
+
+    def reject_image
+      attachment = ActiveStorageAttachment.find(params[:image_id])
+
+      if attachment.update(status: 'rejected')
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: 'Resource could not be rejected')
       end
     end
 
@@ -103,6 +121,7 @@ module Api::V1::Admin
         :price_per_hour,
         :currency_code,
         :street_address,
+        :street_address_2,
         :city,
         :state,
         :zip_code,
@@ -110,7 +129,28 @@ module Api::V1::Admin
         :seeking_guest_spot,
         :guest_studio,
         :avatar,
-        :hero_banner
+        :hero_banner,
+        :monday,       
+        :tuesday,      
+        :wednesday,    
+        :thursday,     
+        :friday,       
+        :saturday,     
+        :sunday,       
+        :monday_start,
+        :tuesday_start,
+        :wednesday_start,
+        :thursday_start,
+        :friday_start,
+        :saturday_start,
+        :sunday_start,
+        :monday_end,
+        :tuesday_end,
+        :wednesday_end,
+        :thursday_end,
+        :friday_end,
+        :saturday_end,
+        :sunday_end
       )
     end
   end

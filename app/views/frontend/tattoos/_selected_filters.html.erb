@@ -1,0 +1,26 @@
+<% if params[:styles].present? %>
+  <% params[:styles].each do |style| %>
+    <button type="button" class="selected-filters__items">
+      <%= style %>
+      <i class="selected-filters__close"></i>
+    </button>
+  <% end %>
+<% end %>
+
+<% if params[:placement].present? %>
+  <% params[:placement].each do |placement| %>
+    <button type="button" class="selected-filters__items">
+      <%= placement %>
+      <i class="selected-filters__close"></i>
+    </button>
+  <% end %>
+<% end %>
+
+<% if params[:color].present? %>
+  <% params[:color].each do |color| %>
+    <button type="button" class="selected-filters__items">
+      <%= color %>
+      <i class="selected-filters__close"></i>
+    </button>
+  <% end %>
+<% end %>

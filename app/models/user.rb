@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include IdentityCache
   enum status: {
     active: 'active',
     inactive: 'inactive',
@@ -17,7 +18,8 @@ class User < ApplicationRecord
 
   require 'json_web_token'
   extend FriendlyId
-  friendly_id :full_name, use: :history
+  friendly_id :slug_candidates, use: %i[slugged finders]
+
   acts_as_favoritor
   before_save :downcase_email
   has_secure_password
@@ -25,6 +27,7 @@ class User < ApplicationRecord
   has_one :artist, dependent: :destroy
   has_one :studio, dependent: :destroy
   has_many :articles, dependent: :destroy
+  has_many :conventions, class_name: 'Convention', foreign_key: 'created_by',dependent: :destroy
 
   STRONG_PASSWORD = /(?=.*[a-zA-Z])(?=.*[0-9]).{6,10}/.freeze
 
@@ -38,6 +41,13 @@ class User < ApplicationRecord
                             on: :create
 
   after_initialize :assign_basic_role, if: :new_record?
+
+  def slug_candidates
+    [
+      :full_name,
+      %i[full_name id]
+    ]
+  end
 
   def assign_basic_role
     self.role = User.roles[:regular]
