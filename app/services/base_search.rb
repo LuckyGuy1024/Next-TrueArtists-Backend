@@ -21,6 +21,7 @@ class BaseSearch
     constraints[:where] = {
       specialty: options[:specialty],
       styles: options[:styles],
+      status: options[:status],
       studio_id: options[:studio_id],
       artist_id: options[:artist_id],
     }
@@ -31,7 +32,7 @@ class BaseSearch
           origin: coordinates
         }
       },
-                        where: { location: { near: coordinates, within: options[:within] } } }
+      where: { location: { near: coordinates, within: options[:within] } } }
     end
 
     constraints.merge(location_info)
