@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_030058) do
+ActiveRecord::Schema.define(version: 2021_05_17_234758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -149,6 +150,26 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.index ["studio_id"], name: "index_clients_on_studio_id"
   end
 
+  create_table "conventions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "link_to_official_site"
+    t.string "facebook_link"
+    t.text "description"
+    t.integer "created_by"
+    t.boolean "verified", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal "lat", precision: 15, scale: 10
+    t.decimal "lon", precision: 15, scale: 10
+    t.string "slug"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.string "favoritable_type", null: false
     t.bigint "favoritable_id", null: false
@@ -227,13 +248,14 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.string "sender_id"
+    t.integer "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "thread_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -308,6 +330,27 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
     t.string "currency_code"
+    t.time "sunday_end"
+    t.time "saturday_end"
+    t.time "friday_end"
+    t.time "thursday_end"
+    t.time "wednesday_end"
+    t.time "tuesday_end"
+    t.time "monday_end"
+    t.time "sunday_start"
+    t.time "saturday_start"
+    t.time "friday_start"
+    t.time "thursday_start"
+    t.time "wednesday_start"
+    t.time "tuesday_start"
+    t.time "monday_start"
+    t.boolean "sunday"
+    t.boolean "saturday"
+    t.boolean "friday"
+    t.boolean "thursday"
+    t.boolean "wednesday"
+    t.boolean "tuesday"
+    t.boolean "monday"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end

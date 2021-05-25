@@ -26,15 +26,6 @@ module Api::V1::Admin
       end
     end
 
-    def remove_image
-      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
-      if attachment.blank?
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: 'We could not delete resource')
-      end
-    end
-
     def approve
       if @artist.approve!
         head(:ok)

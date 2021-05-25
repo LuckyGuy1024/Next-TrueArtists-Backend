@@ -1,21 +1,18 @@
-class TattooSerializer < ActiveModel::Serializer
+# frozen_string_literal: true
+
+class ConventionSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  belongs_to :artist
-  belongs_to :studio
+  belongs_to :user
+
   attributes :id,
-             :styles,
-             :categories,
-             :placement,
+             :name,
              :description,
-             :color,
-             :size,
-             :tags,
-             :caption,
-             :featured,
-             :status,
-             :image,
-             :created_at
+             :link_to_official_site,
+             :facebook_link,
+             :start_date,
+             :end_date,
+             :image
 
   def image
     if object.image.attached?
@@ -27,11 +24,5 @@ class TattooSerializer < ActiveModel::Serializer
         status: object.image.status
       }
     end
-  end
-
-  def tags
-    return [] if object.tag_list.nil?
-
-    object.tag_list.split(',')
   end
 end
