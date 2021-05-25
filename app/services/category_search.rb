@@ -11,7 +11,7 @@ class CategorySearch < BaseSearch
 
     {
       categories: ActiveModel::Serializer::CollectionSerializer.new(results,
-                                                                  serializer: CategorySerializer),
+                                                                    serializer: CategorySerializer),
       meta: meta
     }
   end

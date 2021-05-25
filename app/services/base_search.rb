@@ -22,6 +22,7 @@ class BaseSearch
       specialty: options[:specialty],
       styles: options[:styles],
       placement: options[:placement],
+      verified: options[:verified],
       studio_id: options[:studio_id],
       artist_id: options[:artist_id]
     }.delete_if { |_k, v| v.nil? }

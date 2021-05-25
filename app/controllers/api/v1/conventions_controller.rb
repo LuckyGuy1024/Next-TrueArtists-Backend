@@ -31,6 +31,7 @@ module Api
           status: params[:status],
           near: params[:city] || params[:near],
           verified: true,
+          time_constraint: Date.today,
           within: params[:within],
           user_role: current_user.role
         }.delete_if { |_k, v| v.nil? }

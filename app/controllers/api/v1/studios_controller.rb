@@ -30,7 +30,7 @@ module Api::V1
     end
 
     def create
-      studio = current_user.build_studio(studio_params)
+      studio = Studio.create_studio(current_user, studio_params)
 
       if studio.save
         render json: StudioSerializer.new(studio).to_json, status: :created
@@ -134,6 +134,7 @@ module Api::V1
         :avatar,
         :hero_banner,
         :street_address,
+        :street_address_2,
         :city,
         :state,
         :zip_code,
@@ -157,7 +158,17 @@ module Api::V1
         :services,
         :minimum_spend,
         :price_per_hour,
-        :currency_code
+        :currency_code,
+        :street_address,
+        :city,
+        :state,
+        :zip_code,
+        :country,
+        :seeking_guest_spot,
+        :guest_studio,
+        :avatar,
+        :hero_banner,
+        working_hours: {}
       )
     end
   end
