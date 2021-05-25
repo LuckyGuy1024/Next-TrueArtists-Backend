@@ -23,6 +23,7 @@ class ArtistSerializer < ActiveModel::Serializer
              :price_per_hour,
              :currency_code,
              :street_address,
+             :street_address_2,
              :zip_code,
              :city,
              :state,

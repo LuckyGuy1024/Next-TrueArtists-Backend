@@ -134,6 +134,7 @@ module Api::V1
         :avatar,
         :hero_banner,
         :street_address,
+        :street_address_2,
         :city,
         :state,
         :zip_code,

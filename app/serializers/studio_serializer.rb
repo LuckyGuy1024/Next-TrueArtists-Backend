@@ -11,6 +11,7 @@ class StudioSerializer < ActiveModel::Serializer
              :city,
              :state,
              :street_address,
+             :street_address_2,
              :zip_code,
              :country,
              :phone_number,
