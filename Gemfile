@@ -10,6 +10,7 @@ gem 'active_storage_validations'
 gem 'acts_as_favoritor'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'carmen'
 gem 'browser'
 gem 'cityhash' # optional, for faster hashing (C-Ruby only)
 gem 'faker'
@@ -29,7 +30,6 @@ gem 'searchkick'
 gem 'sprockets', '~>3.0'
 gem 'sass-rails'
 gem 'sassc'
-gem 'ta-assets', git: 'https://github.com/jwachira/ta-assets.git', branch: 'master'
 gem 'twilio-ruby'
 gem 'webpacker', '~> 5.0'
 gem 'rollbar'
@@ -37,6 +37,7 @@ gem 'apitome', github: 'jejacks0n/apitome'
 gem 'rspec_api_documentation'
 gem 'whenever', require: false
 gem 'dalli'
+gem 'validates_timeliness'
 
 group :development, :test do
   gem 'pg', '>= 0.18', '< 2.0'

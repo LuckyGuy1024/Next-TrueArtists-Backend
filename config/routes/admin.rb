@@ -58,6 +58,7 @@ Rails.application.routes.draw do
           end
         end
         resources :articles
+        resources :conventions
         resources :pages
         resources :styles
         resources :categories

@@ -129,7 +129,28 @@ module Api::V1::Admin
         :seeking_guest_spot,
         :guest_studio,
         :avatar,
-        :hero_banner
+        :hero_banner,
+        :monday,       
+        :tuesday,      
+        :wednesday,    
+        :thursday,     
+        :friday,       
+        :saturday,     
+        :sunday,       
+        :monday_start,
+        :tuesday_start,
+        :wednesday_start,
+        :thursday_start,
+        :friday_start,
+        :saturday_start,
+        :sunday_start,
+        :monday_end,
+        :tuesday_end,
+        :wednesday_end,
+        :thursday_end,
+        :friday_end,
+        :saturday_end,
+        :sunday_end
       )
     end
   end
