@@ -1,6 +1,6 @@
 class MessageMailer < ApplicationMailer
 
-  MAIL_DOMAIN = '@trueartists.xyz'
+  MAIL_DOMAIN = '@trueartists.com'
 
   default from: "Message <message#{MAIL_DOMAIN}>"
 
@@ -16,9 +16,9 @@ class MessageMailer < ApplicationMailer
     end
 
     mail(
-      from: "#{@sender.full_name} <message@trueartists.xyz>",
+      from: "#{@sender.full_name} <message@trueartists.com>",
       to: @receiver.email,
-      reply_to: "#{@sender.full_name} <message-#{message.thread_id}@trueartists.xyz>",
+      reply_to: "#{@sender.full_name} <message-#{message.thread_id}@trueartists.com>",
       subject: message.subject,
       references: mail_references
     )

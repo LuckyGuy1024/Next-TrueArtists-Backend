@@ -1,5 +1,5 @@
 class ApplicationMailbox < ActionMailbox::Base
-  routing /message\-.+@trueartists.xyz/i => :message
+  routing /message\-.+@trueartists.com/i => :message
   # routing :all => :message
 
   def mail_body

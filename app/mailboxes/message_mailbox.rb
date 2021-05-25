@@ -1,6 +1,6 @@
 class MessageMailbox < ApplicationMailbox
 
-  RECIPIENT_FORMAT = /message\-(.+)@#{ENV.fetch("INBOUND_EMAIL_DOMAIN", "example.com")}\Z/i
+  RECIPIENT_FORMAT = /message\-(.+)@#{ENV.fetch("INBOUND_EMAIL_DOMAIN", "example.com")}\Z/i.freeze
 
   before_processing :find_user
 
@@ -31,11 +31,11 @@ class MessageMailbox < ApplicationMailbox
       attach_files new_message
 
       MessageMail.create(
-        message_id:      new_message.id,
-        user_id:         @user.id,
-        thread_id:       thread_id,
+        message_id: new_message.id,
+        user_id: @user.id,
+        thread_id: thread_id,
         mail_message_id: mail.message_id,
-        references:      mail.references
+        references: mail.references
       )
 
       MessageMailingService.new(new_message).forward
@@ -57,9 +57,9 @@ class MessageMailbox < ApplicationMailbox
   def attach_files(message)
     if mail.has_attachments?
       mail.attachments.map do |attachment|
-        message.attachments.attach(:io => StringIO.new(attachment.decoded),
-                                   :filename => attachment.filename,
-                                   :content_type => attachment.content_type)
+        message.attachments.attach(io: StringIO.new(attachment.decoded),
+                                   filename: attachment.filename,
+                                   content_type: attachment.content_type)
         message.save!
       end
     end

@@ -55,7 +55,7 @@ Rails.application.configure do
     address: 'smtp.sendgrid.net',
     port: 587,
     enable_starttls_auto: true,
-    domain: 'trueartists.xyz',
+    domain: 'trueartists.com',
     authentication: :plain,
     user_name: 'apikey',
     password: Rails.application.credentials[:SENDGRID_APIKEY]
@@ -66,5 +66,6 @@ Rails.application.configure do
 
   # Add ngrok domain to test inbound emails
   config.hosts << ENV.fetch('DOMAIN')
+
   config.identity_cache_store = :mem_cache_store
 end
