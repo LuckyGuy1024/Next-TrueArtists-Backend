@@ -6,7 +6,7 @@ class PhoneNumberService
     @message = options[:message]
     @phone_number = options[:phone_number]
     @code = options[:code]
-    @client = Twilio::REST::Client.new Rails.application.credentials[:TWILIO_ACCOUNT_SID], Rails.application.credentials[:TWILIO_AUTH_TOKEN]
+    @client = Twilio::REST::Client.new
   end
 
   def create_service
