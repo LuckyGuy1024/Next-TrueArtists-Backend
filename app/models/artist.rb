@@ -7,8 +7,8 @@ class Artist < ApplicationRecord
   SPECIALTY = %w[Flash Freehand].freeze
 
   searchkick locations: [:location],
-             searchable: %i[name status slug styles specialty],
-             filterable: %i[specialty styles]
+             searchable: %i[name slug styles specialty status],
+             filterable: %i[specialty styles status]
 
   include AddressExtension
   include StatusManagement

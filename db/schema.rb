@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_234758) do
+ActiveRecord::Schema.define(version: 2021_05_25_043545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -97,6 +96,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.string "name"
     t.string "street_address"
     t.string "specialty"
+    t.string "street_address_2"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
@@ -248,14 +248,13 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.integer "sender_id"
+    t.string "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "thread_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -330,27 +329,28 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
     t.string "currency_code"
-    t.time "sunday_end"
-    t.time "saturday_end"
-    t.time "friday_end"
-    t.time "thursday_end"
-    t.time "wednesday_end"
-    t.time "tuesday_end"
-    t.time "monday_end"
-    t.time "sunday_start"
-    t.time "saturday_start"
-    t.time "friday_start"
-    t.time "thursday_start"
-    t.time "wednesday_start"
-    t.time "tuesday_start"
+    t.boolean "monday", default: false
+    t.boolean "tuesday", default: false
+    t.boolean "wednesday", default: false
+    t.boolean "thursday", default: false
+    t.boolean "friday", default: false
+    t.boolean "saturday", default: false
+    t.boolean "sunday", default: false
     t.time "monday_start"
-    t.boolean "sunday"
-    t.boolean "saturday"
-    t.boolean "friday"
-    t.boolean "thursday"
-    t.boolean "wednesday"
-    t.boolean "tuesday"
-    t.boolean "monday"
+    t.time "tuesday_start"
+    t.time "wednesday_start"
+    t.time "thursday_start"
+    t.time "friday_start"
+    t.time "saturday_start"
+    t.time "sunday_start"
+    t.time "monday_end"
+    t.time "tuesday_end"
+    t.time "wednesday_end"
+    t.time "thursday_end"
+    t.time "friday_end"
+    t.time "saturday_end"
+    t.time "sunday_end"
+    t.string "street_address_2"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
