@@ -27,18 +27,6 @@ module Api::V1::Admin
       end
     end
 
-    def invite_artist
-      authorize @studio
-
-      studio_invite = @studio.studio_invites.new(artist_invite_params)
-
-      if studio_invite.invite_artist_to_studio
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: @studio.errors)
-      end
-    end
-
     def approve
       if @studio.approve!
         head(:ok)
@@ -79,6 +67,31 @@ module Api::V1::Admin
         head(:ok)
       else
         render_api_error(status: 422, errors: 'Resource could not be rejected')
+      end
+    end
+
+    def invite_artist
+      authorize @studio
+
+      studio_invite = @studio.studio_invites.new(artist_invite_params)
+
+      if studio_invite.invite_artist_to_studio
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
+    def studio_invites
+      authorize @studio
+
+      invites = @studio.studio_invites.where(accepted: false)
+
+      if !invites.blank?
+        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                       serializer: StudioInviteSerializer), status: :ok
+      else
+        render_api_error(status: 422, errors: 'There are no pending invites')
       end
     end
 

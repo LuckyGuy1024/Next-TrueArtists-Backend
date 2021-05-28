@@ -81,7 +81,7 @@ module Api::V1
         render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
                                                                        serializer: StudioInviteSerializer), status: :ok
       else
-        render_api_error(status: 422, errors: 'Studio has no pending invites')
+        render_api_error(status: 422, errors: 'There are no pending invites')
       end
     end
 
