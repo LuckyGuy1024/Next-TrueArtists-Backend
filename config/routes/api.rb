@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       resources :styles
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]
+      resources :messages
       resources :guest_artist_applications, only: %i[create update destroy] do
         member do
           post :respond

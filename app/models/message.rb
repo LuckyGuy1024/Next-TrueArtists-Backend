@@ -15,4 +15,18 @@ class Message < ApplicationRecord
   has_many :message_mails
 
   has_many_attached :attachments
+
+  def self.build_message(sender, message)
+    Message.new({
+      content: "description: #{message[:description]},
+                placement: #{message[:placement]},
+                size: #{message[:size]},
+                urgency: #{message[:urgency]},
+                is this your first tattoo: #{message[:first_time]}",
+      sender_id: sender.id,
+      receiver_id: message[:receiver_id],
+      message_type: message[:message_type],
+      thread_id: message[:thread_id]
+    }.delete_if { |_thread_id, v| v.nil? })
+  end
 end

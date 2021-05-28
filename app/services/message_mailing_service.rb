@@ -1,19 +1,10 @@
-class MessageMailingService
-
-  def initialize(message)
-    @message = message
-  end
-
+class MessageMailingService < BaseMessageService
   # Send a message created on the system to a recipient
   def send
-    return if @message.blank?
+    return unless save_message
 
-    @message.thread_id = random_thread_id
-
-    if @message.save
-      mail = MessageMailer.notify(@message).deliver
-      save_message_mail(mail)
-    end
+    mail = MessageMailer.notify(@message).deliver
+    save_message_mail(mail)
   end
 
   # Forward inbound message to recipient
@@ -32,10 +23,6 @@ class MessageMailingService
       mail_message_id: mail.message_id,
       references: mail.references.try(:join, ',')
     )
-  end
-
-  def random_thread_id
-    rand(100**10).to_s.center(10, rand(10).to_s)
   end
 
   def latest_references

@@ -1,12 +1,12 @@
 
-class PhoneNumberVerifier
+class PhoneNumberService
   attr_reader :options
 
   def initialize(options)
     @message = options[:message]
     @phone_number = options[:phone_number]
     @code = options[:code]
-    @client = Twilio::REST::Client.new
+    @client = Twilio::REST::Client.new Rails.application.credentials[:TWILIO_ACCOUNT_SID], Rails.application.credentials[:TWILIO_AUTH_TOKEN]
   end
 
   def create_service
@@ -39,5 +39,7 @@ class PhoneNumberVerifier
                               to: @phone_number,
                               body: @message
                             })
+  rescue Twilio::REST::TwilioError => e
+    e.message
   end
 end

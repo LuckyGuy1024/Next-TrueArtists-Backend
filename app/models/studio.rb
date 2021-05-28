@@ -87,7 +87,7 @@ class Studio < ApplicationRecord
   end
 
   def verify_phone(code)
-    status = PhoneNumberVerifier.new(code: code, phone_number: phone_number).status
+    status = PhoneNumberService.new(code: code, phone_number: phone_number).status
 
     update(phone_verified: true) if status == 'approved'
   end
@@ -113,7 +113,7 @@ class Studio < ApplicationRecord
   private
 
   def send_phone_verification_code
-    PhoneNumberVerifier.new(phone_number: phone_number).verify
+    PhoneNumberService.new(phone_number: phone_number).verify
   end
 
   def upgrade_user_role
