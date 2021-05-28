@@ -21,4 +21,8 @@ class StudioPolicy < ApplicationPolicy
   def submit_for_review?
     user.admin? or user.id == studio.user_id
   end
+
+  def studio_invites?
+    user.admin? or user.id == studio.user_id
+  end
 end

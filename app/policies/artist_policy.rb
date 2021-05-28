@@ -17,4 +17,8 @@ class ArtistPolicy < ApplicationPolicy
   def submit_for_review?
     user.admin? or user.id == artist.user_id
   end
+
+  def studio_invites?
+    user.admin? or user.id == artist.user_id
+  end
 end

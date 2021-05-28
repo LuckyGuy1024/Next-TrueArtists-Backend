@@ -28,7 +28,11 @@ module Api::V1::Admin
     end
 
     def invite_artist
-      if @studio.invite_artist(artist_invite_params)
+      authorize @studio
+
+      studio_invite = @studio.studio_invites.new(artist_invite_params)
+
+      if studio_invite.invite_artist_to_studio
         head(:ok)
       else
         render_api_error(status: 422, errors: @studio.errors)

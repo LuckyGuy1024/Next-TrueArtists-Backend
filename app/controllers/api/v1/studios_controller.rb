@@ -62,10 +62,26 @@ module Api::V1
 
     def invite_artist
       authorize @studio
-      if @studio.invite_artist(artist_invite_params)
+
+      studio_invite = @studio.studio_invites.new(artist_invite_params)
+
+      if studio_invite.invite_artist_to_studio
         head(:ok)
       else
         render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
+    def studio_invites
+      authorize @studio
+
+      invites = @studio.studio_invites.where(accepted: false)
+
+      if !invites.blank?
+        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                       serializer: StudioInviteSerializer), status: :ok
+      else
+        render_api_error(status: 422, errors: 'Studio has no pending invites')
       end
     end
 
@@ -123,6 +139,13 @@ module Api::V1
 
     def phone_verification_params
       params.permit(:code)
+    end
+
+    def artist_invite_params
+      params.permit(
+        :phone_number,
+        :email
+      )
     end
 
     def studio_params
