@@ -66,6 +66,7 @@ Rails.application.routes.draw do
         resources :styles
         resources :categories
         resources :guest_artist_applications
+        resources :dashboard, only: %i[index]
       end
     end
   end
