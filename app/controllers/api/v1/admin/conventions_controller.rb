@@ -47,6 +47,22 @@ module Api
           end
         end
 
+        def approve
+          if @convention.approve!
+            head(:ok)
+          else
+            render_api_error(status: 422, errors: @artist.errors)
+          end
+        end
+
+        def reject
+          if @convention.reject!
+            head(:ok)
+          else
+            render_api_error(status: 422, errors: @artist.errors)
+          end
+        end
+
         private
 
         def find_convention
