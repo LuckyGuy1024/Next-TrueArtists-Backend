@@ -56,6 +56,7 @@ module Api
         def convention_params
           params.permit(
             :name,
+            :description,
             :address,
             :city,
             :state,

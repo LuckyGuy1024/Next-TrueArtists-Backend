@@ -294,12 +294,13 @@ if ENV['RUN_ALL'] == '1'
   40.times do
     conventions = Convention.create(
       name: Faker::FunnyName.name,
+      description: Faker::Lorem.paragraph(sentence_count: 3),
       address: Faker::Address.street_address,
       country: Faker::Address.country,
       city: Faker::Address.city,
       state: Faker::Address.state,
-      start_date: Faker::Date.between(from: '2021-05-24', to: '2021-05-25'),
-      end_date: Faker::Date.between(from: '2021-05-26', to: '2021-05-29'),
+      start_date: Faker::Date.between(from: '2021-05-25', to: '2021-06-25'),
+      end_date: Faker::Date.between(from: '2021-05-26', to: '2021-06-30'),
       created_by: [1, 2, 3, 4, 5].sample,
       link_to_official_site: Faker::Internet.url,
       facebook_link: Faker::Internet.url(host: 'facebook.com')
