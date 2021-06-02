@@ -6,11 +6,16 @@ class BaseMessageService
     @message = message
   end
 
+  def thread_id
+    binding.pry
+    @message.thread_id = random_thread_id unless @message.thread_id
+  end
+
   # Send a message created on the system to a recipient
   def save_message
     return if @message.blank?
 
-    @message.thread_id = random_thread_id unless @message.thread_id
+    thread_id
 
     @message.save
   end

@@ -3,9 +3,10 @@
 module Api
   module V1
     class MessagesController < ApplicationController
-      def create
-        message = Message.build_message(current_user, message_params)
 
+      def create
+        message = Message.build_message(current_user, message_params, receiver_id)
+        binding.pry
         if message.save
           MessageMailingService.new(message).send
           MessageSmsService.new(message).send
@@ -17,8 +18,27 @@ module Api
 
       private
 
+      def receiver_id
+        recipient = message_params[:recipient_type].constantize.find(message_params[:recipient_id])
+        binding.pry
+        if recipient.instance_of?(Studio) || recipient.instance_of?(Artist)
+          recipient.user_id
+        else
+          recipient.id
+        end
+      end
+
       def message_params
-        params.permit(:description, :placement, :size, :urgency, :first_time, :studio_id, :artist_id, :thread_id)
+        params.permit(
+          :description,
+          :placement,
+          :size,
+          :urgency,
+          :first_time,
+          :recipient_type,
+          :recipient_id,
+          :thread_id
+        )
       end
     end
   end

@@ -16,7 +16,8 @@ class Message < ApplicationRecord
 
   has_many_attached :attachments
 
-  def self.build_message(sender, message)
+  def self.build_message(sender, message, recipient)
+    binding.pry
     Message.new({
       content: "description: #{message[:description]},
                 placement: #{message[:placement]},
@@ -24,7 +25,7 @@ class Message < ApplicationRecord
                 urgency: #{message[:urgency]},
                 is this your first tattoo: #{message[:first_time]}",
       sender_id: sender.id,
-      receiver_id: message[:receiver_id],
+      receiver_id: recipient,
       message_type: message[:message_type],
       thread_id: message[:thread_id]
     }.delete_if { |_thread_id, v| v.nil? })

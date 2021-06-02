@@ -15,6 +15,6 @@ class MessageSmsService < BaseMessageService
   private
 
   def generate_message_url
-    "#{ENV.fetch('HOST')}/api/v1/messages/accept-invite?token=#{@message.thread_id}"
+    "#{ENV.fetch('HOST')}/api/v1/messages/accept-invite?token=#{thread_id}"
   end
 end

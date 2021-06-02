@@ -18,7 +18,7 @@ class MessageMailingService < BaseMessageService
   def save_message_mail(mail)
     MessageMail.create(
       message_id: @message.id,
-      thread_id: @message.thread_id,
+      thread_id: thread_id,
       user_id: @message.receiver_id,
       mail_message_id: mail.message_id,
       references: mail.references.try(:join, ',')
@@ -26,7 +26,7 @@ class MessageMailingService < BaseMessageService
   end
 
   def latest_references
-    last_mail = MessageMail.where(thread_id: @message.thread_id,
+    last_mail = MessageMail.where(thread_id: thread_id,
                                   user_id: @message.receiver_id)
                            .order(:created_at)
                            .last
