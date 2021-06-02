@@ -65,6 +65,7 @@ Rails.application.routes.draw do
           member do
             put :approve
             put :reject
+            put :submit_for_review
           end
         end
 

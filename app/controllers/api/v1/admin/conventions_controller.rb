@@ -29,6 +29,16 @@ module Api
           end
         end
 
+        def submit_for_review
+          @convention.pending_review
+
+          if @convention.save
+            head(:ok)
+          else
+            render_api_error(status: 422, errors: @convention.errors)
+          end
+        end
+
         def update
           convention = BaseForm.new(@convention, convention_params).update
 
