@@ -6,10 +6,10 @@ module Api
 
       def create
         message = Message.build_message(current_user, message_params, receiver_id)
-        binding.pry
+
         if message.save
           MessageMailingService.new(message).send
-          MessageSmsService.new(message).send
+          # MessageSmsService.new(message).send
           render json: message.to_json, status: :created
         else
           render_api_error(status: 422, errors: message.errors)
@@ -20,7 +20,7 @@ module Api
 
       def receiver_id
         recipient = message_params[:recipient_type].constantize.find(message_params[:recipient_id])
-        binding.pry
+
         if recipient.instance_of?(Studio) || recipient.instance_of?(Artist)
           recipient.user_id
         else

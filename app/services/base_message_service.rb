@@ -7,7 +7,6 @@ class BaseMessageService
   end
 
   def thread_id
-    binding.pry
     @message.thread_id = random_thread_id unless @message.thread_id
   end
 

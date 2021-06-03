@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_234758) do
+ActiveRecord::Schema.define(version: 2021_05_25_043545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,8 +106,10 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.string "name"
     t.string "street_address"
     t.string "specialty"
+    t.string "street_address_2"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
+    t.index ["studio_id"], name: "index_artists_on_studio_id"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
@@ -120,6 +122,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.integer "image_file_size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -131,9 +134,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["description"], name: "index_categories_on_description"
-    t.index ["meta_description"], name: "index_categories_on_meta_description"
-    t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
@@ -275,6 +275,8 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "thread_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -308,6 +310,8 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone_number"
     t.index ["artist_id"], name: "index_studio_invites_on_artist_id"
+    t.index ["email"], name: "index_studio_invites_on_email"
+    t.index ["invite_code"], name: "index_studio_invites_on_invite_code"
     t.index ["studio_id"], name: "index_studio_invites_on_studio_id"
   end
 
@@ -348,30 +352,31 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
-    t.string "currency_code"
-    t.time "sunday_end"
-    t.time "saturday_end"
-    t.time "friday_end"
-    t.time "thursday_end"
-    t.time "wednesday_end"
-    t.time "tuesday_end"
-    t.time "monday_end"
-    t.time "sunday_start"
-    t.time "saturday_start"
-    t.time "friday_start"
-    t.time "thursday_start"
-    t.time "wednesday_start"
-    t.time "tuesday_start"
+    t.boolean "monday", default: false
+    t.boolean "tuesday", default: false
+    t.boolean "wednesday", default: false
+    t.boolean "thursday", default: false
+    t.boolean "friday", default: false
+    t.boolean "saturday", default: false
+    t.boolean "sunday", default: false
     t.time "monday_start"
-    t.boolean "sunday"
-    t.boolean "saturday"
-    t.boolean "friday"
-    t.boolean "thursday"
-    t.boolean "wednesday"
-    t.boolean "tuesday"
-    t.boolean "monday"
+    t.time "tuesday_start"
+    t.time "wednesday_start"
+    t.time "thursday_start"
+    t.time "friday_start"
+    t.time "saturday_start"
+    t.time "sunday_start"
+    t.time "monday_end"
+    t.time "tuesday_end"
+    t.time "wednesday_end"
+    t.time "thursday_end"
+    t.time "friday_end"
+    t.time "saturday_end"
+    t.time "sunday_end"
+    t.string "currency_code"
+    t.string "street_address_2"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
-    t.index ["user_id"], name: "index_studios_on_user_id", unique: true
+    t.index ["user_id"], name: "index_studios_on_user_id"
   end
 
   create_table "styles", force: :cascade do |t|
@@ -411,6 +416,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_234758) do
     t.string "slug"
     t.string "social_id"
     t.string "provider"
+    t.index ["email"], name: "index_users_on_email"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["social_id"], name: "index_users_on_social_id"

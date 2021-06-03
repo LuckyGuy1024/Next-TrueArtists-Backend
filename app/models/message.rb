@@ -17,7 +17,6 @@ class Message < ApplicationRecord
   has_many_attached :attachments
 
   def self.build_message(sender, message, recipient)
-    binding.pry
     Message.new({
       content: "description: #{message[:description]},
                 placement: #{message[:placement]},

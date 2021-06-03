@@ -7,6 +7,8 @@ class MessageSmsService < BaseMessageService
     return unless save_message
 
     @message = generate_message_url
+
+    # find user phone number
     @phone_number = @message.receiver
 
     PhoneNumberService.new(message: @message, phone_number: @phone_number).send_sms
@@ -15,6 +17,6 @@ class MessageSmsService < BaseMessageService
   private
 
   def generate_message_url
-    "#{ENV.fetch('HOST')}/api/v1/messages/accept-invite?token=#{thread_id}"
+    "#{ENV.fetch('HOST')}/api/v1/messages?thread_id=#{thread_id}"
   end
 end
