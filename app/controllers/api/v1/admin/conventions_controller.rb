@@ -21,7 +21,7 @@ module Api
 
         def create
           convention = current_user.conventions.new(convention_params)
-
+          binding.pry
           if convention.save
             render json: ConventionSerializer.new(convention).to_json, status: :created
           else
@@ -102,6 +102,7 @@ module Api
             status: params[:status],
             near: params[:city] || params[:near],
             within: params[:within],
+            verified: params[:verified],
             user_role: current_user.role
           }.delete_if { |_k, v| v.nil? }
         end
