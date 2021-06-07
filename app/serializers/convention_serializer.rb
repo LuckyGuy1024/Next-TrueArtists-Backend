@@ -12,6 +12,12 @@ class ConventionSerializer < ActiveModel::Serializer
              :facebook_link,
              :start_date,
              :end_date,
+             :address, 
+             :city, 
+             :state, 
+             :country, 
+             :verified, 
+             :slug,
              :image
 
   def image

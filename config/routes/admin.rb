@@ -60,8 +60,16 @@ Rails.application.routes.draw do
             put :flag
           end
         end
+
+        resources :conventions, only: %i[index show create] do
+          member do
+            put :approve
+            put :reject
+            put :submit_for_review
+          end
+        end
+
         resources :articles
-        resources :conventions
         resources :pages
         resources :styles
         resources :categories
