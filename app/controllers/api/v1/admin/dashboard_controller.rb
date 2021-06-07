@@ -3,57 +3,43 @@
 module Api::V1::Admin
   class DashboardController < BaseController
     def index
-      @users = { users: { total: User.all.size,
-                          admin: User.where(role: 'admin').size,
-                          artists: User.where(role: 'artist').size,
-                          studios: User.where(role: 'studio_manager').size,
-                          regular: User.where(role: 'regular').size,
-                          active: User.where(status: 'active').size,
-                          inactive: User.where(status: 'inactive').size,
-                          suspended: User.where(status: 'suspended').size,
-                          closed: User.where(status: 'closed').size
-                        }
-                 }
-      
-      @styles = { styles: { total: Style.all.size }}
+      @users = { users: { total: User.count,
+                          admin: User.where(role: 'admin').count,
+                          artists: User.where(role: 'artist').count,
+                          studios: User.where(role: 'studio_manager').count,
+                          regular: User.where(role: 'regular').count,
+                          active: User.where(status: 'active').count,
+                          inactive: User.where(status: 'inactive').count,
+                          suspended: User.where(status: 'suspended').count,
+                          closed: User.where(status: 'closed').count } }
 
-      @artists = { artists: { total: Artist.all.size,
-                              pending: Artist.where(status: 'pending').size,
-                              approved: Artist.where(status: 'approved').size,
-                              rejected: Artist.where(status: 'rejected').size
-                            }
-                  }
+      @styles = { styles: { total: Style.count } }
 
-      @studios = { studios: { total: Studio.all.size,
-                              pending: Studio.where(status: 'pending').size,
-                              approved: Studio.where(status: 'approved').size,
-                              rejected: Studio.where(status: 'rejected').size
-                            }
-                  }
+      @artists = { artists: { total: Artist.count,
+                              pending: Artist.where(status: 'pending').count,
+                              approved: Artist.where(status: 'approved').count,
+                              rejected: Artist.where(status: 'rejected').count } }
 
-      @articles = { articles: { total: Article.all.size,
-                                drafts: Article.where(status: 'draft').size,
-                                published: Article.where(status: 'published').size,
-                                flagged: Article.where(status: 'flagged').size
-                              }
-                  }
-      
-      @landing_pages = { landing_pages: { total: LandingPage.all.size,
-                                          drafts: LandingPage.where(status: 'draft').size,
-                                          published: LandingPage.where(status: 'published').size,
-                                          archived: LandingPage.where(status: 'archived').size,
-                                          artists: LandingPage.where('page_key LIKE ?', '%/artists/%').size,
-                                          studios: LandingPage.where('page_key LIKE ?', '%/studios/%').size
-                                        }
-      }
+      @studios = { studios: { total: Studio.count,
+                              pending: Studio.where(status: 'pending').count,
+                              approved: Studio.where(status: 'approved').count,
+                              rejected: Studio.where(status: 'rejected').count } }
 
-      @conventions = { conventions: { total: Convention.all.size,
-                                      active: Convention.where('start_date >= ?', Time.now).size,
-                                      inactive: Convention.where('end_date < ?', Time.now).size
-                                    }
-      }
-      
-      render json: [@users, @artists, @studios, @articles, @landing_pages, @conventions,  @styles], status: :ok
+      @articles = { articles: { total: Article.count,
+                                drafts: Article.where(status: 'draft').count,
+                                published: Article.where(status: 'published').count,
+                                flagged: Article.where(status: 'flagged').count } }
+
+      @landing_pages = { landing_pages: { total: LandingPage.count,
+                                          drafts: LandingPage.where(status: 'draft').count,
+                                          published: LandingPage.where(status: 'published').count,
+                                          archived: LandingPage.where(status: 'archived').count } }
+
+      @conventions = { conventions: { total: Convention.count,
+                                      active: Convention.where('start_date >= ?', Time.now).count,
+                                      inactive: Convention.where('end_date < ?', Time.now).count } }
+
+      render json: [@users, @artists, @studios, @articles, @landing_pages, @conventions, @styles], status: :ok
     end
   end
 end
