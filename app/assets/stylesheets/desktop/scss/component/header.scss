@@ -83,7 +83,7 @@
   border: 1px solid #f2f2f2;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
   position: relative;
-  width: 140px;
+  width: auto;
 
   a {
     display: flex;
@@ -95,14 +95,15 @@
       content: '\e92e';
       font-family: $font-icon;
       position: absolute;
-      right: 3px;
+      right: 10px;
       font-size: 20px;
-      top: 8px;
+      top: 5px;
       transition: 0.4s all ease;
     }
 
     img {
       border-radius: 50%;
+      width: 40px;
     }
 
     span {

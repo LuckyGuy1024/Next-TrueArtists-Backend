@@ -15,6 +15,7 @@ Rails.application.routes.draw do
           end
           member do
             delete 'delete-image/:image_id' => 'artists#remove_image'
+            get 'studio_invites' => 'artists#studio_invites'
             put :approve
             put :reject
           end
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
           end
           member do
             delete 'delete-image/:image_id' => 'studios#remove_image'
+            post 'invite_artist' => 'studios#invite_artist'
+            get 'studio_invites' => 'studios#studio_invites'
             put :approve
             put :reject
           end
@@ -57,12 +60,21 @@ Rails.application.routes.draw do
             put :flag
           end
         end
+
+        resources :conventions, only: %i[index show create] do
+          member do
+            put :approve
+            put :reject
+            put :submit_for_review
+          end
+        end
+
         resources :articles
-        resources :conventions
         resources :pages
         resources :styles
         resources :categories
         resources :guest_artist_applications
+        resources :dashboard, only: %i[index]
       end
     end
   end

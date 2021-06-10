@@ -2,7 +2,7 @@
 
 module Api::V1::Admin
   class StylesController < BaseController
-    before_action :find_style, except: %i[index]
+    before_action :find_style, except: %i[index create]
 
     def index
       @styles = Style.all
@@ -33,10 +33,18 @@ module Api::V1::Admin
       end
     end
 
+    def destroy
+      if @style.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @style.errors)
+      end
+    end
+
     private
 
     def find_style
-      @style = Studio.find(params[:id])
+      @style = Style.find(params[:id])
     end
 
     def style_params

@@ -69,6 +69,19 @@ module Api::V1::Admin
       end
     end
 
+    def studio_invites
+      authorize @artist
+
+      invites = StudioInvite.where(accepted: false, artist_id: @artist.id)
+
+      if !invites.blank?
+        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                       serializer: StudioInviteSerializer), status: :ok
+      else
+        render_api_error(status: 422, errors: 'There are no pending invites')
+      end
+    end
+
     private
 
     def find_artist

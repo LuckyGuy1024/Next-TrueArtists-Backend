@@ -21,11 +21,21 @@ module Api
 
         def create
           convention = current_user.conventions.new(convention_params)
-
+          binding.pry
           if convention.save
             render json: ConventionSerializer.new(convention).to_json, status: :created
           else
             render_api_error(status: 422, errors: convention.errors)
+          end
+        end
+
+        def submit_for_review
+          @convention.pending_review
+
+          if @convention.save
+            head(:ok)
+          else
+            render_api_error(status: 422, errors: @convention.errors)
           end
         end
 
@@ -47,6 +57,22 @@ module Api
           end
         end
 
+        def approve
+          if @convention.approve!
+            head(:ok)
+          else
+            render_api_error(status: 422, errors: @artist.errors)
+          end
+        end
+
+        def reject
+          if @convention.reject!
+            head(:ok)
+          else
+            render_api_error(status: 422, errors: @artist.errors)
+          end
+        end
+
         private
 
         def find_convention
@@ -56,6 +82,7 @@ module Api
         def convention_params
           params.permit(
             :name,
+            :description,
             :address,
             :city,
             :state,
@@ -75,6 +102,7 @@ module Api
             status: params[:status],
             near: params[:city] || params[:near],
             within: params[:within],
+            verified: params[:verified],
             user_role: current_user.role
           }.delete_if { |_k, v| v.nil? }
         end

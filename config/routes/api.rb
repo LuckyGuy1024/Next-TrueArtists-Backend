@@ -37,6 +37,7 @@ Rails.application.routes.draw do
           get :artists
           delete 'delete-image/:image_id' => 'artists#remove_image'
           put :submit_for_review
+          get 'studio_invites' => 'artists#studio_invites'
         end
       end
 
@@ -51,9 +52,11 @@ Rails.application.routes.draw do
         member do
           get :artists
           delete 'delete-image/:image_id' => 'studios#remove_image'
+          post 'invite_artist' => 'studios#invite_artist'
           put :submit_for_review
           get :guest_artist_applications
           get 'guest_artist_applications/:id' => 'studios#application'
+          get 'studio_invites' => 'studios#studio_invites'
         end
       end
 
@@ -82,8 +85,13 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :conventions do
+        member do
+          put :submit_for_review
+        end
+      end
+
       resources :articles, only: %i[index show]
-      resources :conventions, only: %i[index show]
       resources :styles
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]

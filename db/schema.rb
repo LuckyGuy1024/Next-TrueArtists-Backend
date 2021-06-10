@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_043545) do
+ActiveRecord::Schema.define(version: 2021_06_02_160148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_043545) do
     t.string "facebook_link"
     t.text "description"
     t.integer "created_by"
-    t.boolean "verified", default: false
+    t.string "verified"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal "lat", precision: 15, scale: 10
@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_043545) do
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.integer "sender_id"
+    t.string "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
