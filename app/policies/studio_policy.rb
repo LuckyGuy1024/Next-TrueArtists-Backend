@@ -25,4 +25,8 @@ class StudioPolicy < ApplicationPolicy
   def studio_invites?
     user.admin? or user.id == studio.user_id
   end
+
+  def remove_studio_artist?
+    user.admin? or user.id == studio.user_id
+  end
 end

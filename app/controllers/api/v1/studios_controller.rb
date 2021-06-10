@@ -113,6 +113,18 @@ module Api::V1
              status: :ok
     end
 
+    def remove_studio_artist
+      authorize @studio
+
+      studio_artist = @studio.studio_artists.find(params[:studio_artist_id])
+
+      if studio_artist.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @tattoo.errors)
+      end
+    end
+
     def application
       render json: GuestArtistApplicationSerializer.new(@application).to_json, status: :ok
     end

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
         member do
           get :artists
           delete 'delete-image/:image_id' => 'studios#remove_image'
+          delete 'studio_artists/:studio_artist_id' => 'studios#remove_studio_artist'
           post 'invite_artist' => 'studios#invite_artist'
           put :submit_for_review
           get :guest_artist_applications
