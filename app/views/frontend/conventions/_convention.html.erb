@@ -1,21 +1,29 @@
-<div class="container">
-  <div class="row article-container">
-    <div class="col-sm-4 article-image">
-      <%= link_to convention_path(convention) do %>
+<!-- Conventions -->
+<div class="col-lg-3 col-md-6 col-sm-12 col">
+  <div class="location-section">
+    <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
+    <p><%= link_to convention.city_state, city_state_conventions_path(convention.city_state) %></p>
+  </div>
+  <div class="listing-widget shadow">
+    <%= link_to convention_path(convention) do %>
+      <div class="list-image">
         <img data-src="<%= url_for(convention.image) %>" class="lazyload" />
-      <% end %>
-    </div>
-    <div class="col-sm-8">
-      <div class="article-content">
-        <%= link_to convention_path(convention) do %>
-          <h2><%= convention.name %></h2>
-        <% end %>
-<!--        <p><%#= article.introduction %></p>-->
       </div>
-      <div class="article-meta-data">
-        <div class="article-created-date"><%= convention.start_date.strftime("%d-%m-%Y") %></div>
-        <div class="article-created-date"><%= convention.end_date.strftime("%d-%m-%Y") %></div>
+      <div class="list-content d-flex align-items-center">
+        <div class="list-left flex-grow-1">
+          <div class="align-items-center">
+            <div class="info">
+              <h5><%= convention.name %></h5>
+            </div>
+            <div class="date-info">
+              <div class="date">Start Date: <span><%= convention.start_date.strftime("%a, %b %d, %Y") %></span></div>
+              <div class="date">End Date: <span><%= convention.end_date.strftime("%a, %b %d, %Y") %></span></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
+<!-- // -->
+

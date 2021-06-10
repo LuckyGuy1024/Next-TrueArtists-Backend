@@ -30,6 +30,8 @@ module Api
       end
 
       def submit_for_review
+        authorize @convention
+
         @convention.pending_review
 
         if @convention.save
@@ -40,6 +42,8 @@ module Api
       end
 
       def update
+        authorize @convention
+
         convention = BaseForm.new(@convention, convention_params).update
 
         if convention
@@ -53,10 +57,6 @@ module Api
 
       def find_convention
         @convention = Convention.friendly.find(params[:id])
-
-        if @convention.created_by != current_user.id
-          @convention = Convention.friendly.verified_conventions.upcoming_conventions.find(params[:id])
-        end
       end
 
       def convention_params

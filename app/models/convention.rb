@@ -62,6 +62,10 @@ class Convention < ApplicationRecord
     new_record? || slug.blank?
   end
 
+  def city_state
+    format('%s %s', city, state)
+  end
+
   def ends_at
     end_date.strftime('%H:%M %p')
   end

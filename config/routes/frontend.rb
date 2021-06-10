@@ -62,10 +62,16 @@ Rails.application.routes.draw do
         get "categories/:id" => 'categories#show', as: :blog_category
       end
     end
+
+    resources :conventions, only: %i[index show] do
+      collection do
+        get 'city/:city_state' => 'conventions#city', as: :city_state
+      end
+    end
+
     resources :pages, only: %i[index show]
 
     resources :styles
-    resources :conventions, only: %i[index show]
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]
     resources :global_search_redirector, only: [:index]

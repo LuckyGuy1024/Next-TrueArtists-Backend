@@ -8,8 +8,8 @@
           <div class="sub-header">
             <h1>Find Conventions Near You</h1>
           </div>
-          <div class="search-artists-form row">
-            <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-12">
               <div class="search-section">
                 <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search conventions near you' %>
                 <button type="submit" class="search search-box">
@@ -28,7 +28,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="artists-lists grid-gap-30 row">
+        <div class="grid-gap-30 row">
           <%= render @conventions %>
         </div>
       </div>

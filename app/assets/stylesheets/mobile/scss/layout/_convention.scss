@@ -1,0 +1,35 @@
+.container {
+  .header-image img{
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  .date-info {
+    margin: 20px 0;
+
+    span {
+      color: $gray-text-color;
+    }
+  }
+
+  .content {
+    margin: 10px 0;
+
+    p {
+      line-height: 35px;
+    }
+
+    .sharethis-inline-share-buttons {
+      margin-bottom: 15px;
+
+      .st-btn {
+        margin-right: 15px !important;
+        border-radius: 5px;
+      }
+    }
+
+    .body {
+      margin: 25px 0;
+    }
+  }
+}
