@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.string "sender_id"
+    t.integer "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
