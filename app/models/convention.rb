@@ -1,10 +1,30 @@
 # frozen_string_literal: true
 
 class Convention < ApplicationRecord
-  searchkick word_start: %i[name], locations: [:location]
+  include AASM
+  searchkick word_start: %i[name verified], locations: [:location]
 
   extend FriendlyId
   friendly_id :name, use: :history
+
+  aasm column: 'verified' do
+    state :pending, initial: true
+    state :pending_review
+    state :approved
+    state :rejected
+
+    event :pending_review do
+      transitions from: :pending, to: :pending_review
+    end
+
+    event :approve do
+      transitions from: %i[pending_review pending], to: :approved
+    end
+
+    event :reject do
+      transitions from: %i[pending_review pending], to: :rejected
+    end
+  end
 
   has_one_attached :image
 

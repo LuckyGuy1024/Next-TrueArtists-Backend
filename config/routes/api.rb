@@ -85,8 +85,13 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :conventions do
+        member do
+          put :submit_for_review
+        end
+      end
+
       resources :articles, only: %i[index show]
-      resources :conventions, only: %i[index show]
       resources :styles
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]
