@@ -3,6 +3,7 @@
 module Api
   module V1
     class ConventionsController < ApplicationController
+      skip_before_action :authenticate_request!, only: %i[index show]
       before_action :find_convention, except: %i[index]
 
       def index
@@ -21,7 +22,7 @@ module Api
       private
 
       def find_convention
-        @convention = Convention.verified_conventions.upcoming_conventions.friendly.find(params[:id])
+        @convention = Convention.friendly.find(params[:id])
       end
 
       def search_options
@@ -30,10 +31,8 @@ module Api
           per_page: params[:per_page] || BaseSearch::PER_PAGE,
           status: params[:status],
           near: params[:city] || params[:near],
-          verified: true,
           time_constraint: Date.today,
-          within: params[:within],
-          user_role: current_user.role
+          within: params[:within]
         }.delete_if { |_k, v| v.nil? }
       end
     end

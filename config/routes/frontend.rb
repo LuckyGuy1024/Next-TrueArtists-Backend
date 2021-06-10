@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     resources :pages, only: %i[index show]
 
     resources :styles
+    resources :conventions, only: %i[index show]
     resources :categories, only: %i[index show]
     resources :landing_pages, only: %i[show index]
     resources :global_search_redirector, only: [:index]

@@ -1,0 +1,31 @@
+<% set_meta_tags name: @convention.name,
+                 description: @convention.description %>
+
+<div class="page-section gray-bg">
+  <div class="container article-container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 article-content">
+        <div class="sub-header">
+          <h1><%= @convention.name %></h1>
+          <% if true %>
+            <%#= link_to 'Edit', "http://localhost:3000/admin/edit/#{@article.id}" %>
+          <% end %>
+        </div>
+        <div class="article-meta-data">
+          <div class="article-author">By <%= @convention.user.full_name %></div> |
+          <div class="article-created-date"><%= @convention.start_date.strftime("%d-%m-%Y") %></div>
+          <div class="article-created-date"><%= @convention.end_date.strftime("%d-%m-%Y") %></div>
+        </div>
+        <div class="sharethis-inline-share-buttons"></div>
+        <div>
+          <img data-src="<%= url_for(@convention.image) %>" class="lazyload" />
+        </div>
+        <div class="article-body">
+          <%= @convention.description.html_safe %>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
