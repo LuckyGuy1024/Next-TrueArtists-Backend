@@ -35,7 +35,7 @@ class MessageMailingService < BaseMessageService
     else
       last_mail.references.split(',')
                .push(last_mail.message_id)
-               .map { |r| "<#{r}>"}
+               .map { |r| "<#{r}>" }
                .join(' ')
     end
   end
