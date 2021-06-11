@@ -53,6 +53,16 @@ module Api
         end
       end
 
+      def destroy
+        authorize @convention
+
+        if @convention.destroy
+          head(:ok)
+        else
+          render_api_error(status: 422, errors: @convention.errors)
+        end
+      end
+
       private
 
       def find_convention
