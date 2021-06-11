@@ -5,26 +5,42 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2"></div>
-      <div class="col-md-8">
+      <div class="col-md-8 content">
         <div class="sub-header">
           <h1><%= @convention.name %></h1>
           <% if true %>
             <%#= link_to 'Edit', "http://localhost:3000/admin/edit/#{@article.id}" %>
           <% end %>
         </div>
-        <div class="meta-data">
-          <div class="author">By <%= @convention.user.full_name %></div>
-        </div>
         <div class="sharethis-inline-share-buttons"></div>
         <div class="header-image">
           <img data-src="<%= url_for(@convention.image) %>" class="lazyload" />
         </div>
-        <div class="date-info">
-          <div class="date">Start Date: <span><%= @convention.start_date.strftime("%a, %b %d, %Y") %></span></div>
-          <div class="date">End Date: <span><%= @convention.end_date.strftime("%a, %b %d, %Y") %></span></div>
-        </div>
-        <div class="body">
-          <%= @convention.description.html_safe %>
+        <div class="info">
+          <div>
+            <div class="body">
+              <h4>About this convention</h4>
+              <%= @convention.description.html_safe %>
+            </div>
+          </div>
+          <div>
+            <div class="meta-data">
+              <div class="date-info">
+                <div class="header">Date and time</div>
+                <div class="date">Start Date: <span><%= @convention.start_date.strftime("%a, %b %d, %Y") %></span></div>
+                <div class="date">End Date: <span><%= @convention.end_date.strftime("%a, %b %d, %Y") %></span></div>
+              </div>
+              <div class="location-info">
+                <div class="header">Location</div>
+                <div><span><%= @convention.city_state %></span></div>
+              </div>
+              <div class="links">
+                <div class="header">Find out more</div>
+                <div><%=  link_to 'Official Site', @convention.link_to_official_site, target: :_blank %></div>
+                <div><%= link_to 'Facebook Link', @convention.facebook_link, target: :_blank %></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-md-2"></div>

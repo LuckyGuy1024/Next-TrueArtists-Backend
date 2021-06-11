@@ -4,17 +4,7 @@
     margin-top: 10px;
   }
 
-  .date-info {
-    margin: 20px 0;
-
-    span {
-      color: $gray-text-color;
-    }
-  }
-
   .content {
-    margin: 10px 0;
-
     p {
       line-height: 35px;
     }
@@ -28,8 +18,27 @@
       }
     }
 
-    .body {
-      margin: 25px 0;
+    .info {
+      margin: 20px 0;
+
+      .meta-data {
+        span {
+          color: $gray-text-color;
+        }
+
+        a {
+          color: $gray-text-color;
+        }
+
+      }
+
+      .body {
+        margin: 25px 0;
+
+        h4 {
+          margin: 20px 0;
+        }
+      }
     }
   }
 }

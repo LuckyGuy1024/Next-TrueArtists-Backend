@@ -15,7 +15,7 @@ module Frontend
 
     def city
       @city_state = params[:city_state]
-      @conventions = Convention.near(@city_state, 500)
+      @conventions = Convention.near(@city_state).page
     end
 
     def show

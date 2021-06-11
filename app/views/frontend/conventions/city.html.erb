@@ -1,0 +1,32 @@
+<% set_meta_tags title: "Conventions in #{@city_state}",
+                 description: "Find conventions in #{@city_state}." %>
+
+<!-- Latest Studio -->
+<div class="page-section pt-0">
+  <div class="container">
+    <%= form_for conventions_path, html: { remote: true, method: :get } do |f| %>
+      <%= hidden_field_tag 'page', @conventions.current_page %>
+      <%= hidden_field_tag 'per_page', @conventions.limit_value %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sub-header mb-30">
+            <h1>Conventions in <%= @city_state %></h1>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="latest-conventions-lists grid-gap-30 row">
+              <%= render @conventions %>
+              <% if @conventions.empty? %>
+                  <div>No conventions found near this area.</div>
+              <% end %>
+          </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+          <%= paginate @conventions %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<!-- // -->

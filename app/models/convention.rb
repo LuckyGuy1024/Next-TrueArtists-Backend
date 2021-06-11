@@ -65,7 +65,7 @@ class Convention < ApplicationRecord
   end
 
   def city_state
-    format('%s %s', city, state)
+    format('%s, %s', city, state)
   end
 
   def ends_at
