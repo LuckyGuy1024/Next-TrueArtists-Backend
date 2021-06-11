@@ -21,7 +21,7 @@ module Api
 
         def create
           convention = current_user.conventions.new(convention_params)
-          binding.pry
+
           if convention.save
             render json: ConventionSerializer.new(convention).to_json, status: :created
           else
@@ -61,16 +61,20 @@ module Api
           if @convention.approve!
             head(:ok)
           else
-            render_api_error(status: 422, errors: @artist.errors)
+            render_api_error(status: 422, errors: @convention.errors)
           end
+        rescue AASM::InvalidTransition => e
+          render_api_error(status: 422, errors: e.message)
         end
 
         def reject
           if @convention.reject!
             head(:ok)
           else
-            render_api_error(status: 422, errors: @artist.errors)
+            render_api_error(status: 422, errors: @convention.errors)
           end
+        rescue AASM::InvalidTransition => e
+          render_api_error(status: 422, errors: e.message)
         end
 
         private

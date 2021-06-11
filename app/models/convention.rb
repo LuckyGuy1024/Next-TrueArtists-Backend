@@ -18,11 +18,11 @@ class Convention < ApplicationRecord
     end
 
     event :approve do
-      transitions from: %i[pending_review pending], to: :approved
+      transitions from: %i[pending_review pending rejected], to: :approved
     end
 
     event :reject do
-      transitions from: %i[pending_review pending], to: :rejected
+      transitions from: %i[pending_review pending approved], to: :rejected
     end
   end
 
@@ -36,6 +36,8 @@ class Convention < ApplicationRecord
 
   geocoded_by :convention_address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :convention_address_changed?
+
+  before_save :update_verified, if: :admin_user?
 
   ## Scope ##
   scope :verified_conventions, -> { where('verified = ?', "true") }
@@ -76,5 +78,15 @@ class Convention < ApplicationRecord
 
   def full_address
     [address, city, state, Carmen::Country.coded(country)].to_sentence(last_word_connector: ' in ')
+  end
+
+  private
+
+  def admin_user?
+    user.role == 'admin'
+  end
+
+  def update_verified
+    self.verified = 'approved'
   end
 end
