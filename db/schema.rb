@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_02_160148) do
+ActiveRecord::Schema.define(version: 2021_06_14_162539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -100,7 +99,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.string "street_address_2"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
-    t.index ["studio_id"], name: "index_artists_on_studio_id"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
@@ -113,7 +111,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.integer "image_file_size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -125,6 +122,9 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["description"], name: "index_categories_on_description"
+    t.index ["meta_description"], name: "index_categories_on_meta_description"
+    t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.string "facebook_link"
     t.text "description"
     t.integer "created_by"
-    t.string "verified"
+    t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal "lat", precision: 15, scale: 10
@@ -255,8 +255,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -290,8 +288,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone_number"
     t.index ["artist_id"], name: "index_studio_invites_on_artist_id"
-    t.index ["email"], name: "index_studio_invites_on_email"
-    t.index ["invite_code"], name: "index_studio_invites_on_invite_code"
     t.index ["studio_id"], name: "index_studio_invites_on_studio_id"
   end
 
@@ -332,6 +328,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
+    t.string "currency_code"
     t.boolean "monday", default: false
     t.boolean "tuesday", default: false
     t.boolean "wednesday", default: false
@@ -353,10 +350,9 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.time "friday_end"
     t.time "saturday_end"
     t.time "sunday_end"
-    t.string "currency_code"
     t.string "street_address_2"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
-    t.index ["user_id"], name: "index_studios_on_user_id"
+    t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
 
   create_table "styles", force: :cascade do |t|
@@ -396,7 +392,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_160148) do
     t.string "slug"
     t.string "social_id"
     t.string "provider"
-    t.index ["email"], name: "index_users_on_email"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["social_id"], name: "index_users_on_social_id"

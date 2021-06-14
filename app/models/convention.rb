@@ -7,7 +7,7 @@ class Convention < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :history
 
-  aasm column: 'verified' do
+  aasm column: 'status' do
     state :pending, initial: true
     state :pending_review
     state :approved
@@ -37,7 +37,7 @@ class Convention < ApplicationRecord
   geocoded_by :convention_address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :convention_address_changed?
 
-  before_save :update_verified, if: :admin_user?
+  before_save :auto_verify, if: :admin_user?
 
   ## Scope ##
   scope :verified_conventions, -> { where('verified = ?', "true") }
@@ -86,7 +86,7 @@ class Convention < ApplicationRecord
     user.role == 'admin'
   end
 
-  def update_verified
-    self.verified = 'approved'
+  def auto_verify
+    self.status = 'approved'
   end
 end
