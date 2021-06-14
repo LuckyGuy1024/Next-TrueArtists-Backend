@@ -29,5 +29,6 @@ module StudioScoped
 
   def find_studio
     @studio = Studio.fetch_by_slug(params[:id])
+    head(:not_found) unless @studio
   end
 end
