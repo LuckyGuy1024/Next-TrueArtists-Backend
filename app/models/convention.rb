@@ -36,9 +36,8 @@ class Convention < ApplicationRecord
 
   geocoded_by :convention_address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :convention_address_changed?
-  
+
   ## Scope ##
-  scope :verified_conventions, -> { where('verified = ?', "true") }
   scope :upcoming_conventions, -> { where('start_date > ?', Date.today).order('start_date') }
 
   def search_data
