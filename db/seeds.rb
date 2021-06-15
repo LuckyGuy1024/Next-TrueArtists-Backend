@@ -288,7 +288,6 @@ if ENV['RUN_ALL'] == '1'
     )
   end
 
-
   puts '== Creating conventions =='
 
   40.times do
@@ -307,8 +306,8 @@ if ENV['RUN_ALL'] == '1'
     )
 
     conventions.image.attach(
-      io: File.open('app/assets/images/avatar.png'),
-      filename: 'avatar.png'
+      io: File.open('app/assets/images/g1.jpg'),
+      filename: 'g1.jpg'
     )
   end
 end

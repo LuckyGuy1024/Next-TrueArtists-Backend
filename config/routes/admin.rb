@@ -61,7 +61,7 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :conventions, only: %i[index show create] do
+        resources :conventions do
           member do
             put :approve
             put :reject

@@ -32,6 +32,8 @@ module Api::V1::Admin
       else
         render_api_error(status: 422, errors: @artist.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def reject
@@ -40,6 +42,8 @@ module Api::V1::Admin
       else
         render_api_error(status: 422, errors: @artist.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def destroy
@@ -74,12 +78,8 @@ module Api::V1::Admin
 
       invites = StudioInvite.where(accepted: false, artist_id: @artist.id)
 
-      if !invites.blank?
-        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
-                                                                       serializer: StudioInviteSerializer), status: :ok
-      else
-        render_api_error(status: 422, errors: 'There are no pending invites')
-      end
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     private

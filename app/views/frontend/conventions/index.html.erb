@@ -1,0 +1,37 @@
+<% set_meta_tags title: 'Find Tattoo Conventions Near You',
+                 description: 'Find conventions that are happening near your city.' %>
+<div class="page-section gray-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 search-form">
+        <%= form_for conventions_path, html: { method: :get } do |f| %>
+          <div class="sub-header">
+            <h1>Find Tattoo Conventions Near You</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="search-section">
+                <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search conventions near you' %>
+                <button type="submit" class="search search-box">
+                  <i class="ta-icon-search basic-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="grid-gap-30 row">
+          <%= render @conventions %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

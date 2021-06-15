@@ -7,7 +7,7 @@ class Convention < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :history
 
-  aasm column: 'verified' do
+  aasm column: 'status' do
     state :pending, initial: true
     state :pending_review
     state :approved
@@ -18,11 +18,11 @@ class Convention < ApplicationRecord
     end
 
     event :approve do
-      transitions from: %i[pending_review pending], to: :approved
+      transitions from: %i[pending_review pending rejected], to: :approved
     end
 
     event :reject do
-      transitions from: %i[pending_review pending], to: :rejected
+      transitions from: %i[pending_review pending approved], to: :rejected
     end
   end
 
@@ -38,7 +38,6 @@ class Convention < ApplicationRecord
   after_validation :geocode, if: :convention_address_changed?
 
   ## Scope ##
-  scope :verified_conventions, -> { where('verified = ?', "true") }
   scope :upcoming_conventions, -> { where('start_date > ?', Date.today).order('start_date') }
 
   def search_data
@@ -62,6 +61,10 @@ class Convention < ApplicationRecord
     new_record? || slug.blank?
   end
 
+  def city_state
+    format('%s, %s', city, state)
+  end
+
   def ends_at
     end_date.strftime('%H:%M %p')
   end
@@ -72,5 +75,11 @@ class Convention < ApplicationRecord
 
   def full_address
     [address, city, state, Carmen::Country.coded(country)].to_sentence(last_word_connector: ' in ')
+  end
+
+  private
+
+  def admin_user?
+    user.role == 'admin'
   end
 end
