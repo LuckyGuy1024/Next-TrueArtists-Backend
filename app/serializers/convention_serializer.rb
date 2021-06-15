@@ -12,11 +12,11 @@ class ConventionSerializer < ActiveModel::Serializer
              :facebook_link,
              :start_date,
              :end_date,
-             :address, 
-             :city, 
-             :state, 
-             :country, 
-             :verified, 
+             :address,
+             :city,
+             :state,
+             :country,
+             :status, 
              :slug,
              :image
 
