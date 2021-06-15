@@ -22,7 +22,6 @@ class BaseSearch
       specialty: options[:specialty],
       styles: options[:styles],
       placement: options[:placement],
-      verified: options[:verified],
       status: options[:status],
       studio_id: options[:studio_id],
       artist_id: options[:artist_id]

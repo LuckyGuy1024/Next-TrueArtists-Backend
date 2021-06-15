@@ -106,7 +106,6 @@ module Api
             status: params[:status],
             near: params[:city] || params[:near],
             within: params[:within],
-            verified: params[:verified],
             user_role: current_user.role
           }.delete_if { |_k, v| v.nil? }
         end
