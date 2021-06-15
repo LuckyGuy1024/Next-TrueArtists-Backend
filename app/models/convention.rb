@@ -36,9 +36,7 @@ class Convention < ApplicationRecord
 
   geocoded_by :convention_address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :convention_address_changed?
-
-  before_save :auto_verify, if: :admin_user?
-
+  
   ## Scope ##
   scope :verified_conventions, -> { where('verified = ?', "true") }
   scope :upcoming_conventions, -> { where('start_date > ?', Date.today).order('start_date') }
@@ -84,9 +82,5 @@ class Convention < ApplicationRecord
 
   def admin_user?
     user.role == 'admin'
-  end
-
-  def auto_verify
-    self.status = 'approved'
   end
 end
