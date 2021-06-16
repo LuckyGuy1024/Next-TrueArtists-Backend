@@ -2,7 +2,7 @@
 
 class Convention < ApplicationRecord
   include AASM
-  searchkick word_start: %i[name verified], locations: [:location]
+  searchkick word_start: %i[name status], locations: [:location]
 
   extend FriendlyId
   friendly_id :name, use: :history
