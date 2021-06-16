@@ -4,8 +4,6 @@ class MessageSmsService < BaseMessageService
 
   # Send a sms created on the system to a recipient
   def send
-    return unless save_message
-
     @message = generate_message_url
 
     # find user phone number

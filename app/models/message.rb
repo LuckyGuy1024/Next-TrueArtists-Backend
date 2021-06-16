@@ -16,6 +16,7 @@ class Message < ApplicationRecord
 
   has_many_attached :attachments
 
+  before_save :assign_thread_id
   after_save :send_user_notification
 
   def self.build_message(sender, message, recipient)
@@ -37,11 +38,19 @@ class Message < ApplicationRecord
   def send_user_notification
     find_users(self)
     MessageMailingService.new(self).send
-    MessageSmsService.new(self).send unless @sender_role || @receiver_role == 'regular'
+    # MessageSmsService.new(self).send unless @sender_role || @receiver_role == 'regular'
   end
 
   def find_users(message)
     @receiver_role = User.find(message.receiver_id).role
     @sender_role = User.find(message.sender_id).role
+  end
+
+  def assign_thread_id
+    self.thread_id = random_thread_id unless thread_id
+  end
+
+  def random_thread_id
+    rand(100**10).to_s.center(10, rand(10).to_s)
   end
 end

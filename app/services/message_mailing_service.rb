@@ -1,8 +1,6 @@
 class MessageMailingService < BaseMessageService
   # Send a message created on the system to a recipient
   def send
-    return unless save_message
-
     mail = MessageMailer.notify(@message).deliver
     save_message_mail(mail)
   end
@@ -18,7 +16,7 @@ class MessageMailingService < BaseMessageService
   def save_message_mail(mail)
     MessageMail.create(
       message_id: @message.id,
-      thread_id: thread_id,
+      thread_id: @message.thread_id,
       user_id: @message.receiver_id,
       mail_message_id: mail.message_id,
       references: mail.references.try(:join, ',')
