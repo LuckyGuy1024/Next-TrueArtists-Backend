@@ -72,7 +72,6 @@ Rails.application.routes.draw do
         resources :announcements do
           member do
             put :publish
-            put :flag
           end
         end
 

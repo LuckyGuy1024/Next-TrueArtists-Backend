@@ -3,12 +3,10 @@ module Api::V1::Admin
     before_action :find_announcement, except: %i[index create]
 
     def index
-      @results = AnnouncementSearch.new(
-        query: params[:query],
-        options: search_options
-      ).adminFilter
-
-      render json: @results, status: :ok
+      @announcements = paginate(Announcement.order("created_at DESC"))
+      render json: ActiveModel::Serializer::CollectionSerializer.new(@announcements,
+                                                                     serializer: AnnouncementSerializer),
+             status: :ok
     end
 
     def show
@@ -43,26 +41,6 @@ module Api::V1::Admin
       end
     end
 
-    def publish
-      if @announcement.publish!
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: @announcement.errors)
-      end
-    rescue AASM::InvalidTransition => e
-      render_api_error(status: 422, errors: e.message)
-    end
-
-    def flag
-      if @announcement.flag!
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: @announcement.errors)
-      end
-    rescue AASM::InvalidTransition => e
-      render_api_error(status: 422, errors: e.message)
-    end
-
     private
 
     def find_announcement
@@ -73,7 +51,7 @@ module Api::V1::Admin
       params.permit(
         :title,
         :content,
-        :send_when,
+        :publish_on,
         :send_now ,
         :recipients,
         :custom_emails

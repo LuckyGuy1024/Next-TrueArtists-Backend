@@ -7,15 +7,10 @@ class AnnouncementSerializer < ActiveModel::Serializer
   attributes :id,
              :title,
              :content,
-             :send_when,
              :send_now ,
              :recipients,
              :custom_emails,
              :published_by,
-             :published_on,
+             :publish_on,
              :status
-
-  def published_on
-    object.created_at.strftime("%d-%m-%Y")
-  end
 end

@@ -1,29 +1,30 @@
 # frozen_string_literal: true
 
 class Announcement < ApplicationRecord
+  RECIPIENTS = %w[
+    admin
+    artist
+    studio_manager
+    regular
+    all
+  ]
   include IdentityCache
   include AASM
- 
-  searchkick word_start: %i[title status]
 
   aasm column: 'status' do
-    state :published, initial: true
-    state :flagged
+    state :draft, initial: true
+    state :publish
 
     event :publish do
-      transitions from: %i[flagged], to: :published
-    end
-
-    event :flag do
-      transitions from: %i[published], to: :flagged
+      transitions from: %i[draft], to: :published
     end
   end
 
-  belongs_to :user, class_name: 'User', foreign_key: :published_by 
-# has_many_attached :attachments
+  belongs_to :user, class_name: 'User', foreign_key: :published_by
+  # has_many_attached :attachments
 
-  #validates_uniqueness_of :title
-  validates :title , :content, :recipients, :custom_emails, :status, presence: true
+  validates :title, uniqueness: true
+  validates :title, :content, :recipients, :status, presence: true
 
   cache_index :title, unique: true
 end
