@@ -1,1 +1,5 @@
+<% if @announcement.image.present? %>
+  <img data-src="<%= url_for(@announcement.image) %>" />
+<% end %>
+
 <%= @announcement.content.html_safe %>
