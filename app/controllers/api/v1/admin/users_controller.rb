@@ -11,7 +11,7 @@ module Api::V1::Admin
                           User
                         end.where(search_filter))
       render json: ActiveModel::Serializer::CollectionSerializer.new(@users,
-                                                                     serializer: UserSerializer),
+                                                                     serializer: AdminUserSerializer),
              status: :ok
     end
 

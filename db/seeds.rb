@@ -310,4 +310,31 @@ if ENV['RUN_ALL'] == '1'
       filename: 'g1.jpg'
     )
   end
+
+  puts "== Creating announcements==\n\n"
+
+  40.times do |i|
+    recipients_array = []
+    custom_emails_array = []
+
+    10.times do 
+      recipients_array.push("ta#{[*6..405].sample}@example.com")
+    end
+
+    5.times do 
+      custom_emails_array.push(Faker::Internet.free_email)
+    end
+     
+    announcements = Announcement.create(
+      title: Faker::Lorem.sentence,
+      content: Faker::Lorem.paragraph(sentence_count: 5),
+      send_when: Faker::Date.between(from: '2021-06-25', to: '2021-07-25'),
+      send_now: false,
+      recipients: recipients_array,
+      custom_emails: custom_emails_array,
+      published_by: [1, 2, 3, 4, 5].sample,
+      status: %w[published flagged].sample
+    )
+    puts " - create announcement #{i + 1} -- done"
+  end
 end
