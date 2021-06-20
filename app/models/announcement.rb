@@ -21,8 +21,8 @@ class Announcement < ApplicationRecord
   end
 
   belongs_to :user, class_name: 'User', foreign_key: :published_by
-  # has_many_attached :attachments
-
+  has_one_attached :image
+  
   validates :title, uniqueness: true
   validates :title, :content, :recipients, :status, presence: true
 

@@ -52,7 +52,8 @@ module Api::V1::Admin
         :title,
         :content,
         :publish_on,
-        :send_now ,
+        :send_now,
+        :image,
         :recipients,
         :custom_emails
       )
