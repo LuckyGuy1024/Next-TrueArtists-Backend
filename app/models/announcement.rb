@@ -27,4 +27,13 @@ class Announcement < ApplicationRecord
   validates :title, :content, :recipients, :status, presence: true
 
   cache_index :title, unique: true
+
+  after_create :send_announcement
+  after_update :send_announcement
+
+  def send_announcement
+    return if publish?
+    perform_at = send_now? ? Time.zone.now : publish_on
+    AnnouncementJob.set(wait_until: perform_at).perform_later(self)
+  end
 end
