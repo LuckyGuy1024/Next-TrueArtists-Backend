@@ -1,5 +1,6 @@
 class StudioInvite < ApplicationRecord
   belongs_to :studio
+  belongs_to :artist, optional: true
 
   validates :studio_id, :invite_code, presence: true
   validates_presence_of :phone_number, unless: :email?
