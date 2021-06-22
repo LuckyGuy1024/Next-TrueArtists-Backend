@@ -77,12 +77,8 @@ module Api::V1
 
       invites = @studio.studio_invites.where(accepted: false)
 
-      if !invites.blank?
-        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
-                                                                       serializer: StudioInviteSerializer), status: :ok
-      else
-        render_api_error(status: 422, errors: 'There are no pending invites')
-      end
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     def verify_phone
