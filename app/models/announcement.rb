@@ -13,7 +13,7 @@ class Announcement < ApplicationRecord
 
   aasm column: 'status' do
     state :draft, initial: true
-    state :publish
+    state :published
 
     event :publish do
       transitions from: %i[draft], to: :published
@@ -32,7 +32,7 @@ class Announcement < ApplicationRecord
   after_update :send_announcement
 
   def send_announcement
-    return if publish?
+    return if published?
     perform_at = send_now? ? Time.zone.now : publish_on
     AnnouncementJob.set(wait_until: perform_at).perform_later(self)
   end

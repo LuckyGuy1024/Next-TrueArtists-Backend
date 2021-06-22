@@ -41,6 +41,16 @@ module Api::V1::Admin
       end
     end
 
+    def publish
+      if @announcement.publish!
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @announcement.errors)
+      end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
+    end
+
     private
 
     def find_announcement
