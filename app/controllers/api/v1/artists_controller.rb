@@ -78,7 +78,7 @@ module Api::V1
     def studio_invites
       authorize @artist
 
-      invites = StudioInvite.where(accepted: false, artist_id: @artist.id)
+      invites = StudioInvite.where(artist_id: @artist.id)
 
       render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
                                                                      serializer: StudioInviteSerializer), status: :ok

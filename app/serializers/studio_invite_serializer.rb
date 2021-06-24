@@ -3,7 +3,7 @@ class StudioInviteSerializer < ActiveModel::Serializer
   belongs_to :artist
 
   attributes :id,
-             :accepted,
+             :status,
              :artist,
              :studio,
              :created_at

@@ -68,14 +68,14 @@ module Api::V1
       if studio_invite.invite_artist_to_studio
         head(:ok)
       else
-        render_api_error(status: 422, errors: @studio.errors)
+        render_api_error(status: 422, errors: studio_invite.errors)
       end
     end
 
     def studio_invites
       authorize @studio
 
-      invites = @studio.studio_invites.where(accepted: false)
+      invites = @studio.studio_invites
 
       render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
                                                                      serializer: StudioInviteSerializer), status: :ok

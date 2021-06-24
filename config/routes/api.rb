@@ -68,6 +68,12 @@ Rails.application.routes.draw do
           post 'invite-artist' => 'studio_invites#create'
           get 'accept-invite' => 'studio_invites#accept_studio_invite'
         end
+
+        member do
+          put 'accept-invite' => 'studio_invites#accept_studio_invite'
+          put 'reject-invite' => 'studio_invites#reject_studio_invite'
+          put 'cancel-invite' => 'studio_invites#cancel_studio_invite'
+        end
       end
 
       resources :favorites, only: %i[create] do

@@ -1,4 +1,26 @@
 class StudioInvite < ApplicationRecord
+  include AASM
+
+  aasm column: 'status' do
+    state :pending, initial: true
+    state :accepted
+    state :rejected
+    state :cancelled
+
+    event :accept do
+      transitions from: :pending, to: :accepted
+    end
+
+    event :reject do
+      transitions from: :pending, to: :rejected
+    end
+
+    event :cancel do
+      transitions from: :pending, to: :cancelled
+      transitions from: :accepted, to: :cancelled
+    end
+  end
+
   belongs_to :studio
   belongs_to :artist, optional: true
 
@@ -68,14 +90,20 @@ class StudioInvite < ApplicationRecord
 
   # send email to artist after accepting them
   # to acknowledge that they have been added to studio
-  def accept!(artist_id)
+  def accept_invite!(artist_id)
     if studio.add_artist(artist_id)
-      update(accepted: true, artist_id: artist_id)
+      update(status: 'accepted', artist_id: artist_id)
 
       StudioMailer.confirm_adding_artist(email, studio.name).deliver_now
     else
       errors.full_messages
     end
+  end
+
+  def cancel_invite!
+    StudioMailer.cancel_studio_invite(email, studio.name).deliver_now if cancel!
+  rescue AASM::InvalidTransition => e
+    e.message
   end
 
   def create_new_user

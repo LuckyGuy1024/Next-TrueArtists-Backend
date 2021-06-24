@@ -49,6 +49,14 @@ class StudioMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
+  def cancel_studio_invite(email, studio_name)
+    @studio_name = studio_name
+
+    subject = format('%s %s %s', 'Welcome to ', studio_name, ' on TrueArtists')
+
+    mail(to: email, subject: subject)
+  end
+
   def notify_on_account_status(email, status)
     @status = status
 
