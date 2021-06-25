@@ -4,6 +4,7 @@ class StudioInviteSerializer < ActiveModel::Serializer
 
   attributes :id,
              :status,
+             :email,
              :artist,
              :studio,
              :created_at
