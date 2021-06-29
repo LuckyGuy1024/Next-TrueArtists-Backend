@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
-class MessageSmsService < BaseMessageService
+class MessageSmsService
+
+  def initialize(message, phone_number)
+    @message = message
+    @phone_number = phone_number
+  end
 
   # Send a sms created on the system to a recipient
   def send
     @message = generate_message_url
-
-    # find user phone number
-    @phone_number = @message.receiver
 
     PhoneNumberService.new(message: @message, phone_number: @phone_number).send_sms
   end
@@ -15,6 +17,6 @@ class MessageSmsService < BaseMessageService
   private
 
   def generate_message_url
-    "#{ENV.fetch('HOST')}/api/v1/messages?thread_id=#{thread_id}"
+    "#{ENV.fetch('HOST')}/api/v1/messages?thread_id=#{@message.thread_id}"
   end
 end

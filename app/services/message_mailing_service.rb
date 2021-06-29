@@ -1,4 +1,8 @@
-class MessageMailingService < BaseMessageService
+class MessageMailingService
+  def initialize(message)
+    @message = message
+  end
+
   # Send a message created on the system to a recipient
   def send
     mail = MessageMailer.notify(@message).deliver

@@ -17,17 +17,13 @@ class Message < ApplicationRecord
   has_many_attached :attachments
 
   before_save :assign_thread_id
-  after_save :send_user_notification
+  after_create :send_user_notification
 
-  def self.build_message(sender, message, recipient)
+  def self.build_message(sender, message)
     Message.new({
-      content: "description: #{message[:description]},
-                placement: #{message[:placement]},
-                size: #{message[:size]},
-                urgency: #{message[:urgency]},
-                is this your first tattoo: #{message[:first_time]}",
+      content: message[:content],
       sender_id: sender.id,
-      receiver_id: recipient,
+      receiver_id: receiver_id(message)[:id],
       message_type: message[:message_type],
       thread_id: message[:thread_id]
     }.delete_if { |_thread_id, v| v.nil? })
@@ -36,14 +32,18 @@ class Message < ApplicationRecord
   private
 
   def send_user_notification
-    find_users(self)
     MessageMailingService.new(self).send
-    # MessageSmsService.new(self).send unless @sender_role || @receiver_role == 'regular'
+    MessageSmsService.new(self, @@result[:phone]).send unless @@result[:phone].nil?
   end
 
-  def find_users(message)
-    @receiver_role = User.find(message.receiver_id).role
-    @sender_role = User.find(message.sender_id).role
+  def self.receiver_id(message)
+    recipient = message[:recipient_type].constantize.find(message[:recipient_id])
+
+    @@result = if recipient.instance_of?(Studio) || recipient.instance_of?(Artist)
+                 { id: recipient.user_id, phone: recipient.phone_number }
+               else
+                 { id: recipient.id, phone: nil }
+               end
   end
 
   def assign_thread_id

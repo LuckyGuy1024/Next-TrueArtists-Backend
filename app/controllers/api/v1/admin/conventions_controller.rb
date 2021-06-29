@@ -21,7 +21,7 @@ module Api
 
         def create
           convention = current_user.conventions.new(convention_params)
-          binding.pry
+
           if convention.save
             render json: ConventionSerializer.new(convention).to_json, status: :created
           else
