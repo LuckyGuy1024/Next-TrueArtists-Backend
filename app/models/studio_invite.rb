@@ -1,5 +1,28 @@
 class StudioInvite < ApplicationRecord
+  include AASM
+
+  aasm column: 'status' do
+    state :pending, initial: true
+    state :accepted
+    state :rejected
+    state :cancelled
+
+    event :accept do
+      transitions from: :pending, to: :accepted
+    end
+
+    event :reject do
+      transitions from: :pending, to: :rejected
+    end
+
+    event :cancel do
+      transitions from: :pending, to: :cancelled
+      transitions from: :accepted, to: :cancelled
+    end
+  end
+
   belongs_to :studio
+  belongs_to :artist, optional: true
 
   validates :studio_id, :invite_code, presence: true
   validates_presence_of :phone_number, unless: :email?
@@ -14,12 +37,17 @@ class StudioInvite < ApplicationRecord
                Artist.find_by(phone_number: phone_number)
              end
 
+    return create_new_user unless artist
+
     if already_invited?
-      StudioMailer.artist_invite_reminder(self).deliver_now
+      studio_invite = StudioInvite.find_by(artist_id: artist.id, studio_id: studio_id)
+
+      StudioMailer.artist_invite_reminder(studio_invite).deliver_now if artist.user.status == 'active'
+      StudioMailer.new_artist_invite_reminder(studio_invite).deliver_now if artist.user.status == 'inactive'
     else
       self.artist_id = artist&.id
 
-      send_invitation if save
+      send_invitation(false) if save
       self
     end
   end
@@ -51,20 +79,52 @@ class StudioInvite < ApplicationRecord
 
   def send_sms_invitation; end
 
-  def send_invitation
-    send_email_invitation if email
+  def send_invitation(new_user)
+    if new_user
+      StudioMailer.new_artist_studio_invite(self).deliver_now
+    elsif email
+      send_email_invitation if email
+    end
     send_sms_invitation if phone_number
   end
 
   # send email to artist after accepting them
   # to acknowledge that they have been added to studio
-  def accept!(artist_id)
+  def accept_invite!(artist_id)
     if studio.add_artist(artist_id)
-      update(accepted: true, artist_id: artist_id)
+      update(status: 'accepted', artist_id: artist_id)
 
       StudioMailer.confirm_adding_artist(email, studio.name).deliver_now
     else
       errors.full_messages
+    end
+  end
+
+  def cancel_invite!
+    StudioMailer.cancel_studio_invite(email, studio.name).deliver_now if cancel!
+  rescue AASM::InvalidTransition => e
+    e.message
+  end
+
+  def create_new_user
+    return unless save
+
+    begin
+      user = User.create!(email: email, password: invite_code, password_confirmation: invite_code)
+
+      artist = user.build_artist unless user.id.nil?
+
+      if artist&.save
+        user.update(status: 'inactive')
+        update(artist_id: user.artist.id)
+        send_invitation(true)
+        self
+      else
+        user.delete
+      end
+    rescue StandardError => e
+      delete
+      e.message
     end
   end
 end

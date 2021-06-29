@@ -1,0 +1,9 @@
+<p>Hello,</p>
+
+<p>You have been invited to join <b><%= @studio_name %></b> as a tattoo artist on TrueArtist. Get started by signing into the platform using the link below, using your this email address and the password provided below.</p>
+
+<p>Password: <%= @invite_token %></p>
+
+<p><%= link_to 'Get Started', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/login" %> </p>
+
+<p>TrueArtist Team</p>
