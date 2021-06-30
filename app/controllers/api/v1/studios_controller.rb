@@ -68,21 +68,17 @@ module Api::V1
       if studio_invite.invite_artist_to_studio
         head(:ok)
       else
-        render_api_error(status: 422, errors: @studio.errors)
+        render_api_error(status: 422, errors: studio_invite.errors)
       end
     end
 
     def studio_invites
       authorize @studio
 
-      invites = @studio.studio_invites.where(accepted: false)
+      invites = @studio.studio_invites
 
-      if !invites.blank?
-        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
-                                                                       serializer: StudioInviteSerializer), status: :ok
-      else
-        render_api_error(status: 422, errors: 'There are no pending invites')
-      end
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     def verify_phone
@@ -111,6 +107,18 @@ module Api::V1
       render json: ActiveModel::Serializer::CollectionSerializer.new(@applications,
                                                                      serializer: GuestArtistApplicationSerializer),
              status: :ok
+    end
+
+    def remove_studio_artist
+      authorize @studio
+
+      studio_artist = @studio.studio_artists.find(params[:studio_artist_id])
+
+      if studio_artist.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @tattoo.errors)
+      end
     end
 
     def application

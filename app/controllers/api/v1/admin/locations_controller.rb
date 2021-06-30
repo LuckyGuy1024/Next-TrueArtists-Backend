@@ -40,7 +40,7 @@ module Api::V1::Admin
         render_api_error(status: 422, errors: 'We could not delete resource')
       end
     end
-    
+
     private
 
     def find_location

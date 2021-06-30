@@ -52,6 +52,7 @@ Rails.application.routes.draw do
         member do
           get :artists
           delete 'delete-image/:image_id' => 'studios#remove_image'
+          delete 'studio_artists/:studio_artist_id' => 'studios#remove_studio_artist'
           post 'invite_artist' => 'studios#invite_artist'
           put :submit_for_review
           get :guest_artist_applications
@@ -66,6 +67,12 @@ Rails.application.routes.draw do
         collection do
           post 'invite-artist' => 'studio_invites#create'
           get 'accept-invite' => 'studio_invites#accept_studio_invite'
+        end
+
+        member do
+          put 'accept-invite' => 'studio_invites#accept_studio_invite'
+          put 'reject-invite' => 'studio_invites#reject_studio_invite'
+          put 'cancel-invite' => 'studio_invites#cancel_studio_invite'
         end
       end
 

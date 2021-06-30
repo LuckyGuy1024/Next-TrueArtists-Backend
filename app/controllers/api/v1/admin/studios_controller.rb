@@ -33,6 +33,8 @@ module Api::V1::Admin
       else
         render_api_error(status: 422, errors: @studio.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def reject
@@ -41,6 +43,8 @@ module Api::V1::Admin
       else
         render_api_error(status: 422, errors: @studio.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def destroy
@@ -61,7 +65,7 @@ module Api::V1::Admin
     end
 
     def reject_image
-      attachment = ActiveStorageAttachment.find(params[:image_id])
+      attachment = ActiveStorage::Attachment.find(params[:image_id])
 
       if attachment.update(status: 'rejected')
         head(:ok)
@@ -87,12 +91,8 @@ module Api::V1::Admin
 
       invites = @studio.studio_invites.where(accepted: false)
 
-      if !invites.blank?
-        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
-                                                                       serializer: StudioInviteSerializer), status: :ok
-      else
-        render_api_error(status: 422, errors: 'There are no pending invites')
-      end
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     private

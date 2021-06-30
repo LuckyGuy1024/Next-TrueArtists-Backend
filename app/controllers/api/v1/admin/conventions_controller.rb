@@ -61,16 +61,20 @@ module Api
           if @convention.approve!
             head(:ok)
           else
-            render_api_error(status: 422, errors: @artist.errors)
+            render_api_error(status: 422, errors: @convention.errors)
           end
+        rescue AASM::InvalidTransition => e
+          render_api_error(status: 422, errors: e.message)
         end
 
         def reject
           if @convention.reject!
             head(:ok)
           else
-            render_api_error(status: 422, errors: @artist.errors)
+            render_api_error(status: 422, errors: @convention.errors)
           end
+        rescue AASM::InvalidTransition => e
+          render_api_error(status: 422, errors: e.message)
         end
 
         private
@@ -102,7 +106,6 @@ module Api
             status: params[:status],
             near: params[:city] || params[:near],
             within: params[:within],
-            verified: params[:verified],
             user_role: current_user.role
           }.delete_if { |_k, v| v.nil? }
         end

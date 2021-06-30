@@ -5,8 +5,8 @@
 <div class="page-section pt-0">
   <div class="container">
     <%= form_for studios_path, html: { remote: true, method: :get } do |f| %>
-      <%= hidden_field_tag 'page', @meta[:current_page] %>
-      <%= hidden_field_tag 'per_page', @meta[:limit_value] %>
+      <%= hidden_field_tag 'page', @studios.current_page %>
+      <%= hidden_field_tag 'per_page', @studios.limit_value %>
       <div class="row">
         <div class="col-md-12">
           <div class="sub-header mb-30">
@@ -16,15 +16,16 @@
         <div class="col-md-12">
           <div class="latest-studios-lists grid-gap-30 row">
             <%= render @studios %>
+            <% if @studios.empty? %>
+              <div>No studios found near this area.</div>
+            <% end %>
           </div>
         </div>
 
         <div class="col-md-12 text-center">
-          <% unless @meta[:last_page] %>
-            <div class="see-more-section">
-              <button class="btn btn-alternative btn-lg">See More</button>
-            </div>
-          <% end %>
+          <div class="col-md-12 text-center">
+            <%= paginate @studios %>
+          </div>
         </div>
       </div>
     <% end %>
