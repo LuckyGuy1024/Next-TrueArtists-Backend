@@ -14,6 +14,17 @@ module Api
         end
       end
 
+      def get_threads
+        threads = Message.threads
+
+        user_thread_messages = threads.filter_map do |thread|
+          Message.where(sender_id: current_user.id,
+                        thread_id: thread).or(Message.where(sender_id: current_user.id, thread_id: thread)).first
+        end
+
+        render json: user_thread_messages.flatten, status: :ok
+      end
+
       private
 
       def message_params

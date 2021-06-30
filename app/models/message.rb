@@ -16,6 +16,8 @@ class Message < ApplicationRecord
 
   has_many_attached :attachments
 
+  scope :threads, -> { pluck(:thread_id).uniq }
+
   before_save :assign_thread_id
   after_create :send_user_notification
 
