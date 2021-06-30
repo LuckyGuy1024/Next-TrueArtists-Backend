@@ -105,6 +105,7 @@ Rails.application.routes.draw do
       resources :messages do
         collection do
           get 'threads' => 'messages#get_threads'
+          get 'threads/:thread_id' => 'messages#get_thread_messages'
         end
       end
       resources :guest_artist_applications, only: %i[create update destroy] do

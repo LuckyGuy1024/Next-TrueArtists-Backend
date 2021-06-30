@@ -22,7 +22,13 @@ module Api
                         thread_id: thread).or(Message.where(sender_id: current_user.id, thread_id: thread)).first
         end
 
-        render json: user_thread_messages.flatten, status: :ok
+        render json: user_thread_messages, status: :ok
+      end
+
+      def get_thread_messages
+        messages = Message.where(thread_id: params[:thread_id])
+
+        render json: messages, status: :ok
       end
 
       private
