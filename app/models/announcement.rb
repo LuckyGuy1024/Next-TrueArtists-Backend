@@ -24,7 +24,12 @@ class Announcement < ApplicationRecord
   has_one_attached :image
   
   validates :title, uniqueness: true
-  validates :title, :content, :recipients, :status, presence: true
+  validates :title, :content, :status, presence: true
+  validates_presence_of :publish_on, unless: :send_now?
+  validates_presence_of :send_now, unless: :publish_on?
+  validates_presence_of :recipients, unless: :custom_emails?
+  validates_presence_of :custom_emails, unless: :recipients?
+
 
   cache_index :title, unique: true
 
