@@ -65,7 +65,7 @@ module Api::V1::Admin
     end
 
     def reject_image
-      attachment = ActiveStorageAttachment.find(params[:image_id])
+      attachment = ActiveStorage::Attachment.find(params[:image_id])
 
       if attachment.update(status: 'rejected')
         head(:ok)

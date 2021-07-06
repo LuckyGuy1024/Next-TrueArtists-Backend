@@ -1,18 +1,22 @@
 class StudioInviteSerializer < ActiveModel::Serializer
+  belongs_to :studio
+  belongs_to :artist
+
   attributes :id,
-             :studio,
+             :status,
+             :email,
              :artist,
-             :accepted,
+             :studio,
              :created_at
 
   def studio
-    studio = Studio.find(object.studio_id)
+    studio = object.studio
 
     { id: studio.id, name: studio.name }
   end
 
   def artist
-    artist = Artist.find(object.artist_id)
+    artist = object.artist
 
     { id: artist.id, name: artist.name }
   end
