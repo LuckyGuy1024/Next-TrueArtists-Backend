@@ -21,5 +21,8 @@ require 'rollbar/capistrano3'
 require 'capistrano/maintenance'
 # require "capistrano/webpacker/precompile"
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
+require 'capistrano/puma'
+install_plugin Capistrano::Puma, load_hooks: true
+
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
 require 'whenever/capistrano'

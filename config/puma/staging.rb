@@ -22,7 +22,7 @@ environment ENV.fetch('RAILS_ENV', 'staging')
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch('PIDFILE') { "#{app_root_path}/shared/tmp/pids/puma.pid" }
 stdout_redirect "#{app_root_path}/shared/log/puma.log", "#{app_root_path}/shared/log/puma_error.log"
-bind "unix://#{app_root_path}/shared/sockets/puma.sock"
+bind "unix://#{app_root_path}/shared/sockets/trueartists-puma.sock"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked web server processes. If using threads and workers together
