@@ -15,7 +15,9 @@
         <div class="list-left flex-grow-1">
           <div class="d-flex align-items-center">
             <div class="profile-img">
-              <img data-src="<%= url_for(artist.avatar) %>" class="lazyload" />
+              <% if artist.avatar.attached? %>
+                <img data-src="<%= url_for(artist.avatar) %>" class="lazyload" />
+              <% end %>
             </div>
             <div class="profile-info">
               <h5><%= artist.name %></h5>
