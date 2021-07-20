@@ -49,6 +49,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano3-puma'
   gem 'letter_opener'
   gem 'listen', '~> 3.2'
   gem 'spring'
@@ -60,7 +61,7 @@ group :deployment do
   gem 'capistrano-webpacker-precompile', require: false
   # gem 'capistrano-bundler' # for capistrano/bundler
   gem 'capistrano-maintenance'
-  gem 'capistrano-passenger'
+  # gem 'capistrano-passenger'
   gem 'capistrano-rails' # for capistrano/rails/*
   gem 'capistrano-rails-db'
   gem 'capistrano-rvm'

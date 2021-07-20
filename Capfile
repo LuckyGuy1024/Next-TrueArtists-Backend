@@ -16,11 +16,13 @@ require 'capistrano/rails/db'
 # require "capistrano/rails/migrations"
 require 'capistrano/sidekiq'
 require 'sshkit/sudo'
-require 'capistrano/passenger'
+# require 'capistrano/passenger'
 require 'rollbar/capistrano3'
 require 'capistrano/maintenance'
 # require "capistrano/webpacker/precompile"
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
+# require 'capistrano/puma'
+# require "capistrano/puma-nginx"
 require 'capistrano/puma'
 install_plugin Capistrano::Puma, load_hooks: true
 
