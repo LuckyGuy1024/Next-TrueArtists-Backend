@@ -14,6 +14,10 @@ class Tattoo < ApplicationRecord
     event :flag do
       transitions from: :approved, to: :flagged
     end
+
+    event :approve do
+      transitions from: :flagged, to: :approved
+    end
   end
 
   searchkick locations: [:location]
