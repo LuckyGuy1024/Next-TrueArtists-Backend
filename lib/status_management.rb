@@ -15,11 +15,11 @@ module StatusManagement
       end
 
       event :approve, after_commit: :send_status_notification do
-        transitions from: [:pending_review, :pending], to: :approved
+        transitions from: [:pending_review, :pending, :rejected], to: :approved
       end
 
       event :reject, after_commit: :send_status_notification do
-        transitions from: [:pending_review, :pending], to: :rejected
+        transitions from: [:pending_review, :pending, :approved], to: :rejected
       end
     end
   end
