@@ -47,7 +47,9 @@ class Artist < ApplicationRecord
 
     avatar.attach(
       io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
-      filename: 'placeholder-avatar.jpeg', content_type: 'image/jpeg'
+      filename: 'placeholder-avatar.jpeg',
+      content_type: 'image/jpeg',
+      service_name: 'amazon'
     )
   end
 
