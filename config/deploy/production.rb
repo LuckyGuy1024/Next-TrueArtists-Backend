@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-server '192.81.134.189', user: fetch(:deploy_user), roles: %i[app web db], primary: true, port: 8389
+server '45.79.115.170', user: fetch(:deploy_user), roles: %i[app web db], primary: true, port: 8389
 set :stage, :production
 set :sidekiq_default_hooks, false
 set :sidekiq_role, :sidekiq

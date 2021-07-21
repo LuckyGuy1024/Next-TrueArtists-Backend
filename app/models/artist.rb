@@ -40,6 +40,17 @@ class Artist < ApplicationRecord
   after_validation :save_location_data, if: :address_changed?
   before_validation :add_name
 
+  after_commit :attach_default_avatar, on: %i[create update]
+
+  private def attach_default_avatar
+    return if avatar.attached?
+
+    avatar.attach(
+      io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
+      filename: 'placeholder-avatar.jpeg', content_type: 'image/jpeg'
+    )
+  end
+
   def search_data
     attributes.merge(
       location: { lat: lat, lon: lon },

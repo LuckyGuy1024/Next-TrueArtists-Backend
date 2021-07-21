@@ -59,6 +59,17 @@ class Studio < ApplicationRecord
   after_validation :save_location_data, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
+  after_commit :attach_default_avatar, on: %i[create update]
+
+  private def attach_default_avatar
+    return if avatar.attached?
+
+    avatar.attach(
+      io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
+      filename: 'placeholder-avatar.jpeg', content_type: 'image/jpeg'
+    )
+  end
+
   def slug_candidates
     [
       %i[name city state],
