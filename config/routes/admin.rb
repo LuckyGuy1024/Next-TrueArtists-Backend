@@ -58,6 +58,7 @@ Rails.application.routes.draw do
           end
           member do
             put :flag
+            put :approve
           end
         end
 
