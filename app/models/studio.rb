@@ -97,7 +97,7 @@ class Studio < ApplicationRecord
   end
 
   def search_profile_image
-    tattoos.first&.image || hero_banner
+    avatar || tattoos.last&.image || hero_banner
   end
 
   def city_state
