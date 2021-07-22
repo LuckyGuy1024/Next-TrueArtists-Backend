@@ -28,7 +28,6 @@ gem 'kaminari'
 gem 'meta-tags'
 gem "mini_magick"
 gem 'faker'
-gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'sprockets', '~>3.0'
 gem 'sass-rails'
