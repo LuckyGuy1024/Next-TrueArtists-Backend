@@ -71,6 +71,16 @@ class Studio < ApplicationRecord
     )
   end
 
+  private def attach_default_profile
+    return if avatar.attached?
+
+    avatar.attach(
+      io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
+      filename: 'placeholder-avatar.jpeg',
+      content_type: 'image/jpeg'
+    )
+  end
+
   def slug_candidates
     [
       %i[name city state],

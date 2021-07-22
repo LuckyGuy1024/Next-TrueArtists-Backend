@@ -157,6 +157,9 @@ img {
     height: 240px;
     img {
       border-radius: 6px;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
 
     a:hover {

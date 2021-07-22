@@ -168,6 +168,9 @@ img {
 
     img {
       border-radius: 6px 6px 0 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
 
     a:hover {
