@@ -28,9 +28,10 @@ class BaseSearch
     }.delete_if { |_k, v| v.nil? }
 
     if options[:near] && coordinates.present?
-      location_info = { boost_by_distance: {
-        location: {
-          origin: coordinates
+      location_info =  { order: {
+        _geo_distance: {
+          location: coordinates,
+          order: 'asc'
         }
       },
       where: { location: { near: coordinates, within: options[:within] } } }

@@ -43,13 +43,13 @@ class Artist < ApplicationRecord
   after_commit :attach_default_avatar, on: %i[create update]
 
   private def attach_default_avatar
-    return if avatar.attached?
-
-    avatar.attach(
-      io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
-      filename: 'placeholder-avatar.jpeg',
-      content_type: 'image/jpeg'
-    )
+    # return if avatar.attached?
+    #
+    # avatar.attach(
+    #   io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
+    #   filename: 'placeholder-avatar.jpeg',
+    #   content_type: 'image/jpeg'
+    # )
   end
 
   def search_data
@@ -67,7 +67,7 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    format('%s %s', city, state)
+    format('%s, %s', city&.titleize, state)
   end
 
   def current_studio
