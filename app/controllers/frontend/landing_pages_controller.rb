@@ -28,10 +28,9 @@ module Frontend
         }
       ).base_filter
 
-      @styles = Style.all.map(&:name)
-
-      @placement = Tattoo::PLACEMENTS
-
+      @styles = Style.all
+      @tattoo_placements = Tattoo::PLACEMENTS
+      
       respond_to do |format|
         format.html.mobile
         format.html.none

@@ -1,0 +1,26 @@
+<div class="artists-near-you">
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="home-section-header">
+            <h2>
+              Browse tattoos by style
+            </h2>
+          </div>
+          <div class="artists-lists grid-gap-30 row">
+            <%= render 'frontend/styles/styles', styles: @styles %>
+          </div>
+          <div class="col-md-12 text-center">
+            <div class="see-more-section">
+              <%= link_to styles_path do %>
+                <span class="btn btn-alternative">See More</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of row -->
+    </div>
+  </div>
+</div>
