@@ -21,7 +21,7 @@ module ArtistScoped
     {
       page: params[:page] || 1,
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
-      status: params[:status],
+      status: params[:status] || 'approved' ,
       near: params[:near],
       styles: params[:styles],
       within: params[:within],
