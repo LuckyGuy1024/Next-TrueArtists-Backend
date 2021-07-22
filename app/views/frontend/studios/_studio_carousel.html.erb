@@ -8,7 +8,9 @@
       <div class="list-image">
         <div class="list-image-carousel">
           <div class="list-img-item">
-            <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
+            <% if studio.search_profile_image %>
+              <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
+            <% end %>
           </div>
         </div>
       </div>

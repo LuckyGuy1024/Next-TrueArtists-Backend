@@ -7,7 +7,7 @@
   <div class="listing-widget shadow">
     <%= link_to artist_path(artist) do %>
       <div class="list-image">
-        <% if artist.tattoos.present? %>
+        <% if artist.search_profile_image %>
           <img data-src="<%= url_for(artist.search_profile_image) %>" class="lazyload" />
         <% end %>
       </div>
