@@ -5,7 +5,7 @@ module StudioScoped
 
   included do
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_studio, except: %i[index create accept_artist_invite verify_phone]
+    before_action :find_studio, except: %i[index create accept_artist_invite verify_phone city]
   end
 
   private

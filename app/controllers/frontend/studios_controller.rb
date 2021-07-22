@@ -17,7 +17,16 @@ module Frontend
 
     def city
       @city_state = params[:city_state]
-      @studios = Studio.near(@city_state, 500).page
+      @city_state = params[:city_state].split('-').join(' ').titleize
+
+      @studios = StudioSearch.new(
+        query: nil,
+        options: {
+          status: 'approved',
+          near: @city_state,
+          within: '100mi'
+        }
+      ).base_filter
     end
 
     def artists

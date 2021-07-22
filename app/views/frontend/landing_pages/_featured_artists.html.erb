@@ -7,7 +7,7 @@
             <h2>
               Tattoo Artists near you
               <% if current_user_city.present? %>
-                - <%= link_to current_user_city_state, artists_path(near: current_user_coordinates)  %>
+                - <%= link_to current_user_city_state, artists_path(near: current_user_city_state.slugorize)  %>
               <% end %>
             </h2>
           </div>
@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-12 text-center">
             <div class="see-more-section">
-              <%= link_to artists_path(near: nil) do %>
+              <%= link_to artists_path(near: current_user_city_state.slugorize) do %>
                 <span class="btn btn-alternative">See More</span>
               <% end %>
             </div>
