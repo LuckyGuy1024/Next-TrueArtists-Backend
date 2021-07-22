@@ -67,7 +67,11 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    format('%s, %s', city&.titleize, state)
+    if state.present?
+      format('%s, %s', city&.titleize, state)
+    else
+      format('%s, %s', city&.titleize, country)
+    end
   end
 
   def current_studio
