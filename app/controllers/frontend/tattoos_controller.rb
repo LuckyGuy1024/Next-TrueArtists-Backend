@@ -28,7 +28,13 @@ module Frontend
     end
 
     def show
-      @similar_tattoos = @tattoo.similar.first(12)
+      @similar_tattoos = @tattoo.similar(
+        fields: %i[
+          placement styles
+          colors categories caption description
+        ]
+      ).first(12)
+
       respond_to do |format|
         format.html
         format.js

@@ -44,6 +44,10 @@ class Tattoo < ApplicationRecord
     attributes.merge(location: { lat: lat, lon: lon })
   end
 
+  def seo_title
+    format('%s %s %s | %s', color, placement, 'Tattoo', (artist.name || studio.name))
+  end
+
   def add_location_data
     if studio
       self.lat = studio.lat

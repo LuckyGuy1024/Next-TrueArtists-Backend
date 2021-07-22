@@ -1,5 +1,5 @@
-<% set_meta_tags title: 'Best Tattoo Studios Near You',
-              description: 'Find the certified tattoo studios near your city today. Browse from over 1000+ tattoo shops near you.' %>
+<% set_meta_tags title: @tattoo.seo_title,
+              description: @tattoo.caption %>
 
 <!-- Tattoos Details -->
 <div class="page-section">
@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="tattoos-details-img">
-                <% if @tattoo.image.present? %>
+                <% if @tattoo.image.attached? %>
                   <img data-src="<%= url_for(@tattoo.image) %>" class="lazyload" />
                 <% end %>
               </div>
@@ -20,9 +20,11 @@
                 <div class="d-flex align-items-center">
                     <% object = @tattoo.studio || @tattoo.artist %>
                       <%= link_to object, class: 'gallery-item' do %>
-<!--                        <div class="single-user-img mr-3">-->
-<!--                          <img data-src="<%#= url_for(object.avatar) %>" class="lazyload" />-->
-<!--                        </div>-->
+                       <% if object.avatar.attached? %>
+                         <div class="single-user-img mr-3">
+                           <img data-src="<%= url_for(object.avatar) %>" class="lazyload" />
+                         </div>
+                        <% end %>
                         <div class="single-user-name">
                           <h3><%= object.name %></h3>
                         </div>
