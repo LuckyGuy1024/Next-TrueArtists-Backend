@@ -6,17 +6,27 @@ module Frontend
     before_action :find_landing_page, except: %i[home index about_us contact_us]
 
     def home
-      @artists = Artist.near([current_user_location.latitude,
-                              current_user_location.longitude], 100).search(
-                                where: { status: 'approved' },
-                                limit: 6
-                              )
+      @artists = ArtistSearch.new(
+        query: nil,
+        options: {
+          status: 'approved',
+          page: 1,
+          per_page: 6,
+          near: [current_user_location.latitude, current_user_location.longitude],
+          within: '100mi'
+        }
+      ).base_filter
 
-      @studios = Studio.near([current_user_location.latitude,
-                              current_user_location.longitude], 100).search(
-                                where: { status: 'approved' },
-                                limit: 6
-                              )
+      @studios = StudioSearch.new(
+        query: nil,
+        options: {
+          status: 'approved',
+          page: 1,
+          per_page: 6,
+          near: [current_user_location.latitude, current_user_location.longitude],
+          within: '100mi'
+        }
+      ).base_filter
 
       @styles = Style.all.map(&:name)
 
