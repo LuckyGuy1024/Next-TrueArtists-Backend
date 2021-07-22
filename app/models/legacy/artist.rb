@@ -36,7 +36,7 @@ module Legacy
             next unless user
 
             new_artist = ::Artist.find_or_initialize_by(user_id: user.id)
-
+            new_artist.id = artist.id
             new_artist.name = user.full_name
             new_artist.bio = artist.bio
             new_artist.slug = artist.slug

@@ -17,6 +17,7 @@ module Legacy
           specialty = studio.specialities.to_a.map(&:name).join(',').presence
           ActiveRecord::Base.connected_to(role: :writing) do
             new_studio = ::Studio.find_or_initialize_by(email: studio.email)
+            new_studio.id = studio.id
             new_studio.user_id = studio.user_id
             new_studio.name = studio.name
             new_studio.bio = studio.description
