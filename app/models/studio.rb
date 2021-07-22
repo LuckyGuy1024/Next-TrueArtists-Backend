@@ -97,7 +97,8 @@ class Studio < ApplicationRecord
   end
 
   def search_profile_image
-    avatar || tattoos.last&.image || hero_banner
+    return avatar if avatar.attached?
+    tattoos.last&.image || hero_banner
   end
 
   def city_state

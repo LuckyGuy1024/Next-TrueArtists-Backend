@@ -75,7 +75,8 @@ class Artist < ApplicationRecord
   end
 
   def search_profile_image
-    avatar || tattoos.last.image
+    return avatar  if avatar.attached?
+    tattoos.last.image
   end
 
   def has_social_profiles
