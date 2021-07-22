@@ -6,10 +6,22 @@ module Frontend
     before_action :find_landing_page, except: %i[home index about_us contact_us]
 
     def home
-      @artists = Artist.first(12)
-      @studios = Studio.first(12)
+      @artists = Artist.near([current_user_location.latitude,
+                              current_user_location.longitude], 100).search(
+                                where: { status: 'approved' },
+                                limit: 6
+                              )
+
+      @studios = Studio.near([current_user_location.latitude,
+                              current_user_location.longitude], 100).search(
+                                where: { status: 'approved' },
+                                limit: 6
+                              )
+
       @styles = Style.all.map(&:name)
+
       @placement = Tattoo::PLACEMENTS
+
       respond_to do |format|
         format.html.mobile
         format.html.none
