@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'open-uri'
 class Artist < ApplicationRecord
   include AASM
   include IdentityCache

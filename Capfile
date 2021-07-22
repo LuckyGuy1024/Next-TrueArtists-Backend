@@ -11,8 +11,9 @@ install_plugin Capistrano::SCM::Git
 
 require 'capistrano/rvm'
 require 'capistrano/bundler'
-require 'capistrano/rails'
+# require 'capistrano/rails'
 require 'capistrano/rails/db'
+require 'capistrano/rails/assets'
 # require "capistrano/rails/migrations"
 require 'capistrano/sidekiq'
 require 'sshkit/sudo'

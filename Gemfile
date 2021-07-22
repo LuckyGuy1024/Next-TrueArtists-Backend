@@ -13,20 +13,23 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'carmen'
 gem 'browser'
 gem 'cityhash' # optional, for faster hashing (C-Ruby only)
-gem 'faker'
 gem 'figaro'
 gem 'friendly_id', '~> 5.4.0'
 gem 'geocoder'
 gem 'identity_cache'
 gem 'jwt'
-gem 'kaminari'
-gem 'meta-tags'
 gem 'mysql2'
 gem 'puma', '~> 4.1'
 gem 'pundit'
-gem 'rack-cors'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
+gem 'rails'
 gem 'searchkick'
+gem 'sassc-rails'
+gem 'kaminari'
+gem 'meta-tags'
+gem "mini_magick"
+gem 'faker'
+gem 'bootsnap', '>= 1.4.2', require: false
+gem 'rack-cors'
 gem 'sprockets', '~>3.0'
 gem 'sass-rails'
 gem 'sassc'
@@ -38,6 +41,7 @@ gem 'rspec_api_documentation'
 gem 'whenever', require: false
 gem 'dalli'
 gem 'validates_timeliness'
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   gem 'pg', '>= 0.18', '< 2.0'
@@ -51,15 +55,19 @@ end
 group :development do
   gem 'capistrano3-puma'
   gem 'letter_opener'
+  gem 'rubocop'
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :staging, :development do
+  gem 'pry-rails'
+end
+
 group :deployment do
   gem 'capistrano', '~> 3.14.1', require: false
   gem 'capistrano-webpacker-precompile', require: false
-  # gem 'capistrano-bundler' # for capistrano/bundler
   gem 'capistrano-maintenance'
   # gem 'capistrano-passenger'
   gem 'capistrano-rails' # for capistrano/rails/*
