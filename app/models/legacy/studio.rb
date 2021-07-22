@@ -37,7 +37,8 @@ module Legacy
             new_studio.accepted_payment_methods = studio.payment_methods
             new_studio.phone_number = studio.telephone
             new_studio.slug = studio.slug
-            new_studio.status = if studio.admin_approved
+            
+            new_artist.status = if studio.admin_approved && (studio.city.present? || studio.country.present?)
                                   'approved'
                                 else
                                   'pending'

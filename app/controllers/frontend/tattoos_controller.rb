@@ -3,7 +3,7 @@ module Frontend
     include TattooScoped
     skip_before_action :authenticate_request!, only: %i[index filter show]
     before_action :find_parent_object, only: %i[batch_create destroy]
-    before_action :find_tattoo, except: %i[create index filter batch_create]
+    before_action :find_tattoo, except: %i[create index filter batch_create facet]
 
     def index
       @tattoos = search.base_filter
@@ -18,12 +18,17 @@ module Frontend
       end
     end
 
-    def placement
-      
+    def facet
+      @name = params[:name].split('-').join(' ').titleize
+      @tattoos = TattooSearch.new(query: @name).base_filter
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     def show
-      @similar_tattoos = @tattoo.similar(fields: [:placement]).first(12)
+      @similar_tattoos = @tattoo.similar.first(12)
       respond_to do |format|
         format.html
         format.js

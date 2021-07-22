@@ -64,7 +64,7 @@ module Legacy
 
             # phon verification does not exist in system
             # new_artist.phone_verified = artist.phone_verified
-            new_artist.status = if artist.admin_approved
+            new_artist.status = if artist.admin_approved && (artist.city.present? || artist.country.present?)
                                   'approved'
                                 else
                                   'pending'

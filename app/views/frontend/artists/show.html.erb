@@ -16,7 +16,7 @@
             <% if @artist.current_studio %>
               <p><%= link_to @artist.current_studio.name, studio_path(@artist.current_studio) %></p>
             <% end %>
-            <p><%= @artist.city_state %></p>
+            <p><%= link_to @artist.city_state, city_state_artists_path(@artist.city_state.slugorize) %></p>
           </div>
 
           <!-- <div class="artist-p-btn d-flex justify-content-center">
@@ -28,7 +28,7 @@
             <h4>Tattoo Styles</h4>
             <div class="artists-style d-flex flex-wrap">
               <% @artist.styles.each do |style| %>
-                <%= link_to style.name, tattoos_path(query: style.name), class: 'tag tag-cloud' %>
+                <%= link_to style.name, style_tattoos_path(style.slug), class: 'tag tag-cloud' %>
               <% end %>
             </div>
           </div>
@@ -37,7 +37,7 @@
       <div class="col-lg-8">
         <div class="artist-p-right-content">
           <div class="sub-nav d-flex justify-content-start">
-              <a class="active" href="#">Tattoo Portfolio</a>
+            <a class="active" href="#">Tattoo Portfolio</a>
               <!-- <a href="#">About</a> -->
               <!-- <a href="#">Artist</a> -->
           </div>
