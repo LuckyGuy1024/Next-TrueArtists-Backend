@@ -30,7 +30,7 @@ module Api::V1
     end
 
     def create
-      studio = current_user.build_studio(studio_params)
+      studio = Studio.create_studio(current_user, studio_params)
 
       if studio.save
         render json: StudioSerializer.new(studio).to_json, status: :created
@@ -62,11 +62,23 @@ module Api::V1
 
     def invite_artist
       authorize @studio
-      if @studio.invite_artist(artist_invite_params)
+
+      studio_invite = @studio.studio_invites.new(artist_invite_params)
+
+      if studio_invite.invite_artist_to_studio
         head(:ok)
       else
-        render_api_error(status: 422, errors: @studio.errors)
+        render_api_error(status: 422, errors: studio_invite.errors)
       end
+    end
+
+    def studio_invites
+      authorize @studio
+
+      invites = @studio.studio_invites
+
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     def verify_phone
@@ -97,6 +109,18 @@ module Api::V1
              status: :ok
     end
 
+    def remove_studio_artist
+      authorize @studio
+
+      studio_artist = @studio.studio_artists.find(params[:studio_artist_id])
+
+      if studio_artist.destroy
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @tattoo.errors)
+      end
+    end
+
     def application
       render json: GuestArtistApplicationSerializer.new(@application).to_json, status: :ok
     end
@@ -125,6 +149,13 @@ module Api::V1
       params.permit(:code)
     end
 
+    def artist_invite_params
+      params.permit(
+        :phone_number,
+        :email
+      )
+    end
+
     def studio_params
       params.permit(
         :name,
@@ -134,6 +165,7 @@ module Api::V1
         :avatar,
         :hero_banner,
         :street_address,
+        :street_address_2,
         :city,
         :state,
         :zip_code,
@@ -157,7 +189,17 @@ module Api::V1
         :services,
         :minimum_spend,
         :price_per_hour,
-        :currency_code
+        :currency_code,
+        :street_address,
+        :city,
+        :state,
+        :zip_code,
+        :country,
+        :seeking_guest_spot,
+        :guest_studio,
+        :avatar,
+        :hero_banner,
+        working_hours: {}
       )
     end
   end

@@ -66,12 +66,14 @@ class Api::V1::TattoosController < ApplicationController
   end
 
   def flag
-    @tattoo.flag
+    @tattoo.flag!
     if @tattoo.save
       head(:ok)
     else
       render_api_error(status: 422, errors: @tattoo.errors)
     end
+  rescue AASM::InvalidTransition => e
+    render_api_error(status: 422, errors: e.message)
   end
 
   def destroy
@@ -108,6 +110,8 @@ class Api::V1::TattoosController < ApplicationController
      :placement,
      :caption,
      :featured,
+     :description,
+     :caption,
      :color,
      :size,
      :image,

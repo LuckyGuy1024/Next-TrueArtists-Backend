@@ -26,21 +26,14 @@ module Api::V1::Admin
       end
     end
 
-    def remove_image
-      attachment = ActiveStorage::Attachment.find(params[:image_id]).purge
-      if attachment.blank?
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: 'We could not delete resource')
-      end
-    end
-
     def approve
       if @artist.approve!
         head(:ok)
       else
         render_api_error(status: 422, errors: @artist.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def reject
@@ -49,6 +42,8 @@ module Api::V1::Admin
       else
         render_api_error(status: 422, errors: @artist.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def destroy
@@ -69,13 +64,22 @@ module Api::V1::Admin
     end
 
     def reject_image
-      attachment = ActiveStorageAttachment.find(params[:image_id])
+      attachment = ActiveStorage::Attachment.find(params[:image_id])
 
       if attachment.update(status: 'rejected')
         head(:ok)
       else
         render_api_error(status: 422, errors: 'Resource could not be rejected')
       end
+    end
+
+    def studio_invites
+      authorize @artist
+
+      invites = StudioInvite.where(accepted: false, artist_id: @artist.id)
+
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     private
@@ -108,6 +112,7 @@ module Api::V1::Admin
         :price_per_hour,
         :currency_code,
         :street_address,
+        :street_address_2,
         :city,
         :state,
         :zip_code,

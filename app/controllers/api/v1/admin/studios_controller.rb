@@ -27,20 +27,14 @@ module Api::V1::Admin
       end
     end
 
-    def invite_artist
-      if @studio.invite_artist(artist_invite_params)
-        head(:ok)
-      else
-        render_api_error(status: 422, errors: @studio.errors)
-      end
-    end
-
     def approve
       if @studio.approve!
         head(:ok)
       else
         render_api_error(status: 422, errors: @studio.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def reject
@@ -49,6 +43,8 @@ module Api::V1::Admin
       else
         render_api_error(status: 422, errors: @studio.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def destroy
@@ -69,13 +65,34 @@ module Api::V1::Admin
     end
 
     def reject_image
-      attachment = ActiveStorageAttachment.find(params[:image_id])
+      attachment = ActiveStorage::Attachment.find(params[:image_id])
 
       if attachment.update(status: 'rejected')
         head(:ok)
       else
         render_api_error(status: 422, errors: 'Resource could not be rejected')
       end
+    end
+
+    def invite_artist
+      authorize @studio
+
+      studio_invite = @studio.studio_invites.new(artist_invite_params)
+
+      if studio_invite.invite_artist_to_studio
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: @studio.errors)
+      end
+    end
+
+    def studio_invites
+      authorize @studio
+
+      invites = @studio.studio_invites.where(accepted: false)
+
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     private
@@ -121,6 +138,7 @@ module Api::V1::Admin
         :price_per_hour,
         :currency_code,
         :street_address,
+        :street_address_2,
         :city,
         :state,
         :zip_code,
@@ -128,7 +146,28 @@ module Api::V1::Admin
         :seeking_guest_spot,
         :guest_studio,
         :avatar,
-        :hero_banner
+        :hero_banner,
+        :monday,       
+        :tuesday,      
+        :wednesday,    
+        :thursday,     
+        :friday,       
+        :saturday,     
+        :sunday,       
+        :monday_start,
+        :tuesday_start,
+        :wednesday_start,
+        :thursday_start,
+        :friday_start,
+        :saturday_start,
+        :sunday_start,
+        :monday_end,
+        :tuesday_end,
+        :wednesday_end,
+        :thursday_end,
+        :friday_end,
+        :saturday_end,
+        :sunday_end
       )
     end
   end

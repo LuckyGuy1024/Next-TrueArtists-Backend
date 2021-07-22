@@ -1,0 +1,44 @@
+.container {
+  .header-image img{
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  .content {
+    p {
+      line-height: 35px;
+    }
+
+    .sharethis-inline-share-buttons {
+      margin-bottom: 15px;
+
+      .st-btn {
+        margin-right: 15px !important;
+        border-radius: 5px;
+      }
+    }
+
+    .info {
+      margin: 20px 0;
+
+      .meta-data {
+        span {
+          color: $gray-text-color;
+        }
+
+        a {
+          color: $gray-text-color;
+        }
+
+      }
+
+      .body {
+        margin: 25px 0;
+
+        h4 {
+          margin: 20px 0;
+        }
+      }
+    }
+  }
+}

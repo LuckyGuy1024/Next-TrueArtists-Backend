@@ -11,7 +11,7 @@
             <div class="search-artists-form row">
               <div class="col-md-9">
                 <div class="search-section">
-                    <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search artists by zip code, city or style' %>
+                    <%= text_field_tag "near", params[:near], class: '', placeholder: 'Search artists by zip code or city' %>
                     <button type="submit" class="search search-box">
                       <i class="ta-icon-search basic-search"></i>
                     </button>

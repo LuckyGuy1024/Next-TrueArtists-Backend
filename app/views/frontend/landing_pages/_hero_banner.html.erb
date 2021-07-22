@@ -13,7 +13,7 @@
           <input type="radio" id="search-bar-tattoos" for="tattoos" name="search_path" for="tattoos" role="tab" aria-selected="true" value="tattoos">
           <label for="search-bar-tattoos">Tattoos</label>
         </div>
-        <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search by city or zip code' %>
+        <%= text_field_tag "near", params[:near], class: '', placeholder: 'Search by city or zip code' %>
         <button type="submit">Search</button>
       </div>
     <% end %>

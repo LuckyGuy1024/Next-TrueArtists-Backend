@@ -8,7 +8,9 @@
       <div class="list-image">
         <div class="list-image-carousel">
           <div class="list-img-item">
-            <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
+            <% if studio.search_profile_image %>
+              <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
+            <% end %>
           </div>
         </div>
       </div>
@@ -16,7 +18,9 @@
         <div class="list-left flex-grow-1">
           <div class="d-flex align-items-center">
             <div class="profile-img">
-              <img data-src="<%= url_for(studio.avatar) %>" class="lazyload" />
+              <% if studio.avatar.attached? %>
+                <img data-src="<%= url_for(studio.avatar) %>" class="lazyload" />
+              <% end %>
             </div>
             <div class="profile-info">
               <h5><%= studio.name %></h5>

@@ -75,6 +75,15 @@ module Api::V1
       end
     end
 
+    def studio_invites
+      authorize @artist
+
+      invites = StudioInvite.where(artist_id: @artist.id)
+
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
+    end
+
     private
 
     def find_artist
@@ -105,6 +114,7 @@ module Api::V1
         :price_per_hour,
         :currency_code,
         :street_address,
+        :street_address_2,
         :specialty,
         :city,
         :state,

@@ -9,6 +9,8 @@ gem 'active_model_serializers'
 gem 'active_storage_validations'
 gem 'acts_as_favoritor'
 gem 'bcrypt', '~> 3.1.7'
+gem 'bootsnap', '>= 1.4.2', require: false
+gem 'carmen'
 gem 'browser'
 gem 'cityhash' # optional, for faster hashing (C-Ruby only)
 gem 'figaro'
@@ -38,6 +40,7 @@ gem 'apitome', github: 'jejacks0n/apitome'
 gem 'rspec_api_documentation'
 gem 'whenever', require: false
 gem 'dalli'
+gem 'validates_timeliness'
 gem 'image_processing', '~> 1.2'
 
 group :development, :test do
@@ -50,6 +53,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano3-puma'
   gem 'letter_opener'
   gem 'rubocop'
   gem 'listen', '~> 3.2'
@@ -65,7 +69,7 @@ group :deployment do
   gem 'capistrano', '~> 3.14.1', require: false
   gem 'capistrano-webpacker-precompile', require: false
   gem 'capistrano-maintenance'
-  gem 'capistrano-passenger'
+  # gem 'capistrano-passenger'
   gem 'capistrano-rails' # for capistrano/rails/*
   gem 'capistrano-rails-db'
   gem 'capistrano-rvm'

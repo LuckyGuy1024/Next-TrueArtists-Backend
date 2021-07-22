@@ -3,10 +3,12 @@ module Api::V1::Admin
     before_action :find_page, except: %i[index create]
 
     def index
-      @pages = paginate(Page.unscoped)
-      render json: ActiveModel::Serializer::CollectionSerializer.new(@pages,
-                                                                     serializer: ClientSerializer),
-             status: :ok
+      @results = PageSearch.new(
+        query: params[:query],
+        options: search_options
+      ).filter
+
+      render json: @results, status: :ok
     end
 
     def show

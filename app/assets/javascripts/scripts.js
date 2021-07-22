@@ -258,8 +258,10 @@ $(document).ready(function() {
   $("input[name='search_path']").change(function() {
     var value = $(this).val();
     if (value === 'tattoos') {
+      $('#query').attr("name", 'query');
       $('#query').attr("placeholder", `Search ${value} by style or body placement`);
     } else {
+      $('#query').attr("name", 'near');
       $('#query').attr("placeholder", `Search ${value} by city or zip code`);
     }
   });

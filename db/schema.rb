@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_030058) do
+ActiveRecord::Schema.define(version: 2021_07_21_172912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,19 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "announcements", force: :cascade do |t|
+    t.string "title"
+    t.integer "published_by", null: false
+    t.boolean "send_now", default: false
+    t.datetime "publish_on"
+    t.text "content"
+    t.text "recipients", default: [], array: true
+    t.text "custom_emails", default: [], array: true
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "articles", force: :cascade do |t|
@@ -96,6 +109,7 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.string "name"
     t.string "street_address"
     t.string "specialty"
+    t.string "street_address_2"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
@@ -147,6 +161,26 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["artist_id"], name: "index_clients_on_artist_id"
     t.index ["studio_id"], name: "index_clients_on_studio_id"
+  end
+
+  create_table "conventions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "link_to_official_site"
+    t.string "facebook_link"
+    t.text "description"
+    t.integer "created_by"
+    t.string "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal "lat", precision: 15, scale: 10
+    t.decimal "lon", precision: 15, scale: 10
+    t.string "slug"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -261,7 +295,7 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.bigint "studio_id"
     t.string "invite_code"
     t.string "email"
-    t.boolean "accepted", default: false
+    t.string "status", default: "pending", null: false
     t.bigint "artist_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -308,6 +342,28 @@ ActiveRecord::Schema.define(version: 2021_05_08_030058) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
     t.string "currency_code"
+    t.boolean "monday", default: false
+    t.boolean "tuesday", default: false
+    t.boolean "wednesday", default: false
+    t.boolean "thursday", default: false
+    t.boolean "friday", default: false
+    t.boolean "saturday", default: false
+    t.boolean "sunday", default: false
+    t.time "monday_start"
+    t.time "tuesday_start"
+    t.time "wednesday_start"
+    t.time "thursday_start"
+    t.time "friday_start"
+    t.time "saturday_start"
+    t.time "sunday_start"
+    t.time "monday_end"
+    t.time "tuesday_end"
+    t.time "wednesday_end"
+    t.time "thursday_end"
+    t.time "friday_end"
+    t.time "saturday_end"
+    t.time "sunday_end"
+    t.string "street_address_2"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end

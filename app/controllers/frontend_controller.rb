@@ -13,9 +13,9 @@ class FrontendController < ActionController::Base
 
   def current_user_city_state
     if current_user_location.country_code == 'US'
-      "#{current_user_location.city}, #{current_user.state}"
+      "#{current_user_location.city}, #{current_user_location.state}"
     else
-      "#{current_user_location.city}, #{current_user.country}"
+      "#{current_user_location.city}, #{current_user_location.country}"
     end
   end
 

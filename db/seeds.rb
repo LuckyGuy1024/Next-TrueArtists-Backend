@@ -109,7 +109,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/tattoo1.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -124,7 +124,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/tattoo2.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -139,7 +139,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/tattoo3.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -154,7 +154,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/hawaian-tattoo.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -170,7 +170,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/tattoo1.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -185,7 +185,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/tattoo2.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -200,7 +200,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/tattoo3.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -215,7 +215,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/hawaian-tattoo.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -247,7 +247,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     article.image.attach(
-      io: File.open('app/assets/tattoo1.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -266,7 +266,7 @@ if ENV['RUN_ALL'] == '1'
     )
 
     article.image.attach(
-      io: File.open('app/assets/tattoo2.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
     )
   end
@@ -274,7 +274,6 @@ if ENV['RUN_ALL'] == '1'
   200.times do
     landing_page = LandingPage.create(
       page_key: "/artists/#{Faker::FunnyName.name}",
-      page_url: "/artists/#{Faker::FunnyName.name}",
       last_updated_by: [1, 2, 3, 4, 5].sample,
       title: Faker::Lorem.sentence,
       page_title: Faker::Lorem.sentence,
@@ -284,8 +283,31 @@ if ENV['RUN_ALL'] == '1'
     )
 
     landing_page.avatar.attach(
-      io: File.open('app/assets/tattoo2.jpg'),
+      io: File.open('app/assets/images/g1.jpg'),
       filename: 'image.jpg'
+    )
+  end
+
+  puts '== Creating conventions =='
+
+  40.times do
+    conventions = Convention.create(
+      name: Faker::FunnyName.name,
+      description: Faker::Lorem.paragraph(sentence_count: 3),
+      address: Faker::Address.street_address,
+      country: Faker::Address.country,
+      city: Faker::Address.city,
+      state: Faker::Address.state,
+      start_date: Faker::Date.between(from: '2021-05-25', to: '2021-06-25'),
+      end_date: Faker::Date.between(from: '2021-05-26', to: '2021-06-30'),
+      created_by: [1, 2, 3, 4, 5].sample,
+      link_to_official_site: Faker::Internet.url,
+      facebook_link: Faker::Internet.url(host: 'facebook.com')
+    )
+
+    conventions.image.attach(
+      io: File.open('app/assets/images/g1.jpg'),
+      filename: 'g1.jpg'
     )
   end
 end

@@ -5,7 +5,6 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-  config.identity_cache_store = :mem_cache_store
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -89,7 +88,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 25,
-    domain: ENV.fetch('HOST'),
+    domain: 'trueartists.com',
     authentication: :plain,
     user_name: 'apikey',
     password: ENV.fetch('SENDGRID_APIKEY')
@@ -115,4 +114,9 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.identity_cache_store = :mem_cache_store, ENV.fetch('MEM_SERVER_1'), {
+    expires_in: 6.hours.to_i, # in case of network errors when sending a cache invalidation
+    failover: false # avoids more cache consistency issues
+  }
 end

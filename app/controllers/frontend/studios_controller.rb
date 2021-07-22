@@ -16,8 +16,8 @@ module Frontend
     end
 
     def city
-      @city_state = params[:city_state].split('-').titleize
-      @studios = Studio.near(@city_state, 500)
+      @city_state = params[:city_state]
+      @studios = Studio.near(@city_state, 500).page
     end
 
     def artists

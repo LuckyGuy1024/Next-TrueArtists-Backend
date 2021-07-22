@@ -1,21 +1,25 @@
-class Frontend::PagesController < ApplicationController
-  before_action :find_page, except: %i[index create]
-  def index
-    @results = PageSearch.new(
-      query: params[:query],
-      options: search_options
-    ).filter
+# frozen_string_literal: true
 
-    render json: @results, status: :ok
-  end
+module Frontend
+  class PagesController < FrontendController
+    before_action :find_page, except: %i[index create]
+    def index
+      @results = PageSearch.new(
+        query: params[:query],
+        options: search_options
+      ).filter
 
-  def show
-    render json: PageSerializer.new(@page).to_json, status: :ok
-  end
+      render json: @results, status: :ok
+    end
 
-  private
+    def show
+      render json: PageSerializer.new(@page).to_json, status: :ok
+    end
 
-  def find_page
-    @page = Page.friendly.find(params[:id])
+    private
+
+    def find_page
+      @page = Page.friendly.find(params[:id])
+    end
   end
 end

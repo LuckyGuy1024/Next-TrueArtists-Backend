@@ -10,7 +10,7 @@
     <div class="listing-widget shadow">
       <%= link_to studio_path(studio) do %>
         <div class="list-image">
-          <% if studio.tattoos.present? %>
+          <% if studio.search_profile_image %>
             <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
           <% end %>
         </div>
@@ -18,7 +18,7 @@
           <div class="list-left flex-grow-1">
             <div class="d-flex align-items-center">
               <div class="profile-img">
-                <% if studio.avatar.present? %>
+                <% if studio.avatar.attached? %>
                   <img data-src="<%= url_for(studio.avatar) %>" class="lazyload" />
                 <% end %>
               </div>

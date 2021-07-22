@@ -17,16 +17,18 @@ module Frontend
 
     def city
       @city_state = params[:city_state].split('-').titleize
-      @artists = Studio.near(@city_state, 500)
+      @studios = Studio.near(@city_state, 100)
     end
 
     def register
-      @artists = Artist.search(where: { location: { near: { lat: 37, lon: -114 },
-                                                    within: '500mi' } },
+      @artists = Artist.search(where: { location: { near: { lat: current_user_location.latitude,
+                                                    lon: current_user_location.longitude },
+                                                    within: '100mi' } },
                                limit: 6).results
-      @studios = Studio.search(where: { location: { near: { lat: 37, lon: -114 },
-                                                    within: '500mi' } },
-                               limit: 6)
+      @studios = Studio.search(where: { location: { near: { lat: current_user_location.latitude,
+                                                    lon: current_user_location.longitude },
+                                                    within: '100mi' } },
+                               limit: 6).results
 
       respond_to do |format|
         format.html

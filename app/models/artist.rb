@@ -7,8 +7,8 @@ class Artist < ApplicationRecord
   SPECIALTY = %w[Flash Freehand].freeze
 
   searchkick locations: [:location],
-             searchable: %i[name slug styles specialty],
-             filterable: %i[specialty styles]
+             searchable: %i[name slug styles specialty status],
+             filterable: %i[specialty styles status]
 
   include AddressExtension
   include StatusManagement
@@ -40,6 +40,18 @@ class Artist < ApplicationRecord
   after_validation :save_location_data, if: :address_changed?
   before_validation :add_name
 
+  after_commit :attach_default_avatar, on: %i[create update]
+
+  private def attach_default_avatar
+    # return if avatar.attached?
+    #
+    # avatar.attach(
+    #   io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
+    #   filename: 'placeholder-avatar.jpeg',
+    #   content_type: 'image/jpeg'
+    # )
+  end
+
   def search_data
     attributes.merge(
       location: { lat: lat, lon: lon },
@@ -55,7 +67,11 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    format('%s %s', city, state)
+    if state.present?
+      format('%s, %s', city&.titleize, state)
+    else
+      format('%s, %s', city&.titleize, country)
+    end
   end
 
   def current_studio
@@ -63,7 +79,9 @@ class Artist < ApplicationRecord
   end
 
   def search_profile_image
-    tattoos.first.image
+    return tattoos.last&.image if tattoos.last&.image&.attached?
+    return avatar if avatar.attached?
+    false
   end
 
   def has_social_profiles
