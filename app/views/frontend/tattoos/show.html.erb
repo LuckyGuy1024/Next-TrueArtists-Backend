@@ -1,6 +1,32 @@
 <% set_meta_tags title: @tattoo.seo_title,
               description: @tattoo.caption %>
 
+<% set_meta_tags(canonical: tattoo_url(@tattoo))  %>
+
+<% set_meta_tags(open_graph: {
+   title: @tattoo.seo_title,
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: tattoo_url(@tattoo),
+   description: @tattoo.caption,
+   image: {
+     url: url_for(@tattoo.image),
+     width: 655,
+     height: 665
+   }
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: @tattoo.seo_title,
+   description: @tattoo.caption,
+   url: tattoo_url(@tattoo),
+   image: { src: url_for(@tattoo.image) }
+ }
+%>
+
 <!-- Tattoos Details -->
 <div class="page-section">
   <div class="container">

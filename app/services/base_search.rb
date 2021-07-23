@@ -36,6 +36,9 @@ class BaseSearch
                       },
                         where: { location: { near: coordinates, within: options[:within] } } }
                     else
+                      # {
+                      #   boost_by_distance: { location: { origin: current_user_coordinates }}
+                      # }
                       { order: {
                           _geo_distance: {
                             location: options[:current_user_coordinates],
@@ -58,6 +61,14 @@ class BaseSearch
     {
       lat: location.latitude,
       lon: location.longitude
+    }
+  end
+
+  def current_user_coordinates
+    return nil unless options[:current_user_coordinates]
+    {
+      lat: options[:current_user_coordinates].latitude,
+      lon: options[:current_user_coordinates].longitude
     }
   end
 

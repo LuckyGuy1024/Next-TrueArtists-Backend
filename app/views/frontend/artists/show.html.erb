@@ -1,5 +1,31 @@
-<% set_meta_tags title: "#{@artist.name} - Tattoo Artist - #{@artist.city_state} ",
+<% set_meta_tags title: "#{@artist.name} - Tattoo Artist - #{@artist.city_state}",
               description: "Browse tattoo artist #{@artist.name} from #{@artist.city_state} portfolio today. Book a tattoo appointment today." %>
+
+<% set_meta_tags(canonical: artist_url(@artist))  %>
+
+<% set_meta_tags(open_graph: {
+   title: "#{@artist.name} - Tattoo Artist - #{@artist.city_state}",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: artist_url(@artist),
+   description: "Browse tattoo artist #{@artist.name} from #{@artist.city_state} portfolio today. Book a tattoo appointment today.",
+   image: {
+     url: url_for(@artist.search_profile_image),
+     width: 655,
+     height: 665
+   }
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: "#{@artist.name} - Tattoo Artist - #{@artist.city_state}",
+   description: "Browse tattoo artist #{@artist.name} from #{@artist.city_state} portfolio today. Book a tattoo appointment today.",
+   url: artist_url(@artist),
+   image: { src: url_for(@artist.search_profile_image) }
+ }
+%>
 
 <div class="page-section gray">
   <div class="container">

@@ -1,6 +1,32 @@
 <% set_meta_tags title: @article.title,
                  description: @article.meta_description %>
 
+<% set_meta_tags(canonical: article_url(@article))  %>
+
+<% set_meta_tags(open_graph: {
+   title: @article.title,
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: article_url(@article),
+   description: @article.meta_description,
+   image: {
+     url: url_for(@article.image),
+     width: 655,
+     height: 665
+   }
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: @article.title,
+   description: @article.meta_description,
+   url: article_url(@article),
+   image: { src: url_for(@article.image) }
+ }
+%>
+
 <div class="page-section gray-bg">
   <div class="container article-container">
     <div class="row">

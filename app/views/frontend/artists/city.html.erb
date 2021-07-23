@@ -1,6 +1,26 @@
 <% set_meta_tags title: "Best Tattoo Artists in #{@city_state}",
               description: "Find top certified tattoo artists in #{@city_state}. Book an appointment today." %>
 
+<% set_meta_tags(canonical: city_state_artists_url(@city_state.slugorize))  %>
+
+<% set_meta_tags(open_graph: {
+   title: "Best Tattoo Artists in #{@city_state}",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: city_state_artists_url(@city_state.slugorize),
+   description: "Find top certified tattoo artists in #{@city_state}. Book an appointment today.",
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: "Best Tattoo Artists in #{@city_state}",
+   description: "Find top certified tattoo artists in #{@city_state}. Book an appointment today.",
+   url: city_state_artists_url(@city_state.slugorize),
+ }
+%>
+
 <div class="page-section pt-0">
   <div class="container">
     <%= form_for artists_path, html: { remote: true, method: :get } do |f| %>

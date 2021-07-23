@@ -1,5 +1,26 @@
 <% set_meta_tags title: 'Find Tattoo Ideas from Artists Near You',
-              description: 'Browse from thousands of amazing tattoo photos and galleries from tattoo artists near you' %>
+              description: 'Browse thousands tattoo photos and galleries from top tattoo artists near you' %>
+
+
+<% set_meta_tags(canonical: tattoo_url)  %>
+
+<% set_meta_tags(open_graph: {
+   title: 'Find Tattoo Ideas from Artists Near You',
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: tattoos_url,
+   description:'Browse thousands tattoo photos and galleries from top tattoo artists near you'
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: 'Find Tattoo Ideas from Artists Near You',
+   description: 'Browse thousands tattoo photos and galleries from top tattoo artists near you',
+   url: tattoos_url
+ }
+%>
 
 <!-- Tattoos Search -->
 <div class="page-section gray-bg">

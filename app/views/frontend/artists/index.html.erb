@@ -1,34 +1,55 @@
 <% set_meta_tags title: 'The Best Tattoo Artists Near You',
-              description: 'Find the certified tattoo artists near your city today.' %>
-  <div class="page-section gray-bg">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 search-form">
-          <%= form_for artists_path, html: { method: :get } do |f| %>
-            <div class="sub-header">
-              <h1>Find Tattoo Artists Near You</h1>
-            </div>
-            <div class="search-artists-form row">
-              <div class="col-md-9">
-                <div class="search-section">
-                    <%= text_field_tag "near", params[:near], class: '', placeholder: 'Search artists by zip code or city' %>
-                    <button type="submit" class="search search-box">
-                      <i class="ta-icon-search basic-search"></i>
-                    </button>
-                </div>
+              description: 'Find the best certified tattoo artists near your city today.' %>
+
+<% set_meta_tags(canonical: artists_url)  %>
+
+<% set_meta_tags(open_graph: {
+   title: 'The Best Tattoo Artists Near You',
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: artists_url,
+   description: 'Find the best certified tattoo artists near your city today.',
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: 'The Best Tattoo Artists Near You',
+   description: 'Find the best certified tattoo artists near your city today.',
+   url: artists_url,
+ }
+%>
+
+<div class="page-section gray-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 search-form">
+        <%= form_for artists_path, html: { method: :get } do |f| %>
+          <div class="sub-header">
+            <h1>Find Tattoo Artists Near You</h1>
+          </div>
+          <div class="search-artists-form row">
+            <div class="col-md-9">
+              <div class="search-section">
+                  <%= text_field_tag "near", params[:near], class: '', placeholder: 'Search artists by zip code or city' %>
+                  <button type="submit" class="search search-box">
+                    <i class="ta-icon-search basic-search"></i>
+                  </button>
               </div>
-              <div class="col-md-3">
-                <%= render 'frontend/artists/filter' %>
-              </div>
             </div>
-            <div class="selected-filters">
-              <%= render 'frontend/artists/selected_filters' %>
+            <div class="col-md-3">
+              <%= render 'frontend/artists/filter' %>
             </div>
-          <% end %>
-        </div>
+          </div>
+          <div class="selected-filters">
+            <%= render 'frontend/artists/selected_filters' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 
   <div class="page-section">
     <div class="container">
