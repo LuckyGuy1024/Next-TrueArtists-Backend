@@ -23,7 +23,8 @@ module StudioScoped
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
       status: params[:status] || 'approved' ,
       near: params[:near],
-      within: params[:within]
+      within: params[:within],
+      current_user_coordinates: current_user_coordinates
     }.delete_if { |_k, v| v.nil? }
   end
 

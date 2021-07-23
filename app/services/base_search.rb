@@ -27,15 +27,23 @@ class BaseSearch
       artist_id: options[:artist_id]
     }.delete_if { |_k, v| v.nil? }
 
-    if options[:near] && coordinates.present?
-      location_info =  { order: {
-        _geo_distance: {
-          location: coordinates,
-          order: 'asc'
-        }
-      },
-      where: { location: { near: coordinates, within: options[:within] } } }
-    end
+    location_info = if options[:near] && coordinates.present?
+                      { order: {
+                        _geo_distance: {
+                          location: coordinates,
+                          order: 'asc'
+                        }
+                      },
+                        where: { location: { near: coordinates, within: options[:within] } } }
+                    else
+                      { order: {
+                          _geo_distance: {
+                            location: options[:current_user_coordinates],
+                            order: 'asc'
+                          }
+                        }
+                      }
+                    end
 
     constraints.merge(location_info)
 

@@ -16,7 +16,6 @@ module Frontend
     end
 
     def city
-      @city_state = params[:city_state]
       @city_state = params[:city_state].split('-').join(' ').titleize
 
       @studios = StudioSearch.new(

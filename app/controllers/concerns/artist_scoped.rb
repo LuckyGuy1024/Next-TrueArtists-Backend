@@ -24,6 +24,7 @@ module ArtistScoped
       status: params[:status] || 'approved' ,
       near: params[:near],
       styles: params[:styles],
+      current_user_coordinates: current_user_coordinates,
       within: params[:within],
       studio_id: params[:studio_id],
     }.delete_if { |_k, v| v.nil? }
