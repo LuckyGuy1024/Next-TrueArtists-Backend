@@ -2,7 +2,7 @@
 <% @studios.each do |studio| %>
   <div class="col-lg-3 col-md-6 col-sm-12">
     <div class="location-section">
-      <%= link_to '#' do %>
+      <%= link_to city_state_studios_path(artist.city_state.slugorize) do %>
         <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
         <h4><%= studio.city_state %></h4>
       <% end %>
