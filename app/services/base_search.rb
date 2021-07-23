@@ -1,5 +1,6 @@
 class BaseSearch
   PER_PAGE = 60
+  WITHIN = '200mi'
   attr_reader :query, :options
   attr_accessor :results, :meta
 
@@ -15,6 +16,8 @@ class BaseSearch
       page: options[:page] || 1,
       per_page: options[:per_page] || PER_PAGE
     }
+
+    within = options[:within] || WITHIN
 
     constraints[:order] = order
 
@@ -34,7 +37,7 @@ class BaseSearch
                           order: 'asc'
                         }
                       },
-                        where: { location: { near: coordinates, within: options[:within] } } }
+                        where: { location: { near: coordinates, within: within } } }
                     else
                       # {
                       #   boost_by_distance: { location: { origin: current_user_coordinates }}
