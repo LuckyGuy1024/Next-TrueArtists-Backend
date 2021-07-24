@@ -45,7 +45,7 @@ class Tattoo < ApplicationRecord
   end
 
   def seo_title
-    format('%s %s %s | %s', color, placement, 'Tattoo', (artist.name || studio.name))
+    format('%s %s %s | %s', color, placement, 'Tattoo', (artist.name || studio.name)).titleize
   end
 
   def add_location_data
