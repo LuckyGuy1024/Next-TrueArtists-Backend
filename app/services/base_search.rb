@@ -41,15 +41,17 @@ class BaseSearch
                       },
                         where: { location: { near: { lat: coordinates[:lat], lon: coordinates[:lon] },
                                              within: within } } }
-                    else
+                    elsif coordinates.present?
                       { order: {
                         _geo_distance: {
-                          location:  {
+                          location: {
                             lat: coordinates[:lat], lon: coordinates[:lon]
                           },
                           order: 'asc'
                         }
                       } }
+                    else
+                      {}
                     end
 
     constraints = constraints.deep_merge(location_info)
@@ -58,9 +60,9 @@ class BaseSearch
   end
 
   def find_coordinates
-    location = Geocoder.search(options[:near]).first || options[:current_user_coordinates]
+    location = Geocoder.search(options[:near]).first || options[:current_user_location]
 
-    return nil unless location
+    return nil unless location&.latitude.present? && location&.longitude.present?
 
     {
       lat: location.latitude,

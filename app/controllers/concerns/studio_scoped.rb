@@ -24,7 +24,7 @@ module StudioScoped
       status: params[:status] || 'approved' ,
       near: params[:near],
       within: params[:within],
-      current_user_coordinates: current_user_coordinates
+      current_user_location: current_user_location
     }.delete_if { |_k, v| v.nil? }
   end
 
