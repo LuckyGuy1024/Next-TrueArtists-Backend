@@ -45,7 +45,7 @@ class BaseSearch
                       { order: {
                         _geo_distance: {
                           location:  {
-                            lat: current_user_coordinates[:lat], lon: current_user_coordinates[:lon]
+                            lat: coordinates[:lat], lon: coordinates[:lon]
                           },
                           order: 'asc'
                         }
@@ -58,22 +58,13 @@ class BaseSearch
   end
 
   def find_coordinates
-    location = Geocoder.search(options[:near]).first
+    location = Geocoder.search(options[:near]).first || options[:current_user_coordinates]
 
     return nil unless location
 
     {
       lat: location.latitude,
       lon: location.longitude
-    }
-  end
-
-  def current_user_coordinates
-    return nil unless options[:current_user_coordinates]
-
-    {
-      lat: options[:current_user_coordinates]&.latitude,
-      lon: options[:current_user_coordinates]&.longitude
     }
   end
 
