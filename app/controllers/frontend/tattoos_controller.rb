@@ -19,7 +19,7 @@ module Frontend
     end
 
     def facet
-      @name = params[:name].split('-').join(' ').titleize
+      @name = (params[:placement] || params[:style]).split('-').join(' ').titleize
       @tattoos = TattooSearch.new(query: @name).base_filter
       respond_to do |format|
         format.html

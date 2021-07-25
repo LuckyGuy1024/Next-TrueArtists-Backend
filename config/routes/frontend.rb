@@ -51,8 +51,8 @@ Rails.application.routes.draw do
 
     resources :tattoos, only: %i[index show] do
       collection do
-        get 'placement/:name' => 'tattoos#facet', as: :placement
-        get 'style/:name' => 'tattoos#facet', as: :style
+        get '/placement/:placement' => 'tattoos#facet', as: :placement
+        get '/style/:style' => 'tattoos#facet', as: :style
       end
     end
 
