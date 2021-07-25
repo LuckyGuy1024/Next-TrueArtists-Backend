@@ -4,7 +4,6 @@ module AddressExtension
   extend ActiveSupport::Concern
   included do
     geocoded_by :address do |obj, results|
-      binding.pry
       if result = results.first
         # obj.street_address = result.street_address
         obj.state = result.state if result.state.present?
