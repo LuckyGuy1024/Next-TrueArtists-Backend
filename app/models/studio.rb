@@ -56,7 +56,7 @@ class Studio < ApplicationRecord
   before_validation :validate_studio_time
 
   after_commit :upgrade_user_role, on: :create
-  after_validation :save_location_data, if: :address_changed?
+  after_validation :save_location_data #, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
   after_commit :attach_default_avatar, on: %i[create update]

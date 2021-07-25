@@ -37,7 +37,7 @@ class Artist < ApplicationRecord
   after_commit :upgrade_user_role, on: :create
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
-  after_validation :save_location_data, if: :address_changed?
+  # after_validation :save_location_data, if: :address_changed?
   before_validation :add_name
 
   after_commit :attach_default_avatar, on: %i[create update]
