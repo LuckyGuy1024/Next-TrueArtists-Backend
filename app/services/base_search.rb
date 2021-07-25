@@ -44,7 +44,9 @@ class BaseSearch
                     else
                       { order: {
                         _geo_distance: {
-                          location: options[:current_user_coordinates],
+                          location:  {
+                            lat: current_user_coordinates[:lat], lon: current_user_coordinates[:lon]
+                          },
                           order: 'asc'
                         }
                       } }
@@ -70,8 +72,8 @@ class BaseSearch
     return nil unless options[:current_user_coordinates]
 
     {
-      lat: options[:current_user_coordinates].latitude,
-      lon: options[:current_user_coordinates].longitude
+      lat: options[:current_user_coordinates]&.latitude,
+      lon: options[:current_user_coordinates]&.longitude
     }
   end
 

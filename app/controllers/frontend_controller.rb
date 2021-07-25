@@ -24,7 +24,6 @@ class FrontendController < ActionController::Base
   end
 
   def current_user_coordinates
-    binding.pry
     current_user_location.coordinates
   end
 
