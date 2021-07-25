@@ -30,33 +30,32 @@ class BaseSearch
       artist_id: options[:artist_id]
     }.delete_if { |_k, v| v.nil? }
 
+    coordinates = find_coordinates
+
     location_info = if options[:near] && coordinates.present?
                       { order: {
                         _geo_distance: {
-                          location: coordinates,
+                          location: { lat: coordinates[:lat], lon: coordinates[:lon] },
                           order: 'asc'
                         }
                       },
-                        where: { location: { near: coordinates, within: within } } }
+                        where: { location: { near: { lat: coordinates[:lat], lon: coordinates[:lon] },
+                                             within: within } } }
                     else
-                      # {
-                      #   boost_by_distance: { location: { origin: current_user_coordinates }}
-                      # }
                       { order: {
-                          _geo_distance: {
-                            location: options[:current_user_coordinates],
-                            order: 'asc'
-                          }
+                        _geo_distance: {
+                          location: options[:current_user_coordinates],
+                          order: 'asc'
                         }
-                      }
+                      } }
                     end
 
-    constraints.merge(location_info)
+    constraints = constraints.deep_merge(location_info)
 
-    search_class.search(query, constraints)
+    search_class.search(query, **constraints)
   end
 
-  def coordinates
+  def find_coordinates
     location = Geocoder.search(options[:near]).first
 
     return nil unless location
@@ -69,6 +68,7 @@ class BaseSearch
 
   def current_user_coordinates
     return nil unless options[:current_user_coordinates]
+
     {
       lat: options[:current_user_coordinates].latitude,
       lon: options[:current_user_coordinates].longitude
