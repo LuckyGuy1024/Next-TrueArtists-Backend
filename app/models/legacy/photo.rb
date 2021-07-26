@@ -14,7 +14,7 @@ module Legacy
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Photo.count)
-        where(photoable_type: 'Artist').where("id > 15153").find_each do |photo|
+        where(photoable_type: 'Artist').find_each do |photo|
           ActiveRecord::Base.connected_to(role: :writing) do
             new_tattoo = ::Tattoo.find_or_initialize_by(id: photo.id, artist_id: photo.photoable_id)
             new_tattoo.placement = photo.tattoo_placements

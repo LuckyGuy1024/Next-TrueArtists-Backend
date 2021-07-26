@@ -1,9 +1,3 @@
-set :ssh_options, {
-  forward_agent: true,
-  user: 'admin'
-  # port: 8389
-}
-
 set :rails_env, 'staging'
 set :domain, '45.79.115.170'
 server fetch(:domain), user: fetch(:deploy_user), roles: [:app, :db, :sidekiq, :worker], primary: true #, port: 8389
