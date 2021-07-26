@@ -37,6 +37,10 @@ module Legacy
                 io: URI.open(s3_image_url)
               )
             end
+
+            logger.info("uploading image #{new_tattoo.id}")
+            puts "#{new_tattoo.image.url}"
+
             progress_bar.increment
           rescue StandardError => e
             logger.error("Photos[#{photo.id}] \n\n -------------------- #{e.inspect}\n\n\n")
