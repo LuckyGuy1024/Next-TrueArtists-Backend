@@ -10,7 +10,7 @@
    url: tattoo_url(@tattoo),
    description: @tattoo.caption,
    image: {
-     url: url_for(@tattoo.image),
+     url: asset_blob_url(@tattoo.image),
      width: 655,
      height: 665
    }
@@ -23,7 +23,7 @@
    title: @tattoo.seo_title,
    description: @tattoo.caption,
    url: tattoo_url(@tattoo),
-   image: { src: url_for(@tattoo.image) }
+   image: { src: asset_blob_url(@tattoo.image) }
  }
 %>
 
@@ -39,7 +39,7 @@
                 <% object = @tattoo.studio || @tattoo.artist %>
                   <%= link_to object do %>
                     <% if object.avatar.attached? %>
-                      <img data-src="<%= url_for(object.avatar) %>" class="lazyload" />
+                      <img data-src="<%= asset_blob_url(object.avatar) %>" class="lazyload" />
                     <% end %>
                     <h3>
                       <%= object.name %>
@@ -48,7 +48,7 @@
               </header>
               <div class="tattoos-details-img">
                 <% if @tattoo.image.attached? %>
-                  <img data-src="<%= url_for(@tattoo.image) %>" class="lazyload" />
+                  <img data-src="<%= asset_blob_url(@tattoo.image) %>" class="lazyload" />
                 <% end %>
               </div>
               <div class="details-content">

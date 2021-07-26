@@ -10,7 +10,7 @@
    url: article_url(@article),
    description: @article.meta_description,
    image: {
-     url: url_for(@article.image),
+     url: asset_blob_url(@article.image),
      width: 655,
      height: 665
    }
@@ -23,7 +23,7 @@
    title: @article.title,
    description: @article.meta_description,
    url: article_url(@article),
-   image: { src: url_for(@article.image) }
+   image: { src: asset_blob_url(@article.image) }
  }
 %>
 
@@ -44,7 +44,7 @@
           </div>
           <div class="sharethis-inline-share-buttons"></div>
           <div>
-            <img data-src="<%= url_for(@article.image) %>" class="lazyload" />
+            <img data-src="<%= asset_blob_url(@article.image) %>" class="lazyload" />
           </div>
           <div class="article-body">
             <%= @article.content.html_safe %>

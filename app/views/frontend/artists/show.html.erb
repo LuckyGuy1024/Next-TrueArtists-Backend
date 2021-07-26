@@ -10,7 +10,7 @@
    url: artist_url(@artist),
    description: "Browse tattoo artist #{@artist.name} from #{@artist.city_state} portfolio today. Book a tattoo appointment today.",
    image: {
-     url: url_for(@artist.search_profile_image),
+     url: asset_blob_url(@artist.search_profile_image),
      width: 655,
      height: 665
    }
@@ -23,7 +23,7 @@
    title: "#{@artist.name} - Tattoo Artist - #{@artist.city_state}",
    description: "Browse tattoo artist #{@artist.name} from #{@artist.city_state} portfolio today. Book a tattoo appointment today.",
    url: artist_url(@artist),
-   image: { src: url_for(@artist.search_profile_image) }
+   image: { src: asset_blob_url(@artist.search_profile_image) }
  }
 %>
 
@@ -34,7 +34,7 @@
         <div class="artist-left-sidebar">
           <div class="artist-p-info text-center">
             <% if @artist.avatar.attached? %>
-              <img data-src="<%= url_for(@artist.avatar) %>" class="lazyload" />
+              <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
             <% end %>
             <h1><%= @artist.name %></h1>
           </div>

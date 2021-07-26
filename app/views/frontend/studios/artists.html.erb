@@ -10,7 +10,7 @@
    url: artists_studio_url(@studio),
    description: "Book a tattoo appointment with tattoo artist from #{@studio.name} - #{@studio.city_state}.",
    image: {
-     url: url_for(@studio.search_profile_image),
+     url: asset_blob_url(@studio.search_profile_image),
      width: 655,
      height: 665
    }
@@ -23,7 +23,7 @@
    title: "#{@studio.name} - #{@studio.city_state} - Tattoo Artists",
    description: "Book a tattoo appointment with tattoo artist from #{@studio.name} - #{@studio.city_state}.",
    url: artists_studio_url(@studio),
-   image: { src: url_for(@studio.search_profile_image) }
+   image: { src: asset_blob_url(@studio.search_profile_image) }
  }
 %>
 

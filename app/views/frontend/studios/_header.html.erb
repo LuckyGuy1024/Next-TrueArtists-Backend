@@ -6,7 +6,7 @@
         <div class="s-profiles d-flex align-items-center">
           <div class="s-profile-img">
             <%= link_to studio_path(@studio) do %>
-              <img data-src="<%= url_for(@studio.avatar) %>" class="lazyload" />
+              <img data-src="<%= asset_blob_url(@studio.avatar) %>" class="lazyload" />
             <% end %>
           </div>
           <div class="s-profile-info">

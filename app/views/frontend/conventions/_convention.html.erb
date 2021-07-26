@@ -7,7 +7,7 @@
   <div class="listing-widget shadow">
     <%= link_to convention_path(convention) do %>
       <div class="list-image">
-        <img data-src="<%= url_for(convention.image) %>" class="lazyload" />
+        <img data-src="<%= asset_blob_url(convention.image) %>" class="lazyload" />
       </div>
       <div class="list-content d-flex align-items-center">
         <div class="list-left flex-grow-1">

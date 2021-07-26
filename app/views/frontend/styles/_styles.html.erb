@@ -4,7 +4,7 @@
       <%= link_to style_tattoos_path(style.slug) do %>
         <div class="list-image">
           <% if style.avatar.attached? %>
-            <img data-src="<%= url_for(style.avatar) %>" class="lazyload" />
+            <img data-src="<%= asset_blob_url(style.avatar) %>" class="lazyload" />
           <% end %>
         </div>
         <div class="list-content d-flex align-items-center">

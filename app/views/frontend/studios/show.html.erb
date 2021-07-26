@@ -10,7 +10,7 @@
     url: tattoos_studio_url(@studio),
     description: "Welcome to #{@studio.name} tattoo shop in #{@studio.city_state}. Book a tattoo appointment today with us.",
     image: {
-      url: url_for(@studio.search_profile_image),
+      url: asset_blob_url(@studio.search_profile_image),
       width: 655,
       height: 665
     }
@@ -23,7 +23,7 @@
     title: "#{@studio.name} - Tattoo Shop in #{@studio.city_state}.",
     description: "Welcome to #{@studio.name} tattoo shop in #{@studio.city_state}. Book a tattoo appointment today with us.",
     url: tattoos_studio_url(@studio),
-    image: { src: url_for(@studio.search_profile_image) }
+    image: { src: asset_blob_url(@studio.search_profile_image) }
   }
 %>
 

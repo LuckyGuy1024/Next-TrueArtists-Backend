@@ -8,7 +8,7 @@
             <div class="artists-profile d-flex align-items-center">
               <div class="artists-profile-img">
                 <% if artist.avatar.attached? %>
-                  <img data-src="<%= url_for(artist.avatar) %>" class="lazyload" />
+                  <img data-src="<%= asset_blob_url(artist.avatar) %>" class="lazyload" />
                 <% end %>
               </div>
               <div class="artists-profile-info">
