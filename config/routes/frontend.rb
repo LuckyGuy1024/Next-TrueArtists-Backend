@@ -58,8 +58,8 @@ Rails.application.routes.draw do
 
     resources :articles, only: %i[index show], path: 'blog' do
       collection do
-        get "categories" => 'categories#index', as: :blog_categories
-        get "categories/:id" => 'categories#show', as: :blog_category
+        get 'categories' => 'categories#index', as: :blog_categories
+        get 'categories/:id' => 'categories#show', as: :blog_category
       end
     end
 
@@ -79,5 +79,17 @@ Rails.application.routes.draw do
     get '/register/artist' => 'artists#register'
     get '/about-us' => 'landing_pages#about_us'
     get '/contact-us' => 'landing_pages#contact_us'
+  end
+
+  direct :asset_blob do |blob|
+    # Preserve the behaviour of `rails_blob_url` inside these environments
+    # where S3 or the CDN might not be configured
+    if Rails.env.development? || Rails.env.test?
+      route_for(:rails_blob, blob)
+    else
+      # Use an environment variable instead of hard-coding the CDN host
+      # You could also use the Rails.configuration to achieve the same
+      File.join(ENV.fetch('CDN_HOST'), blob.key)
+    end
   end
 end
