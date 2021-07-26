@@ -21,34 +21,24 @@
  }
 %>
 
-<!-- Latest Studio -->
-<div class="page-section pt-0">
+<div class="page-section">
   <div class="container">
-    <%= form_for studios_path, html: { remote: true, method: :get } do |f| %>
-      <%= hidden_field_tag 'page', @studios.current_page %>
-      <%= hidden_field_tag 'per_page', @studios.limit_value %>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="sub-header mb-30">
-            <h1>Tattoo Studios in <%= @city_state %></h1>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="latest-studios-lists grid-gap-30 row">
-            <%= render @studios %>
-            <% if @studios.empty? %>
-              <div>No studios found near this area.</div>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="col-md-12 text-center">
-          <div class="col-md-12 text-center">
-            <%= paginate @studios %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-header align-items-center">
+          <div>
+            <h1>Top Tattoo Artists in <%= @city_state %></h1>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
+
+      <div class="col-md-12">
+        <div class="artists-lists grid-gap-30 row">
+          <%= render @studios %>
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <%= paginate @studios %>
+      </div>
+    </div>
 </div>
-<!-- // -->

@@ -21,28 +21,24 @@
  }
 %>
 
-<div class="page-section pt-0">
+<div class="page-section">
   <div class="container">
-    <%= form_for artists_path, html: { remote: true, method: :get } do |f| %>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="sub-header align-items-center">
-            <div>
-              <h1>Top Tattoo Artists in <%= @city_state %></h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="artists-lists grid-gap-30 row">
-            <%= render @artists %>
-          </div>
-        </div>
-        <div class="col-md-12 text-center">
-          <div class="see-more-section">
-            <button class="btn btn-alternative btn-lg">See More</button>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-header align-items-center">
+          <div>
+            <h1>Top Tattoo Artists in <%= @city_state %></h1>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
+
+      <div class="col-md-12">
+        <div class="artists-lists grid-gap-30 row">
+          <%= render @artists %>
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <%= paginate @artists %>
+      </div>
+    </div>
 </div>
