@@ -25,19 +25,6 @@ module TrueArtists
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'http://localhost:3000',
-                'http://localhost:3001',
-                'http://qa-account.trueartists.com',
-                'https://account.trueartists.com'
-        resource '*',
-                 headers: :any,
-                 methods: %i[get post put patch delete options head]
-      end
-    end
-
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
