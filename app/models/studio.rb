@@ -52,7 +52,7 @@ class Studio < ApplicationRecord
 
   validates :email, presence: true, on: :create
   validates :name, presence: true
-  validates :user_id, uniqueness: true
+  # validates :user_id, uniqueness: true #remove this validation for now
   before_validation :validate_studio_time
 
   after_commit :upgrade_user_role, on: :create
