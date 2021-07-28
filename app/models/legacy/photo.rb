@@ -12,7 +12,7 @@ module Legacy
     end
 
     def self.migrate
-      ::Artist.where(status: 'approved').find_each do |artist|
+      ::Artist.where(status: 'approved').where.not(id: ::Tattoo.pluck(:artist_id).uniq).find_each do |artist|
         ActiveRecord::Base.connected_to(role: :reading) do
           where(photoable_type: 'Artist', photoable_id: artist.id).find_each do |photo|
             ActiveRecord::Base.connected_to(role: :writing) do
