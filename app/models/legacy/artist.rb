@@ -23,7 +23,7 @@ module Legacy
     end
 
     def self.migrate
-      artist_count = ::Artist.last.id - 1
+      artist_count = ::Artist.last.id
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Artist.count)
         where("id > ?", artist_count).find_each do |artist|
