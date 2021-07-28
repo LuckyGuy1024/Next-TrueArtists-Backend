@@ -40,7 +40,7 @@ module Legacy
             end
 
             logger.info("uploading image #{new_tattoo.id}")
-            puts "#{new_tattoo.image.url}"
+            logger.info "#{new_tattoo.image.url}"
 
             progress_bar.increment
           rescue StandardError => e

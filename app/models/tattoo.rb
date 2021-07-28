@@ -20,7 +20,7 @@ class Tattoo < ApplicationRecord
     end
   end
 
-  searchkick locations: [:location]
+  # searchkick locations: [:location]
 
   include AssetExtension
   acts_as_favoritable
@@ -49,12 +49,10 @@ class Tattoo < ApplicationRecord
   end
 
   def add_location_data
-    if studio
-      self.lat = studio.lat
-      self.lon = studio.lon
-    else
-      self.lat = artist.lat
-      self.lon = artist.lon
+    parent = artist || studio
+    if parent.present?
+      self.lat = parent.lat
+      self.lon = parent.lon
     end
   end
 end
