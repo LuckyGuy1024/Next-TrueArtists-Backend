@@ -10,7 +10,7 @@ module Legacy
     end
 
     def self.migrate
-      studio_count = ::Studio.last.id - 1
+      studio_count = ::Studio.last&.id.to_i
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Studio.count)
         where(admin_approved: true).where("id > ?", studio_count).find_each do |studio|
