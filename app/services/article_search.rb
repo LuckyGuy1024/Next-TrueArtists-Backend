@@ -4,7 +4,7 @@ class ArticleSearch < BaseSearch
   end
 
   def filter
-    search_results = base_filter.with_attached_image
+    search_results = base_filter
 
     self.results = search_results.results
     self.meta = pagination_info(search_results)

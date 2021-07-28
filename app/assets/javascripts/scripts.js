@@ -258,12 +258,12 @@ $(document).ready(function() {
   $("input[name='search_path']").change(function() {
     var value = $(this).val();
     if (value === 'tattoos') {
-      $('#query').attr({
-        placeholder:`Search ${value} by style or body placement`,
+      $(this).attr({
+        placeholder: `Search ${value} by style or body placement`,
         name: "query"
       });
     } else {
-      $('#query').attr({
+      $(this).attr({
         placeholder: `Search ${value} by city or zip code`,
         name: "query"
       });
