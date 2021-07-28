@@ -18,6 +18,7 @@ module Legacy
           ActiveRecord::Base.connected_to(role: :writing) do
             new_studio = ::Studio.find_or_initialize_by(id: studio.id, user_id: studio.user_id)
             new_studio.name = studio.name
+            new_studio.email = studio.user&.email
             new_studio.bio = studio.description
             new_studio.languages = languages
             new_studio.website_url = studio.website

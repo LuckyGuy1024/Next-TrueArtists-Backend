@@ -31,7 +31,7 @@ class Artist < ApplicationRecord
   cache_index :slug, unique: true
   # cache_has_many :tattoos, embed: true
 
-  validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
+  # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
