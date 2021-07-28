@@ -10,10 +10,9 @@ module Legacy
     end
 
     def self.migrate
-      studio_count = ::Studio.last&.id.to_i
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Studio.count)
-        where(admin_approved: true).where("id > ?", studio_count).find_each do |studio|
+        where(admin_approved: true).find_each do |studio|
           languages = studio.languages.to_a.map(&:name).join(',').presence
           specialty = studio.specialities.to_a.map(&:name).join(',').presence
           ActiveRecord::Base.connected_to(role: :writing) do
@@ -37,27 +36,28 @@ module Legacy
             new_studio.phone_number = studio.telephone
             new_studio.slug = studio.slug
 
-            new_artist.status = if studio.admin_approved && (studio.city.present? || studio.country.present?)
+            new_studio.status = if studio.admin_approved && (studio.city.present? || studio.country.present?)
                                   'approved'
                                 else
                                   'pending'
                                 end
 
-            if new_studio.save(validate: false) && studio.logo_file_name
-              new_studio.avatar.purge if new_studio.avatar.present?
+            if new_studio.save(validate: false)
+              if studio.logo_file_name.present?
+                new_studio.avatar.purge if new_studio.avatar.present?
 
-              image_file_name = studio.logo_file_name
-              image_extension = File.extname(image_file_name)
-              optimized_file_name = new_studio.name.slugorize.escape
+                image_file_name = studio.logo_file_name
+                image_extension = File.extname(image_file_name)
+                optimized_file_name = new_studio.name.slugorize.escape
 
-              new_file_name = "#{optimized_file_name}#{image_extension}"
+                new_file_name = "#{optimized_file_name}#{image_extension}"
 
-              s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{studio.id}/original/#{image_file_name.escape}"
-              new_studio.avatar.attach(key: "studios/#{new_studio.id}/logo/#{new_file_name}",
-                                       io: URI.open(s3_image_url),
-                                       filename: new_file_name,
-                                       content_type: studio.logo_content_type)
-
+                s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{studio.id}/original/#{image_file_name.escape}"
+                new_studio.avatar.attach(key: "studios/#{new_studio.id}/logo/#{new_file_name}",
+                                         io: URI.open(s3_image_url),
+                                         filename: new_file_name,
+                                         content_type: studio.logo_content_type)
+              end
             end
             progress_bar.increment
           rescue StandardError => e
