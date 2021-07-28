@@ -13,7 +13,7 @@ module Legacy
       studio_count = ::Studio.last.id - 1
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Studio.count)
-        where("id > ?", studio_count).find_each do |studio|
+        where(admin_approved: true).where("id > ?", studio_count).find_each do |studio|
           languages = studio.languages.to_a.map(&:name).join(',').presence
           specialty = studio.specialities.to_a.map(&:name).join(',').presence
           ActiveRecord::Base.connected_to(role: :writing) do

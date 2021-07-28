@@ -26,7 +26,7 @@ module Legacy
       artist_count = ::Artist.last.id
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Artist.count)
-        where("id > ?", artist_count).find_each do |artist|
+          where(admin_approved: true).where("id > ?", artist_count).find_each do |artist|
           # find user
 
           tattoo_style_ids = artist.tattoo_style_ids
