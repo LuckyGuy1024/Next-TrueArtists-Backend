@@ -3,6 +3,7 @@ module Legacy
     self.abstract_class = true
     self.table_name = 'studios'
     connects_to database: { reading: :legacy, writing: :primary }
+    belongs_to :user, class_name: 'Legacy::User'
 
     def self.logger
       @logger ||=
