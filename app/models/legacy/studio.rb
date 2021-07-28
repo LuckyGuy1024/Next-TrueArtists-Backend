@@ -10,9 +10,10 @@ module Legacy
     end
 
     def self.migrate
+      studio_count = ::Studio.last.id - 1
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Studio.count)
-        find_each do |studio|
+        where("id > ?", studio_count).find_each do |studio|
           languages = studio.languages.to_a.map(&:name).join(',').presence
           specialty = studio.specialities.to_a.map(&:name).join(',').presence
           ActiveRecord::Base.connected_to(role: :writing) do
@@ -37,7 +38,7 @@ module Legacy
             new_studio.accepted_payment_methods = studio.payment_methods
             new_studio.phone_number = studio.telephone
             new_studio.slug = studio.slug
-            
+
             new_artist.status = if studio.admin_approved && (studio.city.present? || studio.country.present?)
                                   'approved'
                                 else
