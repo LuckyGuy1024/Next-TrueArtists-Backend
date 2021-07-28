@@ -12,7 +12,7 @@ module Legacy
     end
 
     def self.migrate
-      import_count = ::Tattoo.count
+      import_count = ::Tattoo.last.id - 1
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Photo.count)
         where(photoable_type: 'Artist').where("id >= ?", import_count).find_each do |photo|

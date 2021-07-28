@@ -15,6 +15,7 @@ class ApplicationController < ActionController::API
   def authenticate_request!
     if request.headers['Authorization'].present?
       authenticate_or_request_with_http_token do |token|
+        binding.pry
         jwt_payload = JsonWebToken.decode(token).first
         @current_user_id = jwt_payload['user_id']
       rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
@@ -71,7 +72,7 @@ class ApplicationController < ActionController::API
       next_page: resource.next_page || resource.current_page
     }
   end
-  
+
   private
 
   def json_api_error_format(errors)
