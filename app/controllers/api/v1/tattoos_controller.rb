@@ -8,7 +8,7 @@ class Api::V1::TattoosController < ApplicationController
     @results = TattooSearch.new(
       query: params[:query],
       options: search_options
-    ).search_tattoos
+    ).filter
 
     render json: @results, status: :ok
   end
