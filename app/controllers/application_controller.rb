@@ -13,9 +13,14 @@ class ApplicationController < ActionController::API
 
   # Validates the token and user and sets the @current_user scope
   def authenticate_request!
+    logger = Rails.logger
+    logger.error "========================checking headers==================="
+    logger.error "#{request.headers['Authorization']}"
+    logger.error request.headers['Authorization'].inspect
+    logger.error "========================checking headers==================="
+
     if request.headers['Authorization'].present?
       authenticate_or_request_with_http_token do |token|
-        binding.pry
         jwt_payload = JsonWebToken.decode(token).first
         @current_user_id = jwt_payload['user_id']
       rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
