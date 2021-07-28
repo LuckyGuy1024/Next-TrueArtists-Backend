@@ -1,6 +1,8 @@
 class Tattoo < ApplicationRecord
   include AASM
   include IdentityCache
+  include AssetExtension
+  acts_as_favoritable
 
   COLORS = ['Color', 'Black & Grey'].freeze
   PLACEMENTS = ['Head', 'Neck', 'Shoulder', 'Chest', 'Back',
@@ -20,10 +22,8 @@ class Tattoo < ApplicationRecord
     end
   end
 
-  # searchkick locations: [:location]
+  searchkick locations: [:location]
 
-  include AssetExtension
-  acts_as_favoritable
   belongs_to :studio, optional: true
   belongs_to :artist, optional: true
 
