@@ -13,12 +13,6 @@ class ApplicationController < ActionController::API
 
   # Validates the token and user and sets the @current_user scope
   def authenticate_request!
-    logger = Rails.logger
-    logger.error "========================checking headers==================="
-    logger.error "#{request.headers['Authorization']}"
-    logger.error request.headers['Authorization'].inspect
-    logger.error "========================checking headers==================="
-
     if request.headers['Authorization'].present?
       authenticate_or_request_with_http_token do |token|
         jwt_payload = JsonWebToken.decode(token).first
