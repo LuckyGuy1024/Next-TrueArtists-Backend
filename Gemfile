@@ -35,7 +35,6 @@ gem 'sassc'
 gem 'twilio-ruby'
 gem 'webpacker', '~> 5.0'
 gem 'rollbar'
-gem 'apitome', github: 'jejacks0n/apitome'
 gem 'rspec_api_documentation'
 gem 'whenever', require: false
 gem 'dalli'
@@ -44,10 +43,8 @@ gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   gem 'pg', '>= 0.18', '< 2.0'
-  # gem 'apitome', github: 'jejacks0n/apitome'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
-  # gem 'rspec_api_documentation'
   gem 'rspec-rails'
 end
 
