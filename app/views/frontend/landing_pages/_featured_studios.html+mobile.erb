@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="home-section-header">
             <h2>
-              Tattoo Studios near you
+              Tattoo Shops near you
               <% if current_user_city.present? %>
                 - <%= link_to current_user_city_state, city_state_studios_path(current_user_city_state.slugorize)  %>
               <% end %>
