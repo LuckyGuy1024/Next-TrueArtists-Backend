@@ -25,7 +25,7 @@ module Legacy
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Artist.count)
-          where("id = 1799").where(admin_approved: true).find_each do |artist|
+          where(admin_approved: true).find_each do |artist|
           # find user
           tattoo_style_ids = artist.tattoo_style_ids
           specialty = artist.specialities.to_a.map(&:name).join(',')
@@ -62,30 +62,31 @@ module Legacy
 
             # phon verification does not exist in system
             # new_artist.phone_verified = artist.phone_verified
-            new_artist.status = if artist.admin_approved && (artist.city.present? || artist.country.present?)
+            new_artist.status = if artist.admin_approved && (artist.city.present? || artist.zip_code || artist.country.present?)
                                   'approved'
                                 else
                                   'pending'
                                 end
             if new_artist.save(validate: false)
-              if artist.logo_file_name.present?
-                image_file_name = artist.logo_file_name
-                image_extension = File.extname(image_file_name)
-                optimized_file_name = new_artist.name.slugorize.escape
-                new_file_name = "#{optimized_file_name}#{image_extension}"
-                s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{artist.id}/original/#{image_file_name.escape}"
-
-                options = {
-                  key: "artists/#{new_artist.id}/logo/#{new_file_name}",
-                  io: URI.open(s3_image_url),
-                  filename: new_file_name,
-                  content_type: artist.logo_content_type
-                }
-
-                new_artist.avatar.purge if new_artist.avatar.present?
-
-                new_artist.avatar.attach(options)
-              end
+              # updating address only 
+              # if artist.logo_file_name.present?
+              #   image_file_name = artist.logo_file_name
+              #   image_extension = File.extname(image_file_name)
+              #   optimized_file_name = new_artist.name.slugorize.escape
+              #   new_file_name = "#{optimized_file_name}#{image_extension}"
+              #   s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{artist.id}/original/#{image_file_name.escape}"
+              #
+              #   options = {
+              #     key: "artists/#{new_artist.id}/logo/#{new_file_name}",
+              #     io: URI.open(s3_image_url),
+              #     filename: new_file_name,
+              #     content_type: artist.logo_content_type
+              #   }
+              #
+              #   new_artist.avatar.purge if new_artist.avatar.present?
+              #
+              #   new_artist.avatar.attach(options)
+              # end
             end
             progress_bar.increment
           end

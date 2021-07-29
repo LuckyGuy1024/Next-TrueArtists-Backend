@@ -25,8 +25,8 @@ module Legacy
             new_studio.website_url = studio.website
             new_studio.facebook_url = studio.facebook
             new_studio.twitter_url = studio.twitter
-            new_studio.lat = studio.lat
-            new_studio.lon = studio.lon
+            # new_studio.lat = studio.lat
+            # new_studio.lon = studio.lon
             new_studio.street_address = studio.address
             new_studio.city = studio.city
             new_studio.state = studio.address_state
@@ -38,28 +38,28 @@ module Legacy
             new_studio.phone_number = studio.telephone
             new_studio.slug = studio.slug
 
-            new_studio.status = if studio.admin_approved && (studio.city.present? || studio.country.present?)
+            new_studio.status = if studio.admin_approved && (studio.city.present? || studio.zip_code.present? || studio.country.present?)
                                   'approved'
                                 else
                                   'pending'
                                 end
 
             if new_studio.save(validate: false)
-              if studio.logo_file_name.present?
-                new_studio.avatar.purge if new_studio.avatar.present?
-
-                image_file_name = studio.logo_file_name
-                image_extension = File.extname(image_file_name)
-                optimized_file_name = new_studio.name.slugorize.escape
-
-                new_file_name = "#{optimized_file_name}#{image_extension}"
-
-                s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{studio.id}/original/#{image_file_name.escape}"
-                new_studio.avatar.attach(key: "studios/#{new_studio.id}/logo/#{new_file_name}",
-                                         io: URI.open(s3_image_url),
-                                         filename: new_file_name,
-                                         content_type: studio.logo_content_type)
-              end
+              # if studio.logo_file_name.present?
+              #   new_studio.avatar.purge if new_studio.avatar.present?
+              #
+              #   image_file_name = studio.logo_file_name
+              #   image_extension = File.extname(image_file_name)
+              #   optimized_file_name = new_studio.name.slugorize.escape
+              #
+              #   new_file_name = "#{optimized_file_name}#{image_extension}"
+              #
+              #   s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{studio.id}/original/#{image_file_name.escape}"
+              #   new_studio.avatar.attach(key: "studios/#{new_studio.id}/logo/#{new_file_name}",
+              #                            io: URI.open(s3_image_url),
+              #                            filename: new_file_name,
+              #                            content_type: studio.logo_content_type)
+              # end
             end
             progress_bar.increment
           rescue StandardError => e
