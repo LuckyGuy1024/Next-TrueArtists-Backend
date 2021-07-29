@@ -11,7 +11,7 @@ module Frontend
         options: {
           status: 'approved',
           page: 1,
-          per_page: 6,
+          per_page: 8,
           near: [current_user_location.latitude, current_user_location.longitude],
           within: '100mi'
         }
@@ -22,7 +22,7 @@ module Frontend
         options: {
           status: 'approved',
           page: 1,
-          per_page: 6,
+          per_page: 8,
           near: [current_user_location.latitude, current_user_location.longitude],
           within: '100mi'
         }
@@ -30,7 +30,7 @@ module Frontend
 
       @styles = Style.all
       @tattoo_placements = Tattoo::PLACEMENTS
-      
+
       respond_to do |format|
         format.html.mobile
         format.html.none
