@@ -79,6 +79,8 @@ Rails.application.routes.draw do
     get '/register/artist' => 'artists#register'
     get '/about-us' => 'landing_pages#about_us'
     get '/contact-us' => 'landing_pages#contact_us'
+    get '/terms' => 'landing_pages#terms'
+    get '/privacy' => 'landing_pages#privacy'
   end
 
   direct :asset_blob do |blob|

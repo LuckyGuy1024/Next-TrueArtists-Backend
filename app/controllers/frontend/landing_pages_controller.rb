@@ -3,8 +3,7 @@
 module Frontend
   class LandingPagesController < FrontendController
     include LandingPageScoped
-    before_action :find_landing_page, except: %i[home index about_us contact_us]
-
+    
     def home
       @artists = ArtistSearch.new(
         query: nil,
@@ -39,6 +38,20 @@ module Frontend
     end
 
     def about_us
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
+    def privacy
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
+    def terms
       respond_to do |format|
         format.html
         format.js
