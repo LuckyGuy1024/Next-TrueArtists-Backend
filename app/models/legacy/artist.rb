@@ -25,7 +25,7 @@ module Legacy
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Artist.count)
-          where("id >= 5462").where(admin_approved: true).find_each do |artist|
+          where("id = 1799").where(admin_approved: true).find_each do |artist|
           # find user
           tattoo_style_ids = artist.tattoo_style_ids
           specialty = artist.specialities.to_a.map(&:name).join(',')
@@ -54,8 +54,8 @@ module Legacy
             new_artist.city = artist.city
             new_artist.zip_code = artist.zip_code
             new_artist.country = artist.country
-            new_artist.lat = artist.lat
-            new_artist.lon = artist.lon
+            # new_artist.lat = artist.lat
+            # new_artist.lon = artist.lon
             # migrate this separately for each artist
             new_artist.style_ids = tattoo_style_ids
             new_artist.specialty = specialty.presence
