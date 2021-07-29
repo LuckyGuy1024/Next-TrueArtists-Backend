@@ -1,7 +1,13 @@
 Geocoder.configure(
   timeout: 3, # geocoding service timeout (secs)
   lookup: :google, # name of geocoding service (symbol)
-  api_key: ENV.fetch('GEOCODER_API'),
+  google: {
+    api_key: ENV.fetch('GEOCODER_API_KEY'),
+  },
+  ip_lookup: :ipinfo_io,      # name of IP address geocoding service (symbol)
+  ipinfo_io: {
+    api_key: ENV.fetch('IP_INFO_API_KEY'),   #API key for ip lookup service
+  },
   # ip_lookup: :ipinfo_io,      # name of IP address geocoding service (symbol)
   language: :en, # ISO-639 language code
   # use_https: false,           # use HTTPS for lookup requests? (if supported)
