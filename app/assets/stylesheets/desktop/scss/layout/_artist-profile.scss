@@ -5,14 +5,14 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,.03),0 0 1px 0 rgba(0,0,0,.03);
   border: 1px solid rgb(221, 221, 221);
   .artist-p-info {
-    border-radius: 50%;
-    max-width: 96px;
-    transform: translateZ(0);
-    border-radius: 50%;
-    height: 100px;
-    object-fit: cover;
-    width: 100%;
     img {
+      border-radius: 50%;
+      max-width: 96px;
+      transform: translateZ(0);
+      border-radius: 50%;
+      height: 100px;
+      object-fit: cover;
+      width: 100%;
       max-width: 96px;
     }
 
