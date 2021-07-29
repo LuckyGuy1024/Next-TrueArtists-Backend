@@ -63,7 +63,7 @@ class Artist < ApplicationRecord
   end
 
   def current_studio
-    studios.first
+    studios.last
   end
 
   def search_profile_image
