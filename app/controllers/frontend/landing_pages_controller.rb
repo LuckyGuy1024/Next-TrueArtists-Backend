@@ -3,7 +3,7 @@
 module Frontend
   class LandingPagesController < FrontendController
     include LandingPageScoped
-    
+
     def home
       @artists = ArtistSearch.new(
         query: nil,
@@ -27,7 +27,7 @@ module Frontend
         }
       ).base_filter
 
-      @styles = Style.all
+      @styles = Style.find_all_cached
       @tattoo_placements = Tattoo::PLACEMENTS
 
       respond_to do |format|

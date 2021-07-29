@@ -5,7 +5,7 @@ module Frontend
     def index
       @tattoos = search.base_filter
 
-      @styles = Style.all
+      @styles = Style.find_all_cached
       @colors = Tattoo::COLORS
       @placements = Tattoo::PLACEMENTS
 
@@ -16,6 +16,7 @@ module Frontend
     end
 
     def facet
+      @styles = Style.find_all_cached
       @name = (params[:placement] || params[:style]).split('-').join(' ').titleize
       @tattoos = TattooSearch.new(query: @name).base_filter
       respond_to do |format|

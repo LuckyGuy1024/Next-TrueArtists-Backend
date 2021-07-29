@@ -49,3 +49,23 @@
   </div>
 </div>
 <!-- // -->
+
+<% if @styles.present? %>
+  <div class="artists-near-you">
+    <div class="page-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="home-section-header">
+              <h2>More tattoo styles to explore</h2>
+            </div>
+            <div class="artists-lists grid-gap-30 row">
+              <%= render 'frontend/styles/styles', styles: @styles %>
+            </div>
+          </div>
+        </div>
+        <!-- end of row -->
+      </div>
+    </div>
+  </div>
+<% end %>
