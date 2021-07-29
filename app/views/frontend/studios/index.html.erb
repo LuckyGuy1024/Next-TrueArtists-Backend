@@ -30,9 +30,6 @@
         <%= form_for studios_path, html: { method: :get } do |f| %>
           <div class="sub-header">
             <h1>Find the Best Tattoo Shops Near You</h1>
-            <p><%= current_user_location.inspect %></p>
-            <p></p>
-            <p><%= current_user_location&.coordinates %></p>
           </div>
           <div class="search-artists-form row">
             <div class="col-md-9">

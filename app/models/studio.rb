@@ -75,8 +75,8 @@ class Studio < ApplicationRecord
   end
 
   def search_profile_image
-    return tattoos.last&.image if tattoos.last&.image&.attached?
     return avatar if avatar.attached?
+    return tattoos.last&.image if tattoos.last&.image&.attached?
     false
   end
 
