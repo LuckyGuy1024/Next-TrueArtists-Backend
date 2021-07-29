@@ -37,7 +37,8 @@
               <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
             <% end %>
             <h1><%= @artist.name %></h1>
-            <p><%= @artist.city_state %></p>
+            <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
+            <p><%= @artist.city_state %> <%= @artist.zip_code %></p>
           </div>
 
           <% if false %>

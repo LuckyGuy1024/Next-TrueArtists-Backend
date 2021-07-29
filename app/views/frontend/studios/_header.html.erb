@@ -12,7 +12,8 @@
           <div class="s-profile-info">
             <h1><%= link_to @studio.name, studio_path(@studio) %></h1>
             <div class="s-rating">
-              <span><%= @studio.city_state %></span>
+              <span><%= format('%s %s', @studio.street_address, @studio.street_address_2) %></span>
+              <span><%= @studio.city_state %> <%= @studio.zip_code %></span>
             </div>
           </div>
         </div>
