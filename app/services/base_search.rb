@@ -1,6 +1,6 @@
 class BaseSearch
   PER_PAGE = 60
-  WITHIN = '200mi'
+  WITHIN = '100mi'
   attr_reader :query, :options
   attr_accessor :results, :meta
 

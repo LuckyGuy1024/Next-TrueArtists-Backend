@@ -4,14 +4,13 @@ module StudioScoped
   extend ActiveSupport::Concern
 
   included do
-    skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_studio, except: %i[index create accept_artist_invite verify_phone city]
+    before_action :find_studio, except: %i[index city]
   end
 
   private
 
   def search
-    @search ||= StudioSearch.new(
+    @search = StudioSearch.new(
       query: params[:query],
       options: search_options
     )
@@ -21,10 +20,10 @@ module StudioScoped
     {
       page: params[:page] || 1,
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
-      status: params[:status] || 'approved' ,
+      status: params[:status] || 'approved',
+      current_user_location: current_user_location,
       near: params[:near],
-      within: params[:within],
-      current_user_location: current_user_location
+      within: params[:within]
     }.delete_if { |_k, v| v.nil? }
   end
 
