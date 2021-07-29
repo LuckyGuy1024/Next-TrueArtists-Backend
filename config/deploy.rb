@@ -49,10 +49,9 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
 )
 
 set :keep_releases, 4
-
 set :rollbar_token, '76757cd41e30488194b1cf6e2432c64d'
-set :rollbar_env, Proc.new { fetch :stage }
-set :rollbar_role, Proc.new { fetch :application }
+set :rollbar_env, fetch(:stage)
+set :rollbar_role, fetch(:application)
 
 set :rvm_ruby_version, '2.7.1@271'
 set :maintenance_roles, -> { roles([:web]) }

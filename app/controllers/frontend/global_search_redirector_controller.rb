@@ -6,6 +6,7 @@ module Frontend
     def index
       redirect_to url_for(controller: params[:search_path].to_s,
                           action: 'index',
+                          near: params[:near],
                           query: params[:query])
     end
 

@@ -1,5 +1,5 @@
 set :rails_env, 'production'
-set :domain, '50.116.14.80'
+set :domain, 'account.trueartists.com'
 server fetch(:domain), user: fetch(:deploy_user), roles: [:app, :db, :sidekiq, :worker], primary: true
 set :stage, :production
 set :sidekiq_default_hooks, true
