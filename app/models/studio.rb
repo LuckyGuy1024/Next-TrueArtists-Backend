@@ -3,6 +3,8 @@
 class Studio < ApplicationRecord
   include AASM
   include IdentityCache
+  include AddressExtension
+  include StatusManagement
 
   LANGUAGES = %w[
     Mandarin
@@ -26,13 +28,11 @@ class Studio < ApplicationRecord
               'Basic Body Modification', 'Piercing', 'Scarification',
               'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
 
-  searchkick locations: [:location]
 
-  include AddressExtension
   extend FriendlyId
   friendly_id :slug_candidates, use: %i[slugged finders]
 
-  include StatusManagement
+  searchkick locations: [:location]
 
   acts_as_favoritable
   belongs_to :user
@@ -58,28 +58,6 @@ class Studio < ApplicationRecord
   after_commit :upgrade_user_role, on: :create
   # after_validation :save_location_data #, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
-
-  after_commit :attach_default_avatar, on: %i[create update]
-
-  private def attach_default_avatar
-    # return if avatar.attached?
-    #
-    # avatar.attach(
-    #   io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
-    #   filename: 'placeholder-avatar.jpeg',
-    #   content_type: 'image/jpeg'
-    # )
-  end
-
-  private def attach_default_profile
-    return if avatar.attached?
-
-    avatar.attach(
-      io: File.open(Rails.root.join('app', 'assets', 'images', 'placeholder-avatar.jpeg')),
-      filename: 'placeholder-avatar.jpeg',
-      content_type: 'image/jpeg'
-    )
-  end
 
   def slug_candidates
     [
