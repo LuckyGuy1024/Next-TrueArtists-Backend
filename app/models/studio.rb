@@ -54,10 +54,15 @@ class Studio < ApplicationRecord
   validates :name, presence: true
   # validates :user_id, uniqueness: true #remove this validation for now
   before_validation :validate_studio_time
+  before_validation :format_studio_name
 
   after_commit :upgrade_user_role, on: :create
   # after_validation :save_location_data #, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
+
+  def format_studio_name
+    self.name = self.name&.titleize
+  end
 
   def slug_candidates
     [

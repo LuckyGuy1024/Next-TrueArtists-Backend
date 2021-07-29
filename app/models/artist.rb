@@ -91,7 +91,7 @@ class Artist < ApplicationRecord
   private
 
   def add_name
-    self.name = user.full_name
+    self.name = user.full_name&.titleize
   end
 
   def upgrade_user_role
