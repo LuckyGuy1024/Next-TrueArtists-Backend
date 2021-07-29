@@ -10,7 +10,7 @@ module ArtistScoped
   private
 
   def search
-    @search ||= ArtistSearch.new(
+    @search = ArtistSearch.new(
       query: params[:query],
       options: search_options
     )

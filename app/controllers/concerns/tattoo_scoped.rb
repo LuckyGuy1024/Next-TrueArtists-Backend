@@ -10,7 +10,7 @@ module TattooScoped
   private
 
   def search
-    @search ||= TattooSearch.new(
+    @search = TattooSearch.new(
       query: params[:query],
       options: search_options
     )
@@ -27,7 +27,8 @@ module TattooScoped
       near: params[:near],
       within: params[:within],
       studio_id: params[:studio_id],
-      artist_id: params[:artist_id]
+      artist_id: params[:artist_id],
+      current_user_location: current_user_location
     }.delete_if { |_k, v| v.nil? }
   end
 

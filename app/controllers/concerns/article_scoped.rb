@@ -11,7 +11,7 @@ module ArticleScoped
   private
 
   def search
-    @search ||= ArticleSearch.new(
+    @search = ArticleSearch.new(
       query: params[:query],
       options: search_options
     )

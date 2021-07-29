@@ -11,7 +11,7 @@ module ConventionScoped
   private
 
   def search
-    @search ||= ConventionSearch.new(
+    @search = ConventionSearch.new(
       query: params[:query],
       options: search_options
     )

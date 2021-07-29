@@ -5,7 +5,7 @@ module Frontend
     include ArtistScoped
 
     def index
-      @artists  = search.base_filter
+      @artists = search.base_filter
 
       @styles = Style.all
 
