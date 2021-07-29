@@ -28,7 +28,6 @@ module TattooScoped
       within: params[:within],
       studio_id: params[:studio_id],
       artist_id: params[:artist_id],
-      current_user_location: current_user_location
     }.delete_if { |_k, v| v.nil? }
   end
 
