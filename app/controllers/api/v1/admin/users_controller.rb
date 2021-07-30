@@ -9,7 +9,7 @@ module Api::V1::Admin
                  User.where('email LIKE :query OR full_name LIKE :query', query: "%#{params[:query]}%")
                else
                  User
-                        end.where(search_filter.except(:page)).page(params[:page])
+               end.where(search_filter.except(:page)).page(params[:page])
       render json: { users: ActiveModel::Serializer::CollectionSerializer.new(@users,
                                                                               serializer: UserSerializer),
                      meta: {
@@ -78,7 +78,7 @@ module Api::V1::Admin
                     :role,
                     :status,
                     :role).tap do |whitelisted|
-        whitelisted[:password] = whitelisted[:password_confirmation] = Devise.friendly_token.first(8)
+        whitelisted[:password] = whitelisted[:password_confirmation] = SecureRandom.hex(6)
       end
     end
   end
