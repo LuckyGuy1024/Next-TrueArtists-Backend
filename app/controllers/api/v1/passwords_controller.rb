@@ -1,5 +1,6 @@
 module Api::V1
   class PasswordsController < ApplicationController
+    skip_before_action :authenticate_request!, only: %i[create]
     before_action :validate_confirmation_token, only: %i[update]
     before_action :find_user, only: %i[create]
 
