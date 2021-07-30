@@ -42,7 +42,6 @@ class ArtistSerializer < ActiveModel::Serializer
       {
         id: object.avatar.id,
         image_url: asset_blob_url(object.avatar),
-        status: object.avatar.status
       }
     end
   end
@@ -52,7 +51,6 @@ class ArtistSerializer < ActiveModel::Serializer
       {
         id: object.hero_banner.id,
         image_url: asset_blob_url(object.hero_banner),
-        status: object.hero_banner.status
       }
     end
   end
