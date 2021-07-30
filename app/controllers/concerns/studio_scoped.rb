@@ -23,7 +23,8 @@ module StudioScoped
       status: params[:status] || 'approved',
       current_user_location: current_user_location,
       near: params[:near],
-      within: params[:within]
+      within: params[:within],
+      includes: { avatar_attachment: :blob }
     }.delete_if { |_k, v| v.nil? }
   end
 

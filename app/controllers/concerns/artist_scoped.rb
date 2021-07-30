@@ -20,12 +20,13 @@ module ArtistScoped
     {
       page: params[:page] || 1,
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
-      status: params[:status] || 'approved' ,
+      status: params[:status] || 'approved',
       near: params[:near],
       styles: params[:styles],
       current_user_location: current_user_location,
       within: params[:within],
       studio_id: params[:studio_id],
+      includes: { avatar_attachment: :blob }
     }.delete_if { |_k, v| v.nil? }
   end
 

@@ -28,6 +28,7 @@ module TattooScoped
       within: params[:within],
       studio_id: params[:studio_id],
       artist_id: params[:artist_id],
+      includes: { image_attachment: :blob }
     }.delete_if { |_k, v| v.nil? }
   end
 

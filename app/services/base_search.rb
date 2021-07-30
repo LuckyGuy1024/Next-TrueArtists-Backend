@@ -10,6 +10,7 @@ class BaseSearch
   end
 
   def base_filter
+    includes = {}
     location_info = {}
 
     constraints = {
@@ -20,6 +21,8 @@ class BaseSearch
     within = options[:within] || WITHIN
 
     constraints[:order] = order
+
+    constraints[:includes] = options[:includes] if options[:includes].present?
 
     constraints[:where] = {
       specialty: options[:specialty],
