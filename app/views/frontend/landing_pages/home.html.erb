@@ -24,7 +24,7 @@
 <%= render 'frontend/landing_pages/hero_banner' %>
 
 <div class="home-page">
-  <%= render 'frontend/landing_pages/featured_artists' %>
-  <%= render 'frontend/landing_pages/featured_studios' %>
+  <%= render 'frontend/landing_pages/featured_artists' if @artists.present? %>
+  <%= render 'frontend/landing_pages/featured_studios' if @studios.present? %>
   <%= render 'frontend/landing_pages/featured_styles' %>
 </div>

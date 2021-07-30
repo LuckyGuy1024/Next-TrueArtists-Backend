@@ -56,15 +56,20 @@
 <div class="page-section">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <div class="latest-studios-lists grid-gap-30 row">
-          <%= render @studios %>
+      <% if @studios.present? %>
+        <div class="col-md-12">
+          <div class="artists-lists grid-gap-30 row">
+            <%= render @studios %>
+          </div>
         </div>
-      </div>
-
-      <div class="col-md-12 text-center">
-        <%= paginate @studios %>
-      </div>
+        <div class="col-md-12 text-center">
+          <%= paginate @studios %>
+        </div>
+      <% else %>
+        <div class="col-md-12 text-center">
+          <p>We did not find any tattoo shops in or near "<%= params[:near] %>". Try a different zip code or city.</p>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
