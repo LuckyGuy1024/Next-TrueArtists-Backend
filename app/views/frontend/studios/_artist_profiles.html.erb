@@ -12,7 +12,7 @@
                 <% end %>
               </div>
               <div class="artists-profile-info">
-                <h4><%= artist.name %></h4>
+                <h4 itemprop='name'><%= artist.name %></h4>
               </div>
             </div>
           <% end %>
@@ -20,7 +20,7 @@
         <% if artist.styles.present? %>
           <div class="col-lg-9 col-md-8">
             <div class="artists-style d-flex align-items-center justify-content-end">
-              <span class="btn btn-style-alt">Style:</span>
+              <span class="btn btn-style-alt">Styles:</span>
               <% artist.styles.each do |style| %>
                 <%= link_to style.name, style_tattoos_path(style.slug), class: 'tag tag-cloud' %>
               <% end %>

@@ -270,6 +270,20 @@
   }
 }
 
+.artists-profile-img {
+  max-width: 96px;
+
+  img {
+    transform: translateZ(0);
+    border-radius: 50%;
+    height: 100px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 100%;
+    max-width: 96px;
+  }
+}
+
 .artists-style {
   a:not(:first-child) {
     margin-left: 10px;

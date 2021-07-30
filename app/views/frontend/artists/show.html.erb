@@ -31,8 +31,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
-        <div class="artist-left-sidebar">
-          <div class="artist-p-info text-center" itemprop="mainEntityOfPage" itemscope="true" itemtype="http://schema.org/ProfilePage" itemid="<%= artist_url(@artist) %>">
+        <div class="artist-left-sidebar text-center">
+          <div class="artist-p-info" itemprop="mainEntityOfPage" itemscope="true" itemtype="http://schema.org/ProfilePage" itemid="<%= artist_url(@artist) %>">
             <% if @artist.avatar.attached? %>
               <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
             <% end %>
@@ -44,7 +44,7 @@
           </div>
 
           <% if false %>
-            <div class="artist-p-btn d-flex justify-content-center">
+            <div class="artist-p-btn">
               <a href="#" class="btn btn-secondary">Save</a>
               <a href="#" class="btn btn-primary ml-4">Book</a>
             </div>
@@ -53,7 +53,7 @@
           <% if @artist.current_studio %>
             <div class="artist-p-style">
               <h4>Current Tattoo Shop</h4>
-              <div class="artists-style d-flex flex-wrap">
+              <div class="artists-style">
                 <%= link_to studio_path(@artist.current_studio) do %>
                   <h5><%= @artist.current_studio.name %></h5>
                   <p><%= @artist.current_studio.city_state %></p>
@@ -64,13 +64,12 @@
 
           <div class="artist-p-style">
             <h4>Style Specialization</h4>
-            <div class="artists-style d-flex flex-wrap">
+            <div class="artists-style">
               <% @artist.styles.each do |style| %>
                 <%= link_to style.name, style_tattoos_path(style.slug), class: 'tag tag-cloud' %>
               <% end %>
             </div>
           </div>
-
         </div>
       </div>
       <div class="col-lg-8">
