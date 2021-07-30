@@ -77,4 +77,13 @@ class User < ApplicationRecord
   def admin?
     role == User.roles[:admin]
   end
+
+  private
+
+  def self.find_by_password_reset_token(token)
+    jwt_payload = JsonWebToken.decode(token).first
+    find(jwt_payload['user_id'])
+  rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+    nil
+  end
 end

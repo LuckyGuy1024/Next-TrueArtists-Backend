@@ -1,12 +1,11 @@
 module Api::V1
   class PasswordsController < ApplicationController
-    skip_before_action :authenticate_request!, only: %i[create]
-    before_action :validate_confirmation_token, only: %i[update]
+    skip_before_action :authenticate_request!, only: %i[create update]
     before_action :find_user, only: %i[create]
 
     def update
-      @user = current_user
-      if @user.set_new_password(change_password_params)
+      @user = User.find_by_password_reset_token(params[:token])
+      if @user && @user.set_new_password(change_password_params)
         head(:ok)
       else
         render_api_error(status: 422, errors: @user.errors)
