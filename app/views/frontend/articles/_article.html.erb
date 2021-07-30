@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row article-container">
     <div class="col-sm-4 article-image">
-      <%= link_to article_path(article) do %>
-        <img data-src="<%= asset_blob_url(article.image) %>" class="lazyload" />
+      <% if article.image.attached? %>
+        <%= link_to article_path(article) do %>
+          <img data-src="<%= asset_blob_url(article.image) %>" class="lazyload" />
+        <% end %>
       <% end %>
     </div>
     <div class="col-sm-8">

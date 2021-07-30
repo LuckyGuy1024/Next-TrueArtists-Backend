@@ -2,15 +2,15 @@
 <div class="profile-head-area">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-md-6">
-        <div class="s-profiles d-flex align-items-center">
+      <div class="col-md-6" >
+        <div class="s-profiles d-flex align-items-center" itemscope="true" itemtype="https://schema.org/TattooParlor">
           <div class="s-profile-img">
             <%= link_to studio_path(@studio) do %>
               <img data-src="<%= asset_blob_url(@studio.avatar) %>" class="lazyload" />
             <% end %>
           </div>
           <div class="s-profile-info">
-            <h1><%= link_to @studio.name, studio_path(@studio) %></h1>
+            <h1 itemprop='name'><%= link_to @studio.name, studio_path(@studio) %></h1>
             <div class="s-rating">
               <span><%= format('%s %s', @studio.street_address, @studio.street_address_2) %></span>
               <span><%= @studio.city_state %> <%= @studio.zip_code %></span>

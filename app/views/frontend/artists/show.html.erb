@@ -32,12 +32,14 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="artist-left-sidebar">
-          <div class="artist-p-info text-center">
+          <div class="artist-p-info text-center" itemprop="mainEntityOfPage" itemscope="true" itemtype="http://schema.org/ProfilePage" itemid="<%= artist_url(@artist) %>">
             <% if @artist.avatar.attached? %>
               <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
             <% end %>
-            <h1><%= @artist.name %></h1>
-            <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
+            <h1 itemprop='name'><%= @artist.name %></h1>
+            <% if @artist.street_address.present? %>
+              <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
+            <% end %>
             <p><%= @artist.city_state %> <%= @artist.zip_code %></p>
           </div>
 

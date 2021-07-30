@@ -165,12 +165,14 @@ img {
   .list-image {
     height: 240px;
     position: relative;
-
     img {
       border-radius: 6px 6px 0 0;
       height: 100%;
       width: 100%;
       object-fit: cover;
+      &.large {
+        min-width: 240px;
+      }
     }
 
     a:hover {
