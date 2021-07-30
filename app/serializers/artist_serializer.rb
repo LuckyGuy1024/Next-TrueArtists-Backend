@@ -41,9 +41,7 @@ class ArtistSerializer < ActiveModel::Serializer
     if object.avatar.attached?
       {
         id: object.avatar.id,
-        image_url: ENV['HOST'] + rails_blob_path(object.avatar, only_path: true),
-        name: object.avatar.filename,
-        dimensions: ActiveStorage::Analyzer::ImageAnalyzer.new(object.avatar).metadata,
+        image_url: asset_blob_url(object.avatar),
         status: object.avatar.status
       }
     end
@@ -53,9 +51,7 @@ class ArtistSerializer < ActiveModel::Serializer
     if object.hero_banner.attached?
       {
         id: object.hero_banner.id,
-        image_url: ENV['HOST'] + rails_blob_path(object.hero_banner, only_path: true),
-        name: object.hero_banner.filename,
-        dimensions: ActiveStorage::Analyzer::ImageAnalyzer.new(object.hero_banner).metadata,
+        image_url: asset_blob_url(object.hero_banner),
         status: object.hero_banner.status
       }
     end

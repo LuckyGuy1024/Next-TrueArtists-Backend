@@ -19,10 +19,7 @@ class LandingPageSerializer < ActiveModel::Serializer
     if object.avatar.attached?
       {
         id: object.avatar.id,
-        image_url: ENV['HOST'] + rails_blob_path(object.avatar, only_path: true),
-        name: object.avatar.filename,
-        dimensions: ActiveStorage::Analyzer::ImageAnalyzer.new(object.avatar).metadata,
-        status: object.avatar.status
+        image_url: asset_blob_url(object.avatar),
       }
     end
   end
