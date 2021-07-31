@@ -2,12 +2,13 @@ module Frontend
   class TattoosController < FrontendController
     include TattooScoped
 
+    before_action :find_styles, only: %i[index styles facet]
+    before_action :find_placements, only: %i[index placments]
+
     def index
       @tattoos = search.base_filter
 
-      @styles = Style.find_all_cached
       @colors = Tattoo::COLORS
-      @placements = Tattoo::PLACEMENTS
 
       respond_to do |format|
         format.html
@@ -15,8 +16,22 @@ module Frontend
       end
     end
 
+    def placements
+      @placments = Placement.find_all_cached
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
+    def styles
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
     def facet
-      @styles = Style.find_all_cached
       @name = (params[:placement] || params[:style]).split('-').join(' ').titleize
       @tattoos = TattooSearch.new(query: @name).base_filter
       respond_to do |format|
@@ -37,6 +52,12 @@ module Frontend
         format.html
         format.js
       end
+    end
+
+    private
+
+    def find_styles
+      @styles = Style.find_all_cached
     end
   end
 end

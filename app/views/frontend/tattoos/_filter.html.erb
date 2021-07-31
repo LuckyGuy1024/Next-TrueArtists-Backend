@@ -32,8 +32,8 @@
                 <% @placements.each do |placement| %>
                   <li class="filter">
                     <label class="filter-checkbox">
-                      <%= placement %>
-                      <%= check_box_tag "placement[]", placement, params[:placement].to_a.include?(placement) %>
+                      <%= placement.name %>
+                      <%= check_box_tag "placement[]", placement.name, params[:placement].to_a.include?(placement.name) %>
                       <span class="checkmark"></span>
                     </label>
                   </li>
