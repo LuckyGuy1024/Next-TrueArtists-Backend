@@ -41,7 +41,7 @@ class ArtistSerializer < ActiveModel::Serializer
     if object.avatar.attached?
       {
         id: object.avatar.id,
-        image_url: asset_blob_url(object.avatar),
+        image_url: asset_blob_url(object.avatar)
       }
     end
   end
