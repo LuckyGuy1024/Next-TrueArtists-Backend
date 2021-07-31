@@ -13,6 +13,7 @@ class Message < ApplicationRecord
   belongs_to :receiver, class_name: 'User', foreign_key: 'receiver_id', validate: true
 
   has_many :message_mails
+  has_one :booking, required: false
 
   has_many_attached :attachments
 
@@ -34,6 +35,8 @@ class Message < ApplicationRecord
   private
 
   def send_user_notification
+    return if message_type == 'book_appointment'
+
     MessageMailingService.new(self).send
     MessageSmsService.new(self, @@result[:phone]).send unless @@result[:phone].nil?
   end

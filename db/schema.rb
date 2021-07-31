@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_033941) do
+ActiveRecord::Schema.define(version: 2021_07_29_104307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,25 @@ ActiveRecord::Schema.define(version: 2021_06_24_033941) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.text "description"
+    t.string "placement"
+    t.boolean "consult_artist", default: false, null: false
+    t.string "custom_size"
+    t.string "size_units"
+    t.datetime "urgency"
+    t.boolean "first_tattoo", default: false, null: false
+    t.boolean "colored", default: false, null: false
+    t.integer "receiver_id"
+    t.integer "sender_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "message_id"
+    t.index ["message_id"], name: "index_bookings_on_message_id"
+    t.index ["receiver_id"], name: "index_bookings_on_receiver_id"
+    t.index ["sender_id"], name: "index_bookings_on_sender_id"
   end
 
   create_table "categories", force: :cascade do |t|
