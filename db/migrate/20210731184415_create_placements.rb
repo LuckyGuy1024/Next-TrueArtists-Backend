@@ -15,10 +15,9 @@ class CreatePlacements < ActiveRecord::Migration[6.1]
     Placement::OPTIONS.each do |option|
       placement = Placement.new(name: option)
       placement.save
-
-      tattoo_image = Tattoo.search(option).results&.last&.image
+      tattoo_image = Tattoo.search("#{placement.name}", fields: ["placement^10"]).results&.last&.image
       if tattoo_image&.attached?
-        placement.avatar.attach(io: open(tattoo_image), filename: "#{option} Tattoos")
+        placement.avatar.attach(io: open(tattoo_image.url), filename: "#{placement.name} Tattoos")
       end
     end
   end
