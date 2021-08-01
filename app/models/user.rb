@@ -9,6 +9,10 @@ class User < ApplicationRecord
     closed: 'closed'
   }
 
+  searchkick locations: [:location],
+             searchable: %i[full_name email status role],
+             filterable: %i[status role]
+
   enum role: {
     admin: 'admin',
     artist: 'artist',
