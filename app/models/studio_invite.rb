@@ -39,11 +39,13 @@ class StudioInvite < ApplicationRecord
 
     return create_new_user unless artist
 
-    if already_invited?
-      studio_invite = StudioInvite.find_by(artist_id: artist.id, studio_id: studio_id)
+    studio_invite = StudioInvite.where(artist_id: artist.id, studio_id: studio_id).first
+
+    if already_invited? && studio_invite
 
       StudioMailer.artist_invite_reminder(studio_invite).deliver_now if artist.user.status == 'active'
       StudioMailer.new_artist_invite_reminder(studio_invite).deliver_now if artist.user.status == 'inactive'
+      studio_invite
     else
       self.artist_id = artist&.id
 

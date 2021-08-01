@@ -1,0 +1,39 @@
+<% set_meta_tags title: "Tattoo Placements Ideas",
+              description: "Find your next tattoo idea by exploring different placements on your body." %>
+
+<!-- Tattoos Search -->
+<div class="page-section gray-bg">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12 search-form">
+          <div class="sub-header">
+            <h1>Tattoo Placements</h1>
+          </div>
+        </div>
+        <!- // -->
+        <% @placements.each do |placement| %>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="listing-widget shadow">
+              <%= link_to placement_tattoos_path(placement.slug) do %>
+                <div class="list-image">
+                  <% if placement.avatar.attached? %>
+                    <img data-src="<%= asset_blob_url(placement.avatar) %>" class="lazyload large" />
+                  <% end %>
+                </div>
+                <div class="list-content d-flex align-items-center">
+                  <div class="list-left flex-grow-1">
+                    <div class="d-flex align-items-center">
+                      <div class="profile-info">
+                        <h5 itemprop='name'><%= placement.name %></h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <!-- // -->
+      </div>
+    </div>
+</div>

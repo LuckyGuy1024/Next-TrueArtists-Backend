@@ -4,15 +4,13 @@ module TattooScoped
   extend ActiveSupport::Concern
 
   included do
-    skip_before_action :authenticate_request!, only: %i[index filter show]
-    before_action :find_parent_object, only: %i[batch_create destroy]
-    before_action :find_tattoo, except: %i[create index filter batch_create]
+    before_action :find_tattoo, except: %i[index facet]
   end
 
   private
 
   def search
-    @search ||= TattooSearch.new(
+    @search = TattooSearch.new(
       query: params[:query],
       options: search_options
     )
@@ -29,7 +27,8 @@ module TattooScoped
       near: params[:near],
       within: params[:within],
       studio_id: params[:studio_id],
-      artist_id: params[:artist_id]
+      artist_id: params[:artist_id],
+      includes: { image_attachment: :blob }
     }.delete_if { |_k, v| v.nil? }
   end
 

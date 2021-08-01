@@ -31,9 +31,7 @@ class ArticleSerializer < ActiveModel::Serializer
     if object.image.attached?
       {
         id: object.image.id,
-        image_url: ENV['HOST'] + rails_blob_path(object.image, only_path: true),
-        name: object.image.filename,
-        status: object.image.status
+        image_url: asset_blob_url(object.image)
       }
     end
   end

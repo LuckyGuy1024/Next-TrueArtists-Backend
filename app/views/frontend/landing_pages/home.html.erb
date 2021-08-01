@@ -1,10 +1,30 @@
-<% set_meta_tags title: "Best Tattoo Studios & Artists Near You",
-              description: "Find Certified Tattoo Studios & Artists in a city near. Book a tattoo appointment today." %>
+<% set_meta_tags title: "Best Tattoo Shops & Artists Near You",
+              description: "Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today." %>
 
+<% set_meta_tags(canonical: root_url)  %>
+
+<% set_meta_tags(open_graph: {
+    title: "Best Tattoo Shops & Artists Near You",
+    type: 'website',
+    site_name: 'TrueArtists',
+    url: root_url,
+    description: "Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today."
+  })
+%>
+
+<% set_meta_tags twitter: {
+    card: 'summary_large_image',
+    site: 'TrueArtists',
+    title: "Best Tattoo Shops & Artists Near You",
+    description: "Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today.",
+    url: root_url
+  }
+%>
 
 <%= render 'frontend/landing_pages/hero_banner' %>
 
 <div class="home-page">
-  <%= render 'frontend/landing_pages/featured_artists' %>
-  <%= render 'frontend/landing_pages/featured_studios' %>
+  <%= render 'frontend/landing_pages/featured_artists' if @artists.present? %>
+  <%= render 'frontend/landing_pages/featured_studios' if @studios.present? %>
+  <%= render 'frontend/landing_pages/featured_styles' %>
 </div>

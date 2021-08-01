@@ -2,11 +2,10 @@
 
 module Frontend
   class StylesController < FrontendController
-    skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_style, except: %i[index]
+    before_action :find_all_styles, only: %i[index show]
 
     def index
-      @styles = Style.all
       respond_to do |format|
         format.html
         format.js
@@ -33,6 +32,10 @@ module Frontend
 
     private
 
+    def find_all_styles
+      @styles = Style.find_all_cached
+    end
+    
     def find_style
       @style = Style.friendly.find(params[:id])
     end

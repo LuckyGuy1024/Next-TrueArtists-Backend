@@ -1,32 +1,44 @@
 <% set_meta_tags title: "Best Tattoo Artists in #{@city_state}",
               description: "Find top certified tattoo artists in #{@city_state}. Book an appointment today." %>
 
-<div class="page-section pt-0">
+<% set_meta_tags(canonical: city_state_artists_url(@city_state.slugorize))  %>
+
+<% set_meta_tags(open_graph: {
+   title: "Best Tattoo Artists in #{@city_state}",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: city_state_artists_url(@city_state.slugorize),
+   description: "Find top certified tattoo artists in #{@city_state}. Book an appointment today.",
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: "Best Tattoo Artists in #{@city_state}",
+   description: "Find top certified tattoo artists in #{@city_state}. Book an appointment today.",
+   url: city_state_artists_url(@city_state.slugorize),
+ }
+%>
+
+<div class="page-section">
   <div class="container">
-    <%= form_for artists_path, html: { remote: true, method: :get } do |f| %>
-    <%= hidden_field_tag 'page', @meta[:current_page] %>
-    <%= hidden_field_tag 'per_page', @meta[:limit_value] %>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="sub-header align-items-center">
-            <div>
-              <h1>Top Tattoo Artists in <%= @city_state %></h1>
-            </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-header align-items-center">
+          <div>
+            <h1>Top Tattoo Artists in <%= @city_state %></h1>
           </div>
-        </div>
-        <div class="col-md-12">
-          <div class="artists-lists grid-gap-30 row">
-            <%= render @artists %>
-          </div>
-        </div>
-        <div class="col-md-12 text-center">
-          <% unless @meta[:last_page] %>
-            <div class="see-more-section">
-              <button class="btn btn-alternative btn-lg">See More</button>
-            </div>
-          <% end %>
         </div>
       </div>
-    <% end %>
-  </div>
+
+      <div class="col-md-12">
+        <div class="artists-lists grid-gap-30 row">
+          <%= render @artists %>
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <%= paginate @artists %>
+      </div>
+    </div>
 </div>

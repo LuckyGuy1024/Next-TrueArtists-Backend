@@ -15,11 +15,9 @@ Rails.application.routes.draw do
       get 'me' => 'users#show'
       resources :users, only: %i[create show update destroy]
 
-      resources :passwords do
-        collection do
-          put 'change_password' => 'passwords#update'
-        end
-      end
+      # update and change passwords
+      match '/passwords/change_password' ,to: 'passwords#update', via: :put
+      match '/passwords',  to: 'passwords#create', via: :post
 
       resources :artists do
         resources :tattoos
@@ -65,7 +63,7 @@ Rails.application.routes.draw do
 
       resources :studio_invites, path: 'studio-invites' do
         collection do
-          post 'invite-artist' => 'studio_invites#create'
+          post 'invite-artist/:id' => 'studio_invites#create'
           get 'accept-invite' => 'studio_invites#accept_studio_invite'
         end
 

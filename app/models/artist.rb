@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'open-uri'
 class Artist < ApplicationRecord
   include AASM
   include IdentityCache
@@ -31,13 +31,13 @@ class Artist < ApplicationRecord
   cache_index :slug, unique: true
   # cache_has_many :tattoos, embed: true
 
-  validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
+  # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
-  after_validation :save_location_data, if: :address_changed?
+  # after_validation :save_location_data, if: :address_changed?
   before_validation :add_name
 
   def search_data
@@ -55,15 +55,21 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    format('%s %s', city, state)
+    if state.present?
+      format('%s, %s', city&.titleize, state)
+    else
+      format('%s, %s', city&.titleize, country)
+    end
   end
 
   def current_studio
-    studios.first
+    studios.last
   end
 
   def search_profile_image
-    tattoos.first.image
+    return avatar if avatar.attached?
+    return tattoos.last&.image if tattoos.last&.image&.attached?
+    false
   end
 
   def has_social_profiles
@@ -85,7 +91,7 @@ class Artist < ApplicationRecord
   private
 
   def add_name
-    self.name = user.full_name
+    self.name = user.full_name&.titleize
   end
 
   def upgrade_user_role

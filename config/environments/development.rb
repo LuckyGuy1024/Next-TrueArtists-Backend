@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
+  HOST = 'localhost:3001'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -68,4 +69,5 @@ Rails.application.configure do
   config.hosts << ENV.fetch('DOMAIN')
 
   config.identity_cache_store = :mem_cache_store
+  config.action_mailer.default_url_options = { host: HOST }
 end

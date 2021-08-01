@@ -26,6 +26,15 @@ module Api::V1::Admin
     def flag
       @tattoo.flag!
       render json: TattooSerializer.new(@tattoo.reload).to_json, status: :ok
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
+    end
+
+    def approve
+      @tattoo.approve!
+      render json: TattooSerializer.new(@tattoo.reload).to_json, status: :ok
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     private

@@ -3,16 +3,26 @@
 module AddressExtension
   extend ActiveSupport::Concern
   included do
-    geocoded_by :address, latitude: :lat, longitude: :lon
-    after_validation :geocode, if: :address_changed?
+    geocoded_by :address do |obj, results|
+      if result = results.first
+        # obj.street_address = result.street_address
+        obj.state = result.state if result.state.present?
+        obj.zip_code = result.postal_code if result.postal_code.present?
+        obj.city = result.city
+        obj.country = result.country
+        obj.lat = result.latitude
+        obj.lon = result.longitude
+      end
+    end
+    after_validation :geocode #, if: :address_changed?
   end
 
   def address
-    [street_address, city, state, country].compact.join(', ')
+    [street_address, city, state, zip_code, country].compact.join(', ')
   end
 
   def address_changed?
-    street_address_changed? unless instance_of?(Location) || city_changed? || state_changed? || country_changed?
+    street_address_changed? || city_changed? || state_changed? || zip_code_changed? || country_changed?
   end
 
   def save_location_data

@@ -16,7 +16,7 @@ class ConventionSerializer < ActiveModel::Serializer
              :city,
              :state,
              :country,
-             :status, 
+             :status,
              :slug,
              :image
 
@@ -24,10 +24,7 @@ class ConventionSerializer < ActiveModel::Serializer
     if object.image.attached?
       {
         id: object.image.id,
-        image_url: ENV['HOST'] + rails_blob_path(object.image, only_path: true),
-        name: object.image.filename,
-        dimensions: ActiveStorage::Analyzer::ImageAnalyzer.new(object.image).metadata,
-        status: object.image.status
+        image_url: asset_blob_url(object.image),
       }
     end
   end

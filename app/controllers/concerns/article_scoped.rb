@@ -11,7 +11,7 @@ module ArticleScoped
   private
 
   def search
-    @search ||= ArticleSearch.new(
+    @search = ArticleSearch.new(
       query: params[:query],
       options: search_options
     )
@@ -21,7 +21,7 @@ module ArticleScoped
     {
       page: params[:page] || 1,
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
-      status: params[:status]
+      status: Article.statuses[:published]
     }.delete_if { |_k, v| v.nil? }
   end
 

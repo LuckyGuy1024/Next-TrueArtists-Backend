@@ -3,6 +3,8 @@
 class Studio < ApplicationRecord
   include AASM
   include IdentityCache
+  include AddressExtension
+  include StatusManagement
 
   LANGUAGES = %w[
     Mandarin
@@ -26,13 +28,11 @@ class Studio < ApplicationRecord
               'Basic Body Modification', 'Piercing', 'Scarification',
               'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
 
-  searchkick locations: [:location]
 
-  include AddressExtension
   extend FriendlyId
   friendly_id :slug_candidates, use: %i[slugged finders]
 
-  include StatusManagement
+  searchkick locations: [:location]
 
   acts_as_favoritable
   belongs_to :user
@@ -48,16 +48,21 @@ class Studio < ApplicationRecord
   cache_index :slug, unique: true
   cache_has_many :studio_artists, embed: true
 
-  validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
+  # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
   validates :email, presence: true, on: :create
   validates :name, presence: true
-  validates :user_id, uniqueness: true
+  # validates :user_id, uniqueness: true #remove this validation for now
   before_validation :validate_studio_time
+  before_validation :format_studio_name
 
   after_commit :upgrade_user_role, on: :create
-  after_validation :save_location_data, if: :address_changed?
+  # after_validation :save_location_data #, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
+
+  def format_studio_name
+    self.name = self.name&.titleize
+  end
 
   def slug_candidates
     [
@@ -75,11 +80,17 @@ class Studio < ApplicationRecord
   end
 
   def search_profile_image
-    tattoos.first&.image || hero_banner
+    return avatar if avatar.attached?
+    return tattoos.last&.image if tattoos.last&.image&.attached?
+    false
   end
 
   def city_state
-    format('%s %s', city, state)
+    if state.present?
+      format('%s, %s', city&.titleize, state)
+    else
+      format('%s, %s', city&.titleize, country)
+    end
   end
 
   def full_address

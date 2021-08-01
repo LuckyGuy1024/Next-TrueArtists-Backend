@@ -1,8 +1,7 @@
 class UserMailer < ApplicationMailer
   def password_reset_instructions(user, token)
     @token = token
-
-    mail(to: user.email, subject: 'Password Reset')
+    mail(to: user.email, subject: 'Reset your TrueArtists password')
   end
 
   def new_user_notification(user, password)

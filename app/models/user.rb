@@ -81,4 +81,13 @@ class User < ApplicationRecord
   def send_new_user_invitation
     UserMailer.new_user_notification(self, password).deliver_now
   end
+  
+  private
+
+  def self.find_by_password_reset_token(token)
+    jwt_payload = JsonWebToken.decode(token).first
+    find(jwt_payload['user_id'])
+  rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+    nil
+  end
 end

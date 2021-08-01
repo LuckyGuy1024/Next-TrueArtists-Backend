@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -14,15 +14,6 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "action_mailbox_inbound_emails", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
-    t.string "message_id", null: false
-    t.string "message_checksum", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
-  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,7 +34,27 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "announcements", force: :cascade do |t|
+    t.string "title"
+    t.integer "published_by", null: false
+    t.boolean "send_now", default: false
+    t.datetime "publish_on"
+    t.text "content"
+    t.text "recipients", default: [], array: true
+    t.text "custom_emails", default: [], array: true
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "articles", force: :cascade do |t|
@@ -76,7 +87,6 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
 
   create_table "artists", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "studio_id"
     t.text "bio"
     t.string "slug"
     t.boolean "licensed"
@@ -109,7 +119,6 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.string "street_address_2"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
-    t.index ["studio_id"], name: "index_artists_on_studio_id"
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
@@ -122,7 +131,6 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.integer "image_file_size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -154,6 +162,9 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["description"], name: "index_categories_on_description"
+    t.index ["meta_description"], name: "index_categories_on_meta_description"
+    t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
@@ -273,30 +284,17 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
-  create_table "message_mails", force: :cascade do |t|
-    t.integer "message_id", null: false
-    t.integer "user_id", null: false
-    t.string "thread_id"
-    t.string "mail_message_id", null: false
-    t.text "references"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.integer "sender_id"
+    t.string "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "thread_id"
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -330,8 +328,6 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone_number"
     t.index ["artist_id"], name: "index_studio_invites_on_artist_id"
-    t.index ["email"], name: "index_studio_invites_on_email"
-    t.index ["invite_code"], name: "index_studio_invites_on_invite_code"
     t.index ["studio_id"], name: "index_studio_invites_on_studio_id"
   end
 
@@ -372,6 +368,7 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
+    t.string "currency_code"
     t.boolean "monday", default: false
     t.boolean "tuesday", default: false
     t.boolean "wednesday", default: false
@@ -393,10 +390,9 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.time "friday_end"
     t.time "saturday_end"
     t.time "sunday_end"
-    t.string "currency_code"
     t.string "street_address_2"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
-    t.index ["user_id"], name: "index_studios_on_user_id"
+    t.index ["user_id"], name: "index_studios_on_user_id", unique: true
   end
 
   create_table "styles", force: :cascade do |t|
@@ -436,12 +432,12 @@ ActiveRecord::Schema.define(version: 2021_08_01_173646) do
     t.string "slug"
     t.string "social_id"
     t.string "provider"
-    t.index ["email"], name: "index_users_on_email"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["social_id"], name: "index_users_on_social_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "guest_artist_application_responses", "guest_artist_applications"
 end

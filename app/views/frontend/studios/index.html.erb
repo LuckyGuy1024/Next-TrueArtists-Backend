@@ -1,5 +1,26 @@
-<% set_meta_tags title: 'Best Tattoo Studios Near You',
+<% set_meta_tags title: 'Best Tattoo Shops Near You',
               description: 'Find the certified tattoo studios near your city today. Browse from over 1000+ tattoo shops near you.' %>
+
+
+<% set_meta_tags(canonical: studios_url)  %>
+
+<% set_meta_tags(open_graph: {
+   title: 'Best Tattoo Shops Near You',
+   type: :website,
+   site_name: 'TrueArtists',
+   url: studios_url,
+   description: 'Find the certified tattoo studios near your city today. Browse from over 1000+ tattoo shops near you.',
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: 'Best Tattoo Shops Near You',
+   description: 'Find the certified tattoo studios near your city today. Browse from over 1000+ tattoo shops near you.',
+   url: studios_url,
+ }
+%>
 
 <!-- Latest Studio -->
 <div class="page-section gray-bg">
@@ -13,7 +34,7 @@
           <div class="search-artists-form row">
             <div class="col-md-9">
               <div class="search-section">
-                <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search tattoo shop by zip code or city' %>
+                <%= text_field_tag "near", params[:near], class: '', placeholder: 'Search tattoo shop by zip code or city' %>
                 <button type="submit" class="search search-box">
                   <i class="ta-icon-search basic-search"></i>
                 </button>
@@ -35,15 +56,20 @@
 <div class="page-section">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <div class="latest-studios-lists grid-gap-30 row">
-          <%= render @studios %>
+      <% if @studios.present? %>
+        <div class="col-md-12">
+          <div class="artists-lists grid-gap-30 row">
+            <%= render @studios %>
+          </div>
         </div>
-      </div>
-
-      <div class="col-md-12 text-center">
-        <%= paginate @studios %>
-      </div>
+        <div class="col-md-12 text-center">
+          <%= paginate @studios %>
+        </div>
+      <% else %>
+        <div class="col-md-12 text-center">
+          <p>We did not find any tattoo shops in or near "<%= params[:near] %>". Try a different zip code or city.</p>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

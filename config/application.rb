@@ -31,14 +31,15 @@ module TrueArtists
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.autoload_paths += %W[#{config.root}/lib]
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: %i[get post put patch delete options head]
-      end
-    end
 
     # Handle Pundit::NotAuthorizedError's by having rails handle them as a 403 error
-    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
+    config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
+    config.active_storage.web_image_content_types = %w[
+      image/jpg
+      image/jpeg
+      image/gif
+      image/png
+      image/webp
+    ]
   end
 end

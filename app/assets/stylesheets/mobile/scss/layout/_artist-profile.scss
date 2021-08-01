@@ -2,7 +2,27 @@
   background: $white-bg;
   padding: 30px 20px;
   border-radius: 16px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,.03),0 0 1px 0 rgba(0,0,0,.03);;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,.03),0 0 1px 0 rgba(0,0,0,.03);
+
+  .artist-p-info {
+    img {
+      border-radius: 50%;
+      max-width: 96px;
+      transform: translateZ(0);
+      border-radius: 50%;
+      height: 100px;
+      object-fit: cover;
+      width: 100%;
+      max-width: 96px;
+    }
+
+    h1 {
+      margin: 10px 0 5px;
+      line-height: 1.56;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
 }
 .artist-p-location {
   ul {
