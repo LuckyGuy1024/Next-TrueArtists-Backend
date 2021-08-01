@@ -13,7 +13,7 @@ class Booking < ApplicationRecord
 
   validates :first_tattoo, :colored, presence: true
   validates_presence_of :custom_size, :size_units, message: 'Can\'t be blank if consult_artist=false', unless: lambda {
-    :consult_artist == true
+                                                                                                                 :consult_artist == true
                                                                                                                }
 
   belongs_to :message

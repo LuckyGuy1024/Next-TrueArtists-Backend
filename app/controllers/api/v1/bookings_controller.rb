@@ -9,7 +9,7 @@ module Api
         booking = Booking.build_booking(@user, booking_params)
 
         if booking.save
-          render json: booking.to_json, status: :created
+          render json: BookingSerializer.new(booking).to_json, status: :created
         else
           render_api_error(status: 422, errors: booking.errors)
         end
@@ -18,14 +18,24 @@ module Api
       private
 
       def find_or_create_user
-        user = if current_user.nil? && User.find_by!(email: booking_params[:email]).nil?
-                 User.create!(full_name: booking_params[:email], email: booking_params[:email], password: 'MyName1993',
-                              password_confirmation: 'MyName1993')
-               else
-                 User.find_by!(email: booking_params[:email])
-               end
+        existing_user = User.where(email: booking_params[:email]).first
 
-        @user = current_user.nil? ? user : current_user
+        begin
+          user = if current_user.nil? && existing_user.nil?
+                   User.create!(
+                     full_name: booking_params[:email],
+                     email: booking_params[:email],
+                     password: 'MyName1993',
+                     password_confirmation: 'MyName1993'
+                   )
+                 else
+                   existing_user
+                 end
+
+          @user = current_user.nil? ? user : current_user
+        rescue StandardError => e
+          render json: { errors: e.message }
+        end
       end
 
       def booking_params
