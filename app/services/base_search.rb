@@ -24,7 +24,8 @@ class BaseSearch
       placement: options[:placement],
       status: options[:status],
       studio_id: options[:studio_id],
-      artist_id: options[:artist_id]
+      artist_id: options[:artist_id],
+      or: [[{ sender_id: options[:user_id] }, { receiver_id: options[:user_id] }]]
     }.delete_if { |_k, v| v.nil? }
 
     if options[:near] && coordinates.present?

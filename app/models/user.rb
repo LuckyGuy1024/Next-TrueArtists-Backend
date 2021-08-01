@@ -77,4 +77,8 @@ class User < ApplicationRecord
   def admin?
     role == User.roles[:admin]
   end
+
+  def send_new_user_invitation
+    UserMailer.new_user_notification(self, password).deliver_now
+  end
 end
