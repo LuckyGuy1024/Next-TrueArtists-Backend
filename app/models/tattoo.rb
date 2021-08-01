@@ -26,6 +26,7 @@ class Tattoo < ApplicationRecord
 
   belongs_to :studio, optional: true
   belongs_to :artist, optional: true
+  belongs_to :style, optional: true
 
   has_one_attached :image do |attachable|
     attachable.format :webp
@@ -41,7 +42,7 @@ class Tattoo < ApplicationRecord
   end
 
   def search_data
-    attributes.merge(location: { lat: lat, lon: lon })
+    attributes.merge(location: { lat: lat, lon: lon } style: style&.name)
   end
 
   def seo_title

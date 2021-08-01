@@ -47,6 +47,7 @@ class StudioSerializer < ActiveModel::Serializer
     if object.avatar.attached?
       {
         id: object.avatar.id,
+        name: object.avatar.filename,
         image_url: asset_blob_url(object.avatar),
       }
     end
@@ -56,6 +57,7 @@ class StudioSerializer < ActiveModel::Serializer
     if object.hero_banner.attached?
       {
         id: object.hero_banner.id,
+        name: object.hero_banner.filename,
         image_url: asset_blob_url(object.hero_banner),
       }
     end

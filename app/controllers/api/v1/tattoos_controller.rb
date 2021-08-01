@@ -105,7 +105,8 @@ class Api::V1::TattoosController < ApplicationController
   end
 
   def permitted_attributes
-    [:styles,
+    [
+     :style_id,
      :categories,
      :placement,
      :caption,
