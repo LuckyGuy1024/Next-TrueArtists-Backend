@@ -11,7 +11,7 @@ module Frontend
           status: 'approved',
           page: 1,
           per_page: 8,
-          near: [current_user_location.latitude, current_user_location.longitude],
+          near: [current_user_location&.latitude, current_user_location&.longitude],
           within: '100mi'
         }
       ).base_filter
@@ -22,7 +22,7 @@ module Frontend
           status: 'approved',
           page: 1,
           per_page: 8,
-          near: [current_user_location.latitude, current_user_location.longitude],
+          near: [current_user_location&.latitude, current_user_location&.longitude],
           within: '100mi'
         }
       ).base_filter

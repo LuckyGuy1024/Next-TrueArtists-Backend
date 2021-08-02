@@ -82,7 +82,7 @@ class Studio < ApplicationRecord
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
-    false
+    nil
   end
 
   def city_state

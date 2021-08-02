@@ -12,7 +12,7 @@ class FrontendController < ActionController::Base
                 :current_user_coordinates
 
   def current_user_city_state
-    if current_user_location.state.present? 
+    if current_user_location.state.present?
       "#{current_user_location.city}, #{current_user_location.state}"
     else
       "#{current_user_location.city}, #{current_user_location.country}"
@@ -58,6 +58,18 @@ class FrontendController < ActionController::Base
   helper_method :account_service_artist_signup_url
 
   private
+
+  def user_signed_in?
+    current_user.present?
+  end
+
+  # Sets the @current_user with the user_id from payload
+  def current_user
+    @current_user = User.friendly.find_by(id: @current_user_id)
+  end
+
+  def fail_if_unauthenticated!
+  end
 
   # Validates the token and user and sets the @current_user scope
   def authenticate_request!; end
