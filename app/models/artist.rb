@@ -35,7 +35,7 @@ class Artist < ApplicationRecord
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
-  after_commit :notify_admins, on: :create
+
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
   # after_validation :save_location_data, if: :address_changed?
@@ -89,6 +89,10 @@ class Artist < ApplicationRecord
     tattoos.present?
   end
 
+  def notify_admins
+    AdminMailer.new_artist_notification(self).deliver_now
+  end
+
   private
 
   def add_name
@@ -107,9 +111,5 @@ class Artist < ApplicationRecord
 
   def send_phone_verification_code
     PhoneNumberVerifier.new(phone_number: phone_number).verify
-  end
-
-  def notify_admins
-    AdminMailer.new_artist_notification(self).deliver_now
   end
 end

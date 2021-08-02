@@ -121,6 +121,10 @@ class Studio < ApplicationRecord
     tattoos.present?
   end
 
+  def notify_admins
+    AdminMailer.new_studio_notification(self).deliver_now
+  end
+
   private
 
   def send_phone_verification_code
