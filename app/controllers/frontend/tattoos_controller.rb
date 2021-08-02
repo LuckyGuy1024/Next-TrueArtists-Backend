@@ -17,7 +17,7 @@ module Frontend
     end
 
     def placements
-      @placments = Placement.find_all_cached
+      @placements = Placement.find_all_cached
       respond_to do |format|
         format.html
         format.js
