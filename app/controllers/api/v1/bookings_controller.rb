@@ -39,11 +39,13 @@ module Api
 
         begin
           @user = if existing_user.nil?
+                    password = "TA#{Array.new(11) { rand(9) }.join}"
+
                     new_user = User.new(
                       full_name: booking_params[:email],
                       email: booking_params[:email],
-                      password: 'MyName1993',
-                      password_confirmation: 'MyName1993'
+                      password: password,
+                      password_confirmation: password
                     )
 
                     new_user.send_new_user_invitation if new_user.save

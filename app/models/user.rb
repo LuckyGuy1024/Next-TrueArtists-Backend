@@ -81,7 +81,7 @@ class User < ApplicationRecord
   def send_new_user_invitation
     UserMailer.new_user_notification(self, password).deliver_now
   end
-  
+
   private
 
   def self.find_by_password_reset_token(token)

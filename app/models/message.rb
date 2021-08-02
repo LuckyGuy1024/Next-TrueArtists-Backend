@@ -20,7 +20,7 @@ class Message < ApplicationRecord
   scope :threads, -> { pluck(:thread_id).uniq }
 
   before_save :assign_thread_id
-  after_create :send_user_notification
+  after_save :send_user_notification
 
   def self.build_message(sender, message)
     Message.new({
