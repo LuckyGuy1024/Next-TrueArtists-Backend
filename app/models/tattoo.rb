@@ -42,7 +42,7 @@ class Tattoo < ApplicationRecord
   end
 
   def search_data
-    attributes.merge(location: { lat: lat, lon: lon } style: style&.name)
+    attributes.merge(location: { lat: lat, lon: lon }, style: style&.name)
   end
 
   def seo_title

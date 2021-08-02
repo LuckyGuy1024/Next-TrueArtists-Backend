@@ -83,5 +83,6 @@ Rails.application.routes.draw do
     get '/contact-us' => 'landing_pages#contact_us'
     get '/terms' => 'landing_pages#terms'
     get '/privacy' => 'landing_pages#privacy'
+    get '/photos', to: redirect('/tattoos'), status: 301
   end
 end
