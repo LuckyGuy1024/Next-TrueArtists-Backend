@@ -15,8 +15,8 @@
                 <li>
                   <%= link_to "Tattoos", tattoos_path, "aria-haspopup": "true" %>
                   <ul class="dropdown" aria-label="submenu">
-                    <li><%= link_to 'Tattoos by Placement' %></li>
-                    <li><%= link_to 'Tattoos by Style' %></li>
+                    <li><%= link_to 'Tattoos by Placement', placements_tattoos_path %></li>
+                    <li><%= link_to 'Tattoos by Style', styles_tattoos_path %></li>
                   </ul>
                 </li>
                 <li><%= link_to "Blog", articles_path %></li>
