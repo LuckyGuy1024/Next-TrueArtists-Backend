@@ -4,7 +4,7 @@ module TattooScoped
   extend ActiveSupport::Concern
 
   included do
-    before_action :find_tattoo, except: %i[index facet]
+    before_action :find_tattoo, except: %i[index facet styles placements]
   end
 
   private

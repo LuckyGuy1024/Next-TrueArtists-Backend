@@ -1,16 +1,35 @@
-<% set_meta_tags title: "Tattoo Placements Ideas",
+<% set_meta_tags title: "Find Tattoo Ideas by Body Placement",
               description: "Find your next tattoo idea by exploring different placements on your body." %>
 
-<!-- Tattoos Search -->
+
+<% set_meta_tags(canonical: placements_tattoos_url)  %>
+
+<% set_meta_tags(open_graph: {
+   title: "Find Tattoo Ideas by Body Placement",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: placements_tattoos_url,
+   description: "Find your next tattoo idea by exploring different placements on your body.",
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: "Find Tattoo Ideas by Body Placement",
+   description: "Find your next tattoo idea by exploring different placements on your body.",
+   url: placements_tattoos_url,
+ }
+%>
+
 <div class="page-section gray-bg">
   <div class="container">
     <div class="row">
         <div class="col-md-12 search-form">
           <div class="sub-header">
-            <h1>Tattoo Placements</h1>
+            <h1>Tattoo Ideas by Body Placement</h1>
           </div>
         </div>
-        <!- // -->
         <% @placements.each do |placement| %>
           <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="listing-widget shadow">

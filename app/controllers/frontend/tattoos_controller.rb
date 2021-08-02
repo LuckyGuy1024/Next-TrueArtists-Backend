@@ -3,7 +3,7 @@ module Frontend
     include TattooScoped
 
     before_action :find_styles, only: %i[index styles facet]
-    before_action :find_placements, only: %i[index placments]
+    before_action :find_placements, only: %i[index placements facet]
 
     def index
       @tattoos = search.base_filter
@@ -17,7 +17,6 @@ module Frontend
     end
 
     def placements
-      @placments = Placement.find_all_cached
       respond_to do |format|
         format.html
         format.js
@@ -58,6 +57,10 @@ module Frontend
 
     def find_styles
       @styles = Style.find_all_cached
+    end
+
+    def find_placements
+      @placements = Placement.find_all_cached
     end
   end
 end

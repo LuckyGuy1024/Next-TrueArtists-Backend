@@ -13,7 +13,7 @@ class Placement < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def self.find_all_cached
-    Rails.cache.fetch('styles') do
+    Rails.cache.fetch('placements') do
       Placement.with_attached_avatar.to_a
     end
   end
