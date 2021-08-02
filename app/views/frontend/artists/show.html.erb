@@ -43,12 +43,12 @@
             <p><%= @artist.city_state %> <%= @artist.zip_code %></p>
           </div>
 
-          <% if false %>
-            <div class="artist-p-btn">
+          <div class="artist-p-btn">
+            <% if false %>
               <a href="#" class="btn btn-secondary">Save</a>
-              <a href="#" class="btn btn-primary ml-4">Book</a>
-            </div>
-          <% end %>
+            <% end %>
+            <a href="#" class="btn btn-primary ml-4">Book</a>
+          </div>
 
           <% if @artist.current_studio %>
             <div class="artist-p-style">
