@@ -1,9 +1,11 @@
 <!-- Artists -->
 <div class="col-lg-3 col-md-6 col-sm-12 col">
-  <div class="location-section">
-    <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
-    <p><%= link_to artist.city_state, city_state_artists_path(artist.city_state.slugorize) %></p>
-  </div>
+  <% if artist.city_state.present? %>
+    <div class="location-section">
+      <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
+      <p><%= link_to artist.city_state, city_state_artists_path(artist.city_state.slugorize) %></p>
+    </div>
+  <% end %>
   <div class="listing-widget shadow">
     <%= link_to artist_path(artist) do %>
       <div class="list-image">

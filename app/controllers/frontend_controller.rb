@@ -12,7 +12,7 @@ class FrontendController < ActionController::Base
                 :current_user_coordinates
 
   def current_user_city_state
-    if current_user_location.country_code == 'US'
+    if current_user_location.state.present? 
       "#{current_user_location.city}, #{current_user_location.state}"
     else
       "#{current_user_location.city}, #{current_user_location.country}"
