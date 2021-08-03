@@ -5,6 +5,8 @@ module Frontend
     include StudioScoped
 
     def index
+      breadcrumbs.add 'Studios', studios_path
+
       @studios  = search.base_filter
 
       @styles = Style.all
@@ -45,6 +47,8 @@ module Frontend
     end
 
     def show
+      breadcrumbs.add `#{@studio}`, studio_path
+
       respond_to do |format|
         format.html
         format.js

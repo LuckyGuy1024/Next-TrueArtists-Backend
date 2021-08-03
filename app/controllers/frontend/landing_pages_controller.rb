@@ -5,6 +5,8 @@ module Frontend
     include LandingPageScoped
 
     def home
+      breadcrumbs.add 'Home', root_path
+
       @artists = ArtistSearch.new(
         query: nil,
         options: {
@@ -38,6 +40,7 @@ module Frontend
     end
 
     def about_us
+      breadcrumbs.add 'About Us', about_us_path
       respond_to do |format|
         format.html
         format.js
@@ -45,6 +48,7 @@ module Frontend
     end
 
     def privacy
+      breadcrumbs.add 'Privacy', privacy_path
       respond_to do |format|
         format.html
         format.js
@@ -52,6 +56,8 @@ module Frontend
     end
 
     def terms
+      breadcrumbs.add 'Terms', terms_path
+
       respond_to do |format|
         format.html
         format.js
@@ -59,6 +65,8 @@ module Frontend
     end
 
     def contact_us
+      breadcrumbs.add 'Contact Us', contact_us_path
+
       respond_to do |format|
         format.html
         format.js

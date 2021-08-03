@@ -6,6 +6,8 @@ module Frontend
     before_action :find_placements, only: %i[index placements facet]
 
     def index
+      breadcrumbs.add 'Tattoos', tattoos_path
+
       @tattoos = search.base_filter
 
       @colors = Tattoo::COLORS
@@ -24,6 +26,8 @@ module Frontend
     end
 
     def styles
+      breadcrumbs.add 'Tattoo Styles', styles_path
+
       respond_to do |format|
         format.html
         format.js

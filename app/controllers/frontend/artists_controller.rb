@@ -5,6 +5,8 @@ module Frontend
     include ArtistScoped
 
     def index
+      breadcrumbs.add 'Artists', artists_path
+
       @artists = search.base_filter
 
       @styles = Style.all
@@ -43,8 +45,10 @@ module Frontend
         format.js
       end
     end
-    
+
     def show
+      breadcrumbs.add "#{@artist.name}", artist_path
+
       @tattoos = @artist.tattoos.page(params[:page] || 1).per(BaseSearch::PER_PAGE)
 
       respond_to do |format|

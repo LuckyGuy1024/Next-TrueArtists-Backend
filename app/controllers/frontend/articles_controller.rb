@@ -5,6 +5,8 @@ module Frontend
     include ArticleScoped
 
     def index
+      breadcrumbs.add 'Articles', articles_path
+
       @articles = search.base_filter
 
       respond_to do |format|
