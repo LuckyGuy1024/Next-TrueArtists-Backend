@@ -1,5 +1,25 @@
 <% set_meta_tags title: "#{@name} Tattoo Ideas",
-              description: "Find thousands of #{@name.downcase} tattoo ideas and galleries from top tattoo artists near you." %>
+              description: "Find thousands of #{@name.downcase} tattoo ideas from top tattoo artists near you." %>
+
+<% set_meta_tags(canonical: current_canonical_url)  %>
+
+<% set_meta_tags(open_graph: {
+   title: "#{@name} Tattoo Ideas",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: current_canonical_url,
+   description: "Find thousands of #{@name.downcase} tattoo ideas from top tattoo artists near you."
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title:  "#{@name} Tattoo Ideas",
+   description: "Find thousands of #{@name.downcase} tattoo ideas from top tattoo artists near you.",
+   url: current_canonical_url,
+ }
+%>
 
 <!-- Tattoos Search -->
 <div class="page-section gray-bg">
@@ -85,6 +105,23 @@
           </div>
         </div>
         <!-- end of row -->
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if current_seo_content.present? %>
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sub-header">
+            <h2><%= current_seo_content.title %></h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <%= current_seo_content.content.html_safe %>
+        </div>
       </div>
     </div>
   </div>
