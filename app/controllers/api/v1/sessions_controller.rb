@@ -7,7 +7,7 @@ class Api::V1::SessionsController < ApplicationController
   def create
     if social_authentication || password_authentication
       auth_token = JsonWebToken.encode(user_id: @user.id)
-
+      session[:user_id] = @user.id
       render json: {
         user: UserSerializer.new(@user, root: false),
         auth_token: auth_token

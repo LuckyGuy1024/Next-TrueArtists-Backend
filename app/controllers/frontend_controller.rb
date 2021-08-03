@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FrontendController < ActionController::Base
+  protect_from_forgery prepend: true
+
   layout :set_layout
 
   before_action :authenticate_request!
@@ -85,8 +87,9 @@ class FrontendController < ActionController::Base
 
   # Sets the @current_user with the user_id from payload
   def current_user
-    @current_user = User.friendly.find_by(id: @current_user_id)
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
+  helper_method :current_user
 
   def fail_if_unauthenticated!; end
 
