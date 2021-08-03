@@ -234,6 +234,28 @@
     p {
       font-size: 20px;
     }
+
+    .socials {
+      margin-top: 15px;
+
+      a {
+        margin-left: 0 !important;
+        margin-right: 10px;
+        margin-bottom: 10px;
+
+        &:hover {
+          color: $secondary-color;
+        }
+      }
+
+      .website {
+        margin-top: 10px;
+
+        a {
+          color: #00b0e8;
+        }
+      }
+    }
   }
 }
 // Reviews

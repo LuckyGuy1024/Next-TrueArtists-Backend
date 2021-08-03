@@ -1,4 +1,5 @@
 .artist-left-sidebar {
+  margin-bottom: 10px;
   background: $white-bg;
   padding: 30px 20px;
   border-radius: 16px;
@@ -54,6 +55,18 @@
     margin-left: 0 !important;
     margin-right: 10px;
     margin-bottom: 10px;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  .website {
+    margin-top: 10px;
+
+    a {
+      color: #00b0e8;
+    }
   }
 }
 
