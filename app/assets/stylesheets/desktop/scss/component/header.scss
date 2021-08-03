@@ -8,18 +8,18 @@
 
     .logo {}
 
-    .main-menu {
-      flex: 1;
-
+    .main-nav {
       ul {
-        margin: 0;
-        padding: 0;
         list-style: none;
-        display: flex;
-        justify-content: center;
+        margin: 0;
+        padding-left: 0;
 
         li {
-          margin: 0 3px;
+          display: block;
+          float: left;
+          position: relative;
+          text-decoration: none;
+          transition-duration: 0.5s;
           padding: 10px 15px;
           &.artist-signup {
             width: auto;
@@ -31,7 +31,7 @@
             background: $secondary-color;
             color: $black;
             &:hover {
-              border: 1px solid $secondary-color;
+              border: 1px solid $text-color;
               background: $secondary-color;
               color: $black;
               a {
@@ -43,22 +43,133 @@
               }
             }
           }
-        }
 
-        a {
-          font-size: 15px;
-          text-decoration: none;
-          color: $text-color;
-          &.active,
-          &:active,
-          &:focus,
+          a {
+            font-size: 15px;
+            text-decoration: none;
+            color: $text-color;
+            &.active,
+            &:active,
+            &:focus,
+            &:hover {
+              color: $primary-color;
+              border-bottom: 5px solid $secondary-color;
+            }
+          }
+
           &:hover {
-            color: $primary-color;
-            border-bottom: 5px solid $secondary-color;
+            cursor: pointer;
+          }
+
+          &:focus-within {
+            cursor: pointer;
+
+            a {
+              outline: none;
+            }
+          }
+
+          ul {
+            visibility: hidden;
+            opacity: 0;
+            min-width: 5rem;
+            position: absolute;
+            transition: all 0.5s ease;
+            margin-top: 1rem;
+            background: $secondary-color;
+            left: 0;
+            display: none;
+
+            &:hover {
+              visibility: visible;
+              opacity: 1;
+              display: block;
+            }
+
+            &:focus {
+              visibility: visible;
+              opacity: 1;
+              display: block;
+            }
+
+            li {
+              background: $secondary-color;
+              clear: both;
+              width: 200px;
+            }
+          }
+
+          &:hover {
+            >ul {
+              visibility: visible;
+              opacity: 1;
+              display: block;
+            }
+          }
+
+          &:focus-within {
+            >ul {
+              visibility: visible;
+              opacity: 1;
+              display: block;
+            }
           }
         }
       }
     }
+
+
+    // .main-menu {
+    //   flex: 1;
+    //
+    //   ul {
+    //     margin: 0;
+    //     padding: 0;
+    //     list-style: none;
+    //     display: flex;
+    //     justify-content: center;
+    //
+    //     li {
+    //       margin: 0 3px;
+    //       padding: 10px 15px;
+    //       &.artist-signup {
+    //         width: auto;
+    //         height: auto;
+    //         flex-grow: 0;
+    //         border-radius: 24px;
+    //         border: solid 1px $black;
+    //         border: 1px solid $secondary-color;
+    //         background: $secondary-color;
+    //         color: $black;
+    //         &:hover {
+    //           border: 1px solid $secondary-color;
+    //           background: $secondary-color;
+    //           color: $black;
+    //           a {
+    //             &:active,
+    //             &:focus,
+    //             &:hover {
+    //               border: none;
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //
+    //     a {
+    //       font-size: 15px;
+    //       text-decoration: none;
+    //       color: $text-color;
+    //       &.active,
+    //       &:active,
+    //       &:focus,
+    //       &:hover {
+    //         color: $primary-color;
+    //         border-bottom: 5px solid $secondary-color;
+    //       }
+    //     }
+    //   }
+    // }
 
     .user-profile-search {
       .search {

@@ -35,6 +35,7 @@ class TattooSerializer < ActiveModel::Serializer
   end
 
   def style
+    return {} unless object.style
     {
       id: object.style.id,
       name: object.style.name

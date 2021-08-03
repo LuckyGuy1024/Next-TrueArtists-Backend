@@ -25,10 +25,11 @@ Rails.application.routes.draw do
       end
 
       collection do
-        get 'register' => 'artists#home'
+        get 'register' => 'artists#register'
         get 'city/:city_state' => 'artists#city', as: :city_state
       end
     end
+    get '/register/artist', to: redirect('/artists/register'), status: 301
 
     resources :studios do
       member do
@@ -78,7 +79,6 @@ Rails.application.routes.draw do
     resources :landing_pages, only: %i[show index]
     resources :global_search_redirector, only: [:index]
     root to: 'landing_pages#home'
-    get '/register/artist' => 'artists#register'
     get '/about-us' => 'landing_pages#about_us'
     get '/contact-us' => 'landing_pages#contact_us'
     get '/terms' => 'landing_pages#terms'

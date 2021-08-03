@@ -34,7 +34,7 @@
         <% @styles.each do |style| %>
           <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="listing-widget shadow">
-              <%= link_to style_tattoo_path(style.name.slugorize) do %>
+              <%= link_to style_tattoos_path(style.name.slugorize) do %>
                 <div class="list-image">
                   <% if style.avatar.attached? %>
                     <img data-src="<%= asset_blob_url(style.avatar) %>" class="lazyload large" />
