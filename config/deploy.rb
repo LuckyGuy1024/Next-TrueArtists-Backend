@@ -46,7 +46,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
   'tmp/sockets',
   'vendor/bundle',
   'bundle',
-  'log'
+  'log',
+  'public/shared'
 )
 
 set :keep_releases, 4

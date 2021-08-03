@@ -1,9 +1,9 @@
 SitemapGenerator::Sitemap.default_host = 'https://trueartists.com'
-SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
+SitemapGenerator::Sitemap.sitemaps_path = 'shared/'
 
 SitemapGenerator::Sitemap.create do
   add root_path, changefreq: 'daily', priority: 0.9
-  
+  add articles_path
   add artists_path
   add studios_path
   add styles_tattoos_path
