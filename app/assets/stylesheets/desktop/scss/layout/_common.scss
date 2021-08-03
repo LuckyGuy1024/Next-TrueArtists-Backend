@@ -155,6 +155,7 @@ img {
   .list-image {
     position: relative;
     height: 240px;
+
     img {
       border-radius: 6px;
       height: 100%;
@@ -207,6 +208,7 @@ img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+
         &:hover {
           opacity: 0.7;
         }
@@ -236,6 +238,7 @@ img {
   display: flex;
   margin: 10px 0;
   color: $gray-text-color;
+
   a {
     h4 {
       font-size: 15px;
@@ -243,11 +246,13 @@ img {
       font-weight: normal;
       font-family: $default-font;
       display: inline;
+
       &:hover {
         color: $secondary-color !important;
       }
     }
   }
+
   img {
     margin-right: 4px;
   }
@@ -310,6 +315,46 @@ img {
 }
 
 .image-gallery {
+  .tattoo-info {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+
+    a {
+      font-size: 14px;
+
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+      }
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .meta-data {
+      margin: 5px 0;
+      display: block;
+      font-size: 14px;
+
+      .tag {
+        font-size: 12px;
+        background-color: #f4f4f4;
+        color: $dark-color;
+        border: none;
+
+        &:hover {
+          color: $text-white;
+          background: $black;
+        }
+      }
+    }
+  }
+
   .gallery-item {
     display: flex;
     margin-bottom: 30px;
@@ -319,6 +364,9 @@ img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      &.half {
+        border-radius: 6px 6px 0 0;
+      }
     }
 
     &:hover {
@@ -335,6 +383,7 @@ img {
   color: $border-color;
 }
 // Tag
+
 .tag {
   border-radius: 6px;
   display: inline-block;
