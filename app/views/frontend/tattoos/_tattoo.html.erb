@@ -1,7 +1,26 @@
-<% if tattoo.image.present? %>
+<% if tattoo.image.attached? %>
   <div class="col-lg-3 col-md-6 grid-item">
-    <%= link_to tattoo_path(tattoo), class: 'gallery-item' do %>
+    <%= link_to tattoo_path(tattoo), class: 'gallery-item half' do %>
       <img data-src="<%= asset_blob_url(tattoo.image) %>" class="lazyload" />
     <% end %>
+    <div class='tattoo-info'>
+      <%= link_to url_for(tattoo.parent) do %>
+        <% if tattoo.parent.avatar.attached? %>
+          <img data-src="<%= asset_blob_url(tattoo.parent.avatar) %>" class="lazyload" />
+        <% end %>
+         <span itemprop='name'>
+           <%= tattoo.parent.name %><br>
+         </span>
+      <% end %>
+      <div class='meta-data'>
+        <% if tattoo.style.present? %>
+          <%= link_to tattoo.style.name, style_tattoos_path(tattoo.style.slug), class: 'tag tag-cloud' %>
+        <% end %>
+
+        <% if tattoo.placement.present? %>
+          <%= link_to tattoo.placement, placement_tattoos_path(tattoo.placement.slugorize), class: 'tag tag-cloud' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>
