@@ -25,7 +25,7 @@ module Legacy
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Artist.count)
-          where(admin_approved: true).find_each do |artist|
+         where(admin_approved: nil, artist_status: ['Completed', 'No Studio']).where.not(city: [nil, '']).find_each do |artist|
           # find user
           tattoo_style_ids = artist.tattoo_style_ids
           specialty = artist.specialities.to_a.map(&:name).join(',')
@@ -62,13 +62,15 @@ module Legacy
 
             # phon verification does not exist in system
             # new_artist.phone_verified = artist.phone_verified
-            new_artist.status = if artist.admin_approved && (artist.city.present? || artist.zip_code || artist.country.present?)
+            # new_artist.status = if artist.admin_approved && (artist.city.present? || artist.zip_code || artist.country.present?)
+
+            new_artist.status = if (artist.city.present? || artist.zip_code || artist.country.present?)
                                   'approved'
                                 else
                                   'pending'
                                 end
             if new_artist.save(validate: false)
-              # updating address only 
+              # updating address only
               # if artist.logo_file_name.present?
               #   image_file_name = artist.logo_file_name
               #   image_extension = File.extname(image_file_name)
