@@ -340,7 +340,9 @@ img {
       margin: 5px 0;
       display: block;
       font-size: 14px;
-
+      span {
+        display: block;
+      }
       .tag {
         font-size: 12px;
         background-color: #f4f4f4;

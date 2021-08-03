@@ -20,6 +20,9 @@
         <% if tattoo.placement.present? %>
           <%= link_to tattoo.placement, placement_tattoos_path(tattoo.placement.slugorize), class: 'tag tag-cloud' %>
         <% end %>
+        <% if tattoo.caption.present? %>
+          <span><%= tattoo.caption %></span>
+        <% end %>
       </div>
     </div>
   </div>
