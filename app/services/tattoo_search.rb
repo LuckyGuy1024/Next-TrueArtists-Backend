@@ -10,7 +10,7 @@ class TattooSearch < BaseSearch
     self.meta = pagination_info(search_results)
 
     {
-      studios: ActiveModel::Serializer::CollectionSerializer.new(results,
+      tattoos: ActiveModel::Serializer::CollectionSerializer.new(results,
                                                                  serializer: TattooSerializer),
       meta: meta
     }
