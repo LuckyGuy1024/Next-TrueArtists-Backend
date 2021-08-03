@@ -47,12 +47,18 @@ module Api::V1
 
     def submit_for_review
       authorize @artist
+
       @artist.pending_review
+
       if @artist.save
+        @artist.notify_admins
+
         head(:ok)
       else
         render_api_error(status: 422, errors: @artist.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def verify_phone

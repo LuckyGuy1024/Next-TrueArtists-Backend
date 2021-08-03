@@ -41,12 +41,18 @@ module Api::V1
 
     def submit_for_review
       authorize @studio
+
       @studio.pending_review
+
       if @studio.save
+        @studio.notify_admins
+
         head(:ok)
       else
         render_api_error(status: 422, errors: @studio.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def update

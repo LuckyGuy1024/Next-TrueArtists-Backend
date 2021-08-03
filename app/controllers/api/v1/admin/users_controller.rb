@@ -5,22 +5,12 @@ module Api::V1::Admin
     before_action :find_user, except: %i[index create]
 
     def index
-      @users = if params[:query]
-                 User.where('email LIKE :query OR full_name LIKE :query', query: "%#{params[:query]}%")
-               else
-                 User
-               end.where(search_filter.except(:page)).page(params[:page])
-      render json: { users: ActiveModel::Serializer::CollectionSerializer.new(@users,
-                                                                              serializer: UserSerializer),
-                     meta: {
-                       current_page: @users.current_page,
-                       total_pages: @users.total_pages,
-                       last_page: @users.last_page?,
-                       next_page: @users.next_page || resource.current_page,
-                       limit_value: @users.limit_value,
-                       total_count: @users.total_count
-                     } },
-             status: :ok
+      @results = UserSearch.new(
+        query: params[:query],
+        options: search_options
+      ).filter
+
+      render json: @results, status: :ok
     end
 
     def create
@@ -64,7 +54,7 @@ module Api::V1::Admin
       params.require(:user).permit(:email, :role, :status)
     end
 
-    def search_filter
+    def search_options
       {
         role: params[:role],
         status: params[:status],
