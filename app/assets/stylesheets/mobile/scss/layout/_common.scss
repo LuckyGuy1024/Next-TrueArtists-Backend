@@ -348,6 +348,46 @@ img {
       opacity: 0.7;
     }
   }
+
+  .tattoo-info {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+
+    a {
+      font-size: 14px;
+
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+      }
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .meta-data {
+      margin: 5px 0;
+      display: block;
+      font-size: 14px;
+
+      .tag {
+        font-size: 12px;
+        background-color: #f4f4f4;
+        color: $dark-color;
+        border: none;
+
+        &:hover {
+          color: $text-white;
+          background: $black;
+        }
+      }
+    }
+  }
 }
 
 .ta-icon-star-fill {
