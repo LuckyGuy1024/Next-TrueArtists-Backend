@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Announcement < ApplicationRecord
+  serialize :recipients, Array
+  serialize :custom_emails, Array
   RECIPIENTS = %w[
     admin
     artist
@@ -22,7 +24,7 @@ class Announcement < ApplicationRecord
 
   belongs_to :user, class_name: 'User', foreign_key: :published_by
   has_one_attached :image
-  
+
   validates :title, uniqueness: true
   validates :title, :content, :status, presence: true
   validates_presence_of :publish_on, unless: :send_now?

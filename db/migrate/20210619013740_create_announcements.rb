@@ -6,10 +6,9 @@ class CreateAnnouncements < ActiveRecord::Migration[6.0]
       t.boolean :send_now, default: false
       t.datetime :send_when
       t.text :content
-      t.text :recipients, array: true, default: []
-      t.text :custom_emails, array: true, default: []
+      t.text :recipients, array: true
+      t.text :custom_emails, array: true
       t.string :status
-
       t.timestamps
     end
   end
