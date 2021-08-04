@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     else
       # Use an environment variable instead of hard-coding the CDN host
       # You could also use the Rails.configuration to achieve the same
-      File.join(ENV.fetch('CDN_HOST'), blob.key)
+      File.join(ENV.fetch('CDN_HOST'), (blob&.key || 'default-image-placeholder.png'))
     end
   end
 end
