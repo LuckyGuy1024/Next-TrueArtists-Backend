@@ -67,6 +67,10 @@ class Artist < ApplicationRecord
     studios.last
   end
 
+  def self.with_status(status)
+    where(status: status)
+  end
+
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
