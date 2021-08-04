@@ -75,6 +75,23 @@ class FrontendController < ActionController::Base
   end
   helper_method :current_seo_content
 
+  def lazy_image_tag(target_src, **attrs, &block)
+    (attrs ||= {}).symbolize_keys!
+
+    target_src = image_path(target_src) unless target_src =~ /http(s)?:\/\// || target_src.nil?
+
+    (attrs[:data] ||= {})[:src] = target_src
+    empty_string = ''.dup
+    lazyload_css = ' lazyload'.dup
+    attrs[:class] = (attrs[:class] || empty_string) << lazyload_css
+    attrs.reverse_merge!(src: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==')
+
+    ActionController::Base.helpers.content_tag(:img, **attrs) do
+      capture(&block) if block_given?
+    end
+  end
+  helper_method :lazy_image_tag
+
   private
 
   def canonical_cleaner_predicate
