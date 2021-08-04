@@ -70,25 +70,24 @@ module Legacy
                                   'pending'
                                 end
             if new_artist.save(validate: false)
-              # updating address only
-              # if artist.logo_file_name.present?
-              #   image_file_name = artist.logo_file_name
-              #   image_extension = File.extname(image_file_name)
-              #   optimized_file_name = new_artist.name.slugorize.escape
-              #   new_file_name = "#{optimized_file_name}#{image_extension}"
-              #   s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{artist.id}/original/#{image_file_name.escape}"
-              #
-              #   options = {
-              #     key: "artists/#{new_artist.id}/logo/#{new_file_name}",
-              #     io: URI.open(s3_image_url),
-              #     filename: new_file_name,
-              #     content_type: artist.logo_content_type
-              #   }
-              #
-              #   new_artist.avatar.purge if new_artist.avatar.present?
-              #
-              #   new_artist.avatar.attach(options)
-              # end
+              if artist.logo_file_name.present?
+                image_file_name = artist.logo_file_name
+                image_extension = File.extname(image_file_name)
+                optimized_file_name = new_artist.name.slugorize.escape
+                new_file_name = "#{optimized_file_name}#{image_extension}"
+                s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{artist.id}/original/#{image_file_name.escape}"
+
+                options = {
+                  key: "artists/#{new_artist.id}/logo/#{new_file_name}",
+                  io: URI.open(s3_image_url),
+                  filename: new_file_name,
+                  content_type: artist.logo_content_type
+                }
+
+                new_artist.avatar.purge if new_artist.avatar.present?
+
+                new_artist.avatar.attach(options)
+              end
             end
             progress_bar.increment
           end

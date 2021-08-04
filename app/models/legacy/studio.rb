@@ -47,21 +47,21 @@ module Legacy
                                 end
 
             if new_studio.save(validate: false)
-              # if studio.logo_file_name.present?
-              #   new_studio.avatar.purge if new_studio.avatar.present?
-              #
-              #   image_file_name = studio.logo_file_name
-              #   image_extension = File.extname(image_file_name)
-              #   optimized_file_name = new_studio.name.slugorize.escape
-              #
-              #   new_file_name = "#{optimized_file_name}#{image_extension}"
-              #
-              #   s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{studio.id}/original/#{image_file_name.escape}"
-              #   new_studio.avatar.attach(key: "studios/#{new_studio.id}/logo/#{new_file_name}",
-              #                            io: URI.open(s3_image_url),
-              #                            filename: new_file_name,
-              #                            content_type: studio.logo_content_type)
-              # end
+              if studio.logo_file_name.present?
+                new_studio.avatar.purge if new_studio.avatar.present?
+
+                image_file_name = studio.logo_file_name
+                image_extension = File.extname(image_file_name)
+                optimized_file_name = new_studio.name.slugorize.escape
+
+                new_file_name = "#{optimized_file_name}#{image_extension}"
+
+                s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{studio.id}/original/#{image_file_name.escape}"
+                new_studio.avatar.attach(key: "studios/#{new_studio.id}/logo/#{new_file_name}",
+                                         io: URI.open(s3_image_url),
+                                         filename: new_file_name,
+                                         content_type: studio.logo_content_type)
+              end
             end
             progress_bar.increment
           rescue StandardError => e
