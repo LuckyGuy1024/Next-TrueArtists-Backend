@@ -21,7 +21,7 @@
             <div class="d-flex align-items-center">
               <div class="profile-img">
                 <% if studio.avatar.attached? %>
-                  <img data-src="<%= asset_blob_url(studio.avatar) %>" class="lazyload" />
+                  <%= lazy_image_tag(asset_blob_url(studio.avatar)) %>
                 <% end %>
               </div>
               <div class="profile-info">

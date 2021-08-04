@@ -39,7 +39,7 @@
                 <% object = @tattoo.studio || @tattoo.artist %>
                   <%= link_to object do %>
                     <% if object.avatar.attached? %>
-                      <img data-src="<%= asset_blob_url(object.avatar) %>" class="lazyload" />
+                      <%= lazy_image_tag(asset_blob_url(object.avatar)) %>
                     <% end %>
                     <h3>
                       <%= object.name %>
@@ -48,7 +48,7 @@
               </header>
               <div class="tattoos-details-img">
                 <% if @tattoo.image.attached? %>
-                  <img data-src="<%= asset_blob_url(@tattoo.image) %>" class="lazyload" />
+                  <%= lazy_image_tag(asset_blob_url(@tattoo.image), title: @tattoo.seo_title, alt: @tattoo.seo_title) %>
                 <% end %>
               </div>
               <div class="details-content">

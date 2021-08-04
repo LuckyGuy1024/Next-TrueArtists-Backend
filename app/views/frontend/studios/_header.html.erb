@@ -6,7 +6,7 @@
         <div class="s-profiles d-flex align-items-center" itemscope="true" itemtype="https://schema.org/TattooParlor">
           <div class="s-profile-img">
             <%= link_to studio_path(@studio) do %>
-              <img data-src="<%= asset_blob_url(@studio.avatar) %>" class="lazyload" />
+              <%= lazy_image_tag(asset_blob_url(@studio.avatar), title: @studio.name, alt: @studio.name) %>
             <% end %>
           </div>
           <div class="s-profile-info">

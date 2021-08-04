@@ -7,7 +7,7 @@
       <div class="col-lg-4 col-md-6 col-sm-12">
         <div class='article-widget'>
           <%= link_to article_path(article) do %>
-            <img data-src="<%= asset_blob_url(article.image) %>" class="lazyload" />
+            <%= lazy_image_tag(asset_blob_url(article.image), title: article.title, alt: article.title) %>
             <div class='article-widget-title'>
               <h3><%= article.title %></h3>
             </div>
