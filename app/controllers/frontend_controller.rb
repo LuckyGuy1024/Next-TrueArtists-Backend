@@ -125,12 +125,10 @@ class FrontendController < ActionController::Base
       browser.ie?(">= 11") && !browser.compatibility_view?,
       browser.edge?(">= 15"),
       browser.opera?(">= 50"),
-      browser.facebook?
-        && browser.safari_webapp_mode?
-        && browser.webkit_full_version.to_i >= 602
+      browser.facebook? && browser.safari_webapp_mode? && browser.webkit_full_version.to_i >= 602
     ].any?
   end
-  helper_method :modern_browser
+  helper_method :modern_browser?
 
   def set_layout
     if Array(request.variant).include? :mobile
