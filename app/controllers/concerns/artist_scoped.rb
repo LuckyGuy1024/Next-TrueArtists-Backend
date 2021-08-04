@@ -4,7 +4,7 @@ module ArtistScoped
   extend ActiveSupport::Concern
 
   included do
-    before_action :find_artist, except: %i[index home city]
+    before_action :find_artist, except: %i[index home city register]
   end
 
   private

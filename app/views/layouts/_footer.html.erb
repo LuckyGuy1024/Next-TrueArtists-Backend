@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-3">
           <div class="single-footer">
-            <h3>Explore TrueArtists</h3>
+            <h3>Explore</h3>
             <ul>
               <li>
                 <%= link_to 'Tattoo Ideas', tattoos_path %>
@@ -14,6 +14,14 @@
               </li>
               <li>
                 <%= link_to 'Find Tattoo Shop', studios_path %>
+              </li>
+
+              <li>
+                <%= link_to 'Tattoos by Styles', styles_tattoos_path %>
+              </li>
+
+              <li>
+                <%= link_to 'Tattoos by Placement', placements_tattoos_path %>
               </li>
               <li>
                 <%= link_to 'Learn About Tattoos', articles_path %>
@@ -36,7 +44,7 @@
         <div class="col-md-3">
           <div class="single-footer">
             <h3>For Artists & Studios</h3>
-            <%= link_to 'Join as an Artist or Studio', account_service_artist_signup_url, class: 'btn btn-primary' %>
+            <%= link_to 'Join as an Artist or Studio', register_artists_url, class: 'btn btn-primary' %>
           </div>
         </div>
       </div>

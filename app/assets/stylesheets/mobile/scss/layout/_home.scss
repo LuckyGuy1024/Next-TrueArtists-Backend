@@ -106,6 +106,10 @@
 
     .home-section-header {
       margin-bottom: 22px;
+
+      h2 {
+        margin: 10px 0;
+      }
     }
   }
 
@@ -113,6 +117,9 @@
     .home-section-header {
       margin-bottom: 22px;
 
+      h2 {
+        margin: 15px 0;
+      }
       .chevron-navigation {
         display: none;
       }

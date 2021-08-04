@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_31_184415) do
+ActiveRecord::Schema.define(version: 2021_08_04_164804) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -39,6 +39,19 @@ ActiveRecord::Schema.define(version: 2021_07_31_184415) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "announcements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.integer "published_by", null: false
+    t.boolean "send_now", default: false
+    t.datetime "publish_on"
+    t.text "content"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "recipients"
+    t.text "custom_emails"
   end
 
   create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -397,8 +410,12 @@ ActiveRecord::Schema.define(version: 2021_07_31_184415) do
     t.string "caption"
     t.boolean "featured", default: false
     t.integer "placement_id"
-    t.string "styles"
+    t.integer "styles"
+    t.integer "style_id"
+    t.string "slug"
     t.index ["placement_id"], name: "index_tattoos_on_placement_id"
+    t.index ["slug"], name: "index_tattoos_on_slug"
+    t.index ["style_id"], name: "index_tattoos_on_style_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

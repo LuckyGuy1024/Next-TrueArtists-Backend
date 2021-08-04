@@ -35,6 +35,7 @@ class Artist < ApplicationRecord
   validates :user_id, uniqueness: true
 
   after_commit :upgrade_user_role, on: :create
+
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
   # after_validation :save_location_data, if: :address_changed?
@@ -69,7 +70,7 @@ class Artist < ApplicationRecord
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
-    false
+    nil
   end
 
   def has_social_profiles
@@ -86,6 +87,10 @@ class Artist < ApplicationRecord
 
   def has_tattoo_gallery
     tattoos.present?
+  end
+
+  def notify_admins
+    AdminMailer.new_artist_notification(self).deliver_now
   end
 
   private

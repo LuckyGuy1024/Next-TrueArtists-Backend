@@ -82,7 +82,7 @@ class Studio < ApplicationRecord
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
-    false
+    nil
   end
 
   def city_state
@@ -119,6 +119,10 @@ class Studio < ApplicationRecord
 
   def has_tattoo_gallery
     tattoos.present?
+  end
+
+  def notify_admins
+    AdminMailer.new_studio_notification(self).deliver_now
   end
 
   private

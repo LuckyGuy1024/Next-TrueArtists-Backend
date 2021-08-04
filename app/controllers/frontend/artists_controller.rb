@@ -29,21 +29,21 @@ module Frontend
     end
 
     def register
-      @artists = Artist.search(where: { location: { near: { lat: current_user_location.latitude,
-                                                    lon: current_user_location.longitude },
-                                                    within: '100mi' } },
-                               limit: 6).results
-      @studios = Studio.search(where: { location: { near: { lat: current_user_location.latitude,
-                                                    lon: current_user_location.longitude },
-                                                    within: '100mi' } },
-                               limit: 6).results
+      # @artists = Artist.search(where: { location: { near: { lat: current_user_location.latitude,
+      #                                               lon: current_user_location.longitude },
+      #                                               within: '100mi' } },
+      #                          limit: 6).results
+      # @studios = Studio.search(where: { location: { near: { lat: current_user_location.latitude,
+      #                                               lon: current_user_location.longitude },
+      #                                               within: '100mi' } },
+      #                          limit: 6).results
 
       respond_to do |format|
         format.html
         format.js
       end
     end
-
+    
     def show
       @tattoos = @artist.tattoos.page(params[:page] || 1).per(BaseSearch::PER_PAGE)
 

@@ -56,4 +56,8 @@ class Tattoo < ApplicationRecord
       self.lon = parent.lon
     end
   end
+
+  def parent
+    artist || studio
+  end
 end
