@@ -88,7 +88,7 @@ class BaseSearch
 
   def order
     if options[:sort_attribute].present?
-      order = options[:sort_order].presence || :asc
+      order = options[:sort_order].presence || :desc
       { options[:sort_attribute] => order }
     else
       {}

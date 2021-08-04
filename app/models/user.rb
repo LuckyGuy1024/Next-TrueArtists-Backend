@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_one :studio, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_many :conventions, class_name: 'Convention', foreign_key: 'created_by', dependent: :destroy
+  has_many :announcements, class_name: 'Announcement', foreign_key: 'published_by', dependent: :destroy
 
   scope :artists, -> { where(role: roles[:artist]) }
   scope :studios, -> { where(role: roles[:studio_manager]) }

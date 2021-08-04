@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  include AASM
   include IdentityCache
   enum status: {
     draft: 'draft',
@@ -23,6 +24,29 @@ class Article < ApplicationRecord
   before_validation :import_tag_list, only: %i[create update]
 
   cache_index :slug, unique: true
+
+  aasm column: 'status' do
+    state :draft, initial: true
+    state :published
+    state :flagged
+    state :deleted
+
+    event :draft do
+      transitions from: [:flagged, :deleted, :published], to: :draft
+    end
+
+    event :publish do
+      transitions from: [:flagged, :draft, :deleted], to: :published
+    end
+
+    event :flag do
+      transitions from: [:draft, :deleted, :published], to: :flagged
+    end
+
+    event :delete do
+      transitions from: [:draft, :flagged, :published], to: :deleted
+    end
+  end
 
   def slug_candidates
     [
