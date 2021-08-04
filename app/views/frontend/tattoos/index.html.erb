@@ -1,5 +1,26 @@
 <% set_meta_tags title: 'Find Tattoo Ideas from Artists Near You',
-              description: 'Browse from thousands of amazing tattoo photos and galleries from tattoo artists near you' %>
+              description: 'Browse thousands tattoo photos and galleries from top tattoo artists near you' %>
+
+
+<% set_meta_tags(canonical: tattoos_url)  %>
+
+<% set_meta_tags(open_graph: {
+   title: 'Find Tattoo Ideas from Artists Near You',
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: tattoos_url,
+   description:'Browse thousands tattoo photos and galleries from top tattoo artists near you'
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: 'Find Tattoo Ideas from Artists Near You',
+   description: 'Browse thousands tattoo photos and galleries from top tattoo artists near you',
+   url: tattoos_url
+ }
+%>
 
 <!-- Tattoos Search -->
 <div class="page-section gray-bg">
@@ -13,13 +34,10 @@
             <div class="search-tattoos-form row">
               <div class="col-md-9">
                 <div class="search-section">
-                    <%#= hidden_field_tag 'page', @meta[:current_page] %>
-                    <%#= hidden_field_tag 'per_page', @meta[:limit_value] %>
-                    <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search Tattoos by Style, Color, and Placement' %>
-                    <%#= submit_tag "Search" %>
-                    <button type="submit" class="search search-box">
-                      <i class="ta-icon-search basic-search"></i>
-                    </button>
+                  <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search Tattoos by Style, Color, and Placement' %>
+                  <button type="submit" class="search search-box">
+                    <i class="ta-icon-search basic-search"></i>
+                  </button>
                 </div>
                 </div>
                 <div class="col-md-3">

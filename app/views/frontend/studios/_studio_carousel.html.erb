@@ -1,14 +1,16 @@
 <div class="col-lg-3 col-md-6 col-sm-12 col">
   <div class="location-section">
     <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
-    <p><%= link_to studio.city_state, city_state_studios_path(studio.city_state) %></p>
+    <p><%= link_to studio.city_state, city_state_studios_path(studio.city_state.slugorize) %></p>
   </div>
   <div class="listing-widget shadow">
     <%= link_to studio_path(studio) do %>
       <div class="list-image">
         <div class="list-image-carousel">
           <div class="list-img-item">
-            <img data-src="<%= url_for(studio.search_profile_image) %>" class="lazyload" />
+            <% if studio.search_profile_image %>
+              <img data-src="<%= asset_blob_url(studio.search_profile_image) %>" class="lazyload" />
+            <% end %>
           </div>
         </div>
       </div>
@@ -16,7 +18,9 @@
         <div class="list-left flex-grow-1">
           <div class="d-flex align-items-center">
             <div class="profile-img">
-              <img data-src="<%= url_for(studio.avatar) %>" class="lazyload" />
+              <% if studio.avatar.attached? %>
+                <img data-src="<%= asset_blob_url(studio.avatar) %>" class="lazyload" />
+              <% end %>
             </div>
             <div class="profile-info">
               <h5><%= studio.name %></h5>

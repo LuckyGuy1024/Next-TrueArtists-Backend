@@ -41,12 +41,18 @@ module Api::V1
 
     def submit_for_review
       authorize @studio
+
       @studio.pending_review
+
       if @studio.save
+        @studio.notify_admins
+
         head(:ok)
       else
         render_api_error(status: 422, errors: @studio.errors)
       end
+    rescue AASM::InvalidTransition => e
+      render_api_error(status: 422, errors: e.message)
     end
 
     def update
@@ -68,21 +74,17 @@ module Api::V1
       if studio_invite.invite_artist_to_studio
         head(:ok)
       else
-        render_api_error(status: 422, errors: @studio.errors)
+        render_api_error(status: 422, errors: studio_invite.errors)
       end
     end
 
     def studio_invites
       authorize @studio
 
-      invites = @studio.studio_invites.where(accepted: false)
+      invites = @studio.studio_invites
 
-      if !invites.blank?
-        render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
-                                                                       serializer: StudioInviteSerializer), status: :ok
-      else
-        render_api_error(status: 422, errors: 'There are no pending invites')
-      end
+      render json: ActiveModel::Serializer::CollectionSerializer.new(invites,
+                                                                     serializer: StudioInviteSerializer), status: :ok
     end
 
     def verify_phone

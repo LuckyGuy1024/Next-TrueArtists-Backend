@@ -19,8 +19,7 @@ module Api::V1::Admin
 
 
     def find_studio
-      @studio = current_user.studio
-      head(:not_found) unless @studio
+      @studio = Studio.find(params[:id])
     end
 
     def artist_invite_params

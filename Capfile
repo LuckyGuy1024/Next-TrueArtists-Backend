@@ -11,15 +11,14 @@ install_plugin Capistrano::SCM::Git
 
 require 'capistrano/rvm'
 require 'capistrano/bundler'
-require 'capistrano/rails'
 require 'capistrano/rails/db'
-# require "capistrano/rails/migrations"
+require 'capistrano/rails/assets'
 require 'capistrano/sidekiq'
 require 'sshkit/sudo'
-require 'capistrano/passenger'
 require 'rollbar/capistrano3'
 require 'capistrano/maintenance'
-# require "capistrano/webpacker/precompile"
-# Load custom tasks from `lib/capistrano/tasks` if you have any defined
+require 'capistrano/puma'
+install_plugin Capistrano::Puma, load_hooks: true
+install_plugin Capistrano::Puma::Daemon
+
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
-require 'whenever/capistrano'

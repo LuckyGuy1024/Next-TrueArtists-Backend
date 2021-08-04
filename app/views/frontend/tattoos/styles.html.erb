@@ -1,0 +1,58 @@
+<% set_meta_tags title: "Tattoo Styles & Ideas For your Next Tattoo",
+                 description: "Explore different tattoo styles for your next tattoo."
+%>
+
+<% set_meta_tags(canonical: styles_tattoos_url)  %>
+
+<% set_meta_tags(open_graph: {
+   title: "Tattoo Styles & Ideas For your Next Tattoo",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: styles_tattoos_url,
+   description: "Explore different tattoo styles for your next tattoo."
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: "Tattoo Styles & Ideas For your Next Tattoo",
+   description: "Explore different tattoo styles for your next tattoo.",
+   url: styles_tattoos_url,
+ }
+%>
+
+<!-- Tattoos Search -->
+<div class="page-section gray-bg">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12 search-form">
+          <div class="sub-header">
+            <h1 itemprop='name'>Tattoo Styles</h1>
+          </div>
+        </div>
+        <% @styles.each do |style| %>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="listing-widget shadow">
+              <%= link_to style_tattoos_path(style.name.slugorize) do %>
+                <div class="list-image">
+                  <% if style.avatar.attached? %>
+                    <img data-src="<%= asset_blob_url(style.avatar) %>" class="lazyload large" />
+                  <% end %>
+                </div>
+                <div class="list-content d-flex align-items-center">
+                  <div class="list-left flex-grow-1">
+                    <div class="d-flex align-items-center">
+                      <div class="profile-info">
+                        <h5 itemprop='name'><%= style.name %></h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>

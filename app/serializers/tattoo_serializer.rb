@@ -3,8 +3,9 @@ class TattooSerializer < ActiveModel::Serializer
 
   belongs_to :artist
   belongs_to :studio
+
   attributes :id,
-             :styles,
+             :style,
              :categories,
              :placement,
              :description,
@@ -21,10 +22,8 @@ class TattooSerializer < ActiveModel::Serializer
     if object.image.attached?
       {
         id: object.image.id,
-        image_url: ENV['HOST'] + rails_blob_path(object.image, only_path: true),
         name: object.image.filename,
-        dimensions: ActiveStorage::Analyzer::ImageAnalyzer.new(object.image).metadata,
-        status: object.image.status
+        image_url: asset_blob_url(object.image),
       }
     end
   end
@@ -33,5 +32,13 @@ class TattooSerializer < ActiveModel::Serializer
     return [] if object.tag_list.nil?
 
     object.tag_list.split(',')
+  end
+
+  def style
+    return {} unless object.style
+    {
+      id: object.style.id,
+      name: object.style.name
+    }
   end
 end

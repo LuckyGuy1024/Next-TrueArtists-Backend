@@ -1,34 +1,55 @@
-<% set_meta_tags title: 'Best Tattoo Studios Near You',
-              description: 'Find the certified tattoo studios near your city today. Browse from over 1000+ tattoo shops near you.' %>
+<% set_meta_tags title: @tattoo.seo_title,
+              description: @tattoo.caption %>
+
+<% set_meta_tags(canonical: tattoo_url(@tattoo))  %>
+
+<% set_meta_tags(open_graph: {
+   title: @tattoo.seo_title,
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: tattoo_url(@tattoo),
+   description: @tattoo.caption,
+   image: {
+     url: asset_blob_url(@tattoo.image),
+     width: 655,
+     height: 665
+   }
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: @tattoo.seo_title,
+   description: @tattoo.caption,
+   url: tattoo_url(@tattoo),
+   image: { src: asset_blob_url(@tattoo.image) }
+ }
+%>
 
 <!-- Tattoos Details -->
 <div class="page-section">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="tattoos-details-full gray-bg">
+        <div class="tattoos-details-full">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
+              <header class='tattoo-header'>
+                <% object = @tattoo.studio || @tattoo.artist %>
+                  <%= link_to object do %>
+                    <% if object.avatar.attached? %>
+                      <img data-src="<%= asset_blob_url(object.avatar) %>" class="lazyload" />
+                    <% end %>
+                    <h3>
+                      <%= object.name %>
+                    </h3>
+                  <% end %>
+              </header>
               <div class="tattoos-details-img">
-                <% if @tattoo.image.present? %>
-                  <img data-src="<%= url_for(@tattoo.image) %>" class="lazyload" />
+                <% if @tattoo.image.attached? %>
+                  <img data-src="<%= asset_blob_url(@tattoo.image) %>" class="lazyload" />
                 <% end %>
-              </div>
-            </div>
-            <div class="col-lg-5">
-              <div class="details-header">
-                <div class="d-flex align-items-center">
-                    <% object = @tattoo.studio || @tattoo.artist %>
-                      <%= link_to object, class: 'gallery-item' do %>
-<!--                        <div class="single-user-img mr-3">-->
-<!--                          <img data-src="<%#= url_for(object.avatar) %>" class="lazyload" />-->
-<!--                        </div>-->
-                        <div class="single-user-name">
-                          <h3><%= object.name %></h3>
-                        </div>
-                      <% end %>
-                    <% %>
-                </div>
               </div>
               <div class="details-content">
                 <% if @tattoo.tag_list.present? %>
@@ -36,16 +57,6 @@
                     <span>#<%= tag %></span>
                   <% end %>
                 <% end %>
-              </div>
-              <div class="details-like">
-                <div class="d-flex justify-content-between">
-                  <!-- <div class="like">
-                    <i class="bi bi-heart"></i> <span>200k</span>
-                  </div> -->
-                  <!-- <div class="meta-info">
-                    <span>Posted 10 Months ago</span>
-                  </div> -->
-                </div>
               </div>
             </div>
           </div>

@@ -163,10 +163,16 @@ img {
   border-radius: 6px;
 
   .list-image {
+    height: 240px;
     position: relative;
-
     img {
       border-radius: 6px 6px 0 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      &.large {
+        min-width: 240px;
+      }
     }
 
     a:hover {
@@ -203,6 +209,7 @@ img {
 
     .profile-img {
       width: 50px;
+      height: 50px;
       height: auto;
       border-radius: 50%;
       box-shadow: 0 4px 4px 0 rgba(156, 153, 153, 0.15);
@@ -210,7 +217,10 @@ img {
       margin-right: 10px;
 
       img {
-        border-radius: 50%;
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
 
         &:hover {
           opacity: 0.7;
@@ -220,6 +230,10 @@ img {
 
     .profile-info {
       h5 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         a {
           color: $text-color;
           font-weight: normal;
@@ -243,9 +257,15 @@ img {
   margin: 10px 0;
   color: $gray-text-color;
 
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   a {
     h4 {
-      font-size: 15px;
+      font-size: 14px;
       color: $gray-text-color;
       font-weight: normal;
       font-family: $default-font;
@@ -328,6 +348,48 @@ img {
       opacity: 0.7;
     }
   }
+
+  .tattoo-info {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+
+    a {
+      font-size: 14px;
+
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+      }
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .meta-data {
+      margin: 5px 0;
+      display: block;
+      font-size: 14px;
+      span {
+        display: block;
+      }
+      .tag {
+        font-size: 12px;
+        background-color: #f4f4f4;
+        color: $dark-color;
+        border: none;
+
+        &:hover {
+          color: $text-white;
+          background: $black;
+        }
+      }
+    }
+  }
 }
 
 .ta-icon-star-fill {
@@ -338,6 +400,7 @@ img {
   color: $border-color;
 }
 // Tag
+
 .tag {
   border-radius: 6px;
   display: inline-block;

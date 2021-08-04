@@ -8,7 +8,7 @@ class Api::V1::TattoosController < ApplicationController
     @results = TattooSearch.new(
       query: params[:query],
       options: search_options
-    ).search_tattoos
+    ).filter
 
     render json: @results, status: :ok
   end
@@ -66,12 +66,14 @@ class Api::V1::TattoosController < ApplicationController
   end
 
   def flag
-    @tattoo.flag
+    @tattoo.flag!
     if @tattoo.save
       head(:ok)
     else
       render_api_error(status: 422, errors: @tattoo.errors)
     end
+  rescue AASM::InvalidTransition => e
+    render_api_error(status: 422, errors: e.message)
   end
 
   def destroy
@@ -103,7 +105,8 @@ class Api::V1::TattoosController < ApplicationController
   end
 
   def permitted_attributes
-    [:styles,
+    [
+     :style_id,
      :categories,
      :placement,
      :caption,

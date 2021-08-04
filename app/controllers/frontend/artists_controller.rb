@@ -5,7 +5,7 @@ module Frontend
     include ArtistScoped
 
     def index
-      @artists  = search.base_filter
+      @artists = search.base_filter
 
       @styles = Style.all
 
@@ -16,24 +16,34 @@ module Frontend
     end
 
     def city
-      @city_state = params[:city_state].split('-').titleize
-      @artists = Studio.near(@city_state, 500)
+      @city_state = params[:city_state].split('-').join(' ').titleize
+
+      @artists = ArtistSearch.new(
+        query: nil,
+        options: {
+          status: 'approved',
+          near: @city_state,
+          within: '100mi'
+        }
+      ).base_filter
     end
 
     def register
-      @artists = Artist.search(where: { location: { near: { lat: 37, lon: -114 },
-                                                    within: '500mi' } },
-                               limit: 6).results
-      @studios = Studio.search(where: { location: { near: { lat: 37, lon: -114 },
-                                                    within: '500mi' } },
-                               limit: 6)
+      # @artists = Artist.search(where: { location: { near: { lat: current_user_location.latitude,
+      #                                               lon: current_user_location.longitude },
+      #                                               within: '100mi' } },
+      #                          limit: 6).results
+      # @studios = Studio.search(where: { location: { near: { lat: current_user_location.latitude,
+      #                                               lon: current_user_location.longitude },
+      #                                               within: '100mi' } },
+      #                          limit: 6).results
 
       respond_to do |format|
         format.html
         format.js
       end
     end
-
+    
     def show
       @tattoos = @artist.tattoos.page(params[:page] || 1).per(BaseSearch::PER_PAGE)
 

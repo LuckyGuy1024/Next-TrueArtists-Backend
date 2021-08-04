@@ -12,10 +12,10 @@ class FrontendController < ActionController::Base
                 :current_user_coordinates
 
   def current_user_city_state
-    if current_user_location.country_code == 'US'
-      "#{current_user_location.city}, #{current_user.state}"
+    if current_user_location.state.present?
+      "#{current_user_location.city}, #{current_user_location.state}"
     else
-      "#{current_user_location.city}, #{current_user.country}"
+      "#{current_user_location.city}, #{current_user_location.country}"
     end
   end
 
@@ -32,7 +32,7 @@ class FrontendController < ActionController::Base
   end
 
   def admin_service_url
-    "#{ENV.fetch('ACCOUNT_SERVICE_URL')}"
+    ENV.fetch('ACCOUNT_SERVICE_URL').to_s
   end
   helper_method :admin_service_url
 
@@ -51,13 +51,44 @@ class FrontendController < ActionController::Base
   end
   helper_method :account_service_user_profile_url
 
-
   def account_service_artist_signup_url
     "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/register-selection"
   end
   helper_method :account_service_artist_signup_url
 
+  def current_canonical_path
+    @current_canonical_path ||=
+      request.path.gsub(canonical_cleaner_predicate, '')
+  end
+  helper_method :current_canonical_path
+
+  def current_canonical_url
+    @current_canonical_url ||=
+      request.url.gsub(canonical_cleaner_predicate, '')
+  end
+  helper_method :current_canonical_url
+
+  def current_seo_content
+    @current_seo_content ||= LandingPage.find_by_page_key(current_canonical_path)
+  end
+  helper_method :current_seo_content
+
   private
+
+  def canonical_cleaner_predicate
+    %r{(/page/\d+|\?.*|&.*)}
+  end
+
+  def user_signed_in?
+    current_user.present?
+  end
+
+  # Sets the @current_user with the user_id from payload
+  def current_user
+    @current_user = User.friendly.find_by(id: @current_user_id)
+  end
+
+  def fail_if_unauthenticated!; end
 
   # Validates the token and user and sets the @current_user scope
   def authenticate_request!; end

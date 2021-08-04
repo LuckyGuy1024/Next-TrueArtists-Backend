@@ -1,5 +1,6 @@
 class BaseSearch
   PER_PAGE = 60
+  WITHIN = '100mi'
   attr_reader :query, :options
   attr_accessor :results, :meta
 
@@ -9,6 +10,7 @@ class BaseSearch
   end
 
   def base_filter
+    includes = {}
     location_info = {}
 
     constraints = {
@@ -16,7 +18,11 @@ class BaseSearch
       per_page: options[:per_page] || PER_PAGE
     }
 
+    within = options[:within] || WITHIN
+
     constraints[:order] = order
+
+    constraints[:includes] = options[:includes] if options[:includes].present?
 
     constraints[:where] = {
       specialty: options[:specialty],
@@ -27,24 +33,39 @@ class BaseSearch
       artist_id: options[:artist_id]
     }.delete_if { |_k, v| v.nil? }
 
-    if options[:near] && coordinates.present?
-      location_info = { boost_by_distance: {
-        location: {
-          origin: coordinates
-        }
-      },
-      where: { location: { near: coordinates, within: options[:within] } } }
-    end
+    coordinates = find_coordinates
 
-    constraints.merge(location_info)
+    location_info = if options[:near] && coordinates.present?
+                      { order: {
+                        _geo_distance: {
+                          location: { lat: coordinates[:lat], lon: coordinates[:lon] },
+                          order: 'asc'
+                        }
+                      },
+                        where: { location: { near: { lat: coordinates[:lat], lon: coordinates[:lon] },
+                                             within: within } } }
+                    elsif coordinates.present?
+                      { order: {
+                        _geo_distance: {
+                          location: {
+                            lat: coordinates[:lat], lon: coordinates[:lon]
+                          },
+                          order: 'asc'
+                        }
+                      } }
+                    else
+                      {}
+                    end
 
-    search_class.search(query, constraints)
+    constraints = constraints.deep_merge(location_info)
+
+    search_class.search(query, **constraints)
   end
 
-  def coordinates
-    location = Geocoder.search(options[:near]).first
+  def find_coordinates
+    location = Geocoder.search(options[:near]).first || options[:current_user_location]
 
-    return nil unless location
+    return nil unless location&.latitude.present? && location&.longitude.present?
 
     {
       lat: location.latitude,

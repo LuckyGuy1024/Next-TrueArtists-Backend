@@ -13,3 +13,5 @@ amazon:
   secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCESS_KEY') %>
   region: <%= ENV.fetch('AWS_REGION') %>
   bucket: <%= ENV.fetch('AWS_BUCKET') %>
+  upload:
+    acl: 'public-read'

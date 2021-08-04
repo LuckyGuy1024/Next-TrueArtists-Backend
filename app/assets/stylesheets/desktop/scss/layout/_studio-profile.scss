@@ -8,8 +8,14 @@
     height: 100px;
 
     img {
-      border: 6px solid $text-white;
       border-radius: 50%;
+      max-width: 96px;
+      transform: translateZ(0);
+      border-radius: 50%;
+      height: 100px;
+      object-fit: cover;
+      width: 100%;
+      max-width: 96px;
     }
   }
 
@@ -271,8 +277,19 @@
     margin-bottom: 15px;
   }
 }
+
 .artists-profile-img {
   max-width: 96px;
+
+  img {
+    transform: translateZ(0);
+    border-radius: 50%;
+    height: 100px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 100%;
+    max-width: 96px;
+  }
 }
 
 .artists-style {

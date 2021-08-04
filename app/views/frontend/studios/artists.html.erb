@@ -1,5 +1,31 @@
 <% set_meta_tags title: "#{@studio.name} - #{@studio.city_state} - Tattoo Artists",
                  description: "Book a tattoo appointment with tattoo artist from #{@studio.name} - #{@studio.city_state}." %>
 
+<% set_meta_tags(canonical: artists_studio_url(@studio))  %>
+
+<% set_meta_tags(open_graph: {
+   title: "#{@studio.name} - #{@studio.city_state} - Tattoo Artists",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: artists_studio_url(@studio),
+   description: "Book a tattoo appointment with tattoo artist from #{@studio.name} - #{@studio.city_state}.",
+   image: {
+     url: asset_blob_url(@studio.search_profile_image),
+     width: 655,
+     height: 665
+   }
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: "#{@studio.name} - #{@studio.city_state} - Tattoo Artists",
+   description: "Book a tattoo appointment with tattoo artist from #{@studio.name} - #{@studio.city_state}.",
+   url: artists_studio_url(@studio),
+   image: { src: asset_blob_url(@studio.search_profile_image) }
+ }
+%>
+
 <%= render 'frontend/studios/header' %>
 <%= render 'frontend/studios/artist_profiles' %>

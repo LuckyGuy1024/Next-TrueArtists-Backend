@@ -1,34 +1,44 @@
 <% set_meta_tags title: "Best Tattoo Shops & Studios in #{@city_state}",
-              description: "Find top certified tattoo studios and shops in #{@city_state}." %>
+                 description: "Find top certified tattoo studios and shops in #{@city_state}." %>
 
-<!-- Latest Studio -->
-<div class="page-section pt-0">
+<% set_meta_tags(canonical: city_state_studios_url(@city_state.slugorize))  %>
+
+<% set_meta_tags(open_graph: {
+   title: "Best Tattoo Shops & Studios in #{@city_state}",
+   type: 'website',
+   site_name: 'TrueArtists',
+   url: city_state_studios_url(@city_state.slugorize),
+   description: "Find top certified tattoo studios and shops in #{@city_state}.",
+ })
+%>
+
+<% set_meta_tags twitter: {
+   card: 'summary_large_image',
+   site: 'TrueArtists',
+   title: "Best Tattoo Shops & Studios in #{@city_state}",
+   description: "Find top certified tattoo studios and shops in #{@city_state}.",
+   url: city_state_studios_url(@city_state.slugorize),
+ }
+%>
+
+<div class="page-section">
   <div class="container">
-    <%= form_for studios_path, html: { remote: true, method: :get } do |f| %>
-      <%= hidden_field_tag 'page', @studios.current_page %>
-      <%= hidden_field_tag 'per_page', @studios.limit_value %>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="sub-header mb-30">
-            <h1>Tattoo Studios in <%= @city_state %></h1>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="latest-studios-lists grid-gap-30 row">
-            <%= render @studios %>
-            <% if @studios.empty? %>
-              <div>No studios found near this area.</div>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="col-md-12 text-center">
-          <div class="col-md-12 text-center">
-            <%= paginate @studios %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sub-header align-items-center">
+          <div>
+            <h1>Top Tattoo Artists in <%= @city_state %></h1>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
+
+      <div class="col-md-12">
+        <div class="artists-lists grid-gap-30 row">
+          <%= render @studios %>
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <%= paginate @studios %>
+      </div>
+    </div>
 </div>
-<!-- // -->

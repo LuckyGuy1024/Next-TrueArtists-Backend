@@ -1,6 +1,6 @@
 <div class='hero-banner'>
   <div class='hero-banner-wrapper'>
-    <h1>Find a Certified Tattoo Studio or Artist Your Skin Won't Regret</h1>
+    <h1>Find Certified Tattoo Shops or Artists Near You</h1>
     <%= form_tag global_search_redirector_index_path, method: :get do %>
       <div class="hero-search">
         <div class="search-options">
@@ -13,7 +13,7 @@
           <input type="radio" id="search-bar-tattoos" for="tattoos" name="search_path" for="tattoos" role="tab" aria-selected="true" value="tattoos">
           <label for="search-bar-tattoos">Tattoos</label>
         </div>
-        <%= text_field_tag "query", params[:query], class: '', placeholder: 'Search by city or zip code' %>
+        <%= text_field_tag "near", params[:near], id: 'global-search', class: '', placeholder: 'Search by city or zip code' %>
         <button type="submit">Search</button>
       </div>
     <% end %>
