@@ -2,6 +2,8 @@ class Tattoo < ApplicationRecord
   include AASM
   include IdentityCache
   include AssetExtension
+  extend FriendlyId
+
   acts_as_favoritable
 
   COLORS = ['Color', 'Black & Grey'].freeze
@@ -21,6 +23,8 @@ class Tattoo < ApplicationRecord
       transitions from: :flagged, to: :approved
     end
   end
+
+  friendly_id :slug_candidates, use: %i[slugged finders]
 
   searchkick locations: [:location]
 
@@ -46,7 +50,17 @@ class Tattoo < ApplicationRecord
   end
 
   def seo_title
-    format('%s %s %s | %s', color, placement, 'Tattoo', (artist.name || studio.name)).titleize
+    format('%s %s %s %s | %s', style&.name, color, placement, 'Tattoo', (artist.name || studio.name)).titleize
+  end
+
+  def slug_candidates
+    [
+      %i[id style_slug placement]
+    ]
+  end
+
+  def style_slug
+    style&.slug
   end
 
   def add_location_data
