@@ -8,14 +8,12 @@
         <div class="col-md-12">
           <div class="about-us-header text-center">
             <h3>ABOUT US</h3>
-            <h1>TrueArtists is the world's premiere destination for tattoo culture and lifestyle. Find the best tattoo artists and shops from near you!</h1>
+            <h1>TrueArtists is the world's premiere destination for tattoo culture and lifestyle.</h1>
+            <h2>Find the best tattoo artists and shops from near you!</h2>
           </div>
           <div class="about-us-content">
             <div class="intro-content row">
-              <div class="col-lg-4">
-                <%#= image_pack_tag("media/images/g1.jpg") %>
-              </div>
-              <div class="col-lg-8">
+              <div class="col-lg-12">
                 <h3>We love Tattoos. We care for our community.</h3>
 
                 <p>TrueArtists was founded in 2011 and quickly grew to become the largest Association of Certified Tattoo Artists in the world.  Membership is restricted to tattoo artists who exhibit not only artistic ability, but a good command of the craft of tattooing, from quality workmanship to clean safe work environments.</p>
@@ -32,48 +30,46 @@
               </div>
             </div>
             <!-- add it when we have live data -->
-            <% if false %>
-              <div class="about-us-stats">
-                <div class="row align-items-center">
-                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                    <div>
-                      <%= image_pack_tag("media/images/icon_studio.svg") %>
-                    </div>
-                    <div>
-                      <h1>5K+</h1>
-                      <p>Coveted Studios</p>
-                    </div>
+            <div class="about-us-stats">
+              <div class="row align-items-center">
+                <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                  <div>
+                    <%= image_pack_tag("media/images/icon_studio.svg") %>
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                    <div>
-                      <%= image_pack_tag("media/images/icon_artist.svg") %>
-                    </div>
-                    <div>
-                      <h1>10K+</h1>
-                      <p>Badass Artists</p>
-                    </div>
+                  <div>
+                    <h1>15K+</h1>
+                    <p>Tattoo shops</p>
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                    <div>
-                      <%= image_pack_tag("media/images/icon_ig_fan.svg") %>
-                    </div>
-                    <div>
-                      <h1>20K+</h1>
-                      <p>Instagram Fans</p>
-                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                  <div>
+                    <%= image_pack_tag("media/images/icon_artist.svg") %>
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 stats">
-                    <div>
-                      <%= image_pack_tag("media/images/icon_fb_fans.svg") %>
-                    </div>
-                    <div>
-                      <h1>2.5M</h1>
-                      <p>Facebook Fans</p>
-                    </div>
+                  <div>
+                    <h1>60K+</h1>
+                    <p>Tattoo Artists</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                  <div>
+                    <%= image_pack_tag("media/images/icon_ig_fan.svg") %>
+                  </div>
+                  <div>
+                    <h1>20K+</h1>
+                    <p>Instagram Fans</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 stats">
+                  <div>
+                    <%= image_pack_tag("media/images/icon_fb_fans.svg") %>
+                  </div>
+                  <div>
+                    <h1>2.5M</h1>
+                    <p>Facebook Fans</p>
                   </div>
                 </div>
               </div>
-            <% end %>
+            </div>
 
             <div class="how-it-works-section text-center gray-bg">
               <h1>How it works</h1>
@@ -141,7 +137,9 @@
                 </div>
               </div>
               <div class="action-button align-items-center">
-                <button class="btn btn-alternative btn-lg" type="button">Join as tattoo Artist</button>
+                <div class="join-section">
+                  <%= link_to 'Join as studio/artist', account_service_artist_signup_url, class: 'btn btn-alternative btn-lg' %>
+                </div>
               </div>
             </div>
             <div class="contact-form">
