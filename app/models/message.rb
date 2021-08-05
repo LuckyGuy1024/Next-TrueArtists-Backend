@@ -1,11 +1,12 @@
 class Message < ApplicationRecord
   include AssetExtension
+  DEFAULT_BOOKING_MESSAGE = 'You have a new booking inquiry from TrueArtists'
 
   enum message_type: {
-    consultation: 'Consultation',
+    appointment: 'Appointment',
     advice: 'Advice',
+    consultation: 'Consultation',
     pricing_questions: 'Pricing Questions',
-    book_appointment: 'Book Appointment',
     other: 'Other'
   }
 
@@ -19,14 +20,14 @@ class Message < ApplicationRecord
 
   scope :threads, -> { pluck(:thread_id).uniq }
 
-  before_save :assign_thread_id
-  after_save :send_user_notification
+  before_validation :assign_thread_id, on: :create
+  after_commit :send_user_notification, on: :create
 
   def self.build_message(sender, message)
     Message.new({
       content: message[:content],
       sender_id: sender.id,
-      receiver_id: receiver_id(message)[:id],
+      receiver_id: message[:receiver_id],
       message_type: message[:message_type],
       thread_id: message[:thread_id]
     }.delete_if { |_thread_id, v| v.nil? })
@@ -35,27 +36,12 @@ class Message < ApplicationRecord
   private
 
   def send_user_notification
-    return if message_type == 'book_appointment'
-
+    return if message_type == self.class.message_types[:appointment].downcase
     MessageMailingService.new(self).send
-    MessageSmsService.new(self, @@result[:phone]).send unless @@result[:phone].nil?
-  end
-
-  def self.receiver_id(message)
-    recipient = message[:recipient_type].constantize.find(message[:recipient_id])
-
-    @@result = if recipient.instance_of?(Studio) || recipient.instance_of?(Artist)
-                 { id: recipient.user_id, phone: recipient.phone_number }
-               else
-                 { id: recipient.id, phone: nil }
-               end
+    # MessageSmsService.new(self, @@result[:phone]).send unless @@result[:phone].nil?
   end
 
   def assign_thread_id
-    self.thread_id = random_thread_id unless thread_id
-  end
-
-  def random_thread_id
-    rand(100**10).to_s.center(10, rand(10).to_s)
+    self.thread_id = SecureRandom.uuid unless thread_id
   end
 end

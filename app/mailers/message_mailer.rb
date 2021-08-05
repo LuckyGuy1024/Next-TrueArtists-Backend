@@ -16,7 +16,7 @@ class MessageMailer < ApplicationMailer
     end
 
     mail(
-      from: "#{@sender.full_name} <message@trueartists.com>",
+      from: "TrueArtists<info@trueartists.com>",
       to: @receiver.email,
       reply_to: "#{@sender.full_name} <message-#{message.thread_id}@trueartists.com>",
       subject: message.subject,
@@ -28,7 +28,7 @@ class MessageMailer < ApplicationMailer
     mail(
       to: mail_obj.from.first,
       subject: "Re: #{mail_obj.subject}",
-      content: "You don't exist on our system."
+      content: "We do not have an account in our system."
     )
   end
 end

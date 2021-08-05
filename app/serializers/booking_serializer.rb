@@ -5,17 +5,20 @@ class BookingSerializer < ActiveModel::Serializer
 
   attributes :id,
              :description,
-             :placement,
+             :tattoo_placement,
              :consult_artist,
              :custom_size,
+             :city,
+             :height,
+             :width,
              :urgency,
              :size_units,
              :first_tattoo,
-             :colored,
+             :colored_tattoo,
              :images
 
   def urgency
-    object.urgency.strftime("%d-%m-%Y")
+    object.urgency.strftime("%d-%m-%Y") if object.urgency
   end
 
   def images
@@ -24,10 +27,8 @@ class BookingSerializer < ActiveModel::Serializer
     object.images.each do |image|
       {
         id: image.id,
-        image_url: ENV['HOST'] + rails_blob_path(image, only_path: true),
-        name: image.filename,
-        dimensions: ActiveStorage::Analyzer::ImageAnalyzer.new(image).metadata,
-        status: image.status
+        image_url: asset_blob_url(image),
+        name: image.filename
       }
     end
   end

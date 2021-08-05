@@ -1,7 +1,7 @@
 class AddThreadIdToMessage < ActiveRecord::Migration[6.0]
   def up
-    add_column :messages, :thread_id, :string
-    change_column :messages, :sender_id, 'integer USING sender_id::integer'
+    # add_column :messages, :thread_id, :string
+    change_column :messages, :sender_id, :integer
   end
 
   def down
