@@ -6,8 +6,6 @@ module Frontend
     before_action :find_placements, only: %i[index placements facet]
 
     def index
-      breadcrumbs.add 'Tattoos', tattoos_path
-
       @tattoos = search.base_filter
 
       @colors = Tattoo::COLORS
@@ -19,6 +17,9 @@ module Frontend
     end
 
     def placements
+      breadcrumbs.add 'Tattoos', tattoos_path
+      breadcrumbs.add 'By Placement'
+
       respond_to do |format|
         format.html
         format.js
@@ -26,7 +27,8 @@ module Frontend
     end
 
     def styles
-      breadcrumbs.add 'Tattoo Styles', styles_path
+      breadcrumbs.add 'Tattoos', tattoos_path
+      breadcrumbs.add 'Styles', styles_tattoos_path
 
       respond_to do |format|
         format.html
@@ -36,6 +38,15 @@ module Frontend
 
     def facet
       @name = (params[:placement] || params[:style]).split('-').join(' ').titleize
+
+      breadcrumbs.add 'Tattoos', tattoos_path
+      if params[:placement]
+        breadcrumbs.add 'Placements', placements_tattoos_path
+      else
+        breadcrumbs.add 'Styles', styles_tattoos_path
+      end
+      breadcrumbs.add @name
+
       @tattoos = TattooSearch.new(query: @name).base_filter
       respond_to do |format|
         format.html
@@ -44,6 +55,9 @@ module Frontend
     end
 
     def show
+      breadcrumbs.add 'Tattoos', tattoos_path
+      breadcrumbs.add 'Back',
+
       @similar_tattoos = @tattoo.similar(
         fields: %i[
           placement styles
