@@ -261,6 +261,10 @@ img {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    a {
+      color: $gray-text-color;
+      font-size: 14px;
+    }
   }
 
   a {
