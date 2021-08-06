@@ -15,7 +15,7 @@ module Frontend
     end
 
     def show
-      breadcrumbs.add `#{@style.name}`, style_path
+      breadcrumbs.add @style.name, style_path
 
       @search ||= TattooSearch.new(
         query: @style.name,

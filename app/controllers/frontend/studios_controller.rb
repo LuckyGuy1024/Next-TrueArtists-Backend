@@ -5,8 +5,6 @@ module Frontend
     include StudioScoped
 
     def index
-      breadcrumbs.add 'Studios', studios_path
-
       @studios  = search.base_filter
 
       @styles = Style.all
@@ -20,6 +18,9 @@ module Frontend
     def city
       @city_state = params[:city_state].split('-').join(' ').titleize
 
+      breadcrumbs.add 'Tattoo Shops', studios_path
+      breadcrumbs.add @city_state
+
       @studios = StudioSearch.new(
         query: nil,
         options: {
@@ -31,6 +32,10 @@ module Frontend
     end
 
     def artists
+      breadcrumbs.add 'Studios', studios_path
+      breadcrumbs.add @studio.name, studio_path(@studio)
+      breadcrumbs.add 'Studio Artists'
+
       @artists = @studio.artists
       respond_to do |format|
         format.html
@@ -39,6 +44,10 @@ module Frontend
     end
 
     def tattoos
+      breadcrumbs.add 'Studios', studios_path
+      breadcrumbs.add @studio.name, studio_path(@studio)
+      breadcrumbs.add 'Portfolio'
+
       @tattoos = @studio.tattoos.page(params[:page]).per(BaseSearch::PER_PAGE)
       respond_to do |format|
         format.html
@@ -47,7 +56,8 @@ module Frontend
     end
 
     def show
-      breadcrumbs.add `#{@studio}`, studio_path
+      breadcrumbs.add 'Tattoo Shops', studios_path
+      breadcrumbs.add @studio.name
 
       respond_to do |format|
         format.html

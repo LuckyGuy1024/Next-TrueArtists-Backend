@@ -5,8 +5,6 @@ module Frontend
     include LandingPageScoped
 
     def home
-      breadcrumbs.add 'Home', root_path
-
       @artists = ArtistSearch.new(
         query: nil,
         options: {
