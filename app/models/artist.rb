@@ -4,7 +4,7 @@ class Artist < ApplicationRecord
   include AASM
   include IdentityCache
   serialize :specialty, Array
-  
+
   SPECIALTY = %w[Flash Freehand].freeze
 
   searchkick locations: [:location],
