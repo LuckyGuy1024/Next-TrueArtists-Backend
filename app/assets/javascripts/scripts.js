@@ -255,11 +255,11 @@ $(document).ready(function() {
     $form.submit();
   })
 
-  $("input[name='search_path']").change(function() {
+  $("input[name='search_path']").on('change', function(e) {
     var value = $(this).val();
     if (value === 'tattoos') {
       $('#global-search').attr({
-        placeholder: `Search ${value} by style or body placement`,
+        placeholder: `Search ${value} by style/placement`,
         name: "query"
       });
     } else {
