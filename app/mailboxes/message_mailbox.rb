@@ -1,6 +1,5 @@
 class MessageMailbox < ApplicationMailbox
-
-  RECIPIENT_FORMAT = /message\-(.+)@#{ENV.fetch("INBOUND_EMAIL_DOMAIN", "example.com")}\Z/i.freeze
+  RECIPIENT_FORMAT = /message-(.+)@#{ENV.fetch("INBOUND_EMAIL_DOMAIN", "replies.trueartists.com")}\Z/i.freeze
 
   before_processing :find_user
 
@@ -11,13 +10,11 @@ class MessageMailbox < ApplicationMailbox
     thread = Message.where(thread_id: thread_id).order(:created_at).first
     return if thread.blank?
 
-    receiver_id = begin
-      if thread.sender_id == @user.id
-        thread.receiver_id
-      else
-        thread.sender_id
-      end
-    end
+    receiver_id = if thread.sender_id == @user.id
+                    thread.receiver_id
+                  else
+                    thread.sender_id
+                  end
 
     new_message = Message.new(
       sender_id: @user.id,
@@ -51,7 +48,7 @@ class MessageMailbox < ApplicationMailbox
   end
 
   def find_user
-    @user ||= User.find_by(email: mail.from.first)
+    @user ||= User.find_by(email: mail.from&.first)
   end
 
   def attach_files(message)

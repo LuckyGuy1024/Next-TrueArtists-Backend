@@ -1,6 +1,5 @@
 class MessageMailer < ApplicationMailer
-
-  MAIL_DOMAIN = '@trueartists.com'
+  MAIL_DOMAIN = '@email.trueartists.com'
 
   default from: "Message <message#{MAIL_DOMAIN}>"
 
@@ -16,10 +15,10 @@ class MessageMailer < ApplicationMailer
     end
 
     mail(
-      from: "TrueArtists<info@trueartists.com>",
+      from: 'TrueArtists<info@trueartists.com>',
       to: @receiver.email,
-      reply_to: "#{@sender.full_name} <message-#{message.thread_id}@trueartists.com>",
-      subject: message.subject,
+      reply_to: "#{@sender.full_name} <message-#{message.thread_id}@replies.trueartists.com>",
+      subject: "You have a new message from #{@sender.full_name}",
       references: mail_references
     )
   end
@@ -28,7 +27,7 @@ class MessageMailer < ApplicationMailer
     mail(
       to: mail_obj.from.first,
       subject: "Re: #{mail_obj.subject}",
-      content: "We do not have an account in our system."
+      content: 'We do not have an account in our system.'
     )
   end
 end

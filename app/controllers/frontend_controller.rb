@@ -12,6 +12,7 @@ class FrontendController < ActionController::Base
                 :current_user_coordinates
 
   def current_user_city_state
+    return nil unless current_user_location
     if current_user_location.state.present?
       "#{current_user_location.city}, #{current_user_location.state}"
     else
@@ -20,7 +21,7 @@ class FrontendController < ActionController::Base
   end
 
   def current_user_city
-    @current_user_city = current_user_location.city
+    @current_user_city = current_user_location&.city
   end
 
   def current_user_coordinates

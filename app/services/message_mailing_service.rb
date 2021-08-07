@@ -28,17 +28,15 @@ class MessageMailingService
   end
 
   def latest_references
-    last_mail = MessageMail.where(thread_id: thread_id,
+    last_mail = MessageMail.where(thread_id: @message.thread_id,
                                   user_id: @message.receiver_id)
                            .order(:created_at)
                            .last
-    if last_mail.blank?
-      nil
-    else
-      last_mail.references.split(',')
-               .push(last_mail.message_id)
-               .map { |r| "<#{r}>" }
-               .join(' ')
-    end
+    return nil unless last_mail && last_mail.references
+
+    last_mail.references.split(',')
+             .push(last_mail.message_id)
+             .map { |r| "<#{r}>" }
+             .join(' ')
   end
 end

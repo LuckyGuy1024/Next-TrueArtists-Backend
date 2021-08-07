@@ -59,7 +59,7 @@ Rails.application.configure do
     domain: 'trueartists.com',
     authentication: :plain,
     user_name: 'apikey',
-    password: Rails.application.credentials[:SENDGRID_APIKEY]
+    password: ENV.fetch('SENDGRID_APIKEY')
   }
 
   # Prepare the ingress controller used to receive mail

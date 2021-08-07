@@ -14,3 +14,5 @@ AWS_BUCKET: 'ta-qa' #ta-prod
 DB_NAME: ''
 DB_PASSWORD: ''
 DB_HOST: ''
+DOMAIN: "68c4cfbca077.ngrok.io"
+RAILS_INBOUND_EMAIL_PASSWORD: 'gQobs7DMBiNpJwjt'

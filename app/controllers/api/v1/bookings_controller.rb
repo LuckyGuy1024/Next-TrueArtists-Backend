@@ -34,7 +34,6 @@ module Api
 
       def find_booking_user
         return current_user if current_user
-        binding.pry
         result = UserService.new(user_params).call
         return result.payload if result && result.success?
 
