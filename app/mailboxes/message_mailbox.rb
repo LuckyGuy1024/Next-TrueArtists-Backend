@@ -21,7 +21,8 @@ class MessageMailbox < ApplicationMailbox
       receiver_id: receiver_id,
       subject: mail.subject,
       content: mail_body.body,
-      thread_id: thread_id
+      thread_id: thread_id,
+      email_client_reply: true
     )
 
     if new_message.save

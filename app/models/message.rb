@@ -23,20 +23,12 @@ class Message < ApplicationRecord
   before_validation :assign_thread_id, on: :create
   after_commit :send_user_notification, on: :create
 
-  def self.build_message(sender, message)
-    Message.new({
-      content: message[:content],
-      sender_id: sender.id,
-      receiver_id: message[:receiver_id],
-      message_type: message[:message_type],
-      thread_id: message[:thread_id]
-    }.delete_if { |_thread_id, v| v.nil? })
-  end
-
   private
 
   def send_user_notification
+    return if email_client_reply
     return if message_type == self.class.message_types[:appointment].downcase
+
     MessageMailingService.new(self).send
     # MessageSmsService.new(self, @@result[:phone]).send unless @@result[:phone].nil?
   end
