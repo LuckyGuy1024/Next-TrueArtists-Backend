@@ -15,15 +15,6 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "action_mailbox_inbound_emails", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
-    t.string "message_id", null: false
-    t.string "message_checksum", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
-  end
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -130,26 +121,6 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type"
-  end
-
-  create_table "bookings", force: :cascade do |t|
-    t.text "description"
-    t.string "placement"
-    t.boolean "consult_artist", default: false, null: false
-    t.string "custom_size"
-    t.string "size_units"
-    t.datetime "urgency"
-    t.boolean "first_tattoo", default: false, null: false
-    t.boolean "colored", default: false, null: false
-    t.integer "receiver_id"
-    t.integer "sender_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "message_id"
-    t.string "status", default: "pending"
-    t.index ["message_id"], name: "index_bookings_on_message_id"
-    t.index ["receiver_id"], name: "index_bookings_on_receiver_id"
-    t.index ["sender_id"], name: "index_bookings_on_sender_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -280,28 +251,17 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
-  create_table "message_mails", force: :cascade do |t|
-    t.integer "message_id", null: false
-    t.integer "user_id", null: false
-    t.string "thread_id"
-    t.string "mail_message_id", null: false
-    t.text "references"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.integer "sender_id"
+    t.string "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "thread_id"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
