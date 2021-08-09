@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_01_191507) do
+ActiveRecord::Schema.define(version: 2021_08_06_024322) do
+
+  create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status", default: 0, null: false
+    t.string "message_id", null: false
+    t.string "message_checksum", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
+  end
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +53,20 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "articles", force: :cascade do |t|
+  create_table "announcements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.integer "published_by", null: false
+    t.boolean "send_now", default: false
+    t.datetime "publish_on"
+    t.text "content"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "recipients"
+    t.text "custom_emails"
+  end
+
+  create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
     t.string "page_title"
@@ -103,8 +125,9 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.string "state"
     t.string "name"
     t.string "street_address"
-    t.string "specialty"
     t.string "street_address_2"
+    t.string "old_specialty"
+    t.string "specialty"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["studio_id"], name: "index_artists_on_studio_id"
@@ -123,7 +146,30 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "bookings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "description"
+    t.string "tattoo_placement"
+    t.boolean "consult_artist", default: false, null: false
+    t.boolean "custom_size"
+    t.string "size_units"
+    t.datetime "urgency"
+    t.boolean "first_tattoo", default: false, null: false
+    t.boolean "colored_tattoo", default: false, null: false
+    t.integer "receiver_id"
+    t.integer "sender_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "message_id"
+    t.string "status", default: "pending"
+    t.integer "height"
+    t.integer "width"
+    t.string "city"
+    t.index ["message_id"], name: "index_bookings_on_message_id"
+    t.index ["receiver_id"], name: "index_bookings_on_receiver_id"
+    t.index ["sender_id"], name: "index_bookings_on_sender_id"
+  end
+
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "meta_description"
     t.text "description"
@@ -251,17 +297,28 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "message_mails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "message_id", null: false
+    t.integer "user_id", null: false
+    t.string "thread_id"
+    t.string "mail_message_id", null: false
+    t.text "references"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
-    t.string "sender_id"
+    t.integer "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "thread_id"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
@@ -400,8 +457,11 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.string "caption"
     t.boolean "featured", default: false
     t.integer "placement_id"
+    t.integer "styles"
     t.integer "style_id"
+    t.string "slug"
     t.index ["placement_id"], name: "index_tattoos_on_placement_id"
+    t.index ["slug"], name: "index_tattoos_on_slug"
     t.index ["style_id"], name: "index_tattoos_on_style_id"
   end
 
@@ -416,6 +476,7 @@ ActiveRecord::Schema.define(version: 2021_08_01_191507) do
     t.string "slug"
     t.string "social_id"
     t.string "provider"
+    t.boolean "autogenerated", default: false
     t.index ["email"], name: "index_users_on_email"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["slug"], name: "index_users_on_slug", unique: true

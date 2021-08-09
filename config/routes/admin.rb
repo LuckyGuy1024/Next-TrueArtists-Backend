@@ -70,6 +70,12 @@ Rails.application.routes.draw do
           end
         end
 
+        resources :announcements do
+          member do
+            put :publish
+          end
+        end
+
         resources :articles
         resources :pages
         resources :styles
