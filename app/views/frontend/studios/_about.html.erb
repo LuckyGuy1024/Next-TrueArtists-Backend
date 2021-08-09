@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="studio-right-sidebar text-center">
-          <% if @studio.phone_number %>
+        <div class="studio-right-sidebar">
+          <% if @studio.phone_number.present? %>
             <p>
               <span><%= @studio.phone_number %></span>
               <% if @studio.phone_verified %>
@@ -21,36 +21,43 @@
             </p>
           <% end %>
           <div class="studio-p-style">
-            <% if @studio.services %>
+            <% if @studio.services.present? %>
               <h4>Services</h4>
               <div class="studio-services">
                 <% @studio.services.each do |service| %>
-                  <%= service %>
+                  <%= link_to service, class: 'tag tag-cloud' %>
                 <% end %>
+              </div>
             <% end %>
           </div>
           <div class="studio-p-style">
-            <h4>Pricing</h4>
-            <p>Price/hour: <%= @studio.price_per_hour %></p>
-            <p>Minimum Spend: <%= @studio.minimum_spend %></p>
+            <% if @studio.price_per_hour.present? || @studio.minimum_spend.present? %>
+              <h4>Pricing</h4>
+              <% if @studio.price_per_hour.present? %>
+                <p>Price/hour: <%= @studio.price_per_hour %></p>
+              <% end %>
+              <% if @studio.minimum_spend.present? %>
+                <p>Minimum Spend: <%= @studio.minimum_spend %></p>
+              <% end %>
+            <% end %>
           </div>
           <div class="social-media-profiles">
-            <% if @studio.facebook_url %>
+            <% if @studio.facebook_url.present? %>
               <%= link_to @studio.facebook_url do %>
                 <span class="ta-icon-facebook icon"></span>
               <% end %>
             <% end %>
-            <% if @studio.twitter_url %>
+            <% if @studio.twitter_url.present? %>
               <%= link_to @studio.twitter_url do %>
                 <span class="ta-icon-twitter icon"></span>
               <% end %>
             <% end %>
-            <% if @studio.instagram_url %>
+            <% if @studio.instagram_url.present? %>
               <%= link_to @studio.instagram_url do %>
                 <span class="ta-icon-instagram icon"></span>
               <% end %>
             <% end %>
-            <% if URI.parse(@studio.website_url).is_a?(URI::HTTP) or URI.parse(@studio.website_url).is_a?(URI::HTTPS) %>
+            <% if validate_url(@studio.website_url) %>
               <div class="website">
                 <%= link_to @studio.website_url do %>
                   Website

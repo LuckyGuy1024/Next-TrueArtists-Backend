@@ -29,8 +29,8 @@
 <div class="page-section gray">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4">
-        <div class="artist-left-sidebar text-center">
+      <div class="col-lg-3">
+        <div class="artist-left-sidebar">
           <div class="artist-p-info" itemprop="mainEntityOfPage" itemscope="true" itemtype="http://schema.org/ProfilePage" itemid="<%= artist_url(@artist) %>">
             <% if @artist.avatar.attached? %>
               <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
@@ -73,7 +73,7 @@
           <% end %>
       </div>
 
-        <div class="artist-left-sidebar text-center">
+        <div class="artist-left-sidebar">
           <div class="artist-p-style">
             <h4>Style Specialization</h4>
             <div class="artists-style">
@@ -88,43 +88,48 @@
             <p>CPR Certified: <%= @artist.cpr_certified.to_s.capitalize %></p>
           </div>
           <div class="artist-p-style">
-            <h4>Pricing</h4>
-            <p>Price/hour: <%= @artist.price_per_hour %></p>
-            <p>Minimum Spend: <%= @artist.minimum_spend %></p>
-          </div>
-          <div class="artist-p-style">
-          <div class="social-media-profiles">
-            <% if @artist.facebook_url %>
-              <span>
-                <%= link_to @artist.facebook_url do %>
-                  <span class="ta-icon-facebook icon"></span>
-                <% end %>
-              </span>
+            <% if @artist.price_per_hour.present? || @artist.minimum_spend.present? %>
+              <h4>Pricing</h4>
+              <% if @artist.price_per_hour.present? %>
+                <p>Price/hour: <%= @artist.price_per_hour %></p>
               <% end %>
-            <% if @artist.twitter_url %>
-              <span>
-                <%= link_to @artist.twitter_url do %>
-                  <span class="ta-icon-twitter icon"></span>
-                <% end %>
-              </span>
+              <% if @artist.minimum_spend.present? %>
+                <p>Minimum Spend: <%= @artist.minimum_spend %></p>
               <% end %>
-            <% if @artist.instagram_url %>
-              <span>
-                <%= link_to @artist.instagram_url do %>
-                  <span class="ta-icon-instagram icon"></span>
-                <% end %>
-              </span>
-              <% end %>
-            <% if URI.parse(@artist.website).is_a?(URI::HTTP) or URI.parse(@artist.website).is_a?(URI::HTTPS) %>
-              <div class="website">
-                <%= link_to @artist.website do %>
-                Website
-                <% end %>
-              </div>
             <% end %>
           </div>
+          <div class="artist-p-style">
+            <div class="social-media-profiles">
+              <% if @artist.facebook_url.present? %>
+                <span>
+                  <%= link_to @artist.facebook_url do %>
+                    <span class="ta-icon-facebook icon"></span>
+                  <% end %>
+                </span>
+              <% end %>
+              <% if @artist.twitter_url.present? %>
+                <span>
+                  <%= link_to @artist.twitter_url do %>
+                    <span class="ta-icon-twitter icon"></span>
+                  <% end %>
+                </span>
+              <% end %>
+              <% if @artist.instagram_url.present? %>
+                <span>
+                  <%= link_to @artist.instagram_url do %>
+                    <span class="ta-icon-instagram icon"></span>
+                  <% end %>
+                </span>
+              <% end %>
+              <% if validate_url(@artist.website) %>
+                <div class="website">
+                  <%= link_to @artist.website do %>
+                  Website
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
-
         </div>
       </div>
 
