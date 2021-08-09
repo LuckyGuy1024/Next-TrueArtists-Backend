@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Booking < ApplicationRecord
+  include AASM
+
   PLACEMENTS = ['Head', 'Neck', 'Shoulder', 'Chest', 'Back',
                 'Arm', 'Forearm', 'Ribs', 'Hip', 'Thigh',
                 'Lower Leg', 'Foot'].freeze
@@ -23,6 +25,25 @@ class Booking < ApplicationRecord
   belongs_to :user, validate: true
 
   has_many_attached :images
+
+  aasm column: 'status' do
+    state :pending_review, initial: true
+    state :accepted
+    state :rejected
+    state :canceled
+
+    event :accept do
+      transitions from: %i[pending_review canceled rejected], to: :accepted
+    end
+
+    event :reject do
+      transitions from: %i[pending_review canceled], to: :rejected
+    end
+
+    event :cancel do
+      transitions from: %i[pending_review accepted], to: :canceled
+    end
+  end
 
   after_commit :booking_notification
 
