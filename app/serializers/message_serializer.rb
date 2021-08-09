@@ -9,6 +9,7 @@ class MessageSerializer < ActiveModel::Serializer
              :message_type,
              :sender_deleted,
              :receiver_deleted,
-             :thread_id
-
+             :thread_id,
+             :is_read,
+             :created_at
 end

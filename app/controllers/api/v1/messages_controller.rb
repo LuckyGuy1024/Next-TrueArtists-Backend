@@ -32,6 +32,7 @@ module Api
         params.permit(
           :content,
           :receiver_id,
+          :is_read,
           :message_type,
           :thread_id
         ).tap do |message|
