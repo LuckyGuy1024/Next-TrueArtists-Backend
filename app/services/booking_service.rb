@@ -8,8 +8,8 @@ class BookingService
   def call
     message = MessageService.new(
       message_id: params[:message_id],
-      receiver_id: params[:receiver_id],
-      sender_id: params[:sender_id]
+      receiver_id: recipient&.id,
+      sender_id: params[:user_id]
     ).call
 
     if message && message.success?
@@ -26,6 +26,11 @@ class BookingService
   end
 
   private
+
+  def recipient
+    bookable = params[:bookable_type].constantize.find_by(id: params[:bookable_id])
+    bookable&.user
+  end
 
   def handle_error(error)
     OpenStruct.new({ success?: false, errors: error })

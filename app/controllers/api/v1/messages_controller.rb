@@ -14,15 +14,10 @@ module Api
       end
 
       def threads
-        threads = Message.threads
+        messages = Message.where(sender_id: current_user.id)
+                          .or(Message.where(receiver_id: current_user.id))
 
-        user_thread_messages = threads.filter_map do |thread|
-          Message.where(sender_id: current_user.id,
-                        thread_id: thread)
-                 .or(Message.where(receiver_id: current_user.id, thread_id: thread)).first
-        end
-
-        render json: user_thread_messages, status: :ok
+        render json: messages, status: :ok
       end
 
       def thread_messages

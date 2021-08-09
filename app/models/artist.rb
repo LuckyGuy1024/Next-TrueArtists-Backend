@@ -26,6 +26,7 @@ class Artist < ApplicationRecord
   has_many :studio_artists
   has_many :studios, through: :studio_artists
   has_many :guest_artist_applications
+  has_many :bookings, as: :bookable, dependent: :destroy
   has_one_attached :avatar
   has_one_attached :hero_banner
 

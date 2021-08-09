@@ -19,8 +19,8 @@ class Booking < ApplicationRecord
   #                       message: 'Can\'t be blank if consult_artist=false',
   #                       unless: lambda { :consult_artist == true }
   belongs_to :message
-  belongs_to :sender, class_name: 'User', foreign_key: 'sender_id', validate: true
-  belongs_to :receiver, class_name: 'User', foreign_key: 'receiver_id', validate: true
+  belongs_to :bookable, polymorphic: true
+  belongs_to :user, validate: true
 
   has_many_attached :images
 

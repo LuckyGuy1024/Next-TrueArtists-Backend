@@ -1,8 +1,8 @@
 class BookingMailer < ApplicationMailer
   def new_booking_notification(booking)
     @booking = booking
-    @receiver = booking.receiver
-    @sender = booking.sender
-    mail(to: @receiver.email, subject: 'You have a new booking')
+    @bookable = booking.bookable
+    @user = booking.user
+    mail(to: @bookable.email, subject: 'You have a new booking')
   end
 end

@@ -1,13 +1,16 @@
 class BookingSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  belongs_to :sender
-  belongs_to :receiver
+  belongs_to :user
+  belongs_to :bookable
 
   attributes :id,
+             :bookable_id,
+             :bookable_type,
              :description,
              :tattoo_placement,
              :consult_artist,
              :custom_size,
+             :status,
              :city,
              :height,
              :width,

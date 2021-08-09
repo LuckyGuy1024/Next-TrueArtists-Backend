@@ -20,7 +20,7 @@ module Api
         result = BookingService.new(booking_params).call
 
         if result && result.success?
-          render json: BookingSerializer.new(result.payload), status: :created
+          render json: BookingSerializer.new(result.payload).to_json, status: :created
         else
           render_api_error(status: 422, errors: result.errors)
         end
@@ -52,14 +52,16 @@ module Api
           :height,
           :width,
           :urgency,
-          :receiver_id,
+          :bookable_type,
+          :bookable_id,
+          :status,
           :consult_artist,
           :first_tattoo,
           :size_units,
           :colored_tattoo,
           :custom_size
         ).tap do |booking|
-          booking[:sender_id] = find_booking_user.id
+          booking[:user_id] = find_booking_user.id
         end
       end
 

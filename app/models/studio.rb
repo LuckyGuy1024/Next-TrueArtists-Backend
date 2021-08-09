@@ -42,6 +42,7 @@ class Studio < ApplicationRecord
   has_many :tattoos
   has_many :clients
   has_many :guest_artist_applications
+  has_many :bookings, as: :bookable, dependent: :destroy
   has_one_attached :avatar
   has_one_attached :hero_banner
 

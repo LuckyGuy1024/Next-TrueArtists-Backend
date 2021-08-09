@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_07_232834) do
+ActiveRecord::Schema.define(version: 2021_08_09_035821) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -152,8 +152,7 @@ ActiveRecord::Schema.define(version: 2021_08_07_232834) do
     t.datetime "urgency"
     t.boolean "first_tattoo", default: false, null: false
     t.boolean "colored_tattoo", default: false, null: false
-    t.integer "receiver_id"
-    t.integer "sender_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "message_id"
@@ -161,9 +160,11 @@ ActiveRecord::Schema.define(version: 2021_08_07_232834) do
     t.integer "height"
     t.integer "width"
     t.string "city"
+    t.string "bookable_type"
+    t.integer "bookable_id"
+    t.index ["bookable_type", "bookable_id"], name: "booking_id"
     t.index ["message_id"], name: "index_bookings_on_message_id"
-    t.index ["receiver_id"], name: "index_bookings_on_receiver_id"
-    t.index ["sender_id"], name: "index_bookings_on_sender_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
