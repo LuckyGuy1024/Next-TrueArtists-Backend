@@ -44,7 +44,7 @@
               <p>
                 <span><%= @artist.phone_number %></span>
                 <% if @artist.phone_verified %>
-                  <span class="ta-icon-verified icon"></span>
+                  <span class="ta-icon-check-circle-fill icon"></span>
                 <% end %>
               </p>
             <% end %>
@@ -74,21 +74,35 @@
       </div>
 
         <div class="artist-left-sidebar">
-          <div class="artist-p-style">
-            <h4>Style Specialization</h4>
-            <div class="artists-style">
-              <% @artist.styles.each do |style| %>
-                <%= link_to style.name, style_tattoos_path(style.slug), class: 'tag tag-cloud' %>
-              <% end %>
+          <% if @artist.styles.present? %>
+            <div class="artist-p-style">
+              <h4>Style Specialization</h4>
+              <div class="artists-style">
+                <% @artist.styles.each do |style| %>
+                  <%= link_to style.name, style_tattoos_path(style.slug), class: 'tag tag-cloud' %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
           <div class="artist-p-style">
             <h4>Licencing</h4>
-            <p>Licenced: <%= @artist.licensed.to_s.capitalize %></p>
-            <p>CPR Certified: <%= @artist.cpr_certified.to_s.capitalize %></p>
+            <p>Licenced
+              <% if @artist.licensed %>
+                <span class="ta-icon-check icon"></span>
+              <% else %>
+                <span class="ta-icon-x"></span>
+              <% end %>
+            </p>
+            <p>CPR Certified
+              <% if @artist.cpr_certified %>
+                <span class="ta-icon-check icon"></span>
+              <% else %>
+                <span class="ta-icon-x"></span>
+              <% end %>
+            </p>
           </div>
-          <div class="artist-p-style">
-            <% if @artist.price_per_hour.present? || @artist.minimum_spend.present? %>
+          <% if @artist.price_per_hour.present? || @artist.minimum_spend.present? %>
+            <div class="artist-p-style">
               <h4>Pricing</h4>
               <% if @artist.price_per_hour.present? %>
                 <p>Price/hour: <%= @artist.price_per_hour %></p>
@@ -96,8 +110,8 @@
               <% if @artist.minimum_spend.present? %>
                 <p>Minimum Spend: <%= @artist.minimum_spend %></p>
               <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
           <div class="artist-p-style">
             <div class="social-media-profiles">
               <% if @artist.facebook_url.present? %>
@@ -136,9 +150,9 @@
       <div class="col-lg-8">
         <div class="artist-p-right-content">
           <div class="sub-nav d-flex justify-content-start">
-            <a class="active" href="#">Tattoo Portfolio</a>
-              <!-- <a href="#">About</a> -->
-              <!-- <a href="#">Artist</a> -->
+              <a class="active" href="#">Tattoo Portfolio</a>
+<!--             <a href="#">About</a> -->
+<!--             <a href="#">Artist</a> -->
           </div>
 
           <div class="artist-p-sub-content pt-5">

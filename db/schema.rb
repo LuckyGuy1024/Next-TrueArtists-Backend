@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_203630) do
+ActiveRecord::Schema.define(version: 2021_08_09_215958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -337,7 +337,6 @@ ActiveRecord::Schema.define(version: 2021_08_09_203630) do
     t.text "accepted_payment_methods"
     t.boolean "appointment_only", default: false
     t.text "languages"
-    t.text "services"
     t.string "email"
     t.string "facebook_url"
     t.string "twitter_url"
@@ -384,6 +383,7 @@ ActiveRecord::Schema.define(version: 2021_08_09_203630) do
     t.time "sunday_end"
     t.string "currency_code"
     t.string "street_address_2"
+    t.string "services", array: true
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id"
   end

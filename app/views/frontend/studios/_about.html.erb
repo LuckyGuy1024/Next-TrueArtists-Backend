@@ -12,25 +12,16 @@
       </div>
       <div class="col-lg-4">
         <div class="studio-right-sidebar">
-          <% if @studio.phone_number.present? %>
-            <p>
-              <span><%= @studio.phone_number %></span>
-              <% if @studio.phone_verified %>
-                <span class="ta-icon-verified icon"></span>
-              <% end %>
-            </p>
-          <% end %>
           <div class="studio-p-style">
             <% if @studio.services.present? %>
               <h4>Services</h4>
               <div class="studio-services">
                 <% @studio.services.each do |service| %>
-                  <%= link_to service, class: 'tag tag-cloud' %>
+                  <span class="tag tag-cloud"><%= service %></span>
                 <% end %>
               </div>
             <% end %>
-          </div>
-          <div class="studio-p-style">
+
             <% if @studio.price_per_hour.present? || @studio.minimum_spend.present? %>
               <h4>Pricing</h4>
               <% if @studio.price_per_hour.present? %>
@@ -88,7 +79,9 @@
             <div class="address-text">
               <h2><%= @studio.name %></h2>
               <% if @studio.phone_number %>
-                <p>Phone: <%= @studio.phone_number %></p>
+                <p>Phone: <%= @studio.phone_number %>
+                  <span class="ta-icon-check-circle-fill icon"></span>
+                </p>
               <% end %>
               <p><%= @studio.full_address %></p>
             </div>

@@ -192,7 +192,6 @@ module Api::V1
         :parking,
         :lgbt_friendly,
         :languages,
-        :services,
         :minimum_spend,
         :price_per_hour,
         :currency_code,
@@ -205,6 +204,7 @@ module Api::V1
         :guest_studio,
         :avatar,
         :hero_banner,
+        services: [],
         working_hours: {}
       )
     end

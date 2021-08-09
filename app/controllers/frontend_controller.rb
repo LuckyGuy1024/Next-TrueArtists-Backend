@@ -36,6 +36,10 @@ class FrontendController < ActionController::Base
     URI.parse(website_url).is_a?(URI::HTTP) or URI.parse(website_url).is_a?(URI::HTTPS)
   end
 
+  def validate_true_false(attr)
+    `<span class="ta-icon-check icon"></span>` if attr
+  end
+
   def admin_service_url
     ENV.fetch('ACCOUNT_SERVICE_URL').to_s
   end
