@@ -72,4 +72,19 @@ class StudioMailer < ApplicationMailer
 
     mail(to: email, subject: subject)
   end
+
+  def new_studio_notification(studio)
+    @studio = studio
+    mail(to: studio.email, subject: 'New Studio Notification')
+  end
+
+  def complete_profile_reminder(studio)
+    @studio = studio
+    mail(to: studio.email, subject: 'Reminder: Complete Your Studio Profile')
+  end
+
+  def upload_new_images(studio)
+    @studio = studio
+    mail(to: studio.email, subject: 'Reminder: Upload New Tattoo Images')
+  end
 end

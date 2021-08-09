@@ -35,6 +35,7 @@ class Artist < ApplicationRecord
   # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true
 
+  after_commit :send_complete_profile_notification, on: :create
   after_commit :upgrade_user_role, on: :create
 
   after_save :send_phone_verification_code, if: :phone_number_changed?
@@ -71,6 +72,7 @@ class Artist < ApplicationRecord
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
+
     nil
   end
 
@@ -112,5 +114,11 @@ class Artist < ApplicationRecord
 
   def send_phone_verification_code
     PhoneNumberVerifier.new(phone_number: phone_number).verify
+  end
+
+  def send_complete_profile_notification
+    ArtistNotificationJob.set(wait: 8.hours).perform_later(id)
+    ArtistNotificationJob.set(wait: 7.days).perform_later(id)
+    ArtistNotificationJob.set(wait: 14.days).perform_later(id)
   end
 end

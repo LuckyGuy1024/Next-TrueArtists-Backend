@@ -10,7 +10,7 @@ module StatusManagement
       state :approved
       state :rejected
 
-      event :pending_review do
+      event :pending_review, after_commit: :new_user_notification do
         transitions from: :pending, to: :pending_review
       end
 
@@ -21,6 +21,14 @@ module StatusManagement
       event :reject, after_commit: :send_status_notification do
         transitions from: [:pending_review, :pending, :approved], to: :rejected
       end
+    end
+  end
+
+  def new_user_notification
+    if instance_of?(Studio)
+      StudioMailer.new_studio_notification(self).deliver_now
+    else
+      ArtistMailer.new_artist_notification(self).deliver_now
     end
   end
 
