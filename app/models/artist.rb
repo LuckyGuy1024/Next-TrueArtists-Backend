@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 class Artist < ApplicationRecord
   include AASM
@@ -57,7 +58,8 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    if state.present?
+    #TODO - fix data 
+    if state.present? && ['United States', 'US'].include?(country)
       format('%s, %s', city&.titleize, state)
     else
       format('%s, %s', city&.titleize, country)
@@ -71,6 +73,7 @@ class Artist < ApplicationRecord
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
+
     nil
   end
 
