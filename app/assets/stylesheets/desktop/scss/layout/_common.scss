@@ -238,7 +238,12 @@ img {
   display: flex;
   margin: 10px 0;
   color: $gray-text-color;
-
+  p {
+    a {
+      font-size: 14px;
+      color: $gray-text-color;
+    }
+  }
   a {
     h4 {
       font-size: 15px;

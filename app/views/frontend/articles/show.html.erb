@@ -9,6 +9,11 @@
    site_name: 'TrueArtists',
    url: article_url(@article),
    description: @article.meta_description,
+   image: {
+     url: asset_blob_url(@article.image),
+     width: 655,
+     height: 665
+   }
  })
 %>
 
