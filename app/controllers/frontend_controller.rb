@@ -9,8 +9,7 @@ class FrontendController < ActionController::Base
   helper_method :current_user_location,
                 :current_user_city,
                 :current_user_city_state,
-                :current_user_coordinates,
-                :validate_url
+                :current_user_coordinates
 
   def current_user_city_state
     if current_user_location.state.present?
@@ -30,14 +29,6 @@ class FrontendController < ActionController::Base
 
   def current_user_location
     @current_user_location = request.location
-  end
-
-  def validate_url(website_url)
-    URI.parse(website_url).is_a?(URI::HTTP) or URI.parse(website_url).is_a?(URI::HTTPS)
-  end
-
-  def validate_true_false(attr)
-    `<span class="ta-icon-check icon"></span>` if attr
   end
 
   def admin_service_url
