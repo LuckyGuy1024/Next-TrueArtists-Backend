@@ -9,3 +9,7 @@ end
 every [:monday], at: '8:00 AM' do
   rake 'send_tattoo_upload_email:reminder --trace'
 end
+
+every 24.hours, at: '10:00 PM' do
+  rake 'complete_profile_schedule:reminder --trace'
+end

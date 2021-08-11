@@ -117,9 +117,6 @@ class Artist < ApplicationRecord
   end
 
   def send_complete_profile_notification
-    ArtistNotificationJob.set(wait: 5.seconds).perform_later(id)
-    ArtistNotificationJob.set(wait: 10.seconds).perform_later(id)
-    ArtistNotificationJob.set(wait: 15.seconds).perform_later(id)
-    ArtistNotificationJob.set(wait: 20.seconds).perform_later(id)
+    ArtistNotificationJob.set(wait: 8.hours).perform_later(id)
   end
 end
