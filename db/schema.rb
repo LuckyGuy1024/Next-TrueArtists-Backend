@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_06_024322) do
+ActiveRecord::Schema.define(version: 2021_08_11_223110) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2021_08_06_024322) do
     t.string "street_address_2"
     t.string "old_specialty"
     t.string "specialty"
+    t.string "new_specialty"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["studio_id"], name: "index_artists_on_studio_id"
@@ -152,8 +153,7 @@ ActiveRecord::Schema.define(version: 2021_08_06_024322) do
     t.datetime "urgency"
     t.boolean "first_tattoo", default: false, null: false
     t.boolean "colored_tattoo", default: false, null: false
-    t.integer "receiver_id"
-    t.integer "sender_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "message_id"
@@ -161,9 +161,11 @@ ActiveRecord::Schema.define(version: 2021_08_06_024322) do
     t.integer "height"
     t.integer "width"
     t.string "city"
+    t.string "bookable_type"
+    t.integer "bookable_id"
+    t.index ["bookable_type", "bookable_id"], name: "booking_id"
     t.index ["message_id"], name: "index_bookings_on_message_id"
-    t.index ["receiver_id"], name: "index_bookings_on_receiver_id"
-    t.index ["sender_id"], name: "index_bookings_on_sender_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -316,6 +318,8 @@ ActiveRecord::Schema.define(version: 2021_08_06_024322) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "thread_id"
+    t.boolean "email_client_reply"
+    t.boolean "is_read"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
