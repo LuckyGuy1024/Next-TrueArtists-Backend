@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_223110) do
+ActiveRecord::Schema.define(version: 2021_08_11_224915) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -125,7 +125,6 @@ ActiveRecord::Schema.define(version: 2021_08_11_223110) do
     t.string "street_address_2"
     t.string "old_specialty"
     t.string "specialty"
-    t.string "new_specialty"
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["studio_id"], name: "index_artists_on_studio_id"

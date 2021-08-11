@@ -4,9 +4,7 @@ require 'open-uri'
 class Artist < ApplicationRecord
   include AASM
   include IdentityCache
-  # serialize :specialty, Array
-  serialize :new_specialty, Array
-
+  serialize :specialty, Array
 
   SPECIALTY = %w[Flash Freehand].freeze
 
