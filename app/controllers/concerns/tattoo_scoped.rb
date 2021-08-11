@@ -33,6 +33,7 @@ module TattooScoped
   end
 
   def find_tattoo
-    @tattoo = Tattoo.fetch(params[:id])
+    @tattoo = Tattoo.fetch_by_slug_and_status(params[:id], 'approved').first
+    head(:not_found) unless @tattoo
   end
 end
