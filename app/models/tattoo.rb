@@ -12,7 +12,7 @@ class Tattoo < ApplicationRecord
                 'Lower Leg', 'Foot'].freeze
 
   aasm column: 'status' do
-    state :pending_review, :initial: true
+    state :pending_review, initial: true
     state :approved
     state :flagged
     state :rejected
