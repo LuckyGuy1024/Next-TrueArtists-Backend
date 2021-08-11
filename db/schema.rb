@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_025415) do
+ActiveRecord::Schema.define(version: 2021_08_11_043210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_025415) do
     t.string "street_address"
     t.string "street_address_2"
     t.string "specialty", array: true
+    t.integer "reminder_count", default: 0
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["studio_id"], name: "index_artists_on_studio_id"
@@ -298,14 +299,6 @@ ActiveRecord::Schema.define(version: 2021_08_11_025415) do
     t.index ["slug"], name: "index_placements_on_slug"
   end
 
-  create_table "reminders", force: :cascade do |t|
-    t.integer "complete_profile", default: 0
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_reminders_on_user_id"
-  end
-
   create_table "studio_artists", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "artist_id"
@@ -392,6 +385,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_025415) do
     t.string "currency_code"
     t.string "street_address_2"
     t.string "services", array: true
+    t.integer "reminder_count", default: 0
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id"
   end
@@ -437,6 +431,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_025415) do
     t.string "slug"
     t.string "social_id"
     t.string "provider"
+    t.integer "reminder_count", default: 0
     t.index ["email"], name: "index_users_on_email"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["slug"], name: "index_users_on_slug", unique: true

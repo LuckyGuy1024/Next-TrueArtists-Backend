@@ -65,6 +65,12 @@ class StudioMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
+  def notify_on_account_rejection(email)
+    subject = format('TrueArtists Account Status Update')
+
+    mail(to: email, subject: subject)
+  end
+
   def notify_guest_artist(message, email)
     @message = message
 

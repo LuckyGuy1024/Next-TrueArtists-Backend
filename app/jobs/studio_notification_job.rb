@@ -2,6 +2,7 @@ class StudioNotificationJob < ActiveJob::Base
   queue_as :default
 
   rescue_from(ActiveRecord::RecordNotFound) do |exception|
+    # TO-DO: find a better way to handle errors
     Rails.logger.error exception
   end
 
@@ -14,13 +15,11 @@ class StudioNotificationJob < ActiveJob::Base
     }
     studio = Studio.find(studio_id)
 
-    reminder = Reminder.find_or_create_by(user_id: studio.user.id)
-
-    return if reminder.complete_profile > 3
+    return if studio.reminder_count > 3
 
     case studio.status
     when 'pending'
-      StudioMailer.complete_profile_reminder(studio, subject[reminder.complete_profile]).deliver_now
+      StudioMailer.complete_profile_reminder(studio, subject[studio.reminder_count]).deliver_now
     when 'pending_review'
       # do something
     when 'rejected'
@@ -30,6 +29,6 @@ class StudioNotificationJob < ActiveJob::Base
     end
 
     # update reminder count
-    reminder.update(complete_profile: reminder.complete_profile + 1) if reminder.complete_profile < 4
+    studio.update(reminder_count: studio.reminder_count + 1)
   end
 end

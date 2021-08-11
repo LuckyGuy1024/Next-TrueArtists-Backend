@@ -18,7 +18,7 @@ module StatusManagement
         transitions from: [:pending_review, :pending, :rejected], to: :approved
       end
 
-      event :reject, after_commit: :send_status_notification do
+      event :reject, after_commit: :send_account_rejection do
         transitions from: [:pending_review, :pending, :approved], to: :rejected
       end
     end
@@ -37,6 +37,14 @@ module StatusManagement
       StudioMailer.notify_on_account_status(email, status).deliver_now
     else
       ArtistMailer.notify_on_account_status(user.email, status).deliver_now
+    end
+  end
+
+  def send_account_rejection
+    if instance_of?(Studio)
+      StudioMailer.notify_on_account_rejection(email).deliver_now
+    else
+      ArtistMailer.notify_on_account_rejection(user.email).deliver_now
     end
   end
 end

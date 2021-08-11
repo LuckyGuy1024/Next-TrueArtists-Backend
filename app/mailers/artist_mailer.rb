@@ -7,6 +7,12 @@ class ArtistMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
+  def notify_on_account_rejection(email)
+    subject = format('TrueArtists Account Status Update')
+
+    mail(to: email, subject: subject)
+  end
+
   def new_artist_notification(artist)
     @artist = artist
     mail(to: artist.user.email, subject: 'New Artist Notification')
