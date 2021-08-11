@@ -40,7 +40,8 @@
             <% if @artist.street_address.present? %>
               <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
             <% end %>
-            <p><%= @artist.city_state %> <%= @artist.zip_code %></p>
+            <p><%= @artist.city %>, <%= @artist.state %><br/>
+              <%= @artist.country %> <%= @artist.zip_code %></p>
           </div>
 
           <div class="artist-p-btn">

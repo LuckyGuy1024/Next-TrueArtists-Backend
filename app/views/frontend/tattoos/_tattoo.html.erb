@@ -1,12 +1,17 @@
 <% if tattoo.image.attached? %>
   <div class="col-lg-3 col-md-6 grid-item">
     <%= link_to tattoo_path(tattoo), class: 'gallery-item half' do %>
-      <img data-src="<%= asset_blob_url(tattoo.image) %>" class="lazyload" />
+      <% if false #modern_browser? %>
+        <% variant = tattoo.image.variant(convert: 'webp').processed %>
+        <%= lazy_image_tag(asset_blob_url(variant), title: tattoo.seo_title, alt: tattoo.seo_title) %>
+      <% else %>
+        <%= lazy_image_tag(asset_blob_url(tattoo.image), title: tattoo.seo_title, alt: tattoo.seo_title) %>
+      <% end %>
     <% end %>
     <div class='tattoo-info'>
       <%= link_to url_for(tattoo.parent) do %>
         <% if tattoo.parent.avatar.attached? %>
-          <img data-src="<%= asset_blob_url(tattoo.parent.avatar) %>" class="lazyload" />
+          <%= lazy_image_tag(asset_blob_url(tattoo.parent.avatar)) %>
         <% end %>
          <span itemprop='name'>
            <%= tattoo.parent.name %><br>

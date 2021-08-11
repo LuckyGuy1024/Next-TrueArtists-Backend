@@ -9,6 +9,11 @@
    site_name: 'TrueArtists',
    url: article_url(@article),
    description: @article.meta_description,
+   image: {
+     url: asset_blob_url(@article.image),
+     width: 655,
+     height: 665
+   }
  })
 %>
 
@@ -36,7 +41,7 @@
           <div class="sharethis-inline-share-buttons"></div>
           <% if @article.image.attached? %>
             <div>
-              <img data-src="<%= asset_blob_url(@article.image) %>" class="lazyload" />
+              <%= lazy_image_tag(asset_blob_url(@article.image), title: @article.title, alt: @article.title) %>
             </div>
           <% end %>
           <div class="article-body">

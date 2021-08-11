@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  require 'json_web_token'
+
+  include ActionController::Cookies
+  include ActionController::RequestForgeryProtection
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include Pundit
-  require 'json_web_token'
+
+  protect_from_forgery prepend: true
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

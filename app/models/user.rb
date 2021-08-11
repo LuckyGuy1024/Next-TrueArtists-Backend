@@ -34,6 +34,10 @@ class User < ApplicationRecord
   has_many :conventions, class_name: 'Convention', foreign_key: 'created_by', dependent: :destroy
   has_many :announcements, class_name: 'Announcement', foreign_key: 'published_by', dependent: :destroy
 
+  scope :artists, -> { where(role: roles[:artist]) }
+  scope :studios, -> { where(role: roles[:studio_manager]) }
+  scope :admins, -> { where(role:  roles[:admin]) }
+
   STRONG_PASSWORD = /(?=.*[a-zA-Z])(?=.*[0-9]).{6,10}/.freeze
 
   validates :role, presence: true
@@ -93,8 +97,6 @@ class User < ApplicationRecord
   def change_password_request
     UserMailer.change_password_request(self, password).deliver_now
   end
-
-  private
 
   def self.find_by_password_reset_token(token)
     jwt_payload = JsonWebToken.decode(token).first
