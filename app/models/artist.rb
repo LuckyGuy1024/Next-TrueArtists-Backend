@@ -3,7 +3,7 @@ require 'open-uri'
 class Artist < ApplicationRecord
   include AASM
   include IdentityCache
-  serialize :specialty, Array
+  # serialize :specialty, Array
 
   SPECIALTY = %w[Flash Freehand].freeze
 
@@ -118,6 +118,7 @@ class Artist < ApplicationRecord
 
   def send_complete_profile_notification
     ArtistNotificationJob.set(wait: 8.hours).perform_later(id)
+    ArtistNotificationJob.set(wait: 1.day).perform_later(id)
     ArtistNotificationJob.set(wait: 7.days).perform_later(id)
     ArtistNotificationJob.set(wait: 14.days).perform_later(id)
   end

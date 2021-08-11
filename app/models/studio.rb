@@ -147,8 +147,9 @@ class Studio < ApplicationRecord
   end
 
   def send_complete_profile_notification
-    StudioNotificationJob.set(wait: 8.hours.from_now).perform_later(id)
-    StudioNotificationJob.set(wait: 7.days.from_now).perform_later(id)
-    StudioNotificationJob.set(wait: 14.days.from_now).perform_later(id)
+    StudioNotificationJob.set(wait: 8.hours).perform_later(id)
+    StudioNotificationJob.set(wait: 1.day).perform_later(id)
+    StudioNotificationJob.set(wait: 7.days).perform_later(id)
+    StudioNotificationJob.set(wait: 14.days).perform_later(id)
   end
 end

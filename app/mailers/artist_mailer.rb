@@ -12,9 +12,9 @@ class ArtistMailer < ApplicationMailer
     mail(to: artist.user.email, subject: 'New Artist Notification')
   end
 
-  def complete_profile_reminder(artist)
+  def complete_profile_reminder(artist, reminder_count)
     @artist = artist
-    mail(to: artist.user.email, subject: 'Reminder: Complete Your Artist Profile')
+    mail(to: artist.user.email, subject: "#{reminder_count}: Complete Your Artist Profile")
   end
 
   def upload_new_images(artist)

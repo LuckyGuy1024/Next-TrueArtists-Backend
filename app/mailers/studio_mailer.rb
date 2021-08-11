@@ -78,9 +78,9 @@ class StudioMailer < ApplicationMailer
     mail(to: studio.email, subject: 'New Studio Notification')
   end
 
-  def complete_profile_reminder(studio)
+  def complete_profile_reminder(studio, reminder_count)
     @studio = studio
-    mail(to: studio.email, subject: 'Reminder: Complete Your Studio Profile')
+    mail(to: studio.email, subject: "#{reminder_count}: Complete Your Studio Profile")
   end
 
   def upload_new_images(studio)

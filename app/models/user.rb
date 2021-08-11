@@ -30,6 +30,7 @@ class User < ApplicationRecord
 
   has_one :artist, dependent: :destroy
   has_one :studio, dependent: :destroy
+  has_one :reminder, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_many :conventions, class_name: 'Convention', foreign_key: 'created_by', dependent: :destroy
   has_many :announcements, class_name: 'Announcement', foreign_key: 'published_by', dependent: :destroy
