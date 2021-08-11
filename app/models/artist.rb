@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 class Artist < ApplicationRecord
   include AASM
@@ -58,7 +59,8 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    if state.present?
+    #TODO - fix data 
+    if state.present? && ['United States', 'US'].include?(country)
       format('%s, %s', city&.titleize, state)
     else
       format('%s, %s', city&.titleize, country)
