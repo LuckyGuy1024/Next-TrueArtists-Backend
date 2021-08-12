@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MessageSmsService
-
   def initialize(message, phone_number)
     @message = message
     @phone_number = phone_number

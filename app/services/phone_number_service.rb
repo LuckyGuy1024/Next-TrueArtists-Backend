@@ -35,7 +35,7 @@ class PhoneNumberService
 
   def send_sms
     @client.messages.create({
-                              from: Rails.application.credentials[:TWILIO_PHONE_NUMBER],
+                              from: ENV.fetch('TWILIO_PHONE_NUMBER'),
                               to: @phone_number,
                               body: @message
                             })
