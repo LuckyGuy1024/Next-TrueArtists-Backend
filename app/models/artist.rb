@@ -67,6 +67,10 @@ class Artist < ApplicationRecord
     end
   end
 
+  def email
+    user.email
+  end
+
   def current_studio
     studios.last
   end
