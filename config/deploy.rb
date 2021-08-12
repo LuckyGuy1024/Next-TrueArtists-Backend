@@ -23,7 +23,7 @@ SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
 set :application, "trueartists"
 set :repo_url, "git@github.com:jwachira/trueartists.git"
 set :deploy_to, "/var/www/apps/#{fetch(:application)}"
-set :migration_role, :db
+set :migration_role, :app
 set :migration_command, 'db:migrate:primary'
 set :conditionally_migrate, true
 
@@ -69,25 +69,5 @@ namespace :deploy do
         execute("cd #{release_path} && yarn install --silent --no-progress --no-audit --no-optional")
       end
     end
-  end
-end
-
-namespace :puma do
-  desc "Start the application"
-  task :start do
-    queue 'echo "-----> Start Puma"'
-    queue "cd #{current_path} && RAILS_ENV=#{stage} && bin/puma.sh start", :pty => false
-  end
-
-  desc "Stop the application"
-  task :stop do
-    queue 'echo "-----> Stop Puma"'
-    queue "cd #{current_path} && RAILS_ENV=#{stage} && bin/puma.sh stop"
-  end
-
-  desc "Restart the application"
-  task :restart do
-    queue 'echo "-----> Restart Puma"'
-    queue "cd #{current_path} && RAILS_ENV=#{stage} && bin/puma.sh restart"
   end
 end
