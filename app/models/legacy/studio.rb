@@ -14,7 +14,10 @@ module Legacy
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Studio.count)
         # where(admin_approved: nil).where(state: 'complete').find_each do |studio|
-        Legacy::Studio.where(id: ::Studio.pluck(:id)).find_each do |studio|
+        studio_ids = ActiveRecord::Base.connected_to(role: :writing) do
+          ::Studio.pluck(:id)
+        end
+        where(id: studio_ids).find_each do |studio|
         # where(admin_approved: true).find_each do |studio|
           languages = studio.languages.to_a.map(&:name).join(',').presence
           specialty = studio.specialities.to_a.map(&:name).join(',').presence

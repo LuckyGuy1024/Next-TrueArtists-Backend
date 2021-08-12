@@ -26,7 +26,10 @@ module Legacy
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Artist.count)
          # where(admin_approved: nil, artist_status: ['Completed', 'No Studio']).where.not(city: [nil, '']).find_each do |artist|
-         Legacy::Artist.where(id: ::Artist.pluck(:id)).find_each do |artist|
+         artist_ids = ActiveRecord::Base.connected_to(role: :writing) do
+           ::Artist.pluck(:id)
+         end
+         Legacy::Artist.where(id: artist_ids).find_each do |artist|
           # find user
           tattoo_style_ids = artist.tattoo_style_ids
           specialty = artist.specialities.to_a.map(&:name) #.join(',')
