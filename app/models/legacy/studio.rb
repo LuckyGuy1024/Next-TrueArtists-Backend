@@ -13,38 +13,42 @@ module Legacy
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Studio.count)
-        where(admin_approved: nil).where(state: 'complete').find_each do |studio|
+        # where(admin_approved: nil).where(state: 'complete').find_each do |studio|
+        studio_ids = ActiveRecord::Base.connected_to(role: :writing) do
+          ::Studio.pluck(:id)
+        end
+        where(id: studio_ids).find_each do |studio|
         # where(admin_approved: true).find_each do |studio|
           languages = studio.languages.to_a.map(&:name).join(',').presence
           specialty = studio.specialities.to_a.map(&:name).join(',').presence
           ActiveRecord::Base.connected_to(role: :writing) do
             new_studio = ::Studio.find_or_initialize_by(id: studio.id, user_id: studio.user_id)
-            new_studio.name = studio.name
-            new_studio.email = studio.email || studio.user&.email
-            new_studio.bio = studio.description
-            new_studio.languages = languages
-            new_studio.website_url = studio.website
-            new_studio.facebook_url = studio.facebook
-            new_studio.twitter_url = studio.twitter
-            # new_studio.lat = studio.lat
-            # new_studio.lon = studio.lon
-            new_studio.street_address = studio.address
-            new_studio.city = studio.city
-            new_studio.state = studio.address_state
-            new_studio.zip_code = studio.zip_code
-            new_studio.country = studio.country
-            new_studio.appointment_only = studio.appointment_only
-            # new_studio.specialty = specialty
-            new_studio.accepted_payment_methods = studio.payment_methods
-            new_studio.phone_number = studio.telephone
-            new_studio.slug = studio.slug
-
-            # new_studio.status = if studio.admin_approved && (studio.city.present? || studio.zip_code.present? || studio.country.present?)
-            new_studio.status = if (studio.city.present? || studio.zip_code.present? || studio.country.present?)
-                                  'approved'
-                                else
-                                  'pending'
-                                end
+            # new_studio.name = studio.name
+            # new_studio.email = studio.email || studio.user&.email
+            # new_studio.bio = studio.description
+            # new_studio.languages = languages
+            # new_studio.website_url = studio.website
+            # new_studio.facebook_url = studio.facebook
+            # new_studio.twitter_url = studio.twitter
+            # # new_studio.lat = studio.lat
+            # # new_studio.lon = studio.lon
+            # new_studio.street_address = studio.address
+            # new_studio.city = studio.city
+            # new_studio.state = studio.address_state
+            # new_studio.zip_code = studio.zip_code
+            # new_studio.country = studio.country
+            # new_studio.appointment_only = studio.appointment_only
+            # # new_studio.specialty = specialty
+            # new_studio.accepted_payment_methods = studio.payment_methods
+            # new_studio.phone_number = studio.telephone
+            # new_studio.slug = studio.slug
+            #
+            # # new_studio.status = if studio.admin_approved && (studio.city.present? || studio.zip_code.present? || studio.country.present?)
+            # new_studio.status = if (studio.city.present? || studio.zip_code.present? || studio.country.present?)
+            #                       'approved'
+            #                     else
+            #                       'pending'
+            #                     end
 
             if new_studio.save(validate: false)
               if studio.logo_file_name.present?

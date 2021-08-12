@@ -55,6 +55,7 @@ class Studio < ApplicationRecord
   end
 
   cache_index :slug, unique: true
+  cache_index :slug, :status
   cache_has_many :studio_artists, embed: true
 
   # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }

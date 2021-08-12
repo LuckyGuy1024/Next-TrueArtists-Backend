@@ -32,7 +32,7 @@ class Artist < ApplicationRecord
   has_one_attached :hero_banner
 
   cache_index :slug, unique: true
-  # cache_has_many :tattoos, embed: true
+  cache_index :slug, :status
 
   # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true
@@ -59,7 +59,7 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    #TODO - fix data 
+    #TODO - fix data
     if state.present? && ['United States', 'US'].include?(country)
       format('%s, %s', city&.titleize, state)
     else
