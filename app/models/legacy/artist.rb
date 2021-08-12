@@ -25,68 +25,73 @@ module Legacy
     def self.migrate
       ActiveRecord::Base.connected_to(role: :reading) do
         progress_bar = ProgressBar.new(Legacy::Artist.count)
-          where(admin_approved: true).find_each do |artist|
+         # where(admin_approved: nil, artist_status: ['Completed', 'No Studio']).where.not(city: [nil, '']).find_each do |artist|
+         artist_ids = ActiveRecord::Base.connected_to(role: :writing) do
+           ::Artist.pluck(:id)
+         end
+         Legacy::Artist.where(id: artist_ids).find_each do |artist|
           # find user
           tattoo_style_ids = artist.tattoo_style_ids
-          specialty = artist.specialities.to_a.map(&:name).join(',')
+          specialty = artist.specialities.to_a.map(&:name) #.join(',')
 
           ActiveRecord::Base.connected_to(role: :writing) do
             user = ::User.find_by(id: artist.user_id)
             next unless user
 
             new_artist = ::Artist.find_or_initialize_by(id: artist.id, user_id: user.id)
-            new_artist.name = user.full_name
-            new_artist.bio = artist.bio
-            new_artist.slug = artist.slug
-            new_artist.licensed = artist.licensed
-            new_artist.cpr_certified = artist.cpr_certified
-            new_artist.years_of_experience = artist.years_of_experiance
-            new_artist.website = artist.website
-            new_artist.facebook_url = artist.facebook_page
-            new_artist.twitter_url = artist.twitter_page
-            new_artist.instagram_url = artist.instagram
-            new_artist.phone_number = artist.phone_number
-            new_artist.minimum_spend = artist.minimum_spend
-            new_artist.price_per_hour = artist.hourly_rate
-            new_artist.seeking_guest_spot = artist.seeking_guest_spot
-            new_artist.state = artist.address_state
-            new_artist.street_address = artist.address
-            new_artist.city = artist.city
-            new_artist.zip_code = artist.zip_code
-            new_artist.country = artist.country
-            # new_artist.lat = artist.lat
-            # new_artist.lon = artist.lon
-            # migrate this separately for each artist
-            new_artist.style_ids = tattoo_style_ids
-            new_artist.specialty = specialty.presence
-
-            # phon verification does not exist in system
-            # new_artist.phone_verified = artist.phone_verified
-            new_artist.status = if artist.admin_approved && (artist.city.present? || artist.zip_code || artist.country.present?)
-                                  'approved'
-                                else
-                                  'pending'
-                                end
+            # new_artist.name = user.full_name
+            # new_artist.bio = artist.bio
+            # new_artist.slug = artist.slug
+            # new_artist.licensed = artist.licensed
+            # new_artist.cpr_certified = artist.cpr_certified
+            # new_artist.years_of_experience = artist.years_of_experiance
+            # new_artist.website = artist.website
+            # new_artist.facebook_url = artist.facebook_page
+            # new_artist.twitter_url = artist.twitter_page
+            # new_artist.instagram_url = artist.instagram
+            # new_artist.phone_number = artist.phone_number
+            # new_artist.minimum_spend = artist.minimum_spend
+            # new_artist.price_per_hour = artist.hourly_rate
+            # new_artist.seeking_guest_spot = artist.seeking_guest_spot
+            # new_artist.state = artist.address_state
+            # new_artist.street_address = artist.address
+            # new_artist.city = artist.city
+            # new_artist.zip_code = artist.zip_code
+            # new_artist.country = artist.country
+            # # new_artist.lat = artist.lat
+            # # new_artist.lon = artist.lon
+            # # migrate this separately for each artist
+            # new_artist.style_ids = tattoo_style_ids
+            new_artist.specialty = specialty
+            #
+            # # phon verification does not exist in system
+            # # new_artist.phone_verified = artist.phone_verified
+            # # new_artist.status = if artist.admin_approved && (artist.city.present? || artist.zip_code || artist.country.present?)
+            #
+            # new_artist.status = if (artist.city.present? || artist.zip_code || artist.country.present?)
+            #                       'approved'
+            #                     else
+            #                       'pending'
+            #                     end
             if new_artist.save(validate: false)
-              # updating address only 
-              # if artist.logo_file_name.present?
-              #   image_file_name = artist.logo_file_name
-              #   image_extension = File.extname(image_file_name)
-              #   optimized_file_name = new_artist.name.slugorize.escape
-              #   new_file_name = "#{optimized_file_name}#{image_extension}"
-              #   s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{artist.id}/original/#{image_file_name.escape}"
-              #
-              #   options = {
-              #     key: "artists/#{new_artist.id}/logo/#{new_file_name}",
-              #     io: URI.open(s3_image_url),
-              #     filename: new_file_name,
-              #     content_type: artist.logo_content_type
-              #   }
-              #
-              #   new_artist.avatar.purge if new_artist.avatar.present?
-              #
-              #   new_artist.avatar.attach(options)
-              # end
+              if artist.logo_file_name.present?
+                image_file_name = artist.logo_file_name
+                image_extension = File.extname(image_file_name)
+                optimized_file_name = new_artist.name.slugorize.escape
+                new_file_name = "#{optimized_file_name}#{image_extension}"
+                s3_image_url = "https://s3.amazonaws.com/trueartists_production/logos/#{artist.id}/original/#{image_file_name.escape}"
+
+                options = {
+                  key: "artists/#{new_artist.id}/logo/#{new_file_name}",
+                  io: URI.open(s3_image_url),
+                  filename: new_file_name,
+                  content_type: artist.logo_content_type
+                }
+
+                new_artist.avatar.purge if new_artist.avatar.present?
+
+                new_artist.avatar.attach(options)
+              end
             end
             progress_bar.increment
           end

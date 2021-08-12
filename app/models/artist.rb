@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 class Artist < ApplicationRecord
   include AASM
@@ -26,11 +27,12 @@ class Artist < ApplicationRecord
   has_many :studio_artists
   has_many :studios, through: :studio_artists
   has_many :guest_artist_applications
+  has_many :bookings, as: :bookable, dependent: :destroy
   has_one_attached :avatar
   has_one_attached :hero_banner
 
   cache_index :slug, unique: true
-  # cache_has_many :tattoos, embed: true
+  cache_index :slug, :status
 
   # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true
@@ -57,20 +59,30 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    if state.present?
+    #TODO - fix data
+    if state.present? && ['United States', 'US'].include?(country)
       format('%s, %s', city&.titleize, state)
     else
       format('%s, %s', city&.titleize, country)
     end
   end
 
+  def email
+    user.email
+  end
+
   def current_studio
     studios.last
+  end
+
+  def self.with_status(status)
+    where(status: status)
   end
 
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
+
     nil
   end
 
@@ -105,12 +117,12 @@ class Artist < ApplicationRecord
   end
 
   def verify_phone(code)
-    status = PhoneNumberVerifier.new(code: code, phone_number: phone_number).status
+    status = PhoneNumberService.new(code: code, phone_number: phone_number).status
 
     update(phone_verified: true) if status == 'approved'
   end
 
   def send_phone_verification_code
-    PhoneNumberVerifier.new(phone_number: phone_number).verify
+    PhoneNumberService.new(phone_number: phone_number).verify
   end
 end

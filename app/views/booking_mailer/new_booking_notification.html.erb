@@ -1,0 +1,5 @@
+<p>You have a new booking at TrueArtists from <b><%= @user.full_name %></b></p>
+
+<p><%= link_to 'Click here', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/bookings/#{@booking.id}" %> to view the booking.</p>
+
+<p>TrueArtist Team</p>

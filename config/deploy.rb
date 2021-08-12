@@ -23,7 +23,7 @@ SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
 set :application, "trueartists"
 set :repo_url, "git@github.com:jwachira/trueartists.git"
 set :deploy_to, "/var/www/apps/#{fetch(:application)}"
-set :migration_role, :db
+set :migration_role, :app
 set :migration_command, 'db:migrate:primary'
 set :conditionally_migrate, true
 

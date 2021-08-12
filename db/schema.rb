@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_215958) do
+ActiveRecord::Schema.define(version: 2021_08_12_162731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,8 +275,12 @@ ActiveRecord::Schema.define(version: 2021_08_09_215958) do
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "thread_id"
+    t.boolean "email_client_reply"
+    t.boolean "is_read"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.index ["thread_id"], name: "index_messages_on_thread_id"
   end
 
   create_table "pages", force: :cascade do |t|

@@ -1,16 +1,21 @@
-HOST: 'http://localhost:3001'
-ACCOUNT_SERVICE_URL: 'http://localhost:3000'
-IP_INFO_API_KEY: 'something'
-GEOCODER_API_KEY: 'something-3yKAm-gFQ'
-CDN_HOST: ''
-SECRET_KEY_BASE: 'bed78b8dd0090d97e997dbc3dfa19f192359541ec2f4d0c715393c612dbdf11e81c18367626b9fc3966973e63fc9755af5fc9dc1fa71b36d245dd5ad48c4d018'
-RUN_ALL: '1'
-MEM_SERVER_1: 'localhost:11211'
-SENDGRID_APIKEY: 'something'
-AWS_ACCESS_KEY_ID: 'AKIASXKHHATRRJ44VOA5'
-AWS_SECRET_ACCESS_KEY: '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'
-AWS_REGION: 'us-west-1'
-AWS_BUCKET: 'ta-qa' #ta-prod
-DB_NAME: ''
-DB_PASSWORD: ''
-DB_HOST: ''
+HOST:                         "http://localhost:3001"
+ACCOUNT_SERVICE_URL:          "http://localhost:3000"
+IP_INFO_API_KEY:              "something"
+GEOCODER_API_KEY:             "something-3yKAm-gFQ"
+CDN_HOST:                     ""
+SECRET_KEY_BASE:              "8cfc532fd9bc1c532f2785f9062fca40dad16a943bdb40d9a09ee978a943280894ad9a7597e8fd894c905ce331f2308c7832470e8d42490e11cc0536a7e72780"
+RUN_ALL:                      "1"
+MEM_SERVER_1:                 "localhost:11211"
+SENDGRID_APIKEY:              "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"
+AWS_ACCESS_KEY_ID:            "AKIASXKHHATRRJ44VOA5"
+AWS_SECRET_ACCESS_KEY:        "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"
+AWS_REGION:                   "us-west-1"
+AWS_BUCKET:                   "ta-qa" #ta-prod
+DB_NAME:                      ""
+DB_PASSWORD:                  ""
+DB_HOST:                      ""
+DOMAIN:                       "68c4cfbca077.ngrok.io"
+RAILS_INBOUND_EMAIL_PASSWORD: "gQobs7DMBiNpJwjt"
+TWILIO_PHONE_NUMBER:          ""
+TWILIO_AUTH_TOKEN:            ""
+TWILIO_ACCOUNT_SID:           ""

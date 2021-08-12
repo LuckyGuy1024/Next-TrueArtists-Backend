@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   scope module: 'frontend' do
     resources :sessions do
       collection do
-        post 'login' => 'sessions#create'
         delete 'logout' => 'sessions#destroy'
       end
     end

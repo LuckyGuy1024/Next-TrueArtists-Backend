@@ -7,11 +7,15 @@ Rails.application.routes.draw do
     # Preserve the behaviour of `rails_blob_url` inside these environments
     # where S3 or the CDN might not be configured
     if Rails.env.development? || Rails.env.test?
-      ENV.fetch('HOST') + rails_blob_path(blob, only_path: true)
+      if blob.is_a?(ActiveStorage::Variant)
+        ENV.fetch('HOST') + rails_representation_path(blob, only_path: true)
+      else
+        ENV.fetch('HOST') + rails_blob_path(blob, only_path: true)
+      end
     else
       # Use an environment variable instead of hard-coding the CDN host
       # You could also use the Rails.configuration to achieve the same
-      File.join(ENV.fetch('CDN_HOST'), blob.key)
+      File.join(ENV.fetch('CDN_HOST'), (blob&.key || 'default-image-placeholder.png'))
     end
   end
 end

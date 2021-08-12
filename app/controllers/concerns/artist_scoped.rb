@@ -31,7 +31,7 @@ module ArtistScoped
   end
 
   def find_artist
-    @artist = Artist.fetch_by_slug(params[:id])
+    @artist = Artist.fetch_by_slug_and_status(params[:id], 'approved').first
     head(:not_found) unless @artist
   end
 end

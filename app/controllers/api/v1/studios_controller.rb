@@ -123,7 +123,7 @@ module Api::V1
       if studio_artist.destroy
         head(:ok)
       else
-        render_api_error(status: 422, errors: @tattoo.errors)
+        render_api_error(status: 422, errors: @studio.errors)
       end
     end
 

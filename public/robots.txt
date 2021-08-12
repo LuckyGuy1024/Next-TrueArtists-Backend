@@ -1,1 +1,7 @@
 User-Agent: *
+Disallow: https://trueartists.com/studios/salvation-ink
+Disallow: https://trueartists.com/artists/karen-slafter
+Disallow: https://trueartists.com/artists/lulu
+Disallow: https://trueartists.com/studios/tattoo-lucky-7
+
+Sitemap: https://trueartists.com/shared/sitemap.xml.gz

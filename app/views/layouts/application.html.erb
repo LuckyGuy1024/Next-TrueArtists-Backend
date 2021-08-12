@@ -10,11 +10,13 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <script data-ad-client="ca-pub-7265497306961577" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- Warning !! ensure that "stylesheet_pack_tag" is used, line below -->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=608a75899c605400117b15ca&product=inline-share-buttons" async="async"></script>
+    <script data-ad-client="ca-pub-3320494929620380" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <% if controller_name == 'articles' %>
+      <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=608a75899c605400117b15ca&product=inline-share-buttons" async="async"></script>
+    <% end %>
   </head>
 
   <body>
