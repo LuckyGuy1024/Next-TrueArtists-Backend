@@ -5,6 +5,7 @@ class Studio < ApplicationRecord
   include IdentityCache
   include AddressExtension
   include StatusManagement
+  serialize :services, Array
 
   LANGUAGES = %w[
     Mandarin
