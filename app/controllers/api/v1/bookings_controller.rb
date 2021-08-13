@@ -32,7 +32,7 @@ module Api
         render json: BookingSerializer.new(@booking).to_json, status: :ok
       end
 
-      def accept_booking
+      def accept
         authorize @booking
 
         @booking.accept
@@ -47,7 +47,7 @@ module Api
         render_api_error(status: 422, errors: e.message)
       end
 
-      def reject_booking
+      def reject
         authorize @booking
 
         @booking.reject
@@ -62,7 +62,7 @@ module Api
         render_api_error(status: 422, errors: e.message)
       end
 
-      def cancel_booking
+      def cancel
         authorize @booking
 
         @booking.cancel

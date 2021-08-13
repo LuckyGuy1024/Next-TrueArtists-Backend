@@ -78,7 +78,6 @@ Rails.application.routes.draw do
 
         resources :bookings do
           member do
-            put :accept
             put :reject
             put :cancel
           end
