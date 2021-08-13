@@ -9,6 +9,6 @@ class TattooMailer < ApplicationMailer
       @name = tattoo.artist.name
     end
 
-    mail(to: email, subject: 'Flagged Image')
+    mail(to: email, subject: "Your tattoo photo has been flagged")
   end
 end

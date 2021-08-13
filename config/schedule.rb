@@ -6,10 +6,10 @@ every 2.hours do
   rake 'import:legacy_data --trace'
 end
 
-every [:monday], at: '8:00 AM' do
+every [:wednesday], at: Time.parse('4pm').getlocal.strftime('%H:%M') do
   rake 'send_tattoo_upload_email:reminder --trace'
 end
 
-every 24.hours, at: '10:00 PM' do
+every 24.hours, at: Time.parse('2pm').getlocal.strftime('%H:%M') do
   rake 'complete_profile_schedule:reminder --trace'
 end
