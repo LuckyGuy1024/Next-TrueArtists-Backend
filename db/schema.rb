@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_162731) do
+ActiveRecord::Schema.define(version: 2021_08_13_011822) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 2021_08_12_162731) do
     t.integer "studio_id"
     t.text "bio"
     t.string "slug"
-    t.boolean "licensed"
-    t.boolean "cpr_certified"
+    t.boolean "licensed", default: false
+    t.boolean "cpr_certified", default: false
     t.integer "years_of_experience"
     t.string "website"
     t.string "facebook_url"
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2021_08_12_162731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "message_id"
-    t.string "status", default: "pending"
+    t.string "status"
     t.integer "height"
     t.integer "width"
     t.string "city"
@@ -382,7 +382,6 @@ ActiveRecord::Schema.define(version: 2021_08_12_162731) do
     t.text "accepted_payment_methods"
     t.boolean "appointment_only", default: false
     t.text "languages"
-    t.text "services"
     t.string "email"
     t.string "facebook_url"
     t.string "twitter_url"
@@ -429,6 +428,7 @@ ActiveRecord::Schema.define(version: 2021_08_12_162731) do
     t.time "saturday_end"
     t.time "sunday_end"
     t.string "street_address_2"
+    t.string "services"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id"
   end
