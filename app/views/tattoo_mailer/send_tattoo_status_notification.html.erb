@@ -1,0 +1,13 @@
+Hi <%= @name %>, <br>
+
+<p>We have removed the following photo from your profile page:</p> <br>
+
+<%= image_tag(ActiveStorage::Attachment.find(@tattoo.id)) %>
+
+<br><br>The image has been flagged by the community and reviewed by our committee as not meeting the standards of TrueArtists artwork. <br><br>
+
+If you wish to contest this or think there has been a mistake, please forward this email to us at info@trueartists.com and we will review this again.  Sometimes it's the picture quality that can distort the true image of the artwork. <br><br>
+
+Thanks for your understanding, <br><br>
+
+TrueArtists Team

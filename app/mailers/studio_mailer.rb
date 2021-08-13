@@ -65,11 +65,32 @@ class StudioMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
+  def notify_on_account_rejection(email)
+    subject = format('TrueArtists Account Status Update')
+
+    mail(to: email, subject: subject)
+  end
+
   def notify_guest_artist(message, email)
     @message = message
 
     subject = format('Guest Artist Response')
 
     mail(to: email, subject: subject)
+  end
+
+  def new_studio_notification(studio)
+    @studio = studio
+    mail(to: studio.email, subject: 'New Studio Notification')
+  end
+
+  def complete_profile_reminder(studio, reminder_count)
+    @studio = studio
+    mail(to: studio.email, subject: "#{reminder_count}: Complete Your Studio Profile")
+  end
+
+  def upload_new_images(studio)
+    @studio = studio
+    mail(to: studio.email, subject: 'Reminder: Upload New Tattoo Images')
   end
 end
