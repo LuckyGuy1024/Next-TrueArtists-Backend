@@ -32,25 +32,31 @@
       <div class="col-lg-3">
         <div class="artist-left-sidebar">
           <div class="artist-p-info" itemprop="mainEntityOfPage" itemscope="true" itemtype="http://schema.org/ProfilePage" itemid="<%= artist_url(@artist) %>">
-            <% if @artist.avatar.attached? %>
-              <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
-            <% end %>
-            <h1 itemprop='name'><%= @artist.name %></h1>
-            <% if @artist.street_address.present? %>
-              <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
-            <% end %>
-            <p>
-              <%= @artist.city %>, <%= @artist.state %><br/>
-              <%= @artist.country %> <%= @artist.zip_code %>
-            </p>
-            <% if @artist.phone_number.present? %>
-              <p>
-                <span>Phone number: <%= @artist.phone_number %></span>
-                <% if @artist.phone_verified %>
-                  <span class="ta-icon-check-circle-fill icon"></span>
+            <div class='row'>
+              <div class='col-md-4'>
+                <% if @artist.avatar.attached? %>
+                  <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
                 <% end %>
-              </p>
-            <% end %>
+              </div>
+              <div class='col-md-8'>
+                <h1 itemprop='name'><%= @artist.name %></h1>
+                <% if @artist.street_address.present? %>
+                  <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
+                <% end %>
+                <p>
+                  <%= @artist.city %>, <%= @artist.state %><br/>
+                  <%= @artist.country %> <%= @artist.zip_code %>
+                </p>
+                <% if @artist.phone_number.present? %>
+                  <p>
+                    <span>Phone number: <%= @artist.phone_number %></span>
+                    <% if @artist.phone_verified %>
+                      <span class="ta-icon-check-circle-fill icon"></span>
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+            </div>
           </div>
 
           <div class="artist-p-btn">
@@ -88,8 +94,8 @@
             </div>
           <% end %>
           <div class="artist-p-style">
-            <h4>Licencing</h4>
-            <p>Licenced
+            <h4>Licensing</h4>
+            <p>Licensed
               <% if @artist.licensed %>
                 <span class="ta-icon-check icon"></span>
               <% else %>
