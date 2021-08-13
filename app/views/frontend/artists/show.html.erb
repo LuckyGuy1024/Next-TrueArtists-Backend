@@ -40,16 +40,18 @@
               </div>
               <div class='col-md-8'>
                 <h1 itemprop='name'><%= @artist.name %></h1>
-                <% if @artist.street_address.present? %>
-                  <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
-                <% end %>
-                <p>
-                  <%= @artist.city %>, <%= @artist.state %><br/>
-                  <%= @artist.country %> <%= @artist.zip_code %>
-                </p>
+                <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  <% if @artist.street_address.present? %>
+                    <p itemprop="streetAddress"><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
+                  <% end %>
+                  <p>
+                    <span itemprop="streetAddress"><%= @artist.city %></span>, <span itemprop="addressRegion"><%= @artist.state %></span><br/>
+                    <%= @artist.country %> <%= @artist.zip_code %>
+                  </p>
+                </div>
                 <% if @artist.phone_number.present? %>
                   <p>
-                    <span>Phone number: <%= @artist.phone_number %></span>
+                    <span itemprop="telephone"><%= @artist.phone_number %></span>
                     <% if @artist.phone_verified %>
                       <span class="ta-icon-check-circle-fill icon"></span>
                     <% end %>
