@@ -4,24 +4,24 @@ class BookingSerializer < ActiveModel::Serializer
   belongs_to :bookable
 
   attributes :id,
-             :bookable_id,
-             :bookable_type,
              :description,
              :tattoo_placement,
-             :consult_artist,
-             :custom_size,
-             :status,
+             :tattoo_color,
+             :tattoo_size,
+             :budget,
+             :style_id,
+             :phone_number,
+             :availability,
              :city,
-             :height,
-             :width,
              :urgency,
-             :size_units,
+             :bookable_type,
+             :bookable_id,
              :first_tattoo,
-             :colored_tattoo,
+             :status,
              :images
 
   def urgency
-    object.urgency.strftime("%d-%m-%Y") if object.urgency
+    object.urgency.strftime('%d-%m-%Y') if object.urgency
   end
 
   def images

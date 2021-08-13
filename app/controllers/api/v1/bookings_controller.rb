@@ -48,18 +48,17 @@ module Api
         params.permit(
           :description,
           :tattoo_placement,
+          :tattoo_color,
+          :tattoo_size,
+          :budget,
+          :style_id,
+          :phone_number,
+          :availability,
           :city,
-          :height,
-          :width,
           :urgency,
           :bookable_type,
           :bookable_id,
-          :status,
-          :consult_artist,
-          :first_tattoo,
-          :size_units,
-          :colored_tattoo,
-          :custom_size
+          :first_tattoo
         ).tap do |booking|
           booking[:user_id] = find_booking_user.id
         end
