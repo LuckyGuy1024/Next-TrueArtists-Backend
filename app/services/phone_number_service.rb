@@ -1,5 +1,5 @@
 
-class PhoneNumberVerifier
+class PhoneNumberService
   attr_reader :options
 
   def initialize(options)
@@ -35,9 +35,11 @@ class PhoneNumberVerifier
 
   def send_sms
     @client.messages.create({
-                              from: Rails.application.credentials[:TWILIO_PHONE_NUMBER],
+                              from: ENV.fetch('TWILIO_PHONE_NUMBER'),
                               to: @phone_number,
                               body: @message
                             })
+  rescue Twilio::REST::TwilioError => e
+    e.message
   end
 end

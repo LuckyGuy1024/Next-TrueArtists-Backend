@@ -100,6 +100,15 @@ Rails.application.routes.draw do
       resources :styles
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]
+      resources :messages do
+        collection do
+          get 'threads' => 'messages#threads'
+          get 'threads/:thread_id' => 'messages#thread_messages'
+        end
+      end
+
+      resources :bookings
+
       resources :guest_artist_applications, only: %i[create update destroy] do
         member do
           post :respond

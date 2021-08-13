@@ -5,6 +5,9 @@ class Studio < ApplicationRecord
   include IdentityCache
   include AddressExtension
   include StatusManagement
+  serialize :services, Array
+  serialize :languages, Array
+  serialize :accepted_payment_methods, Array
 
   LANGUAGES = %w[
     Mandarin
@@ -28,7 +31,6 @@ class Studio < ApplicationRecord
               'Basic Body Modification', 'Piercing', 'Scarification',
               'Tattoo Coverup', 'Tattoo Design', 'Tattooing'].freeze
 
-
   extend FriendlyId
   friendly_id :slug_candidates, use: %i[slugged finders]
 
@@ -42,10 +44,21 @@ class Studio < ApplicationRecord
   has_many :tattoos
   has_many :clients
   has_many :guest_artist_applications
+  has_many :bookings, as: :bookable, dependent: :destroy
   has_one_attached :avatar
-  has_one_attached :hero_banner
+
+  has_one_attached :avatar do |attachable|
+    attachable.format :webp
+    attachable.resize "100x100"
+  end
+
+  has_one_attached :hero_banner do |attachable|
+    attachable.format :webp
+    attachable.resize "100x100"
+  end
 
   cache_index :slug, unique: true
+  cache_index :slug, :status
   cache_has_many :studio_artists, embed: true
 
   # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
@@ -62,7 +75,7 @@ class Studio < ApplicationRecord
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
   def format_studio_name
-    self.name = self.name&.titleize
+    self.name = name&.titleize
   end
 
   def slug_candidates
@@ -83,6 +96,7 @@ class Studio < ApplicationRecord
   def search_profile_image
     return avatar if avatar.attached?
     return tattoos.last&.image if tattoos.last&.image&.attached?
+
     nil
   end
 
@@ -99,7 +113,7 @@ class Studio < ApplicationRecord
   end
 
   def verify_phone(code)
-    status = PhoneNumberVerifier.new(code: code, phone_number: phone_number).status
+    status = PhoneNumberService.new(code: code, phone_number: phone_number).status
 
     update(phone_verified: true) if status == 'approved'
   end
@@ -108,6 +122,10 @@ class Studio < ApplicationRecord
     studio_params = params.merge(params[:working_hours]).delete_if { |k, _v| k == 'working_hours' }
 
     user.build_studio(studio_params)
+  end
+
+  def self.with_status(status)
+    where(status: status)
   end
 
   def has_social_profiles
@@ -129,7 +147,7 @@ class Studio < ApplicationRecord
   private
 
   def send_phone_verification_code
-    PhoneNumberVerifier.new(phone_number: phone_number).verify
+    PhoneNumberService.new(phone_number: phone_number).verify
   end
 
   def upgrade_user_role

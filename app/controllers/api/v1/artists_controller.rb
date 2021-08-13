@@ -121,8 +121,8 @@ module Api::V1
         :price_per_hour,
         :currency_code,
         :street_address,
+        :cpr_certified,
         :street_address_2,
-        :specialty,
         :city,
         :state,
         :zip_code,
@@ -131,7 +131,8 @@ module Api::V1
         :seeking_guest_spot,
         :guest_artist,
         :avatar,
-        :hero_banner
+        :hero_banner,
+        specialty: []
       ).tap do |whitelisted|
         whitelisted[:style_ids] = params[:styles]
       end

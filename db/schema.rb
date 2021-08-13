@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_043210) do
+ActiveRecord::Schema.define(version: 2021_08_13_055818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,7 +137,37 @@ ActiveRecord::Schema.define(version: 2021_08_11_043210) do
     t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "bookings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "description"
+    t.string "tattoo_placement"
+    t.boolean "consult_artist", default: false, null: false
+    t.boolean "custom_size"
+    t.string "size_units"
+    t.datetime "urgency"
+    t.boolean "first_tattoo", default: false, null: false
+    t.boolean "colored_tattoo", default: false, null: false
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "message_id"
+    t.string "status"
+    t.integer "height"
+    t.integer "width"
+    t.string "city"
+    t.string "bookable_type"
+    t.integer "bookable_id"
+    t.string "budget"
+    t.string "tattoo_color"
+    t.string "tattoo_size"
+    t.string "phone_number"
+    t.integer "style_id"
+    t.string "availability"
+    t.index ["bookable_type", "bookable_id"], name: "booking_id"
+    t.index ["message_id"], name: "index_bookings_on_message_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "meta_description"
     t.text "description"
@@ -276,8 +306,12 @@ ActiveRecord::Schema.define(version: 2021_08_11_043210) do
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "thread_id"
+    t.boolean "email_client_reply"
+    t.boolean "is_read"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.index ["thread_id"], name: "index_messages_on_thread_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -384,8 +418,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_043210) do
     t.time "sunday_end"
     t.string "currency_code"
     t.string "street_address_2"
-    t.string "services", array: true
-    t.integer "reminder_count", default: 0
+    t.string "services"
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id"
   end

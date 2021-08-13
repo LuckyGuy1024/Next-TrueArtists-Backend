@@ -123,7 +123,7 @@ module Api::V1
       if studio_artist.destroy
         head(:ok)
       else
-        render_api_error(status: 422, errors: @tattoo.errors)
+        render_api_error(status: 422, errors: @studio.errors)
       end
     end
 
@@ -181,7 +181,6 @@ module Api::V1
         :twitter_url,
         :instagram_url,
         :accepting_guest_artist,
-        :accepted_payment_methods,
         :piercings,
         :cosmetic_tattoos,
         :appointment_only,
@@ -191,20 +190,16 @@ module Api::V1
         :wheelchair_access,
         :parking,
         :lgbt_friendly,
-        :languages,
-        :services,
         :minimum_spend,
         :price_per_hour,
         :currency_code,
-        :street_address,
-        :city,
-        :state,
-        :zip_code,
-        :country,
         :seeking_guest_spot,
         :guest_studio,
         :avatar,
         :hero_banner,
+        languages: [],
+        accepted_payment_methods: [],
+        services: [],
         working_hours: {}
       )
     end

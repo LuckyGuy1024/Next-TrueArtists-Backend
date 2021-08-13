@@ -37,7 +37,7 @@
               <%= link_to style_tattoos_path(style.name.slugorize) do %>
                 <div class="list-image">
                   <% if style.avatar.attached? %>
-                    <img data-src="<%= asset_blob_url(style.avatar) %>" class="lazyload large" />
+                    <%= lazy_image_tag(asset_blob_url(style.avatar), title: style.name, alt: style.name, class: 'large') %>
                   <% end %>
                 </div>
                 <div class="list-content d-flex align-items-center">

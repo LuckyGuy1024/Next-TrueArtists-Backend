@@ -3,7 +3,7 @@
     <div class="col-sm-4 article-image">
       <% if article.image.attached? %>
         <%= link_to article_path(article) do %>
-          <img data-src="<%= asset_blob_url(article.image) %>" class="lazyload" />
+          <%= lazy_image_tag(asset_blob_url(article.image), title: article.title, alt: article.title) %>
         <% end %>
       <% end %>
     </div>

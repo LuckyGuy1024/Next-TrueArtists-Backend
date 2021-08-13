@@ -2,6 +2,8 @@ class Tattoo < ApplicationRecord
   include AASM
   include IdentityCache
   include AssetExtension
+  extend FriendlyId
+
   acts_as_favoritable
 
   COLORS = ['Color', 'Black & Grey'].freeze
@@ -10,17 +12,25 @@ class Tattoo < ApplicationRecord
                 'Lower Leg', 'Foot'].freeze
 
   aasm column: 'status' do
-    state :approved, initial: true
+    state :pending_review, initial: true
+    state :approved
     state :flagged
+    state :rejected
 
     event :flag, after_commit: :send_tattoo_status_notification do
       transitions from: :approved, to: :flagged
     end
 
+    event :reject do
+      transitions from: [:pending_review, :approved], to: :rejected
+    end
+
     event :approve do
-      transitions from: :flagged, to: :approved
+      transitions from: [:pending_review, :flagged, :rejected], to: :approved
     end
   end
+
+  friendly_id :slug_candidates, use: %i[slugged finders]
 
   searchkick locations: [:location]
 
@@ -31,6 +41,9 @@ class Tattoo < ApplicationRecord
   has_one_attached :image do |attachable|
     attachable.format :webp
   end
+
+  cache_index :slug, unique: true
+  cache_index :slug, :status
 
   validates :image, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
@@ -46,7 +59,17 @@ class Tattoo < ApplicationRecord
   end
 
   def seo_title
-    format('%s %s %s | %s', color, placement, 'Tattoo', (artist.name || studio.name)).titleize
+    format('%s %s %s %s | %s', style&.name, color, placement, 'Tattoo', (artist.name || studio.name)).titleize
+  end
+
+  def slug_candidates
+    [
+      %i[id style_slug placement]
+    ]
+  end
+
+  def style_slug
+    style&.slug
   end
 
   def add_location_data

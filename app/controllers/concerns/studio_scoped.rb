@@ -29,7 +29,7 @@ module StudioScoped
   end
 
   def find_studio
-    @studio = Studio.fetch_by_slug(params[:id])
+    @studio = Studio.fetch_by_slug_and_status(params[:id], 'approved').first
     head(:not_found) unless @studio
   end
 end

@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  require 'json_web_token'
+
+  include ActionController::Cookies
+  include ActionController::RequestForgeryProtection
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include Pundit
-  require 'json_web_token'
+
+  protect_from_forgery prepend: true
+  skip_before_action :verify_authenticity_token
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -51,7 +57,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_api_error(status: 500, errors: [])
-    head(status: status) && return if errors.empty?
+    head(status: status) && return if errors.to_a.empty?
 
     render(json: json_api_error_format(errors).to_json, status: status) && return if errors.respond_to?(:messages)
 
