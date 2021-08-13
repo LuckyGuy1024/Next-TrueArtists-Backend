@@ -51,7 +51,7 @@
                 </div>
                 <% if @artist.phone_number.present? %>
                   <p>
-                    <span itemprop="telephone"><%= @artist.phone_number %></span>
+                    <span itemprop="telephone"><a href="tel:<%= @artist.phone_number %>"></a></span>
                     <% if @artist.phone_verified %>
                       <span class="ta-icon-check-circle-fill icon"></span>
                     <% end %>

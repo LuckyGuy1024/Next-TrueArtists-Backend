@@ -88,7 +88,7 @@
             <div class="address-text">
               <h2><%= @studio.name %></h2>
               <% if @studio.phone_number %>
-                <p>Phone: <%= @studio.phone_number %>
+                <p itemprop='telephone'>Phone: <a href="tel:<%= @studio.phone_number %>"></a>
                   <span class="ta-icon-check-circle-fill icon"></span>
                 </p>
               <% end %>

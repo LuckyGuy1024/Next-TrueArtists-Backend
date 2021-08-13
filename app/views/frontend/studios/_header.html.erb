@@ -11,12 +11,17 @@
           </div>
           <div class="s-profile-info">
             <h1 itemprop='name'><%= link_to @studio.name, studio_path(@studio) %></h1>
-            <div class="s-rating">
+            <div class="s-rating" itemprop='address'>
               <span><%= format('%s %s', @studio.street_address, @studio.street_address_2) %></span>
-              <span>
+              <span >
                 <%= @studio.city %>, <%= @studio.state %><br/>
                 <%= @studio.country %> <%= @studio.zip_code %>
               </span>
+              <% if @studio.phone_number %>
+                <p itemprop='telephone'><a href="tel:<%= @studio.phone_number %>"></a>
+                  <span class="ta-icon-check-circle-fill icon"></span>
+                </p>
+              <% end %>
             </div>
           </div>
         </div>
