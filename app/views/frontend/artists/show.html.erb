@@ -127,7 +127,7 @@
             <div class="social-media-profiles">
               <% if full_url(@artist.facebook_url) %>
                 <span>
-                  <%= link_to full_url(@artist.facebook_url) do %>
+                  <%= link_to full_url(@artist.facebook_url), target: '_blank' do %>
                     <span class="ta-icon-facebook icon"></span>
                   <% end %>
                 </span>
@@ -135,7 +135,7 @@
 
               <% if full_url(@artist.twitter_url) %>
                 <span>
-                  <%= link_to full_url(@artist.twitter_url) do %>
+                  <%= link_to full_url(@artist.twitter_url), target: '_blank', rel: 'nofollow' do %>
                     <span class="ta-icon-twitter icon"></span>
                   <% end %>
                 </span>
@@ -143,7 +143,7 @@
 
               <% if full_url(@artist.instagram_url) %>
                 <span>
-                  <%= link_to full_url(@artist.instagram_url) do %>
+                  <%= link_to full_url(@artist.instagram_url), target: '_blank', rel: 'nofollow' do %>
                     <span class="ta-icon-instagram icon"></span>
                   <% end %>
                 </span>
@@ -151,7 +151,7 @@
 
               <% if full_url(@artist.website) %>
                 <div class="website">
-                  <%= link_to full_url(@artist.website) do %>
+                  <%= link_to full_url(@artist.website), target: '_blank', rel: 'nofollow' do %>
                   Website
                   <% end %>
                 </div>
