@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-namespace :complete_profile_schedule do
-  task reminder: :environment do
+namespace :onboarding do
+  task reminders: :environment do
     puts 'Starting scheduling studio complete profile reminders'
     Studio.where(status: 'pending').find_each do |studio|
       # time in hours from when created to now
-      time_diff = ((Time.now - studio.created_at) / 1.hour).round
+      time_diff = ((Time.zone.now - studio.created_at) / 1.hour).round
 
       case time_diff
       when 8..24

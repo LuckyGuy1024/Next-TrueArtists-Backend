@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-namespace :send_tattoo_upload_email do
+namespace :tattoo_upload do
   task reminder: :environment do
     puts 'Starting Studio Tattoo Image Reminders'
     Studio.where(status: 'accepted').find_each do |studio|
