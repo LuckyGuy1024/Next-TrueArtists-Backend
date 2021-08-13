@@ -28,7 +28,7 @@ module Frontend
 
     def styles
       breadcrumbs.add 'Tattoos', tattoos_path
-      breadcrumbs.add 'Styles', styles_tattoos_path
+      breadcrumbs.add 'Styles'
 
       respond_to do |format|
         format.html
@@ -56,7 +56,6 @@ module Frontend
 
     def show
       breadcrumbs.add 'Tattoos', tattoos_path
-      breadcrumbs.add 'Back',
 
       @similar_tattoos = @tattoo.similar(
         fields: %i[
