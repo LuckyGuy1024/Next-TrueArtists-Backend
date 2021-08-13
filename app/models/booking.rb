@@ -3,9 +3,31 @@
 class Booking < ApplicationRecord
   include AASM
 
-  PLACEMENTS = ['Head', 'Neck', 'Shoulder', 'Chest', 'Back',
-                'Arm', 'Forearm', 'Ribs', 'Hip', 'Thigh',
-                'Lower Leg', 'Foot'].freeze
+  TATTOO_COLORS = [
+    'Colored',
+    'Black & White',
+    'Mixed',
+    'Consult with artist'
+  ]
+
+  TATTOO_SIZES = {
+    centimeters: [
+      '1-5 cm',
+      '5-10 cm',
+      '10-20 cm',
+      '20-30 cm',
+      '+ 30 cm',
+      'Consult with artist'
+    ],
+    inches: [
+      '1-5 inch',
+      '5-10 inch',
+      '10-20 inch',
+      '20-30 inch',
+      '+ 20 inch',
+      'Consult with artist'
+    ]
+  }
 
   enum size_units: {
     cm: 'Centimeters',
@@ -14,12 +36,9 @@ class Booking < ApplicationRecord
 
   searchkick locations: [:location],
              searchable: %i[status tattoo_placement description receiver_id sender_id],
-             filterable: %i[first_tattoo size_units consult_artist tattoo_placement colored_tattoo status]
+             filterable: %i[first_tattoo tattoo_placement tatoo_color status]
 
   validates :tattoo_placement, :description, presence: true
-  # validates_presence_of :custom_size, :size_units,
-  #                       message: 'Can\'t be blank if consult_artist=false',
-  #                       unless: lambda { :consult_artist == true }
   belongs_to :message
   belongs_to :bookable, polymorphic: true
   belongs_to :user, validate: true

@@ -109,7 +109,7 @@ module Api::V1
     def artist_params
       params.permit(
         :licensed,
-        :cpr_certified,
+        :name,
         :bio,
         :years_of_experience,
         :website,
@@ -121,6 +121,7 @@ module Api::V1
         :price_per_hour,
         :currency_code,
         :street_address,
+        :cpr_certified,
         :street_address_2,
         :city,
         :state,

@@ -17,7 +17,7 @@ class Tattoo < ApplicationRecord
     state :flagged
     state :rejected
 
-    event :flag do
+    event :flag, after_commit: :send_tattoo_status_notification do
       transitions from: :approved, to: :flagged
     end
 
@@ -82,5 +82,9 @@ class Tattoo < ApplicationRecord
 
   def parent
     artist || studio
+  end
+
+  def send_tattoo_status_notification
+    TattooMailer.send_tattoo_status_notification(self).deliver_now
   end
 end

@@ -6,6 +6,8 @@ class BookingService
   end
 
   def call
+    return handle_error('Select a studio or artist') unless recipient
+
     message = MessageService.new(
       message_id: params[:message_id],
       receiver_id: recipient&.id,
@@ -21,7 +23,7 @@ class BookingService
         handle_error(booking.errors.full_messages)
       end
     else
-      handle_error(message&.error)
+      handle_error(message&.errors)
     end
   end
 

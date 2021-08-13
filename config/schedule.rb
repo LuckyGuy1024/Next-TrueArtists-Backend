@@ -1,7 +1,13 @@
-env :MAILTO, 'jamomathenge@gmail.com'
+env :MAILTO, 'james@trueartists.com'
 set :output, 'log/cron.log'
-# job_type :rake, 'cd :path && PATH=/usr/local/bin:$PATH RAILS_ENV=:environment bundle exec rake :task :output'
 
-every 2.hours do
-  rake "import:legacy_data --trace"
+case @environment
+when 'production'
+  every [:wednesday], at: Time.parse('4pm').getlocal.strftime('%H:%M'), roles: [:app] do
+    rake 'tattoo_upload:reminder --trace'
+  end
+
+  every 24.hours, at: Time.parse('2pm').getlocal.strftime('%H:%M'), roles: [:app] do
+    rake 'onboarding:reminders --trace'
+  end
 end

@@ -7,6 +7,7 @@ class Studio < ApplicationRecord
   include StatusManagement
   serialize :services, Array
   serialize :languages, Array
+  serialize :accepted_payment_methods, Array
 
   LANGUAGES = %w[
     Mandarin
@@ -69,6 +70,7 @@ class Studio < ApplicationRecord
   before_validation :format_studio_name
 
   after_commit :upgrade_user_role, on: :create
+  after_commit :send_complete_profile_notification, on: :create
   # after_validation :save_location_data #, if: :address_changed?
   after_save :send_phone_verification_code, if: :phone_number_changed?
 
@@ -160,5 +162,9 @@ class Studio < ApplicationRecord
                      before: "#{time}_end".to_sym,
                      before_message: "must be before #{time} end date"
     end
+  end
+
+  def send_complete_profile_notification
+    StudioNotificationJob.set(wait: 8.hours).perform_later(id)
   end
 end

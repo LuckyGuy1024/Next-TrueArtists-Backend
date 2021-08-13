@@ -59,12 +59,12 @@
             </div>
           </div>
 
-          <div class="artist-p-btn">
-            <% if false %>
+          <% if false %>
+            <div class="artist-p-btn">
               <a href="#" class="btn btn-secondary">Save</a>
-            <% end %>
-            <%= link_to 'Book', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/book/artist/#{@artist.slug}", target: '_blank', class: 'btn btn-primary ml-4' %>
-          </div>
+              <%= link_to 'Book', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/book/artist/#{@artist.slug}", target: '_blank', class: 'btn btn-primary ml-4' %>
+            </div>
+          <% end %>
 
           <% if @artist.current_studio %>
             <div class="artist-p-style">

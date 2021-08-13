@@ -9,6 +9,7 @@ class ApplicationController < ActionController::API
   include Pundit
 
   protect_from_forgery prepend: true
+  skip_before_action :verify_authenticity_token
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
