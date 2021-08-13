@@ -120,6 +120,7 @@ module Api::V1
         :price_per_hour,
         :currency_code,
         :street_address,
+        :cpr_certified,
         :street_address_2,
         :city,
         :state,
