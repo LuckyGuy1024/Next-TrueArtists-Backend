@@ -1,6 +1,6 @@
 class ChangeServicesToArrayField < ActiveRecord::Migration[6.1]
   def change
-    remove_column :studios, :services, :text
-    add_column :studios, :services, :string, array: true
+    change_column :studios, :services, :string
+    change_column :studios, :languages, :string
   end
 end
