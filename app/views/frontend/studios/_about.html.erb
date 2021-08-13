@@ -33,25 +33,34 @@
             <% end %>
           </div>
           <div class="social-media-profiles">
-            <% if @studio.facebook_url.present? %>
-              <%= link_to @studio.facebook_url do %>
-                <span class="ta-icon-facebook icon"></span>
-              <% end %>
+            <% if full_url(@studio.facebook_url) %>
+              <span>
+                <%= link_to full_url(@studio.facebook_url) do %>
+                  <span class="ta-icon-facebook icon"></span>
+                <% end %>
+              </span>
             <% end %>
-            <% if @studio.twitter_url.present? %>
-              <%= link_to @studio.twitter_url do %>
-                <span class="ta-icon-twitter icon"></span>
-              <% end %>
+
+            <% if full_url(@studio.twitter_url) %>
+              <span>
+                <%= link_to full_url(@studio.twitter_url) do %>
+                  <span class="ta-icon-twitter icon"></span>
+                <% end %>
+              </span>
             <% end %>
-            <% if @studio.instagram_url.present? %>
-              <%= link_to @studio.instagram_url do %>
-                <span class="ta-icon-instagram icon"></span>
-              <% end %>
+
+            <% if full_url(@studio.instagram_url) %>
+              <span>
+                <%= link_to full_url(@studio.instagram_url) do %>
+                  <span class="ta-icon-instagram icon"></span>
+                <% end %>
+              </span>
             <% end %>
-            <% if validate_url(@studio.website_url) %>
+
+            <% if full_url(@studio.website) %>
               <div class="website">
-                <%= link_to @studio.website_url do %>
-                  Website
+                <%= link_to full_url(@studio.website) do %>
+                Website
                 <% end %>
               </div>
             <% end %>

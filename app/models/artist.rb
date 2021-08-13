@@ -60,7 +60,7 @@ class Artist < ApplicationRecord
   end
 
   def city_state
-    #TODO - fix data
+    # TODO: - fix data
     if state.present? && ['United States', 'US'].include?(country)
       format('%s, %s', city&.titleize, state)
     else

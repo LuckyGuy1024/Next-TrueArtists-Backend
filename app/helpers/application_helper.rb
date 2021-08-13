@@ -1,5 +1,6 @@
 module ApplicationHelper
-  def validate_url(website_url)
-    URI.parse(website_url).is_a?(URI::HTTP) or URI.parse(website_url).is_a?(URI::HTTPS)
+  def full_url(url)
+    return nil unless url.present?
+    "https://#{url}" unless url[%r{\Ahttp://}] || url[%r{\Ahttps://}]
   end
 end

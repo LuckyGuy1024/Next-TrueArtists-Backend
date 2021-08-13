@@ -125,30 +125,33 @@
           <% end %>
           <div class="artist-p-style">
             <div class="social-media-profiles">
-              <% if @artist.facebook_url.present? %>
+              <% if full_url(@artist.facebook_url) %>
                 <span>
-                  <%= link_to @artist.facebook_url do %>
+                  <%= link_to full_url(@artist.facebook_url) do %>
                     <span class="ta-icon-facebook icon"></span>
                   <% end %>
                 </span>
               <% end %>
-              <% if @artist.twitter_url.present? %>
+
+              <% if full_url(@artist.twitter_url) %>
                 <span>
-                  <%= link_to @artist.twitter_url do %>
+                  <%= link_to full_url(@artist.twitter_url) do %>
                     <span class="ta-icon-twitter icon"></span>
                   <% end %>
                 </span>
               <% end %>
-              <% if @artist.instagram_url.present? %>
+
+              <% if full_url(@artist.instagram_url) %>
                 <span>
-                  <%= link_to @artist.instagram_url do %>
+                  <%= link_to full_url(@artist.instagram_url) do %>
                     <span class="ta-icon-instagram icon"></span>
                   <% end %>
                 </span>
               <% end %>
-              <% if validate_url(@artist.website) %>
+
+              <% if full_url(@artist.website) %>
                 <div class="website">
-                  <%= link_to @artist.website do %>
+                  <%= link_to full_url(@artist.website) do %>
                   Website
                   <% end %>
                 </div>
