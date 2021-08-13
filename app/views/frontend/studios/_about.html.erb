@@ -57,12 +57,12 @@
               </span>
             <% end %>
 
-            <% if full_url(@studio.website) %>
-              <div class="website">
-                <%= link_to full_url(@studio.website), target: '_blank', rel: 'nofollow' do %>
-                Website
+            <% if full_url(@studio.website_url) %>
+              <span>
+                <%= link_to full_url(@studio.website_url), target: '_blank', rel: 'nofollow' do %>
+                  Website
                 <% end %>
-              </div>
+              </span>
             <% end %>
           </div>
           </div>

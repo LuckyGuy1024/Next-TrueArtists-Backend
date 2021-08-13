@@ -150,11 +150,11 @@
               <% end %>
 
               <% if full_url(@artist.website) %>
-                <div class="website">
+                <span>
                   <%= link_to full_url(@artist.website), target: '_blank', rel: 'nofollow' do %>
                     Website
                   <% end %>
-                </div>
+                </span>
               <% end %>
             </div>
           </div>
