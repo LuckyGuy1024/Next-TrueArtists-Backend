@@ -68,36 +68,34 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="studio-address-item d-flex align-items-center flex-wrap">
-          <div class="studio-map">
-            <iframe
-              width="400"
-              height="400"
-              style="border:0"
-              loading="lazy"
-              allowfullscreen
-              src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch('GEOCODER_API_KEY') %>
-                &q=<%= @studio.full_address %>">
-            </iframe>
-          </div>
-          <div class="studio-address d-flex align-items-center flex-grow-1 justify-content-between">
-            <div class="address-text">
-              <h2><%= @studio.name %></h2>
-              <% if @studio.phone_number %>
-                <p itemprop='telephone'>Phone: <a href="tel:<%= @studio.phone_number %>"></a>
-                  <span class="ta-icon-check-circle-fill icon"></span>
-                </p>
-              <% end %>
-              <p><%= @studio.full_address %></p>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="studio-address-item d-flex align-items-center flex-wrap">
+            <div class="studio-map">
+              <iframe
+                width="400"
+                height="400"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch('GEOCODER_API_KEY') %>
+                  &q=<%= @studio.full_address %>">
+              </iframe>
+            </div>
+            <div class="studio-address d-flex align-items-center flex-grow-1 justify-content-between">
+              <div class="address-text">
+                <h2 itemprop='name'><%= @studio.name %></h2>
+                <% if @studio.phone_number.present? %>
+                  <p itemprop='telephone'>Phone: <a href="tel:<%= @studio.phone_number %>"></a>
+                    <span class="ta-icon-check-circle-fill icon"></span>
+                  </p>
+                <% end %>
+                <p><%= @studio.full_address %></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>
 <!-- // -->
