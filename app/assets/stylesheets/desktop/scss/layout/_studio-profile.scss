@@ -251,6 +251,18 @@
       margin-left: 0;
       margin-right: 10px;
       margin-bottom: 10px;
+      color: $p-gray;
+
+      span {
+        border-bottom: 1px solid #e1e1e1;
+        display: block;
+        padding: 16px;
+        span {
+          &.icon {
+            float: right;
+          }
+        }
+      }
 
       &:hover {
         color: $secondary-color;
@@ -259,10 +271,6 @@
 
     .website {
       margin-top: 10px;
-
-      a {
-        color: #00b0e8;
-      }
     }
   }
 }
@@ -299,6 +307,18 @@
         margin-left: 0;
         margin-right: 10px;
         margin-bottom: 10px;
+        color: $p-gray;
+
+        span {
+          border-bottom: 1px solid #e1e1e1;
+          display: block;
+          padding: 16px;
+          span {
+            &.icon {
+              float: right;
+            }
+          }
+        }
 
         &:hover {
           color: $secondary-color;
@@ -307,10 +327,6 @@
 
       .website {
         margin-top: 10px;
-
-        a {
-          color: #00b0e8;
-        }
       }
     }
   }

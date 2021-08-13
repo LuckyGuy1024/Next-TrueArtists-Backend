@@ -33,12 +33,12 @@
         <div class="artist-left-sidebar">
           <div class="artist-p-info" itemprop="mainEntityOfPage" itemscope="true" itemtype="http://schema.org/ProfilePage" itemid="<%= artist_url(@artist) %>">
             <div class='row'>
-              <div class='col-md-4'>
+              <div class='col-4'>
                 <% if @artist.avatar.attached? %>
                   <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
                 <% end %>
               </div>
-              <div class='col-md-8'>
+              <div class='col-8'>
                 <h1 itemprop='name'><%= @artist.name %></h1>
                 <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                   <% if @artist.street_address.present? %>
@@ -128,7 +128,7 @@
               <% if full_url(@artist.facebook_url) %>
                 <span>
                   <%= link_to full_url(@artist.facebook_url), target: '_blank' do %>
-                    <span class="ta-icon-facebook icon"></span>
+                    Facebook <span class="ta-icon-facebook icon"></span>
                   <% end %>
                 </span>
               <% end %>
@@ -136,7 +136,7 @@
               <% if full_url(@artist.twitter_url) %>
                 <span>
                   <%= link_to full_url(@artist.twitter_url), target: '_blank', rel: 'nofollow' do %>
-                    <span class="ta-icon-twitter icon"></span>
+                    Twitter <span class="ta-icon-twitter icon"></span>
                   <% end %>
                 </span>
               <% end %>
@@ -144,7 +144,7 @@
               <% if full_url(@artist.instagram_url) %>
                 <span>
                   <%= link_to full_url(@artist.instagram_url), target: '_blank', rel: 'nofollow' do %>
-                    <span class="ta-icon-instagram icon"></span>
+                    Instagram <span class="ta-icon-instagram icon"></span>
                   <% end %>
                 </span>
               <% end %>
@@ -152,7 +152,7 @@
               <% if full_url(@artist.website) %>
                 <div class="website">
                   <%= link_to full_url(@artist.website), target: '_blank', rel: 'nofollow' do %>
-                  Website
+                    Website
                   <% end %>
                 </div>
               <% end %>

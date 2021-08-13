@@ -245,6 +245,19 @@
       margin-left: 0 !important;
       margin-right: 10px;
       margin-bottom: 10px;
+      color: $p-gray;
+
+      span {
+        border-bottom: 1px solid #e1e1e1;
+        display: block;
+        padding: 16px;
+
+        span {
+          &.icon {
+            float: right;
+          }
+        }
+      }
 
       &:hover {
         color: $secondary-color;
@@ -253,10 +266,6 @@
 
     .website {
       margin-top: 10px;
-
-      a {
-        color: #00b0e8;
-      }
     }
   }
 }
@@ -288,6 +297,7 @@
   }
 }
 // Reviews
+
 .reviews-list {
   .single-review {
     &:not(:last-child) {
@@ -313,6 +323,7 @@
   }
 }
 // Artists
+
 .artists-profile-info {
   padding-left: 30px;
 
