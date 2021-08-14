@@ -16,8 +16,8 @@ Rails.application.routes.draw do
       resources :users, only: %i[create show update destroy]
 
       # update and change passwords
-      match '/passwords/change_password' ,to: 'passwords#update', via: :put
-      match '/passwords',  to: 'passwords#create', via: :post
+      match '/passwords/change_password', to: 'passwords#update', via: :put
+      match '/passwords', to: 'passwords#create', via: :post
 
       resources :artists do
         resources :tattoos
@@ -100,12 +100,9 @@ Rails.application.routes.draw do
       resources :styles
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]
-      resources :messages do
-        collection do
-          get 'threads' => 'messages#threads'
-          get 'threads/:thread_id' => 'messages#thread_messages'
-        end
-      end
+
+      resources :conversations, only: %i[index]
+      resources :messages, only: %i[create]
 
       resources :bookings
 

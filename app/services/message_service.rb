@@ -1,5 +1,6 @@
 class MessageService
   attr_reader :params
+
   def initialize(params = {})
     @params = params
   end
@@ -9,6 +10,7 @@ class MessageService
       content: Message::DEFAULT_BOOKING_MESSAGE,
       sender_id: params[:sender_id],
       receiver_id: params[:receiver_id],
+      conversation_id: params[:conversation_id],
       message_type: Message.message_types[:appointment]
     )
     if message.save

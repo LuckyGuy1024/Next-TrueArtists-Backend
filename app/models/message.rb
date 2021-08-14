@@ -13,13 +13,13 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User', foreign_key: 'sender_id', validate: true
   belongs_to :receiver, class_name: 'User', foreign_key: 'receiver_id', validate: true
 
+  belongs_to :conversation
   has_many :message_mails
-  has_one :booking, required: false
-
   has_many_attached :attachments
 
   scope :threads, -> { pluck(:thread_id).uniq }
 
+  validates :content, :conversation_id, presence: true
   before_validation :assign_thread_id, on: :create
   after_commit :send_user_notification, on: :create
 

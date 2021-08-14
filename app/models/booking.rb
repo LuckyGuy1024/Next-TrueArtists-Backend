@@ -38,12 +38,13 @@ class Booking < ApplicationRecord
              searchable: %i[status tattoo_placement description receiver_id sender_id],
              filterable: %i[first_tattoo tattoo_placement tatoo_color status]
 
-  validates :tattoo_placement, :description, presence: true
-  belongs_to :message
+  belongs_to :conversation
   belongs_to :bookable, polymorphic: true
   belongs_to :user, validate: true
 
   has_many_attached :images
+
+  validates :tattoo_placement, :description, :conversation_id, presence: true
 
   aasm column: 'status' do
     state :pending_review, initial: true
