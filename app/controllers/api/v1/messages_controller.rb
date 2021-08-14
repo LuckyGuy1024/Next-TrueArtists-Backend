@@ -44,7 +44,6 @@ module Api
         params.permit(
           :email,
           :full_name,
-          :conversation_id,
           :sender_id,
           :receiver_id,
           :recipient_type,

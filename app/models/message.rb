@@ -3,8 +3,7 @@ class Message < ApplicationRecord
   DEFAULT_BOOKING_MESSAGE = 'You have a new booking inquiry from TrueArtists'
 
   enum message_type: {
-    appointment: 'Appointment',
-    advice: 'Advice',
+    appointment: 'Book Appointment',
     consultation: 'Consultation',
     pricing_questions: 'Pricing Questions',
     other: 'Other'

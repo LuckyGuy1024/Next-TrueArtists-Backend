@@ -58,7 +58,8 @@ module Api
           :urgency,
           :bookable_type,
           :bookable_id,
-          :first_tattoo
+          :first_tattoo,
+          images: []
         ).tap do |booking|
           booking[:user_id] = find_booking_user.id
         end
