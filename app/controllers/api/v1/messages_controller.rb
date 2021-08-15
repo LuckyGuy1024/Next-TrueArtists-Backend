@@ -30,7 +30,6 @@ module Api
           :receiver_id,
           :sender_id,
           :is_read,
-          :message_type,
           :thread_id
         ).tap do |message|
           if params[:receiver_id].blank? || params[:sender_id].blank?
