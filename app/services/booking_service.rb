@@ -18,6 +18,7 @@ class BookingService
 
     if message && message.success?
       booking = Booking.new(params)
+      booking.bookable = bookable
       booking.conversation_id = message.payload.conversation_id
       if booking.save
         OpenStruct.new({ success?: true, payload: booking })
@@ -39,8 +40,11 @@ class BookingService
   end
 
   def recipient
-    bookable = params[:bookable_type].constantize.find_by(id: params[:bookable_id])
-    bookable&.user
+    @recipient ||= bookable&.user
+  end
+
+  def bookable
+    @bookable ||= params[:bookable_type].constantize.find_by(slug: params[:bookable_id])
   end
 
   def handle_error(error)

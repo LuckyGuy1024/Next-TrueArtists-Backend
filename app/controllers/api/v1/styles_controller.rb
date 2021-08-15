@@ -6,7 +6,7 @@ module Api::V1
     before_action :find_style, except: %i[index]
 
     def index
-      @styles = Style.all
+      @styles = Style.find_all_cached
       render json: ActiveModel::Serializer::CollectionSerializer.new(@styles,
                                                                      serializer: StyleSerializer),
              status: :ok

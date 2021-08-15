@@ -3,9 +3,9 @@ class Message < ApplicationRecord
   DEFAULT_BOOKING_MESSAGE = 'You have a new booking inquiry from TrueArtists'
 
   enum message_type: {
-    appointment: 'Book Appointment',
+    appointment: 'Appointment',
     consultation: 'Consultation',
-    pricing_questions: 'Pricing Questions',
+    pricing_questions: 'Pricing',
     other: 'Other'
   }
 
@@ -14,6 +14,7 @@ class Message < ApplicationRecord
 
   belongs_to :conversation
   has_many :message_mails
+  has_one  :booking
   has_many_attached :attachments
 
   scope :threads, -> { pluck(:thread_id).uniq }
@@ -31,7 +32,7 @@ class Message < ApplicationRecord
 
   def send_user_notification
     return if email_client_reply
-    return if message_type == self.class.message_types[:appointment].downcase
+    return unless conversation.booking.blank?
 
     MessageMailingService.new(self).send
     # MessageSmsService.new(self, @@result[:phone]).send unless @@result[:phone].nil?
