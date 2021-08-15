@@ -42,7 +42,7 @@ class Booking < ApplicationRecord
   belongs_to :bookable, polymorphic: true
   belongs_to :user, validate: true
 
-  has_many_attached :images
+  has_many_attached :images, dependent: :destroy
 
   validates :tattoo_placement, :description, :conversation_id, presence: true
 

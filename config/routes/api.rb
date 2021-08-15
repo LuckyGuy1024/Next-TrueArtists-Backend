@@ -101,7 +101,12 @@ Rails.application.routes.draw do
       resources :categories, only: %i[index show]
       resources :landing_pages, only: %i[show index]
 
-      resources :conversations, only: %i[index]
+      resources :conversations, only: %i[index] do
+        member do
+          put :archive
+          put :read
+        end
+      end
       resources :messages, only: %i[create]
 
       resources :bookings

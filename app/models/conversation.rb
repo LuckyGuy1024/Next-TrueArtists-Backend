@@ -9,4 +9,18 @@ class Conversation < ApplicationRecord
   scope :between, lambda { |sender_id, receiver_id|
                     where('(conversations.sender_id = ? AND conversations.receiver_id = ?) OR (conversations.receiver_id = ? AND conversations.sender_id = ?)', sender_id, receiver_id, sender_id, receiver_id)
                   }
+  def archive!
+    self.archive = true
+    save
+  end
+
+  def read!
+    self.read = true
+    save
+  end
+
+  def unread!
+    self.read = false
+    save
+  end
 end

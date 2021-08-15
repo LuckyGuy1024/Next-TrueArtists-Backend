@@ -21,8 +21,13 @@ class Message < ApplicationRecord
   validates :content, :conversation_id, presence: true
   before_validation :assign_thread_id, on: :create
   after_commit :send_user_notification, on: :create
+  after_commit :mark_conversation_as_unread, on: :create
 
   private
+
+  def mark_conversation_as_unread
+    conversation.unread!
+  end
 
   def send_user_notification
     return if email_client_reply
