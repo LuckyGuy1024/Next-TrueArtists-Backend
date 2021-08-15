@@ -23,7 +23,7 @@ module Api::V1
     end
 
     def style_params
-      params.permit(:name)
+      params.permit(:name, :avatar)
     end
   end
 end

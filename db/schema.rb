@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_13_055818) do
+ActiveRecord::Schema.define(version: 2021_08_14_212804) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -156,7 +156,6 @@ ActiveRecord::Schema.define(version: 2021_08_13_055818) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "message_id"
     t.string "status"
     t.integer "height"
     t.integer "width"
@@ -169,8 +168,9 @@ ActiveRecord::Schema.define(version: 2021_08_13_055818) do
     t.string "phone_number"
     t.integer "style_id"
     t.string "availability"
+    t.integer "conversation_id"
     t.index ["bookable_type", "bookable_id"], name: "booking_id"
-    t.index ["message_id"], name: "index_bookings_on_message_id"
+    t.index ["conversation_id"], name: "index_bookings_on_conversation_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -226,6 +226,15 @@ ActiveRecord::Schema.define(version: 2021_08_13_055818) do
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lon", precision: 15, scale: 10
     t.string "slug"
+  end
+
+  create_table "conversations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "archive", default: false
+    t.boolean "read", default: false
   end
 
   create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -315,8 +324,6 @@ ActiveRecord::Schema.define(version: 2021_08_13_055818) do
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "subject"
     t.text "content"
-    t.integer "receiver_id"
-    t.integer "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
@@ -326,8 +333,10 @@ ActiveRecord::Schema.define(version: 2021_08_13_055818) do
     t.string "thread_id"
     t.boolean "email_client_reply"
     t.boolean "is_read"
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.integer "conversation_id"
+    t.integer "receiver_id"
+    t.integer "sender_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["thread_id"], name: "index_messages_on_thread_id"
   end
 
@@ -436,6 +445,7 @@ ActiveRecord::Schema.define(version: 2021_08_13_055818) do
     t.time "sunday_end"
     t.string "street_address_2"
     t.string "services"
+    t.integer "reminder_count", default: 0
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id"
   end
