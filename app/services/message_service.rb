@@ -1,5 +1,6 @@
 class MessageService
   attr_reader :params
+
   def initialize(params = {})
     @params = params
   end
@@ -9,8 +10,10 @@ class MessageService
       content: Message::DEFAULT_BOOKING_MESSAGE,
       sender_id: params[:sender_id],
       receiver_id: params[:receiver_id],
-      message_type: Message.message_types[:appointment]
+      conversation_id: params[:conversation_id]
     )
+    message.message_type = Message.message_types[:appointment]
+
     if message.save
       OpenStruct.new({ success?: true, payload: message })
     else

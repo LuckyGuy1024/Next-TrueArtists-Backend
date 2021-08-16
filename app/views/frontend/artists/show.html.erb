@@ -135,7 +135,7 @@
 
               <% if full_url(@artist.twitter_url) %>
                 <span>
-                  <%= link_to full_url(@artist.twitter_url), target: '_blank', rel: 'nofollow' do %>
+                  <%= link_to full_url(@artist.twitter_url), target: '_blank', rel: 'noopener noreferrer' do %>
                     Twitter <span class="ta-icon-twitter icon"></span>
                   <% end %>
                 </span>
@@ -143,7 +143,7 @@
 
               <% if full_url(@artist.instagram_url) %>
                 <span>
-                  <%= link_to full_url(@artist.instagram_url), target: '_blank', rel: 'nofollow' do %>
+                  <%= link_to full_url(@artist.instagram_url), target: '_blank', rel: 'noopener noreferrer' do %>
                     Instagram <span class="ta-icon-instagram icon"></span>
                   <% end %>
                 </span>
@@ -151,7 +151,7 @@
 
               <% if full_url(@artist.website) %>
                 <span>
-                  <%= link_to full_url(@artist.website), target: '_blank', rel: 'nofollow' do %>
+                  <%= link_to full_url(@artist.website), target: '_blank', rel: 'noopener noreferrer' do %>
                     Website
                   <% end %>
                 </span>
