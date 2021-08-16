@@ -8,7 +8,7 @@ module Api::V1
       if @user && @user.set_new_password(change_password_params)
         head(:ok)
       else
-        render_api_error(status: 422, errors: @user.errors)
+        render_api_error(status: 422, errors: ['Password reset link has expired. Reset your password again'])
       end
     end
 
@@ -16,7 +16,7 @@ module Api::V1
       if @user.reset_password_request
         head(:ok)
       else
-        render_api_error(status: 422, errors: 'Request could not be made.')
+        render_api_error(status: 422, errors: ['Invalid request. Reset your password again'])
       end
     end
 
