@@ -1,7 +1,7 @@
 <% set_meta_tags title: "Best Tattoo Shops & Studios in #{@city_state}",
                  description: "Find top certified tattoo studios and shops in #{@city_state}." %>
 
-<% set_meta_tags(canonical: city_state_studios_url(@city_state.slugorize))  %>
+<% set_meta_tags(canonical: city_state_studios_url(city_state: @city_state.slugorize))  %>
 
 <% set_meta_tags(open_graph: {
    title: "Best Tattoo Shops & Studios in #{@city_state}",

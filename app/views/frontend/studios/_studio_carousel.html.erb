@@ -1,7 +1,7 @@
 <div class="col-lg-3 col-md-6 col-sm-12 col">
   <div class="location-section">
     <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
-    <p><%= link_to studio.city_state, city_state_studios_path(studio.city_state.slugorize) %></p>
+    <p><%= link_to studio.city_state, city_state_studios_path(city_state: studio.city_state.slugorize) %></p>
   </div>
   <div class="listing-widget shadow">
     <%= link_to studio_path(studio) do %>

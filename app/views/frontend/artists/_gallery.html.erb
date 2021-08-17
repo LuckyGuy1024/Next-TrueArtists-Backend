@@ -1,10 +1,10 @@
 <div class="image-gallery grid">
   <div class='row'>
     <% tattoos.each do |tattoo| %>
-      <% if tattoo.image.present? %>
+      <% if tattoo.image.attached? %>
         <div class="col-lg-3 col-md-6 grid-item">
           <%= link_to tattoo_path(tattoo), class: 'gallery-item' do %>
-            <img data-src="<%= asset_blob_url(tattoo.image) %>" class="lazyload" />
+            <%= lazy_image_tag(asset_blob_url(tattoo.image)) %>
           <% end %>
         </div>
       <% end %>
