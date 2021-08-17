@@ -76,12 +76,7 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :bookings do
-          member do
-            put :reject
-            put :cancel
-          end
-        end
+        resources :bookings
 
         resources :articles
         resources :pages

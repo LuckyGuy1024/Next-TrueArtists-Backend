@@ -32,51 +32,6 @@ module Api
         render json: BookingSerializer.new(@booking).to_json, status: :ok
       end
 
-      def accept
-        authorize @booking
-
-        @booking.accept
-
-        if @booking.save
-
-          head(:ok)
-        else
-          render_api_error(status: 422, errors: @booking.errors)
-        end
-      rescue AASM::InvalidTransition => e
-        render_api_error(status: 422, errors: e.message)
-      end
-
-      def reject
-        authorize @booking
-
-        @booking.reject
-
-        if @booking.save
-
-          head(:ok)
-        else
-          render_api_error(status: 422, errors: @booking.errors)
-        end
-      rescue AASM::InvalidTransition => e
-        render_api_error(status: 422, errors: e.message)
-      end
-
-      def cancel
-        authorize @booking
-
-        @booking.cancel
-
-        if @booking.save
-
-          head(:ok)
-        else
-          render_api_error(status: 422, errors: @booking.errors)
-        end
-      rescue AASM::InvalidTransition => e
-        render_api_error(status: 422, errors: e.message)
-      end
-
       private
 
       def find_booking_user
