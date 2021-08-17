@@ -3,7 +3,7 @@
   <% unless artist.city_state.blank? %>
     <div class="location-section">
       <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
-      <p><%= link_to artist.city_state, city_state_artists_path(artist.city_state.slugorize) %></p>
+      <p><%= link_to artist.city_state, city_state_artists_path(city_state: artist.city_state&.slugorize || 'unknown') %></p>
     </div>
   <% end %>
   <div class="listing-widget shadow">
