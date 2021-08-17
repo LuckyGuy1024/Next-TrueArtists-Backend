@@ -74,3 +74,20 @@
   </div>
 </div>
 <!-- // -->
+
+<% if current_seo_content.present? %>
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sub-header">
+            <h2><%= current_seo_content.title %></h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <%= current_seo_content.content.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

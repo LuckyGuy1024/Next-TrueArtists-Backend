@@ -1,22 +1,22 @@
-<% set_meta_tags title: "Best Tattoo Shops & Artists Near You",
-              description: "Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today." %>
+<% set_meta_tags title: "#{current_seo_content&.title || 'Best Tattoo Shops & Artists Near You'}",
+              description: "#{current_seo_content&.meta_description || 'Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today.'}" %>
 
 <% set_meta_tags(canonical: root_url)  %>
 
 <% set_meta_tags(open_graph: {
-    title: "Best Tattoo Shops & Artists Near You",
+    title:  "#{current_seo_content&.title || 'Best Tattoo Shops & Artists Near You'}",
     type: 'website',
     site_name: 'TrueArtists',
     url: root_url,
-    description: "Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today."
+    description: "#{current_seo_content&.meta_description || 'Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today.'}"
   })
 %>
 
 <% set_meta_tags twitter: {
     card: 'summary_large_image',
     site: 'TrueArtists',
-    title: "Best Tattoo Shops & Artists Near You",
-    description: "Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today.",
+    title:  "#{current_seo_content&.title || 'Best Tattoo Shops & Artists Near You'}",
+    description: "#{current_seo_content&.meta_description || 'Find Certified Tattoo Shops & Artists in a city near. Book a tattoo appointment today.'}",
     url: root_url
   }
 %>
