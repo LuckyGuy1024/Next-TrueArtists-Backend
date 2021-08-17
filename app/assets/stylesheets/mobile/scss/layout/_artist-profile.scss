@@ -1,4 +1,5 @@
 .artist-left-sidebar {
+  margin-bottom: 10px;
   background: $white-bg;
   padding: 30px 20px;
   border-radius: 16px;
@@ -22,6 +23,10 @@
       font-weight: 600;
       font-size: 20px;
     }
+  }
+  p {
+    color: $p-gray;
+    font-size: 15px;
   }
 }
 .artist-p-location {
@@ -54,6 +59,14 @@
     margin-left: 0 !important;
     margin-right: 10px;
     margin-bottom: 10px;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  .icon {
+    font-size: 25px;
   }
 }
 

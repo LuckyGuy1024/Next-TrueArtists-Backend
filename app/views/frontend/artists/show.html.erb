@@ -26,22 +26,39 @@
    image: { src: asset_blob_url(@artist.search_profile_image) }
  }
 %>
-
-<div class="page-section gray">
+<div class="page-section gray-bg">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4">
-        <div class="artist-left-sidebar text-center">
+      <div class="col-lg-3">
+        <div class="artist-left-sidebar">
           <div class="artist-p-info" itemprop="mainEntityOfPage" itemscope="true" itemtype="http://schema.org/ProfilePage" itemid="<%= artist_url(@artist) %>">
-            <% if @artist.avatar.attached? %>
-              <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
-            <% end %>
-            <h1 itemprop='name'><%= @artist.name %></h1>
-            <% if @artist.street_address.present? %>
-              <p><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
-            <% end %>
-            <p><%= @artist.city %>, <%= @artist.state %><br/>
-              <%= @artist.country %> <%= @artist.zip_code %></p>
+            <div class='row'>
+              <div class='col-4'>
+                <% if @artist.avatar.attached? %>
+                  <img data-src="<%= asset_blob_url(@artist.avatar) %>" class="lazyload" />
+                <% end %>
+              </div>
+              <div class='col-8'>
+                <h1 itemprop='name'><%= @artist.name %></h1>
+                <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  <% if @artist.street_address.present? %>
+                    <p itemprop="streetAddress"><%= format('%s %s', @artist.street_address, @artist.street_address_2) %></p>
+                  <% end %>
+                  <p>
+                    <span itemprop="streetAddress"><%= @artist.city %></span>, <span itemprop="addressRegion"><%= @artist.state %></span><br/>
+                    <%= @artist.country %> <%= @artist.zip_code %>
+                  </p>
+                </div>
+                <% if @artist.phone_number.present? %>
+                  <p>
+                    <span itemprop="telephone"><a href="tel:<%= @artist.phone_number %>"></a></span>
+                    <% if @artist.phone_verified %>
+                      <span class="ta-icon-check-circle-fill icon"></span>
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+            </div>
           </div>
 
           <% if false %>
@@ -59,26 +76,97 @@
                   <h5><%= @artist.current_studio.name %></h5>
                   <p><%= @artist.current_studio.city_state %></p>
                 <% end %>
+                <% if @artist.guest_artist %>
+                  <h3>Guest Artist</h3>
+                <% end %>
               </div>
             </div>
           <% end %>
+      </div>
 
+        <div class="artist-left-sidebar">
+          <% if @artist.styles.present? %>
+            <div class="artist-p-style">
+              <h4>Style Specialization</h4>
+              <div class="artists-style">
+                <% @artist.styles.each do |style| %>
+                  <%= link_to style.name, style_tattoos_path(style.slug), class: 'tag tag-cloud' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
           <div class="artist-p-style">
-            <h4>Style Specialization</h4>
-            <div class="artists-style">
-              <% @artist.styles.each do |style| %>
-                <%= link_to style.name, style_tattoos_path(style.slug), class: 'tag tag-cloud' %>
+            <h4>Licensing</h4>
+            <p>Licensed
+              <% if @artist.licensed %>
+                <span class="ta-icon-check icon"></span>
+              <% else %>
+                <span class="ta-icon-x"></span>
+              <% end %>
+            </p>
+            <p>CPR Certified
+              <% if @artist.cpr_certified %>
+                <span class="ta-icon-check icon"></span>
+              <% else %>
+                <span class="ta-icon-x"></span>
+              <% end %>
+            </p>
+          </div>
+          <% if @artist.price_per_hour.present? || @artist.minimum_spend.present? %>
+            <div class="artist-p-style">
+              <h4>Pricing</h4>
+              <% if @artist.price_per_hour.present? %>
+                <p>Price/hour: <%= @artist.price_per_hour %></p>
+              <% end %>
+              <% if @artist.minimum_spend.present? %>
+                <p>Minimum Spend: <%= @artist.minimum_spend %></p>
+              <% end %>
+            </div>
+          <% end %>
+          <div class="artist-p-style">
+            <div class="social-media-profiles">
+              <% if full_url(@artist.facebook_url) %>
+                <span>
+                  <%= link_to full_url(@artist.facebook_url), target: '_blank' do %>
+                    Facebook <span class="ta-icon-facebook icon"></span>
+                  <% end %>
+                </span>
+              <% end %>
+
+              <% if full_url(@artist.twitter_url) %>
+                <span>
+                  <%= link_to full_url(@artist.twitter_url), target: '_blank', rel: 'noopener noreferrer' do %>
+                    Twitter <span class="ta-icon-twitter icon"></span>
+                  <% end %>
+                </span>
+              <% end %>
+
+              <% if full_url(@artist.instagram_url) %>
+                <span>
+                  <%= link_to full_url(@artist.instagram_url), target: '_blank', rel: 'noopener noreferrer' do %>
+                    Instagram <span class="ta-icon-instagram icon"></span>
+                  <% end %>
+                </span>
+              <% end %>
+
+              <% if full_url(@artist.website) %>
+                <span>
+                  <%= link_to full_url(@artist.website), target: '_blank', rel: 'noopener noreferrer' do %>
+                    Website
+                  <% end %>
+                </span>
               <% end %>
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-lg-8">
         <div class="artist-p-right-content">
           <div class="sub-nav d-flex justify-content-start">
-            <a class="active" href="#">Tattoo Portfolio</a>
-              <!-- <a href="#">About</a> -->
-              <!-- <a href="#">Artist</a> -->
+              <a class="active" href="#">Tattoo Portfolio</a>
+<!--             <a href="#">About</a> -->
+<!--             <a href="#">Artist</a> -->
           </div>
 
           <div class="artist-p-sub-content pt-5">

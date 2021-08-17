@@ -109,6 +109,7 @@ module Api::V1
     def artist_params
       params.permit(
         :licensed,
+        :name,
         :bio,
         :years_of_experience,
         :website,

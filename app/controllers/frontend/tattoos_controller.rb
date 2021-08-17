@@ -17,6 +17,9 @@ module Frontend
     end
 
     def placements
+      breadcrumbs.add 'Tattoos', tattoos_path
+      breadcrumbs.add 'By Placement'
+
       respond_to do |format|
         format.html
         format.js
@@ -24,6 +27,9 @@ module Frontend
     end
 
     def styles
+      breadcrumbs.add 'Tattoos', tattoos_path
+      breadcrumbs.add 'Styles'
+
       respond_to do |format|
         format.html
         format.js
@@ -32,6 +38,15 @@ module Frontend
 
     def facet
       @name = (params[:placement] || params[:style]).split('-').join(' ').titleize
+
+      breadcrumbs.add 'Tattoos', tattoos_path
+      if params[:placement]
+        breadcrumbs.add 'Placements', placements_tattoos_path
+      else
+        breadcrumbs.add 'Styles', styles_tattoos_path
+      end
+      breadcrumbs.add @name
+
       @tattoos = TattooSearch.new(query: @name).base_filter
       respond_to do |format|
         format.html
@@ -40,6 +55,8 @@ module Frontend
     end
 
     def show
+      breadcrumbs.add 'Tattoos', tattoos_path
+
       @similar_tattoos = @tattoo.similar(
         fields: %i[
           placement styles

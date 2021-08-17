@@ -12,6 +12,5 @@ class AddMoreColumnsInBookingRequest < ActiveRecord::Migration[6.1]
     remove_column :bookings, :width
     remove_column :bookings, :size_units
     remove_column :bookings, :colored_tattoo
-
   end
 end

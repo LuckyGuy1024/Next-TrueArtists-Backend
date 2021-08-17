@@ -43,8 +43,11 @@ module Frontend
         format.js
       end
     end
-    
+
     def show
+      breadcrumbs.add 'Artists', artists_path
+      breadcrumbs.add @artist.name
+
       @tattoos = @artist.tattoos.page(params[:page] || 1).per(BaseSearch::PER_PAGE)
 
       respond_to do |format|

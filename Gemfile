@@ -10,6 +10,7 @@ gem 'active_storage_validations'
 gem 'acts_as_favoritor'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'breadcrumbs'
 gem 'carmen'
 gem 'browser'
 gem 'cityhash' # optional, for faster hashing (C-Ruby only)

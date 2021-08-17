@@ -1,7 +1,7 @@
 <!-- About -->
 <div class="page-section">
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-between">
       <div class="col-lg-6">
         <div class="about-studio">
           <div class="about-studio-content">
@@ -10,34 +10,92 @@
           </div>
         </div>
       </div>
-    </div>
+      <div class="col-lg-4">
+        <div class="studio-right-sidebar">
+          <div class="studio-p-style">
+            <% if @studio.services.present? %>
+              <h4>Services</h4>
+              <div class="studio-services">
+                <% @studio.services.each do |service| %>
+                  <span class="tag tag-cloud"><%= service %></span>
+                <% end %>
+              </div>
+            <% end %>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="studio-address-item d-flex align-items-center flex-wrap">
-          <div class="studio-map">
-            <iframe
-              width="400"
-              height="400"
-              style="border:0"
-              loading="lazy"
-              allowfullscreen
-              src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch('GEOCODER_API_KEY') %>
-                &q=<%= @studio.full_address %>">
-            </iframe>
-          </div>
-          <div class="studio-address d-flex align-items-center flex-grow-1 justify-content-between">
-            <div class="address-text">
-              <h2><%= @studio.name %></h2>
-              <% if @studio.phone_number %>
-                <p>Phone: <%= @studio.phone_number %></p>
+            <% if @studio.price_per_hour.present? || @studio.minimum_spend.present? %>
+              <h4>Pricing</h4>
+              <% if @studio.price_per_hour.present? %>
+                <p>Price/hour: <%= @studio.price_per_hour %></p>
               <% end %>
-              <p><%= @studio.full_address %></p>
+              <% if @studio.minimum_spend.present? %>
+                <p>Minimum Spend: <%= @studio.minimum_spend %></p>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="social-media-profiles">
+            <% if full_url(@studio.facebook_url) %>
+              <span>
+                <%= link_to full_url(@studio.facebook_url), target: '_blank', rel: 'noopener noreferrer' do %>
+                  <span class="ta-icon-facebook icon"></span>
+                <% end %>
+              </span>
+            <% end %>
+
+            <% if full_url(@studio.twitter_url) %>
+              <span>
+                <%= link_to full_url(@studio.twitter_url), target: '_blank', rel: 'noopener noreferrer' do %>
+                  <span class="ta-icon-twitter icon"></span>
+                <% end %>
+              </span>
+            <% end %>
+
+            <% if full_url(@studio.instagram_url) %>
+              <span>
+                <%= link_to full_url(@studio.instagram_url), target: '_blank', rel: 'noopener noreferrer' do %>
+                  <span class="ta-icon-instagram icon"></span>
+                <% end %>
+              </span>
+            <% end %>
+
+            <% if full_url(@studio.website_url) %>
+              <span>
+                <%= link_to full_url(@studio.website_url), target: '_blank', rel: 'noopener noreferrer' do %>
+                  Website
+                <% end %>
+              </span>
+            <% end %>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="studio-address-item d-flex align-items-center flex-wrap">
+            <div class="studio-map">
+              <iframe
+                width="400"
+                height="400"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch('GEOCODER_API_KEY') %>
+                  &q=<%= @studio.full_address %>">
+              </iframe>
+            </div>
+            <div class="studio-address d-flex align-items-center flex-grow-1 justify-content-between">
+              <div class="address-text">
+                <h2 itemprop='name'><%= @studio.name %></h2>
+                <% if @studio.phone_number.present? %>
+                  <p itemprop='telephone'>Phone: <a href="tel:<%= @studio.phone_number %>"></a>
+                    <span class="ta-icon-check-circle-fill icon"></span>
+                  </p>
+                <% end %>
+                <p><%= @studio.full_address %></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>
 <!-- // -->

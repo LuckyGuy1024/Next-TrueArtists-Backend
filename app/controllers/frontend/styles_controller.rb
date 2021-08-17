@@ -6,6 +6,8 @@ module Frontend
     before_action :find_all_styles, only: %i[index show]
 
     def index
+      breadcrumbs.add 'Styles', styles_path
+
       respond_to do |format|
         format.html
         format.js
@@ -13,6 +15,8 @@ module Frontend
     end
 
     def show
+      breadcrumbs.add @style.name, style_path
+
       @search ||= TattooSearch.new(
         query: @style.name,
         options: search_options
@@ -35,7 +39,7 @@ module Frontend
     def find_all_styles
       @styles = Style.find_all_cached
     end
-    
+
     def find_style
       @style = Style.friendly.find(params[:id])
     end

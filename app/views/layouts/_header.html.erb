@@ -33,7 +33,7 @@
               <div class="user-profile align-items-center">
                 <a href="#">
                   <%= image_pack_tag("media/images/avatar.png") %>
-                    <span>David</span>
+                  <span>David</span>
                 </a>
 
                 <div class="user-dropdown">
@@ -52,38 +52,49 @@
               </div>
             <% end %>
             <div class="mobile-menu-icon d-block d-lg-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#000" class="bi bi-list" viewBox="0 0 16 16">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#000" class="bi bi-list" viewbox="0 0 16 16">
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
               </svg>
             </div>
           </div>
         </div>
-        </div>
-        <div class="col-md-12">
-          <ul id="mobile-nav" class="gray-bg">
-            <li><%= link_to "Artists", artists_path, class: "active" %></li>
-            <li><%= link_to "Studios", studios_path %></li>
-            <li><%= link_to "Tattoos", tattoos_path %></li>
-            <li><%= link_to "Blog", articles_path %></li>
-            <% unless @current_user %>
-              <li class='artist-signup'>
-                <%= link_to 'Join as artist/studio', register_artists_url, target: '_blank' %>
-              </li>
-            <% end %>
-            <% if @current_user %>
-               <li>
-                 User Profile
-                 <ul>
-                 <li><a href="#">View profile</a></li>
-                 <li><a href="#">Edit account</a></li>
-                 <li><a href="#">Log out</a></li>
-                 </ul>
-               </li>
-            <% end %>
-          </ul>
-          <div class="mobile-menu d-block d-lg-none"></div>
-        </div>
+      </div>
+      <div class="col-md-12">
+        <ul id="mobile-nav" class="gray-bg">
+          <li><%= link_to "Artists", artists_path, class: "active" %></li>
+          <li><%= link_to "Studios", studios_path %></li>
+          <li><%= link_to "Tattoos", tattoos_path %></li>
+          <li><%= link_to "Blog", articles_path %></li>
+          <% unless @current_user %>
+            <li class='artist-signup'>
+              <%= link_to 'Join as artist/studio', register_artists_url, target: '_blank' %>
+            </li>
+          <% end %>
+          <% if @current_user %>
+            <li>
+              User Profile
+              <ul>
+                <li>
+                  <a href="#">View profile</a>
+                </li>
+                <li>
+                  <a href="#">Edit account</a>
+                </li>
+                <li>
+                  <a href="#">Log out</a>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+        <div class="mobile-menu d-block d-lg-none"></div>
       </div>
     </div>
-  </header>
-  <!-- // -->
+  </div>
+</header>
+<% if breadcrumbs.present? %>
+  <div class='container'>
+    <%= breadcrumbs.render(format: :inline, separator: ">") %>
+  </div>
+<% end %>
+<!-- // -->

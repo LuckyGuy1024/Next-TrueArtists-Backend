@@ -11,12 +11,20 @@
           </div>
           <div class="s-profile-info">
             <h1 itemprop='name'><%= link_to @studio.name, studio_path(@studio) %></h1>
-            <div class="s-rating">
-              <span><%= format('%s %s', @studio.street_address, @studio.street_address_2) %></span>
+            <div class="s-rating" itemprop='address'>
+              <span itemprop="streetAddress"><%= format('%s %s', @studio.street_address, @studio.street_address_2) %></span>
               <span>
                 <%= @studio.city %>, <%= @studio.state %><br/>
                 <%= @studio.country %> <%= @studio.zip_code %>
               </span>
+              <% if @studio.phone_number.present? %>
+                <p itemprop='telephone'>
+                  <a href="tel:<%= @studio.phone_number %>"></a>
+                  <% if @studio.phone_verified %>
+                    <span class="ta-icon-check-circle-fill icon"></span>
+                  <% end %>
+                </p>
+              <% end %>
             </div>
           </div>
         </div>
@@ -33,6 +41,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="sub-nav d-flex justify-content-center">
+          <%= link_to 'Studio', studio_path(@studio) %>
           <%= link_to 'Studio Artists', artists_studio_path(@studio) %>
           <%= link_to 'Portfolio', tattoos_studio_path(@studio) %>
         </div>

@@ -210,6 +210,61 @@
   }
 }
 
+.studio-right-sidebar {
+  margin-bottom: 10px;
+  background: $white-bg;
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,.03),0 0 1px 0 rgba(0,0,0,.03);
+
+  .studio-p-info {
+    h1 {
+      margin: 10px 0 5px;
+      line-height: 1.56;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+
+  .icon {
+    font-size: 25px;
+  }
+
+  .studio-services {
+    margin: 15px 0;
+
+    h4 {
+      margin-bottom: 5px;
+    }
+  }
+
+  .social-media-profiles {
+    margin-top: 15px;
+
+    span {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      padding: 16px;
+      span {
+        &.icon {
+          float: right;
+        }
+      }
+    }
+
+    a {
+      margin-left: 0 !important;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      color: $p-gray;
+
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
 .studio-address-item {
   margin-top: 70px;
 
@@ -237,6 +292,7 @@
   }
 }
 // Reviews
+
 .reviews-list {
   .single-review {
     &:not(:last-child) {
@@ -262,6 +318,7 @@
   }
 }
 // Artists
+
 .artists-profile-info {
   padding-left: 30px;
 

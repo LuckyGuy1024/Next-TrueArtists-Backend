@@ -1,5 +1,6 @@
 .artist-left-sidebar {
   background: $white-bg;
+  margin-bottom: 10px;
   padding: 30px 20px;
   border-radius: 16px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,.03),0 0 1px 0 rgba(0,0,0,.03);
@@ -22,6 +23,10 @@
       font-weight: 600;
       font-size: 20px;
     }
+  }
+  p {
+    color: $p-gray;
+    font-size: 14px;
   }
 }
 
@@ -66,6 +71,14 @@
     margin-left: 0 !important;
     margin-right: 10px;
     margin-bottom: 10px;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  .icon {
+    font-size: 25px
   }
 }
 

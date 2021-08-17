@@ -6,17 +6,20 @@ class BookingService
   end
 
   def call
-    return handle_error('Select a studio or artist') unless recipient
+    return handle_error(['Select a studio or artist']) unless recipient
+
+    return handle_error(conversation.errors) unless conversation.success?
 
     message = MessageService.new(
-      message_id: params[:message_id],
       receiver_id: recipient&.id,
+      conversation_id: conversation.payload.id,
       sender_id: params[:user_id]
     ).call
 
     if message && message.success?
       booking = Booking.new(params)
-      booking.message_id = message.payload.id
+      booking.bookable = bookable
+      booking.conversation_id = message.payload.conversation_id
       if booking.save
         OpenStruct.new({ success?: true, payload: booking })
       else
@@ -29,9 +32,19 @@ class BookingService
 
   private
 
+  def conversation
+    conversation_service = ConversationService.new(
+      receiver_id: recipient&.id,
+      sender_id: params[:user_id]
+    ).call
+  end
+
   def recipient
-    bookable = params[:bookable_type].constantize.find_by(id: params[:bookable_id])
-    bookable&.user
+    @recipient ||= bookable&.user
+  end
+
+  def bookable
+    @bookable ||= params[:bookable_type].constantize.find_by(slug: params[:bookable_id])
   end
 
   def handle_error(error)
