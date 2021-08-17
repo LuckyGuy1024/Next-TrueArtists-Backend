@@ -54,7 +54,7 @@ module Api
           :style_id,
           :phone_number,
           :availability,
-          :city,
+          :formatted_address,
           :urgency,
           :bookable_type,
           :bookable_id,

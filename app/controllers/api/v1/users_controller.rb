@@ -49,6 +49,7 @@ class Api::V1::UsersController < ApplicationController
     params.permit(:email,
                   :full_name,
                   :social_id,
+                  :formatted_address,
                   :provider,
                   :password,
                   :password_confirmation)
