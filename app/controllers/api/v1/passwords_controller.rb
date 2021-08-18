@@ -24,7 +24,13 @@ module Api::V1
 
     def find_user
       @user = User.find_by(email: password_change_request_params[:email])
-      head(:not_found) unless @user
+
+      unless @user
+        render_api_error(
+          status: 422,
+          errors: ["There's no TrueArtists account for #{password_change_request_params[:email]}"]
+        )
+      end
     end
 
     def change_password_params
