@@ -49,12 +49,12 @@ class Studio < ApplicationRecord
 
   has_one_attached :avatar do |attachable|
     attachable.format :webp
-    attachable.resize "100x100"
+    attachable.resize '100x100'
   end
 
   has_one_attached :hero_banner do |attachable|
     attachable.format :webp
-    attachable.resize "100x100"
+    attachable.resize '100x100'
   end
 
   cache_index :slug, unique: true
@@ -90,7 +90,11 @@ class Studio < ApplicationRecord
   end
 
   def search_data
-    attributes.merge(location: { lat: lat, lon: lon })
+    attributes.merge(
+      location: { lat: lat, lon: lon },
+      user_email: user.email,
+      email: email
+    )
   end
 
   def search_profile_image
