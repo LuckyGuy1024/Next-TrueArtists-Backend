@@ -12,7 +12,7 @@ class MessageService
       receiver_id: params[:receiver_id],
       conversation_id: params[:conversation_id]
     )
-    message.message_type = Message.message_types[:appointment]
+    message.message_type = Message.message_types[:booking]
 
     if message.save
       OpenStruct.new({ success?: true, payload: message })
