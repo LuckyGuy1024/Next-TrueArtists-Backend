@@ -32,6 +32,8 @@ module Api
         render json: BookingSerializer.new(@booking).to_json, status: :ok
       end
 
+      private
+
       def find_booking_user
         return current_user if current_user
         result = UserService.new(user_params).call

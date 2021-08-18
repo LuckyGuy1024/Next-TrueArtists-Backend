@@ -109,7 +109,13 @@ Rails.application.routes.draw do
       end
       resources :messages, only: %i[create]
 
-      resources :bookings
+      resources :bookings do
+        member do
+          put :accept
+          put :reject
+          put :cancel
+        end
+      end
 
       resources :guest_artist_applications, only: %i[create update destroy] do
         member do

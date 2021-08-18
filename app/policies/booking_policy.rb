@@ -13,4 +13,16 @@ class BookingPolicy < ApplicationPolicy
   def update?
     user.admin? or booking.sender.id == user.id
   end
+
+  def accept?
+    booking.receiver.id == user.id
+  end
+
+  def reject?
+    user.admin? or booking.receiver.id == user.id
+  end
+
+  def cancel?
+    user.admin? or (booking.receiver.id or booking.sender.id) == user.id
+  end
 end

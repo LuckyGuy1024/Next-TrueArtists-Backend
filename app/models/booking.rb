@@ -65,7 +65,7 @@ class Booking < ApplicationRecord
     end
   end
 
-  after_commit :booking_notification
+  after_commit :booking_notification, on: :create
 
   scope :sender_bookings, ->(user_id) { where(sender_id: user_id) }
   scope :receiver_bookings, ->(user_id) { where(receiver_id: user_id) }
