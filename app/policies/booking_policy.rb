@@ -7,22 +7,22 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? or (booking.receiver.id or booking.sender.id) == user.id
+    booking.user == user || booking.bookable.user == user
   end
 
   def update?
-    user.admin? or booking.sender.id == user.id
+    booking.user == user || booking.bookable.user == user
   end
 
   def accept?
-    booking.receiver.id == user.id
+    booking.bookable.user == user
   end
 
   def reject?
-    user.admin? or booking.receiver.id == user.id
+    booking.bookable.user == user
   end
 
   def cancel?
-    user.admin? or (booking.receiver.id or booking.sender.id) == user.id
+    booking.user == user
   end
 end
