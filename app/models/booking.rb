@@ -34,9 +34,7 @@ class Booking < ApplicationRecord
     in: 'Inches'
   }
 
-  searchkick locations: [:location],
-             searchable: %i[status tattoo_placement description receiver_id sender_id],
-             filterable: %i[first_tattoo tattoo_placement tatoo_color status]
+  searchkick searchable: %i[status email user_id bookable_type bookable_id phone_number full_name]
 
   belongs_to :conversation
   belongs_to :bookable, polymorphic: true
@@ -70,6 +68,12 @@ class Booking < ApplicationRecord
   scope :sender_bookings, ->(user_id) { where(sender_id: user_id) }
   scope :receiver_bookings, ->(user_id) { where(receiver_id: user_id) }
   scope :user_bookings, ->(user_id) { sender_bookings(user_id).or(receiver_bookings(user_id)) }
+
+  def search_data
+    attributes.merge(
+      full_name: user.full_name,
+      email: user.email)
+  end
 
   private
 
