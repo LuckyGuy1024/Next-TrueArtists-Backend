@@ -87,14 +87,21 @@ Rails.application.configure do
   # Mailer settings
   config.action_mailer.default_url_options = { host: ENV.fetch('HOST') }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
-    port: 25,
-    domain: 'trueartists.com',
-    authentication: :plain,
-    user_name: 'apikey',
-    password: ENV.fetch('SENDGRID_APIKEY')
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.sendgrid.net',
+  #   port: 25,
+  #   domain: 'trueartists.com',
+  #   authentication: :plain,
+  #   user_name: 'apikey',
+  #   password: ENV.fetch('SENDGRID_APIKEY')
+  # }
+
+  # Sendgrid ActionMailer settings for Sendgrid
+  config.action_mailer.delivery_method = :sendgrid_actionmailer
+  config.action_mailer.sendgrid_actionmailer_settings = {
+    api_key: ENV.fetch('SENDGRID_APIKEY'),
+    raise_delivery_errors: true
   }
 
   # Inserts middleware to perform automatic connection switching.

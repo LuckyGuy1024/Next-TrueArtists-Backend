@@ -46,20 +46,28 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.default_url_options = { host: 'trueartists.com' }
 
   # SMTP settings for Sendgrid
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
-    port: 587,
-    enable_starttls_auto: true,
-    domain: 'trueartists.com',
-    authentication: :plain,
-    user_name: 'apikey',
-    password: ENV.fetch('SENDGRID_APIKEY')
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.sendgrid.net',
+  #   port: 587,
+  #   enable_starttls_auto: true,
+  #   domain: 'trueartists.com',
+  #   authentication: :plain,
+  #   user_name: 'apikey',
+  #   password: ENV.fetch('SENDGRID_APIKEY')
+  # }
+
+  # Sendgrid ActionMailer settings for Sendgrid
+  config.action_mailer.delivery_method = :sendgrid_actionmailer
+  config.action_mailer.sendgrid_actionmailer_settings = {
+    api_key: ENV.fetch('SENDGRID_APIKEY'),
+    mail_settings: { sandbox_mode: { enable: true }},
+    raise_delivery_errors: true
   }
 
   # Prepare the ingress controller used to receive mail
