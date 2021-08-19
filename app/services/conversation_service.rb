@@ -50,7 +50,8 @@ class ConversationService
       return OpenStruct.new({ success?: false, payload: ['Select a valid artist or studio'] })
     end
 
-    recipient_object = params[:recipient_type].constantize.find_by(id: params[:recipient_id])
+    #TODO make it possible to search by slug or id
+    recipient_object = params[:recipient_type].constantize.find_by(slug: params[:recipient_id])
 
     if recipient_object&.user
       OpenStruct.new({ success?: true, payload: recipient_object.user })

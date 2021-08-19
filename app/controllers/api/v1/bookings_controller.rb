@@ -81,6 +81,7 @@ module Api
           :formatted_address,
           :phone_number,
           :availability,
+          :formatted_address,
           :urgency,
           :bookable_type,
           :bookable_id,

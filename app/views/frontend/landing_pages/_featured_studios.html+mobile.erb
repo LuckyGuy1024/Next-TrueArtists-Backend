@@ -7,7 +7,7 @@
             <h2>
               Tattoo Shops near you
               <% if current_user_city.present? %>
-                - <%= link_to current_user_city_state, city_state_studios_path(current_user_city_state.slugorize)  %>
+                - <%= link_to current_user_city_state, city_state_studios_path(city_state: current_user_city_state.slugorize)  %>
               <% end %>
             </h2>
           </div>
