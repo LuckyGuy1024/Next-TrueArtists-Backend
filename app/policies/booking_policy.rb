@@ -25,4 +25,8 @@ class BookingPolicy < ApplicationPolicy
   def cancel?
     booking.user == user
   end
+
+  def archive?
+    booking.bookable.user == user
+  end
 end

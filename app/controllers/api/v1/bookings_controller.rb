@@ -4,7 +4,7 @@ module Api
   module V1
     class BookingsController < ApplicationController
       skip_before_action :authenticate_request!, only: %i[create]
-      before_action :find_booking, only: %i[show]
+      before_action :find_booking, only: %i[show cancel accept archive reject]
       before_action :find_booking_user, only: %i[create]
 
       def index
@@ -24,6 +24,30 @@ module Api
         else
           render_api_error(status: 422, errors: result.errors)
         end
+      end
+
+      def reject
+        authorize @booking, :accept?
+        @booking.reject!
+        head(:ok)
+      end
+
+      def accept
+        authorize @booking, :accept?
+        @booking.accept!
+        head(:ok)
+      end
+
+      def archive
+        authorize @booking, :archive?
+        @booking.archive!
+        head(:ok)
+      end
+
+      def cancel
+        authorize @booking, :cancel?
+        @booking.cancel!
+        head(:ok)
       end
 
       def show

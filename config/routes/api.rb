@@ -114,6 +114,7 @@ Rails.application.routes.draw do
           put :accept
           put :reject
           put :cancel
+          put :archive
         end
       end
 

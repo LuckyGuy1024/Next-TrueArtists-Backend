@@ -49,6 +49,7 @@ class Booking < ApplicationRecord
     state :accepted
     state :rejected
     state :canceled
+    state :archived
 
     event :accept do
       transitions from: %i[pending_review canceled rejected], to: :accepted
@@ -60,6 +61,10 @@ class Booking < ApplicationRecord
 
     event :cancel do
       transitions from: %i[pending_review accepted], to: :canceled
+    end
+
+    event :archive do
+      transitions from: %i[pending_review accepted], to: :archived
     end
   end
 
