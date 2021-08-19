@@ -1,24 +1,23 @@
-<% set_meta_tags title: "Tattoo Styles & Ideas For your Next Tattoo",
-                 description: "Explore different tattoo styles for your next tattoo."
-%>
+<% set_meta_tags title: current_seo_content&.page_title,
+              description: current_seo_content&.meta_description %>
 
-<% set_meta_tags(canonical: styles_tattoos_url)  %>
+<% set_meta_tags(canonical: current_canonical_url)  %>
 
 <% set_meta_tags(open_graph: {
-   title: "Tattoo Styles & Ideas For your Next Tattoo",
+   title:  current_seo_content&.page_title,
    type: 'website',
    site_name: 'TrueArtists',
-   url: styles_tattoos_url,
-   description: "Explore different tattoo styles for your next tattoo."
+   url: current_canonical_url,
+   description: current_seo_content&.meta_description"
  })
 %>
 
 <% set_meta_tags twitter: {
    card: 'summary_large_image',
    site: 'TrueArtists',
-   title: "Tattoo Styles & Ideas For your Next Tattoo",
-   description: "Explore different tattoo styles for your next tattoo.",
-   url: styles_tattoos_url,
+   title:  current_seo_content&.page_title,
+   description: current_seo_content&.meta_description,
+   url: current_canonical_url,
  }
 %>
 
