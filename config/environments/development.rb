@@ -46,7 +46,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.default_url_options = { host: 'trueartists.com' }
@@ -63,7 +62,8 @@ Rails.application.configure do
   # }
 
   # Sendgrid ActionMailer settings for Sendgrid
-  config.action_mailer.delivery_method = :sendgrid_actionmailer
+  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :sendgrid_actionmailer
   config.action_mailer.sendgrid_actionmailer_settings = {
     api_key: ENV.fetch('SENDGRID_APIKEY'),
     mail_settings: { sandbox_mode: { enable: true }},

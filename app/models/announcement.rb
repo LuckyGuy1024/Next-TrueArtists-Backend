@@ -32,15 +32,14 @@ class Announcement < ApplicationRecord
   validates_presence_of :recipients, unless: :custom_emails?
   validates_presence_of :custom_emails, unless: :recipients?
 
-
   cache_index :title, unique: true
 
   after_create :send_announcement
-  after_update :send_announcement
 
   def send_announcement
     return if published?
+
     perform_at = send_now? ? Time.zone.now : publish_on
-    AnnouncementJob.set(wait_until: perform_at).perform_later(self)
+    AnnouncementJob.set(wait_until: perform_at).perform_later(id)
   end
 end

@@ -7,11 +7,9 @@ class AnnouncementMailer < ApplicationMailer
 
     personalization = users.map { |email| { to: [{ email: email }] } }
 
-    # sendgrid_recipients users
-    # sendgrid_category subject
-
     mail(
-      from: "TrueArtists<#{@announcement.user.email}>",
+      to: "TrueArtists <#{@announcement.user.email}>",
+      from: "TrueArtists <#{@announcement.user.email}>",
       reply_to: 'info@trueartists.com',
       personalizations: personalization,
       subject: subject,
