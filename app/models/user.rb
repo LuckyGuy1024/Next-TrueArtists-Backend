@@ -72,10 +72,6 @@ class User < ApplicationRecord
     UserMailer.password_reset_instructions(self, auth_token).deliver_now
   end
 
-  def change_password_request
-    UserMailer.change_password_instructions(self, auth_token).deliver_now
-  end
-
   def auth_token
     JsonWebToken.encode(user_id: id)
   end
@@ -84,6 +80,10 @@ class User < ApplicationRecord
     return unless attrs[:password] == attrs[:password_confirmation]
 
     update(password: attrs[:password])
+  end
+
+  def notify_on_password_update
+    UserMailer.notify_on_password_update(self, auth_token).deliver_now
   end
 
   def assign_role(role)
