@@ -1,7 +1,7 @@
 class BookingSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   belongs_to :user
-  
+
   attributes :id,
              :description,
              :tattoo_placement,
@@ -12,7 +12,6 @@ class BookingSerializer < ActiveModel::Serializer
              :phone_number,
              :availability,
              :formatted_address,
-             :urgency,
              :bookable_type,
              :bookable_id,
              :first_tattoo,
