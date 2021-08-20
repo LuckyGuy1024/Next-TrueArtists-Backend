@@ -9,8 +9,9 @@ class UserMailer < ApplicationMailer
     mail(to: user.email, subject: 'We have created an account for you at TrueArtists')
   end
 
-  def notify_on_password_update(user)
+  def notify_on_password_update(user, token)
+    @token = token
     @user = user
-    mail(to: user.email, subject: 'Password Update')
+    mail(to: user.email, subject: 'Your TrueArtists Password Has Changed')
   end
 end

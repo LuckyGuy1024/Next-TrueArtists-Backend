@@ -83,7 +83,7 @@ class User < ApplicationRecord
   end
 
   def notify_on_password_update
-    UserMailer.notify_on_password_update(self).deliver_now
+    UserMailer.notify_on_password_update(self, auth_token).deliver_now
   end
 
   def assign_role(role)
@@ -99,7 +99,6 @@ class User < ApplicationRecord
   end
 
   def self.find_by_password_reset_token(token)
-    binding.pry
     jwt_payload = JsonWebToken.decode(token).first
     find(jwt_payload['user_id'])
   rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
