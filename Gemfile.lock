@@ -218,8 +218,6 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     mail_extract (0.1.4)
-    marcel (0.3.3)
-      mimemagic (~> 0.3.2)
     marcel (1.0.1)
     meta-tags (2.14.0)
       actionpack (>= 3.2.0, < 6.2)
@@ -347,6 +345,7 @@ GEM
     ruby-vips (2.1.2)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    ruby_http_client (3.5.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -364,6 +363,11 @@ GEM
       elasticsearch (>= 6)
       hashie
     semantic_range (3.0.0)
+    sendgrid-actionmailer (3.2.0)
+      mail (~> 2.7)
+      sendgrid-ruby (~> 6.4)
+    sendgrid-ruby (6.5.0)
+      ruby_http_client (~> 3.4)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -395,6 +399,8 @@ GEM
       nokogiri (>= 1.6, < 2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2021.1)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.0.0)
     validates_timeliness (5.0.0)
       timeliness (>= 0.3.10, < 1)
@@ -468,6 +474,7 @@ DEPENDENCIES
   sassc
   sassc-rails
   searchkick
+  sendgrid-actionmailer
   sitemap_generator
   spring
   spring-watcher-listen (~> 2.0.0)
