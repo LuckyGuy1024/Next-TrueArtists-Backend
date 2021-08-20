@@ -1,6 +1,5 @@
 class BookingSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  belongs_to :user
 
   attributes :id,
              :description,
@@ -8,18 +7,39 @@ class BookingSerializer < ActiveModel::Serializer
              :tattoo_color,
              :tattoo_size,
              :budget,
-             :style_id,
+             :style,
              :phone_number,
              :availability,
              :formatted_address,
-             :bookable_type,
-             :bookable_id,
              :first_tattoo,
              :status,
-             :images
+             :created_at,
+             :images,
+             :user,
+             :bookable
 
-  def urgency
-    object.urgency.strftime('%d-%m-%Y') if object.urgency
+  def user
+    {
+      id: object.user_id,
+      name: object.user.full_name,
+      email: object.user.email
+    }
+  end
+
+  def bookable
+    {
+      id: object.bookable_id,
+      name: object.bookable.name,
+      bookable_type: object.bookable_type
+    }
+  end
+
+  def created_at
+    object.created_at.strftime('%d-%m-%Y') if object.urgency
+  end
+
+  def style
+    object.style.name
   end
 
   def images

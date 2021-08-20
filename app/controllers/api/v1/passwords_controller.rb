@@ -5,7 +5,10 @@ module Api::V1
 
     def update
       @user = User.find_by_password_reset_token(params[:token])
+
       if @user && @user.set_new_password(change_password_params)
+        @user.notify_on_password_update
+
         head(:ok)
       else
         render_api_error(status: 422, errors: ['Password reset link has expired. Reset your password again'])

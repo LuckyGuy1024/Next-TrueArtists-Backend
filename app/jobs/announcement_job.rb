@@ -1,14 +1,22 @@
 class AnnouncementJob < ActiveJob::Base
   queue_as :default
 
-  def perform(announcement)
+  def perform(announcement_id)
+    announcement = Announcement.find(announcement_id)
+
     if announcement.custom_emails.present?
-      AnnouncementMailer.send_announcement(announcement_id, announcement.custom_emails.split(",")).deliver
+      AnnouncementMailer.send_announcement(
+        announcement,
+        announcement.custom_emails.split(',')
+      ).deliver
     end
 
     if announcement.recipients.present?
       User.where(role: announcement.recipients).find_in_batches do |users|
-        AnnouncementMailer.send_announcement(announcement, users.collect(&:email)).deliver
+        AnnouncementMailer.send_announcement(
+          announcement,
+          users.map(&:email)
+        ).deliver
       end
     end
 

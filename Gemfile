@@ -30,6 +30,7 @@ gem 'meta-tags'
 gem "mini_magick"
 gem 'faker'
 gem 'rack-cors'
+gem 'sendgrid-actionmailer'
 gem 'sprockets', '~>3.0'
 gem 'mail_extract'
 gem 'sass-rails'
