@@ -3,7 +3,7 @@
   <div class="col-lg-3 col-md-6 col-sm-12">
     <% if studio.city_state.present? %>
       <div class="location-section">
-        <%= link_to city_state_studios_path(studio.city_state.slugorize) do %>
+        <%= link_to city_state_studios_path(city_state: studio.city_state.slugorize) do %>
           <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
           <h4><%= studio.city_state %></h4>
         <% end %>
@@ -13,7 +13,7 @@
       <%= link_to studio_path(studio) do %>
         <div class="list-image">
           <% if studio.search_profile_image %>
-            <img data-src="<%= asset_blob_url(studio.search_profile_image) %>" class="lazyload" />
+            <%= lazy_image_tag(asset_blob_url(studio.search_profile_image)) %>
           <% end %>
         </div>
         <div class="list-content d-flex align-items-center">

@@ -27,6 +27,7 @@ module Api
       def message_params
         params.permit(
           :content,
+          :formatted_address,
           :receiver_id,
           :sender_id,
           :is_read,

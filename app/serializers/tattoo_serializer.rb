@@ -9,6 +9,7 @@ class TattooSerializer < ActiveModel::Serializer
              :categories,
              :placement,
              :description,
+             :slug,
              :color,
              :size,
              :tags,

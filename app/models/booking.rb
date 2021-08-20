@@ -34,9 +34,7 @@ class Booking < ApplicationRecord
     in: 'Inches'
   }
 
-  searchkick locations: [:location],
-             searchable: %i[status tattoo_placement description receiver_id sender_id],
-             filterable: %i[first_tattoo tattoo_placement tatoo_color status]
+  searchkick searchable: %i[status email user_id bookable_type bookable_id phone_number full_name]
 
   belongs_to :conversation
   belongs_to :bookable, polymorphic: true
@@ -51,6 +49,7 @@ class Booking < ApplicationRecord
     state :accepted
     state :rejected
     state :canceled
+    state :archived
 
     event :accept do
       transitions from: %i[pending_review canceled rejected], to: :accepted
@@ -63,13 +62,23 @@ class Booking < ApplicationRecord
     event :cancel do
       transitions from: %i[pending_review accepted], to: :canceled
     end
+
+    event :archive do
+      transitions from: %i[pending_review accepted], to: :archived
+    end
   end
 
-  after_commit :booking_notification
+  after_commit :booking_notification, on: :create
 
   scope :sender_bookings, ->(user_id) { where(sender_id: user_id) }
   scope :receiver_bookings, ->(user_id) { where(receiver_id: user_id) }
   scope :user_bookings, ->(user_id) { sender_bookings(user_id).or(receiver_bookings(user_id)) }
+
+  def search_data
+    attributes.merge(
+      full_name: user.full_name,
+      email: user.email)
+  end
 
   private
 

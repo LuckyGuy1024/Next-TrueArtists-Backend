@@ -3,11 +3,11 @@ class Message < ApplicationRecord
   DEFAULT_BOOKING_MESSAGE = 'You have a new booking inquiry from TrueArtists'
 
   enum message_type: {
-    appointment: 'Appointment',
+    booking: 'Booking',
     consultation: 'Consultation',
     pricing_questions: 'Pricing',
     other: 'Other'
-  }
+  }, _prefix: true
 
   belongs_to :sender, class_name: 'User', foreign_key: 'sender_id', validate: true
   belongs_to :receiver, class_name: 'User', foreign_key: 'receiver_id', validate: true
@@ -32,6 +32,7 @@ class Message < ApplicationRecord
 
   def send_user_notification
     return if email_client_reply
+    return if message_type_booking?
     return unless conversation.booking.blank?
 
     MessageMailingService.new(self).send

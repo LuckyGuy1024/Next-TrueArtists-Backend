@@ -1,7 +1,7 @@
 <% set_meta_tags title: "Best Tattoo Shops & Studios in #{@city_state}",
                  description: "Find top certified tattoo studios and shops in #{@city_state}." %>
 
-<% set_meta_tags(canonical: city_state_studios_url(@city_state.slugorize))  %>
+<% set_meta_tags(canonical: city_state_studios_url(city_state: @city_state.slugorize))  %>
 
 <% set_meta_tags(open_graph: {
    title: "Best Tattoo Shops & Studios in #{@city_state}",
@@ -42,3 +42,20 @@
       </div>
     </div>
 </div>
+
+<% if current_seo_content.present? %>
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sub-header">
+            <h2><%= current_seo_content.title %></h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <%= current_seo_content.content.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

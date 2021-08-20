@@ -1,22 +1,22 @@
-<% set_meta_tags title: "#{@name} Tattoo Ideas",
-              description: "Find thousands of #{@name.downcase} tattoo ideas from top tattoo artists near you." %>
+<% set_meta_tags title: "#{current_seo_content&.page_title ||  format('%s %s', @name, 'Tattoo Ideas')}",
+              description: "#{current_seo_content&.meta_description || format('Find thousands of %s tattoo ideas from top tattoo artists near you.', @name.downcase)}" %>
 
 <% set_meta_tags(canonical: current_canonical_url)  %>
 
 <% set_meta_tags(open_graph: {
-   title: "#{@name} Tattoo Ideas",
+   title:  "#{current_seo_content&.page_title ||  format('%s %s', @name, 'Tattoo Ideas')}",
    type: 'website',
    site_name: 'TrueArtists',
    url: current_canonical_url,
-   description: "Find thousands of #{@name.downcase} tattoo ideas from top tattoo artists near you."
+   description: "#{current_seo_content&.meta_description || format('Find thousands of %s tattoo ideas from top tattoo artists near you.', @name.downcase)}"
  })
 %>
 
 <% set_meta_tags twitter: {
    card: 'summary_large_image',
    site: 'TrueArtists',
-   title:  "#{@name} Tattoo Ideas",
-   description: "Find thousands of #{@name.downcase} tattoo ideas from top tattoo artists near you.",
+   title:  "#{current_seo_content&.page_title ||  format('%s %s', @name, 'Tattoo Ideas')}",
+   description: "#{current_seo_content&.meta_description || format('Find thousands of %s tattoo ideas from top tattoo artists near you.', @name.downcase)}",
    url: current_canonical_url,
  }
 %>

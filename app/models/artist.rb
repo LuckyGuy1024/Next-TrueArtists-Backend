@@ -34,7 +34,6 @@ class Artist < ApplicationRecord
   cache_index :slug, unique: true
   cache_index :slug, :status
 
-  # validates :avatar, :hero_banner, size: { less_than: 10.megabytes, message: 'is not given between size' }
   validates :user_id, uniqueness: true
 
   after_commit :send_complete_profile_notification, on: :create
@@ -48,7 +47,9 @@ class Artist < ApplicationRecord
   def search_data
     attributes.merge(
       location: { lat: lat, lon: lon },
-      styles: styles.map(&:name)
+      styles: styles.map(&:name),
+      email: user.email,
+      name: user.full_name
     )
   end
 

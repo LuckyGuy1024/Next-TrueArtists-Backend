@@ -1,24 +1,23 @@
-<% set_meta_tags title: 'Find Tattoo Ideas from Artists Near You',
-              description: 'Browse thousands tattoo photos and galleries from top tattoo artists near you' %>
+<% set_meta_tags title: current_seo_content&.page_title,
+              description: current_seo_content&.meta_description %>
 
-
-<% set_meta_tags(canonical: tattoos_url)  %>
+<% set_meta_tags(canonical: current_canonical_url)  %>
 
 <% set_meta_tags(open_graph: {
-   title: 'Find Tattoo Ideas from Artists Near You',
+   title:  current_seo_content&.page_title,
    type: 'website',
    site_name: 'TrueArtists',
-   url: tattoos_url,
-   description:'Browse thousands tattoo photos and galleries from top tattoo artists near you'
+   url: current_canonical_url,
+   description: current_seo_content&.meta_description"
  })
 %>
 
 <% set_meta_tags twitter: {
    card: 'summary_large_image',
    site: 'TrueArtists',
-   title: 'Find Tattoo Ideas from Artists Near You',
-   description: 'Browse thousands tattoo photos and galleries from top tattoo artists near you',
-   url: tattoos_url
+   title:  current_seo_content&.page_title,
+   description: current_seo_content&.meta_description,
+   url: current_canonical_url,
  }
 %>
 
@@ -29,7 +28,7 @@
         <div class="col-md-12 search-form">
           <%= form_for tattoos_path, html: { method: :get } do |f| %>
             <div class="sub-header">
-              <h1>Find Tattoo Ideas</h1>
+              <h1><%= current_seo_content.title %></h1>
             </div>
             <div class="search-tattoos-form row">
               <div class="col-md-9">
@@ -70,3 +69,20 @@
   </div>
 </div>
 <!-- // -->
+
+<% if current_seo_content.present? %>
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sub-header">
+            <h2><%= current_seo_content.title %></h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <%= current_seo_content.content.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

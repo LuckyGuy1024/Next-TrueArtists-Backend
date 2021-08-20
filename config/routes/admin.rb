@@ -76,6 +76,8 @@ Rails.application.routes.draw do
           end
         end
 
+        resources :bookings
+
         resources :articles
         resources :pages
         resources :styles

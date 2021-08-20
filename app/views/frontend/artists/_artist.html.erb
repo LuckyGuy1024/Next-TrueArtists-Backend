@@ -3,14 +3,14 @@
   <% unless artist.city_state.blank? %>
     <div class="location-section">
       <i><%= image_pack_tag("media/images/geo-alt.svg") %></i>
-      <p><%= link_to artist.city_state, city_state_artists_path(artist.city_state.slugorize) %></p>
+      <p><%= link_to artist.city_state, city_state_artists_path(city_state: artist.city_state&.slugorize || 'unknown') %></p>
     </div>
   <% end %>
   <div class="listing-widget shadow">
     <%= link_to artist_path(artist) do %>
       <div class="list-image">
         <% if artist.search_profile_image %>
-          <img data-src="<%= asset_blob_url(artist.search_profile_image) %>" class="lazyload" />
+          <%= lazy_image_tag(asset_blob_url(artist.search_profile_image)) %>
         <% end %>
       </div>
       <div class="list-content d-flex align-items-center">
@@ -18,7 +18,7 @@
           <div class="d-flex align-items-center">
             <div class="profile-img">
               <% if artist.avatar.attached? %>
-                <img data-src="<%= asset_blob_url(artist.avatar) %>" class="lazyload" />
+                <%= lazy_image_tag(asset_blob_url(artist.avatar)) %>
               <% end %>
             </div>
             <div class="profile-info">
