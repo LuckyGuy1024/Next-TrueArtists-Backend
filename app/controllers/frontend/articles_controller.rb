@@ -14,7 +14,10 @@ module Frontend
     end
 
     def show
-      @similar_articles = @article.similar(fields: %i[tag_list title]).first(12)
+      @similar_articles = @article.similar(
+        where: { status: 'published' },
+        fields: %i[tag_list title]
+      ).first(12)
       respond_to do |format|
         format.html
         format.js

@@ -18,6 +18,7 @@ class Article < ApplicationRecord
   before_validation :import_tag_list, only: %i[create update]
 
   cache_index :slug, unique: true
+  cache_index :slug, :status
 
   aasm column: 'status' do
     state :draft, initial: true

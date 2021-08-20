@@ -26,6 +26,7 @@ module ArticleScoped
   end
 
   def find_article
-    @article = Article.friendly.find(params[:id])
+    @article = Article.fetch_by_slug_and_status(params[:id], 'pubslished').first
+    head(:not_found) unless @article
   end
 end
