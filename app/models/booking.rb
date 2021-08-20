@@ -37,6 +37,7 @@ class Booking < ApplicationRecord
   searchkick searchable: %i[status email user_id bookable_type bookable_id phone_number full_name]
 
   belongs_to :conversation
+  belongs_to :style
   belongs_to :bookable, polymorphic: true
   belongs_to :user, validate: true
 
