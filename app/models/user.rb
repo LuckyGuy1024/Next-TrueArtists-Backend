@@ -93,6 +93,10 @@ class User < ApplicationRecord
   def admin?
     role == User.roles[:admin]
   end
+  
+  def role_is?(assigned_role)
+    assigned_role == role
+  end
 
   def change_password_request
     UserMailer.change_password_request(self, password).deliver_now
