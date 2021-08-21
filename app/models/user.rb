@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :conventions, class_name: 'Convention', foreign_key: 'created_by', dependent: :destroy
   has_many :announcements, class_name: 'Announcement', foreign_key: 'published_by', dependent: :destroy
+  has_one_attached :avatar
 
   scope :artists, -> { where(role: roles[:artist]) }
   scope :studios, -> { where(role: roles[:studio_manager]) }
@@ -93,7 +94,7 @@ class User < ApplicationRecord
   def admin?
     role == User.roles[:admin]
   end
-  
+
   def role_is?(assigned_role)
     assigned_role == role
   end
