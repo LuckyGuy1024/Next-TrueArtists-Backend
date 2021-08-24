@@ -1,4 +1,5 @@
 class Api::V1::ConversationsController < ApplicationController
+  before_action :find_conversation, except: [:index]
   def index
     @conversations = paginate(current_user_conversations)
     render json: ActiveModel::Serializer::CollectionSerializer.new(@conversations,
@@ -7,7 +8,6 @@ class Api::V1::ConversationsController < ApplicationController
   end
 
   def show
-    @conversation = current_user_conversations.find(params[:id])
     render json: ConversationSerializer.new(@conversation).to_json, status: :ok
   end
 
@@ -31,13 +31,11 @@ class Api::V1::ConversationsController < ApplicationController
 
   def current_user_conversations
     @current_user_conversations = Conversation.where(sender_id: current_user.id)
-                                .or(Conversation.where(receiver_id: current_user.id))
+                                              .or(Conversation.where(receiver_id: current_user.id))
   end
 
-  def conversation
-    @conversation = Conversation.where(id: params[:id])
-                                .where(sender_id: current_user.id)
-                                .or(Conversation.where(receiver_id: current_user.id)).first
+  def find_conversation
+    @conversation = current_user_conversations.find(params[:id])
     head(:not_found) unless @conversation
   end
 end

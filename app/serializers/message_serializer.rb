@@ -1,4 +1,5 @@
 class MessageSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
   has_one :booking
 
   attributes :id,
