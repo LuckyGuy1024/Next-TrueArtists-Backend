@@ -18,6 +18,8 @@ require 'sshkit/sudo'
 require 'rollbar/capistrano3'
 require 'capistrano/maintenance'
 require 'capistrano/puma'
+require 'capistrano/rails/migrations'
+
 install_plugin Capistrano::Puma, load_hooks: true
 install_plugin Capistrano::Puma::Systemd
 

@@ -21,11 +21,12 @@ module ArticleScoped
     {
       page: params[:page] || 1,
       per_page: params[:per_page] || BaseSearch::PER_PAGE,
-      status: Article.statuses[:published]
+      status: 'published'
     }.delete_if { |_k, v| v.nil? }
   end
 
   def find_article
-    @article = Article.friendly.find(params[:id])
+    @article = Article.fetch_by_slug_and_status(params[:id], 'published').first
+    head(:not_found) unless @article
   end
 end

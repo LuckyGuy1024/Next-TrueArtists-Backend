@@ -1,11 +1,6 @@
 class Article < ApplicationRecord
   include AASM
   include IdentityCache
-  enum status: {
-    draft: 'draft',
-    published: 'published',
-    flagged: 'flagged'
-  }
 
   searchkick
 
@@ -20,16 +15,16 @@ class Article < ApplicationRecord
   validates :meta_description, :introduction, :content, :status, presence: true
   validates :image, size: { less_than: 10.megabytes, message: 'is not given between size' }
 
-  before_validation :assign_status, only: %i[create update]
   before_validation :import_tag_list, only: %i[create update]
 
   cache_index :slug, unique: true
+  cache_index :slug, :status
 
   aasm column: 'status' do
     state :draft, initial: true
     state :published
     state :flagged
-    state :deleted
+    state :archived
 
     event :draft do
       transitions from: [:flagged, :deleted, :published], to: :draft
@@ -43,8 +38,8 @@ class Article < ApplicationRecord
       transitions from: [:draft, :deleted, :published], to: :flagged
     end
 
-    event :delete do
-      transitions from: [:draft, :flagged, :published], to: :deleted
+    event :archive do
+      transitions from: [:draft, :flagged, :published], to: :archived
     end
   end
 
@@ -53,10 +48,6 @@ class Article < ApplicationRecord
       :title,
       %i[title id]
     ]
-  end
-
-  def assign_status
-    self.status = Article.statuses[status] || Article.statuses[:draft]
   end
 
   def import_tag_list
