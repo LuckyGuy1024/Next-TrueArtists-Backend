@@ -59,7 +59,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_api_error(status: 500, errors: [])
-    head(status: status) && return if errors.to_a.empty?
+    head(status: status) && return unless errors.present?
 
     render(json: json_api_error_format(errors).to_json, status: status) && return if errors.respond_to?(:messages)
 
