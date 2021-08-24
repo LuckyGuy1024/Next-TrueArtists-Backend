@@ -11,8 +11,10 @@ class ApplicationController < ActionController::API
   protect_from_forgery prepend: true
   skip_before_action :verify_authenticity_token
 
+  rescue_from StandardError do |e|
+    render_api_error(status: 500, errors: ["We're sorry, but something went wrong. Our team has been notified"])
+  end
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found!
 
   before_action :authenticate_request!
