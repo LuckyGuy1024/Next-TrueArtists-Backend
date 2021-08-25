@@ -19,9 +19,24 @@ FileUtils.chdir APP_ROOT do
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
+  puts "\n== Setup config files =="
+  system! 'cp config/application.yml.example config/application.yml'
+  system! 'cp config/database.yml.example config/database.yml'
+  system! 'cp config/storage.yml.example config/storage.yml'
+
+
+  puts "\n== Setup database =="
+  system! 'bin/rails db:create db:migrate'
+
+  puts "\n== Populate seed data =="
+  system! 'bin/rails db:seed --trace'
+
+  puts "\n== Setup assets =="
+  system! "bundle exec rails webpacker:install"
+
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
 
   puts "\n== Restarting application server =="
-  system! 'bin/rails restart'
+  system! 'bin/rails s -p 3005'
 end

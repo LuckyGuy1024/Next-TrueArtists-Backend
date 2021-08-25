@@ -28,7 +28,7 @@
         <div class="col-md-12 search-form">
           <%= form_for tattoos_path, html: { method: :get } do |f| %>
             <div class="sub-header">
-              <h1><%= current_seo_content.title %></h1>
+              <h1><%= current_seo_content&.title %></h1>
             </div>
             <div class="search-tattoos-form row">
               <div class="col-md-9">
