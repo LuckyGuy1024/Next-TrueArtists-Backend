@@ -9,6 +9,7 @@ puts '== Seeding the database =='
 end
 
 if ENV['RUN_ALL'] == '1'
+  puts "\n== Creating admin user data =="
   5.times do |i|
     User.create(
       email: "admin#{i + 1}@example.com",
@@ -19,9 +20,9 @@ if ENV['RUN_ALL'] == '1'
     )
   end
 
-  puts "\n== Creating regular_user data =="
+  puts "\n== Creating regular user data =="
 
-  100.times do |i|
+  300.times do |i|
     User.create(
       email: "ta#{i + 1}@example.com",
       full_name: Faker::Name.name,
@@ -32,7 +33,7 @@ if ENV['RUN_ALL'] == '1'
 
   puts "\n== Creating studio data =="
 
-  50.times do |i|
+  100.times do |i|
     studio = Studio.create(
       user_id: i + 6,
       email: Faker::Internet.safe_email,
@@ -44,6 +45,7 @@ if ENV['RUN_ALL'] == '1'
       instagram_url: Faker::Internet.url(host: 'instagram.com'),
       minimum_spend: 30,
       price_per_hour: 30,
+      status: ['pending_review', 'approved'].sample,
       city: Faker::Address.city
     )
 
@@ -51,18 +53,13 @@ if ENV['RUN_ALL'] == '1'
       io: File.open('app/assets/images/avatar.png'),
       filename: 'avatar.png'
     )
-
-    studio.hero_banner.attach(
-      io: File.open('app/assets/images/hero_banner.jpg'),
-      filename: 'hero_banner.jpg'
-    )
   end
 
   puts "\n== Creating artist data =="
 
   100.times do |i|
     artist = Artist.create(
-      user_id: i + 506,
+      user_id: i + 206,
       licensed: true,
       years_of_experience: Faker::Number.number(digits: 1),
       bio: Faker::Lorem.sentence,
@@ -73,6 +70,7 @@ if ENV['RUN_ALL'] == '1'
       minimum_spend: 30,
       price_per_hour: 30,
       currency_code: 'USD',
+      status: ['pending_review', 'approved'].sample,
       city: Faker::Address.city
     )
 
@@ -80,27 +78,22 @@ if ENV['RUN_ALL'] == '1'
       io: File.open('app/assets/images/avatar.png'),
       filename: 'avatar.png'
     )
-
-    artist.hero_banner.attach(
-      io: File.open('app/assets/images/hero_banner.jpg'),
-      filename: 'hero_banner.jpg'
-    )
   end
 
   puts "\n== Creating studio_artist data =="
 
   50.times do |i|
     StudioArtist.create(
-      artist_id: i + 1,
-      studio_id: i + 251,
+      artist_id: Artist.pluck(:id).sample,
+      studio_id: Studio.pluck(:id).sample,
       start_date: Time.now
     )
   end
 
   puts "\n== Creating artist tattoos data =="
-  50.times do |i|
+  20.times do |i|
     artist_tattoo = Tattoo.create(
-      artist_id: i + 1,
+      artist_id: Artist.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -108,14 +101,14 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
-  50.times do |i|
+  20.times do |i|
     artist_tattoo = Tattoo.create(
-      artist_id: i + 50,
+      artist_id: Artist.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -123,14 +116,14 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
-  50.times do |i|
+  20.times do |i|
     artist_tattoo = Tattoo.create(
-      artist_id: i + 100,
+      artist_id: Artist.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -138,14 +131,14 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
-  50.times do |i|
+  20.times do |i|
     artist_tattoo = Tattoo.create(
-      artist_id: i + 150,
+      artist_id: Artist.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -153,15 +146,15 @@ if ENV['RUN_ALL'] == '1'
     )
 
     artist_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
   puts "\n== Creating studio tattoos data =="
-  50.times do |i|
+  20.times do |i|
     studio_tattoo = Tattoo.create(
-      studio_id: i + 1,
+      studio_id: Studio.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -169,14 +162,14 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
-  50.times do |i|
+  20.times do |i|
     studio_tattoo = Tattoo.create(
-      studio_id: i + 50,
+      studio_id: Studio.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -184,14 +177,14 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
-  50.times do |i|
+  20.times do |i|
     studio_tattoo = Tattoo.create(
-      studio_id: i + 100,
+      studio_id: Studio.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -199,14 +192,14 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
-  50.times do |i|
+  20.times do |i|
     studio_tattoo = Tattoo.create(
-      studio_id: i + 150,
+      studio_id: Studio.pluck(:id).sample,
       placement: 'back',
       size: 'small',
       color: Faker::Color.color_name,
@@ -214,8 +207,8 @@ if ENV['RUN_ALL'] == '1'
     )
 
     studio_tattoo.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 
@@ -232,7 +225,7 @@ if ENV['RUN_ALL'] == '1'
 
   puts "\n== Creating articles =="
 
-  200.times do
+  30.times do
     article = Article.create(
       user_id: [1, 2, 3, 4, 5].sample,
       title: Faker::Lorem.sentence,
@@ -246,67 +239,8 @@ if ENV['RUN_ALL'] == '1'
     )
 
     article.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
-    )
-  end
-
-  50.times do
-    article = Article.create(
-      user_id: [1, 2, 3, 4, 5].sample,
-      title: Faker::Lorem.sentence,
-      page_title: Faker::Lorem.sentence,
-      meta_description: Faker::Lorem.sentence,
-      tag_list: ['artist', 'tattoo', 'artist tattoo'],
-      introduction: Faker::Lorem.paragraph(sentence_count: 9),
-      content: Faker::Lorem.paragraph(sentence_count: 40),
-      status: %w[draft published flagged].sample,
-      category_id: [*1..20].sample
-    )
-
-    article.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
-    )
-  end
-
-  50.times do
-    landing_page = LandingPage.create(
-      page_key: "/artists/#{Faker::FunnyName.name}",
-      last_updated_by: [1, 2, 3, 4, 5].sample,
-      title: Faker::Lorem.sentence,
-      page_title: Faker::Lorem.sentence,
-      meta_description: Faker::Lorem.sentence,
-      content: Faker::Lorem.paragraph(sentence_count: 40),
-      status: %w[draft published].sample,
-    )
-
-    landing_page.avatar.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'image.jpg'
-    )
-  end
-
-  puts '== Creating conventions =='
-
-  40.times do
-    conventions = Convention.create(
-      name: Faker::FunnyName.name,
-      description: Faker::Lorem.paragraph(sentence_count: 3),
-      address: Faker::Address.street_address,
-      country: Faker::Address.country,
-      city: Faker::Address.city,
-      state: Faker::Address.state,
-      start_date: Faker::Date.between(from: '2021-05-25', to: '2021-06-25'),
-      end_date: Faker::Date.between(from: '2021-05-26', to: '2021-06-30'),
-      created_by: [1, 2, 3, 4, 5].sample,
-      link_to_official_site: Faker::Internet.url,
-      facebook_link: Faker::Internet.url(host: 'facebook.com')
-    )
-
-    conventions.image.attach(
-      io: File.open('app/assets/images/g1.jpg'),
-      filename: 'g1.jpg'
+      io: File.open("lib/tasks/sample_data/images/#{[1, 2, 3].sample}.jpeg"),
+      filename: 'image.jpeg'
     )
   end
 end
