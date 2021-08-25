@@ -3,7 +3,6 @@
 require 'faker'
 
 puts '== Seeding the database =='
-puts "\n== Creating Admin user data =="
 
 ['Free Style', 'Free Hand', 'Black & White', 'Color', 'Japanase', 'Freehand'].each do |s|
   Style.create(name: s)
@@ -22,7 +21,7 @@ if ENV['RUN_ALL'] == '1'
 
   puts "\n== Creating regular_user data =="
 
-  1500.times do |i|
+  100.times do |i|
     User.create(
       email: "ta#{i + 1}@example.com",
       full_name: Faker::Name.name,
@@ -33,7 +32,7 @@ if ENV['RUN_ALL'] == '1'
 
   puts "\n== Creating studio data =="
 
-  500.times do |i|
+  50.times do |i|
     studio = Studio.create(
       user_id: i + 6,
       email: Faker::Internet.safe_email,
@@ -61,7 +60,7 @@ if ENV['RUN_ALL'] == '1'
 
   puts "\n== Creating artist data =="
 
-  500.times do |i|
+  100.times do |i|
     artist = Artist.create(
       user_id: i + 506,
       licensed: true,
@@ -90,7 +89,7 @@ if ENV['RUN_ALL'] == '1'
 
   puts "\n== Creating studio_artist data =="
 
-  250.times do |i|
+  50.times do |i|
     StudioArtist.create(
       artist_id: i + 1,
       studio_id: i + 251,
@@ -252,7 +251,7 @@ if ENV['RUN_ALL'] == '1'
     )
   end
 
-  200.times do
+  50.times do
     article = Article.create(
       user_id: [1, 2, 3, 4, 5].sample,
       title: Faker::Lorem.sentence,
@@ -271,7 +270,7 @@ if ENV['RUN_ALL'] == '1'
     )
   end
 
-  200.times do
+  50.times do
     landing_page = LandingPage.create(
       page_key: "/artists/#{Faker::FunnyName.name}",
       last_updated_by: [1, 2, 3, 4, 5].sample,
@@ -309,32 +308,5 @@ if ENV['RUN_ALL'] == '1'
       io: File.open('app/assets/images/g1.jpg'),
       filename: 'g1.jpg'
     )
-  end
-
-  puts "== Creating announcements==\n\n"
-
-  40.times do |i|
-    recipients_array = []
-    custom_emails_array = []
-
-    10.times do
-      recipients_array.push(Announcement::RECIPIENTS.sample)
-    end
-
-    5.times do
-      custom_emails_array.push(Faker::Internet.free_email)
-    end
-
-    announcements = Announcement.create(
-      title: Faker::Lorem.sentence,
-      content: Faker::Lorem.paragraph(sentence_count: 5),
-      publish_on: Faker::Date.between(from: '2021-06-25', to: '2021-07-25'),
-      send_now: false,
-      recipients: recipients_array,
-      custom_emails: custom_emails_array,
-      published_by: [1, 2, 3, 4, 5].sample,
-      status: %w[published draft].sample
-    )
-    puts " - create announcement #{i + 1} -- done"
   end
 end
