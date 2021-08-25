@@ -26,10 +26,10 @@ FileUtils.chdir APP_ROOT do
 
 
   puts "\n== Setup database =="
-  # system! 'bin/rails db:create db:migrate'
+  system! 'bin/rails db:create db:migrate'
 
   puts "\n== Populate seed data =="
-  # system! 'bin/rails db:seed --trace'
+  system! 'bin/rails db:seed --trace'
 
   puts "\n== Setup assets =="
   system! "bundle exec rails webpacker:install"
