@@ -30,10 +30,11 @@
         </div>
       </div>
       <div class="col-md-6">
-        <% if false %>
+        <% unless Rails.env.production? %>
           <div class="profile-head-btn d-flex justify-content-center justify-content-md-end">
-            <a href="#" class="btn btn-secondary btn-lg">Save</a>
-            <%= link_to 'Book', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/book/studio/#{@studio.slug}", target: '_blank', class: 'btn btn-primary ml-4' %>
+            <!-- <a href="#" class="btn btn-secondary btn-lg">Save</a> -->
+            <%= link_to 'Contact', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/message/studio/#{@studio.slug}", target: '_blank', class: 'btn btn-secondary' %>
+            <%= link_to 'Book', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/booking/studio/#{@studio.slug}", target: '_blank', class: 'btn btn-primary' %>
           </div>
         <% end %>
       </div>
