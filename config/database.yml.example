@@ -9,12 +9,12 @@ default: &default
 
 development:
   <<: *default
-  database: 'ta_dev'
+  database: 'trueartists_dev'
 
 test:
   <<: *default
-  database: 'ta_test'
+  database: 'trueartists_test'
 
 production:
   <<: *default
-  database: 'ta_prod'
+  database: 'trueartists_prod'
