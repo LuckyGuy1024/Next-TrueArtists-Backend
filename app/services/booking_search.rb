@@ -38,6 +38,7 @@ class BookingSearch < BaseSearch
 
   def owner_options
     @owner = options[:user]
+    #TODO we should not return all bookings without user
     return {} if @owner.blank?
 
     if @owner.artist
@@ -53,7 +54,7 @@ class BookingSearch < BaseSearch
         bookable_type: @owner.studio.class.to_s
       }
     end
-
+    
     {
       user_id: @owner.id
     }

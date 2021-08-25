@@ -35,7 +35,7 @@ class BookingSerializer < ActiveModel::Serializer
   end
 
   def created_at
-    object.created_at.strftime('%d-%m-%Y') if object.urgency
+    object.created_at.strftime('%d-%m-%Y')
   end
 
   def style
@@ -45,8 +45,8 @@ class BookingSerializer < ActiveModel::Serializer
   def images
     return unless object.images.attached?
 
-    object.images.each do |image|
-      {
+    object.images.each_with_object([]) do |image, array|
+      array << {
         id: image.id,
         image_url: asset_blob_url(image),
         name: image.filename
