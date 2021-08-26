@@ -36,7 +36,8 @@ class ArtistSerializer < ActiveModel::Serializer
              :has_styles,
              :has_social_profiles,
              :has_tattoo_gallery,
-             :has_avatar
+             :has_avatar,
+             :onboarding_steps
 
   def avatar
     if object.avatar.attached?
@@ -47,11 +48,23 @@ class ArtistSerializer < ActiveModel::Serializer
     end
   end
 
+  def onboarding_steps
+    return {} if object.approved?
+
+    {
+      social_media_profiles: object.has_social_profiles,
+      photos: object.has_tattoo_gallery,
+      avatar: object.has_avatar,
+      address: object.has_address,
+      phone_number: object.has_phone_number
+    }
+  end
+
   def hero_banner
     if object.hero_banner.attached?
       {
         id: object.hero_banner.id,
-        image_url: asset_blob_url(object.hero_banner),
+        image_url: asset_blob_url(object.hero_banner)
       }
     end
   end

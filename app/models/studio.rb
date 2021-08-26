@@ -137,11 +137,23 @@ class Studio < ApplicationRecord
   end
 
   def has_avatar
-    avatar.present?
+    avatar.attached?
   end
 
   def has_tattoo_gallery
     tattoos.present?
+  end
+
+  def has_phone_number
+    phone_number.present?
+  end
+
+  def has_services
+    services.present?
+  end
+
+  def has_address
+    city.present? && country.present?
   end
 
   def notify_admins

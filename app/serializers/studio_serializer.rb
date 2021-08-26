@@ -41,14 +41,15 @@ class StudioSerializer < ActiveModel::Serializer
              :working_hours,
              :has_social_profiles,
              :has_tattoo_gallery,
-             :has_avatar
+             :has_avatar,
+             :onboarding_steps
 
   def avatar
     if object.avatar.attached?
       {
         id: object.avatar.id,
         name: object.avatar.filename,
-        image_url: asset_blob_url(object.avatar),
+        image_url: asset_blob_url(object.avatar)
       }
     end
   end
@@ -58,9 +59,22 @@ class StudioSerializer < ActiveModel::Serializer
       {
         id: object.hero_banner.id,
         name: object.hero_banner.filename,
-        image_url: asset_blob_url(object.hero_banner),
+        image_url: asset_blob_url(object.hero_banner)
       }
     end
+  end
+
+  def onboarding_steps
+    return {} if object.approved?
+
+    {
+      social_media_profiles: object.has_social_profiles,
+      photos: object.has_tattoo_gallery,
+      avatar: object.has_avatar,
+      address: object.has_address,
+      phone_number: object.has_phone_number,
+      services: object.has_services
+    }
   end
 
   def working_hours
@@ -120,6 +134,6 @@ class StudioSerializer < ActiveModel::Serializer
   def format_time(time)
     return nil unless time
 
-    time.strftime("%I:%M %p")
+    time.strftime('%I:%M %p')
   end
 end
