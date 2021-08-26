@@ -15,6 +15,7 @@ class ApplicationController < ActionController::API
     render_api_error(status: 500, errors: ["We're sorry, but something went wrong. Our team has been notified"])
   end
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found!
 
   before_action :authenticate_request!
@@ -56,6 +57,10 @@ class ApplicationController < ActionController::API
 
   def render_not_found!
     render_api_error(status: 404, errors: 'Resource not found')
+  end
+
+  def unprocessable_entity_response(exception)
+    render_api_error(status: :unprocessable_entity, errors: exception.record.errors)
   end
 
   def render_api_error(status: 500, errors: [])

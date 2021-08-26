@@ -64,8 +64,8 @@ module Api::V1::Admin
         :publish_on,
         :send_now,
         :image,
-        :recipients,
-        :custom_emails
+        recipients: [],
+        custom_emails: []
       )
     end
 

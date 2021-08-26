@@ -29,8 +29,7 @@ class Announcement < ApplicationRecord
   validates :title, :content, :status, presence: true
   validates_presence_of :publish_on, unless: :send_now?
   validates_presence_of :send_now, unless: :publish_on?
-  validates_presence_of :recipients, unless: :custom_emails?
-  validates_presence_of :custom_emails, unless: :recipients?
+  validates_presence_of :recipients
 
   cache_index :title, unique: true
 
