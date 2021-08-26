@@ -52,8 +52,9 @@ class ArtistSerializer < ActiveModel::Serializer
     return {} if object.approved?
 
     {
+      styles: object.has_styles,
       social_media_profiles: object.has_social_profiles,
-      photos: object.has_tattoo_gallery,
+      tattoo_photos: object.has_tattoo_gallery,
       avatar: object.has_avatar,
       address: object.has_address,
       phone_number: object.has_phone_number
