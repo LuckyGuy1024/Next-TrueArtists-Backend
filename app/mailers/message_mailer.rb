@@ -20,7 +20,7 @@ class MessageMailer < ApplicationMailer
       reply_to: "#{@sender.full_name} <message-#{message.thread_id}@replies.trueartists.com>",
       subject: "You have a new message from #{@sender.full_name}",
       references: mail_references,
-      personalizations: { to: [{ email: @receiver.email }] }
+      personalizations: [{ to: [{ email: @receiver.email }] }]
     )
   end
 
