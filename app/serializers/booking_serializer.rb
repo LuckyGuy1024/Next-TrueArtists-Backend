@@ -39,7 +39,7 @@ class BookingSerializer < ActiveModel::Serializer
   end
 
   def style
-    object.style.name
+    object.style.name if object.style
   end
 
   def images

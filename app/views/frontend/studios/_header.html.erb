@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <% unless Rails.env.production? %>
+        <% if params[:show_booking].present? %>
           <div class="profile-head-btn d-flex justify-content-center justify-content-md-end">
             <!-- <a href="#" class="btn btn-secondary btn-lg">Save</a> -->
             <%= link_to 'Contact', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/message/studio/#{@studio.slug}", target: '_blank', class: 'btn btn-secondary' %>
