@@ -95,6 +95,7 @@ Rails.application.configure do
   # }
 
   # Sendgrid ActionMailer settings for Sendgrid
+  config.action_mailbox.ingress = :sendgrid
   config.action_mailer.delivery_method = :sendgrid_actionmailer
   config.action_mailer.sendgrid_actionmailer_settings = {
     api_key: ENV.fetch('SENDGRID_APIKEY'),
