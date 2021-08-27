@@ -45,7 +45,6 @@ class Studio < ApplicationRecord
   has_many :clients
   has_many :guest_artist_applications
   has_many :bookings, as: :bookable, dependent: :destroy
-  has_one_attached :avatar
 
   has_one_attached :avatar do |attachable|
     attachable.format :webp
@@ -54,7 +53,6 @@ class Studio < ApplicationRecord
 
   has_one_attached :hero_banner do |attachable|
     attachable.format :webp
-    attachable.resize '100x100'
   end
 
   cache_index :slug, unique: true

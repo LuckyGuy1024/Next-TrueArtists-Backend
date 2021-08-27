@@ -28,8 +28,15 @@ class Artist < ApplicationRecord
   has_many :studios, through: :studio_artists
   has_many :guest_artist_applications
   has_many :bookings, as: :bookable, dependent: :destroy
-  has_one_attached :avatar
-  has_one_attached :hero_banner
+  
+  has_one_attached :avatar do |attachable|
+    attachable.format :webp
+    attachable.resize '100x100'
+  end
+
+  has_one_attached :hero_banner do |attachable|
+    attachable.format :webp
+  end
 
   cache_index :slug, unique: true
   cache_index :slug, :status

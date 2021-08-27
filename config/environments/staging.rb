@@ -98,8 +98,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :sendgrid_actionmailer
   config.action_mailer.sendgrid_actionmailer_settings = {
     api_key: ENV.fetch('SENDGRID_APIKEY'),
-    mail_settings: { sandbox_mode: { enable: true }},
-    raise_delivery_errors: false
+    raise_delivery_errors: true
   }
 
   # Inserts middleware to perform automatic connection switching.
