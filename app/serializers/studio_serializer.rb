@@ -36,6 +36,8 @@ class StudioSerializer < ActiveModel::Serializer
              :parking,
              :lgbt_friendly,
              :price_per_hour,
+             :minimum_spend,
+             :currency_code,
              :avatar,
              :hero_banner,
              :working_hours,
