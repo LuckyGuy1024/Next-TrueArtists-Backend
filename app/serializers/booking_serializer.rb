@@ -14,6 +14,7 @@ class BookingSerializer < ActiveModel::Serializer
              :first_tattoo,
              :status,
              :created_at,
+             :updated_at,
              :images,
              :user,
              :bookable

@@ -32,6 +32,7 @@ class Api::V1::ConversationsController < ApplicationController
   def current_user_conversations
     @current_user_conversations = Conversation.where(sender_id: current_user.id)
                                               .or(Conversation.where(receiver_id: current_user.id))
+                                              .order("updated_at DESC")
   end
 
   def find_conversation
