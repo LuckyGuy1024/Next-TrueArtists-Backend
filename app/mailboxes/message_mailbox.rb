@@ -1,5 +1,5 @@
 class MessageMailbox < ApplicationMailbox
-  RECIPIENT_FORMAT = /message-(.+)@#{ENV.fetch("INBOUND_EMAIL_DOMAIN", "replies.trueartists.com")}\Z/i.freeze
+  RECIPIENT_FORMAT = /message-(.+)@#{ENV.fetch("INBOUND_EMAIL_DOMAIN", "#{ENV.fetch('EMAIL_REPLY_DOMAIN')}")}\Z/i.freeze
 
   before_processing :find_user
 
