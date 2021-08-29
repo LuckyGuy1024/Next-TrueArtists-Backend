@@ -37,24 +37,20 @@
     isotop: () => {
       if ($('.grid').length) {
         document.addEventListener("turbolinks:load", () => {
-            var $grid = $('.grid').isotope({
-                itemSelector: '.grid-item',
-                percentPosition: true,
-                masonry: {
-                    horizontalOrder: false,
-                }
-            });
+          var $grid = $('.grid').isotope({
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            masonry: {
+              horizontalOrder: false,
+            }
+          });
 
-            document.addEventListener('lazyloaded', function(e) {
-                //optimize re-layout
-                if (e.target.classList.contains('grid-item-img')) {
-                    $grid.isotope('layout')
-                }
-            });
-
-            // $grid.imagesLoaded().progress(function() {
-            //   $grid.isotope('layout')
-            // });
+          document.addEventListener('lazyloaded', function(e) {
+            //optimize re-layout
+            if (e.target.classList.contains('grid-item-img')) {
+              $grid.isotope('layout')
+            }
+          });
         })
       }
     },
