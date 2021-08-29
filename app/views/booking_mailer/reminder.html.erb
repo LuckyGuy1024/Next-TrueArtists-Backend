@@ -1,10 +1,10 @@
-<p><b><%= @user.name %></b> made a booking request with you at TrueArtists on <b><%= @booking.created_at.to_s(:full_usa) %></b> and you are yet to respond.
+<p><b><%= @user.full_name %></b> made a booking request with you at TrueArtists on <b><%= @booking.created_at.to_s(:full_usa) %></b> and you are yet to respond.
 
 <p><%= link_to 'Click here', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}" %> to respond.</p>
 
-<p>A prompt response helps customers finalize plans. If you don’t respond to <b><%= @user.name %></b> inquiry within 24 hours, it could negatively impact your response rate and your listing’s placement in search.</p>
+<p>A prompt response helps customers finalize plans. If you don’t respond to <b><%= @user.full_name %></b> inquiry within 24 hours, it could negatively impact your response rate and your listing’s placement in search.</p>
 
-<p>If you have any questions or need help, don't hesitate to contact us at <%= link_to 'info@trueartists.com', 'info@trueartists.com' %>.</p>
+<p>If you have any questions or need help, don't hesitate to contact us at <%= link_to 'info@trueartists.com', 'mailto:info@trueartists.com' %>.</p>
 
 <p>Best Regards</p>
 
