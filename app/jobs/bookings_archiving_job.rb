@@ -8,7 +8,7 @@ class BookingsArchivingJob < ActiveJob::Base
 
   def perform
     Booking.requires_archiving.find_each do |booking|
-      booking.archive
+      booking.archive!
     end
   end
 end
