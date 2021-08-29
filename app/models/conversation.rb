@@ -7,6 +7,10 @@ class Conversation < ApplicationRecord
 
   validates_uniqueness_of :sender_id, scope: :receiver_id
 
+  scope :between, lambda { |sender_id, receiver_id|
+                    where('(conversations.sender_id = ? AND conversations.receiver_id = ?) OR (conversations.receiver_id = ? AND conversations.sender_id = ?)', sender_id, receiver_id, sender_id, receiver_id)
+                  }
+
   scope :for_receiver, lambda { |receiver|
                          order(updated_at: :desc)
                            .joins(:receipts).merge(Receipt.for_receiver(receiver).not_archived).distinct
@@ -16,9 +20,9 @@ class Conversation < ApplicationRecord
   }
 
   scope :archived, lambda { |receiver|
-                         order(updated_at: :desc)
-                           .joins(:receipts).merge(Receipt.for_receiver(receiver).archived).distinct
-                       }
+                     order(updated_at: :desc)
+                       .joins(:receipts).merge(Receipt.for_receiver(receiver).archived).distinct
+                   }
 
   def mark_as_archived(receiver)
     receipts_for(receiver).not_archived.update_all(archived: true)

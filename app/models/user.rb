@@ -108,8 +108,8 @@ class User < ApplicationRecord
     UserMailer.change_password_request(self, password).deliver_now
   end
 
-  def unread_message_count
-    @unread_message_count = Conversation.unread(self).count
+  def unread_inbox_count
+    @unread_inbox_count = Conversation.unread(self).count
   end
 
   def self.find_by_password_reset_token(token)
