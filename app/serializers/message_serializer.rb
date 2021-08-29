@@ -18,7 +18,7 @@ class MessageSerializer < ActiveModel::Serializer
     {
       id: object.sender.id,
       name: display_name(object.sender)
-    }.merge(avatar(object.receiver))
+    }.merge(avatar(object.sender))
   end
 
   def receiver

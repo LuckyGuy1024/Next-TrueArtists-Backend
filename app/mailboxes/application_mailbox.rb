@@ -1,5 +1,5 @@
 class ApplicationMailbox < ActionMailbox::Base
-  # routing (/message-.+@replies.trueartists.com/i => :message)
+  # routing (/message-.+@"#{ENV.fetch('EMAIL_REPLY_DOMAIN')}"/i => :message)
   routing all: :message
 
   def mail_body

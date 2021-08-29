@@ -17,7 +17,7 @@ class MessageMailer < ApplicationMailer
     mail(
       from: 'TrueArtists<info@trueartists.com>',
       to: @receiver.email,
-      reply_to: "#{@sender.full_name} <message-#{message.thread_id}@replies.trueartists.com>",
+      reply_to: "#{@sender.full_name} <message-#{message.thread_id}@#{ENV.fetch('EMAIL_REPLY_DOMAIN')}>",
       subject: "You have a new message from #{@sender.full_name}",
       references: mail_references,
       personalizations: [{ to: [{ email: @receiver.email }] }]

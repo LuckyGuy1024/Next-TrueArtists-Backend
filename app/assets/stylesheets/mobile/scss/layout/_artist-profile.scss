@@ -29,6 +29,17 @@
     font-size: 15px;
     margin: 2px 0;
   }
+
+  .artist-profile-actions {
+    width: 100%;
+    margin: 15px 5px;
+    display: block;
+    .btn {
+      padding: 8px 12px;
+      width: 49%;
+      text-align: center;
+    }
+  }
 }
 .artist-p-location {
   ul {

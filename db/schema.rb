@@ -56,11 +56,11 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.boolean "send_now", default: false
     t.datetime "publish_on"
     t.text "content"
-    t.text "recipients"
-    t.text "custom_emails"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "recipients"
+    t.text "custom_emails"
   end
 
   create_table "articles", charset: "utf8", force: :cascade do |t|
@@ -123,8 +123,9 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.string "name"
     t.string "street_address"
     t.string "street_address_2"
-    t.integer "reminder_count", default: 0
+    t.string "old_specialty"
     t.string "specialty"
+    t.integer "reminder_count", default: 0
     t.index ["guest_artist"], name: "index_artists_on_guest_artist"
     t.index ["seeking_guest_spot"], name: "index_artists_on_seeking_guest_spot"
     t.index ["studio_id"], name: "index_artists_on_studio_id"
@@ -147,12 +148,17 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.text "description"
     t.string "tattoo_placement"
     t.boolean "consult_artist", default: false, null: false
+    t.boolean "custom_size"
+    t.string "size_units"
     t.datetime "urgency"
     t.boolean "first_tattoo", default: false, null: false
+    t.boolean "colored_tattoo", default: false, null: false
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
+    t.integer "height"
+    t.integer "width"
     t.string "formatted_address"
     t.string "bookable_type"
     t.integer "bookable_id"
@@ -226,10 +232,9 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
   create_table "conversations", charset: "utf8", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "receiver_id"
-    t.boolean "archive", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "read", default: false
+    t.boolean "archived", default: false
   end
 
   create_table "favorites", charset: "utf8", force: :cascade do |t|
@@ -319,21 +324,19 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
   create_table "messages", charset: "utf8", force: :cascade do |t|
     t.string "subject"
     t.text "content"
-    t.integer "receiver_id"
-    t.integer "sender_id"
     t.boolean "sender_deleted"
     t.boolean "receiver_deleted"
     t.integer "parent_id"
     t.string "message_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "thread_id"
     t.boolean "email_client_reply"
     t.boolean "is_read"
-    t.string "thread_id"
     t.integer "conversation_id"
+    t.integer "receiver_id"
+    t.integer "sender_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
     t.index ["thread_id"], name: "index_messages_on_thread_id"
   end
 
@@ -356,7 +359,21 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.index ["slug"], name: "index_placements_on_slug"
   end
 
-  create_table "studio_artists", charset: "utf8", force: :cascade do |t|
+  create_table "receipts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "receiver_type"
+    t.bigint "receiver_id"
+    t.bigint "message_id"
+    t.string "mailbox_type"
+    t.boolean "read", default: false
+    t.boolean "archived", default: false
+    t.boolean "deleted", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id"], name: "index_receipts_on_message_id"
+    t.index ["receiver_type", "receiver_id"], name: "index_receipts_on_receiver"
+  end
+
+  create_table "studio_artists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "artist_id"
     t.date "start_date"
@@ -394,8 +411,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.string "phone_number"
     t.text "accepted_payment_methods"
     t.boolean "appointment_only", default: false
-    t.string "languages"
-    t.string "services"
+    t.text "languages"
     t.string "email"
     t.string "facebook_url"
     t.string "twitter_url"
@@ -442,6 +458,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.time "saturday_end"
     t.time "sunday_end"
     t.string "street_address_2"
+    t.string "services"
     t.integer "reminder_count", default: 0
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id"
@@ -472,6 +489,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.string "caption"
     t.boolean "featured", default: false
     t.integer "placement_id"
+    t.integer "styles"
     t.integer "style_id"
     t.string "slug"
     t.index ["placement_id"], name: "index_tattoos_on_placement_id"

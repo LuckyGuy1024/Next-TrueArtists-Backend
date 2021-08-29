@@ -396,12 +396,11 @@ img {
   display: inline-block;
   line-height: normal;
   position: relative;
-  border: 1px solid $dark-color;
-  background-color: transparent;
-  color: $dark-color;
+  background: $lightgray;
+  color: $black;
   font-weight: 500;
   font-size: 14px;
-  padding: 5px 15px;
+  padding: 5px 10px;
 
   &:hover {
     background-color: $primary-color;

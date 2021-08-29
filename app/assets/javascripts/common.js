@@ -36,16 +36,22 @@
     // isotop masonary
     isotop: () => {
       if ($('.grid').length) {
-        var $grid = $('.grid').isotope({
-          itemSelector: '.grid-item',
-          percentPosition: true,
-          masonry: {
-            horizontalOrder: false,
-          }
-        });
-        $grid.imagesLoaded().progress(function() {
-          $grid.isotope('layout')
-        });
+        document.addEventListener("turbolinks:load", () => {
+          var $grid = $('.grid').isotope({
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            masonry: {
+              horizontalOrder: false,
+            }
+          });
+
+          document.addEventListener('lazyloaded', function(e) {
+            //optimize re-layout
+            if (e.target.classList.contains('grid-item-img')) {
+              $grid.isotope('layout')
+            }
+          });
+        })
       }
     },
     // nice-select js
