@@ -75,7 +75,7 @@ class Booking < ApplicationRecord
   scope :sender_bookings, ->(user_id) { where(sender_id: user_id) }
   scope :receiver_bookings, ->(user_id) { where(receiver_id: user_id) }
   scope :user_bookings, ->(user_id) { sender_bookings(user_id).or(receiver_bookings(user_id)) }
-  scope :requires_archiving , -> { where(status: 'pending_review').where("reminder_count >= ? AND created_at > ?", MAX_REMINDER_AMOUNT, 5.days.ago) }
+  scope :requires_archiving , -> { where(status: 'pending_review').where("reminder_count >= ? AND created_at < ?", MAX_REMINDER_AMOUNT, 5.days.ago) }
 
   def search_data
     attributes.merge(

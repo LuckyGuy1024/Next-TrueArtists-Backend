@@ -17,8 +17,8 @@ class BookingNotificationJob < ActiveJob::Base
     return if booking.reminder_count > Booking::MAX_REMINDER_AMOUNT
 
     case booking.status
-    when 'pending_review '
-      ArtistMailer.complete_profile_reminder(artist, subject[booking.reminder_count]).deliver_now
+    when 'pending_review'
+      BookingMailer.reminder(booking, subject[booking.reminder_count]).deliver_now
     else
       return
     end

@@ -6,7 +6,7 @@ class BookingMailer < ApplicationMailer
     mail(to: @bookable.email, subject: 'You have a new booking')
   end
 
-  def reminded(booking, subject)
+  def reminder(booking, subject)
     @booking = booking
     @bookable = booking.bookable
     @user = booking.user
