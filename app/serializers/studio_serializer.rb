@@ -9,9 +9,9 @@ class StudioSerializer < ActiveModel::Serializer
              :name,
              :bio,
              :city,
-             :state,
              :street_address,
              :street_address_2,
+             :state,
              :zip_code,
              :country,
              :phone_number,
@@ -69,7 +69,7 @@ class StudioSerializer < ActiveModel::Serializer
   def onboarding_steps
     return {} if object.approved?
 
-    { 
+    {
       social_media_profiles: object.has_social_profiles,
       tattoo_photos: object.has_tattoo_gallery,
       avatar: object.has_avatar,
