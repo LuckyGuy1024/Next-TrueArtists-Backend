@@ -30,4 +30,8 @@ class ConversationSerializer < ActiveModel::Serializer
 
     object.full_name
   end
+
+  def read
+    object.read_all?(instance_options[:current_user])
+  end
 end

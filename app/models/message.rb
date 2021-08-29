@@ -12,22 +12,34 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User', foreign_key: 'sender_id', validate: true
   belongs_to :receiver, class_name: 'User', foreign_key: 'receiver_id', validate: true
 
+  has_one :booking
   belongs_to :conversation
-  has_many :message_mails
-  has_one  :booking
-  has_many_attached :attachments
+  has_many :message_mails, dependent: :destroy
+  has_many :receipts, dependent: :destroy
+  has_many_attached :attachments, dependent: :destroy
 
   scope :threads, -> { pluck(:thread_id).uniq }
 
   validates :content, :conversation_id, presence: true
   before_validation :assign_thread_id, on: :create
-  after_commit :send_user_notification, on: :create
-  after_commit :mark_conversation_as_unread, on: :create
+  after_commit :deliver, on: :create
 
   private
 
-  def mark_conversation_as_unread
-    conversation.unread!
+  def deliver
+    # Receiver receipt
+    receipts.build(receiver: receiver, mailbox_type: 'inbox', read: false)
+
+    # Sender receipt
+    receipts.build(receiver: sender, mailbox_type: 'outbox', read: true)
+
+    save if valid?
+
+    return if email_client_reply
+    return if message_type_booking?
+    return unless conversation.booking.blank?
+
+    MessageMailingService.new(self).send
   end
 
   def send_user_notification

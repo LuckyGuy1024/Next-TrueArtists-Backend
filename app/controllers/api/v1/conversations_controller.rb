@@ -3,12 +3,15 @@ class Api::V1::ConversationsController < ApplicationController
   def index
     @conversations = paginate(current_user_conversations)
     render json: ActiveModel::Serializer::CollectionSerializer.new(@conversations,
-                                                                   serializer: ConversationSerializer),
+                                                                   serializer: ConversationSerializer,
+                                                                   current_user: current_user),
            status: :ok
   end
 
   def show
-    render json: ConversationSerializer.new(@conversation).to_json, status: :ok
+    render json: ConversationSerializer.new(@conversation).to_json,
+           current_user: current_user,
+           status: :ok
   end
 
   def archive
@@ -20,7 +23,7 @@ class Api::V1::ConversationsController < ApplicationController
   end
 
   def read
-    if @conversation.read!
+    if @conversation.mark_as_read(current_user)
       head(:ok)
     else
       render_api_error(status: 422, errors: @conversation.errors)
@@ -32,7 +35,7 @@ class Api::V1::ConversationsController < ApplicationController
   def current_user_conversations
     @current_user_conversations = Conversation.where(sender_id: current_user.id)
                                               .or(Conversation.where(receiver_id: current_user.id))
-                                              .order("updated_at DESC")
+                                              .order('updated_at DESC')
   end
 
   def find_conversation
