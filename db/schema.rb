@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_21_010911) do
+ActiveRecord::Schema.define(version: 2021_08_29_171029) do
 
-  create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "action_mailbox_inbound_emails", charset: "utf8", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
     t.string "message_checksum", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -44,13 +44,13 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "announcements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "announcements", charset: "utf8", force: :cascade do |t|
     t.string "title"
     t.integer "published_by", null: false
     t.boolean "send_now", default: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "articles", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
     t.string "page_title"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
-  create_table "artist_styles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "artist_styles", charset: "utf8", force: :cascade do |t|
     t.bigint "artist_id"
     t.bigint "style_id"
     t.datetime "created_at", precision: 6, null: false
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["style_id"], name: "index_artist_styles_on_style_id"
   end
 
-  create_table "artists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "artists", charset: "utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "studio_id"
     t.text "bio"
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["user_id"], name: "index_artists_on_user_id", unique: true
   end
 
-  create_table "assets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "assets", charset: "utf8", force: :cascade do |t|
     t.integer "attachable_id"
     t.string "attachable_type"
     t.string "image_content_type"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["attachable_id", "attachable_type"], name: "index_assets_on_attachable_id_and_attachable_type", length: { attachable_type: 20 }
   end
 
-  create_table "bookings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "bookings", charset: "utf8", force: :cascade do |t|
     t.text "description"
     t.string "tattoo_placement"
     t.boolean "consult_artist", default: false, null: false
@@ -163,12 +163,13 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.integer "style_id"
     t.string "availability"
     t.integer "conversation_id"
+    t.integer "reminder_count", default: 0
     t.index ["bookable_type", "bookable_id"], name: "booking_id"
     t.index ["conversation_id"], name: "index_bookings_on_conversation_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "categories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.text "meta_description"
     t.text "description"
@@ -181,7 +182,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
-  create_table "clients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "clients", charset: "utf8", force: :cascade do |t|
     t.bigint "artist_id"
     t.bigint "studio_id"
     t.string "name"
@@ -202,7 +203,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["studio_id"], name: "index_clients_on_studio_id"
   end
 
-  create_table "conventions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "conventions", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
@@ -222,7 +223,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.string "slug"
   end
 
-  create_table "conversations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "conversations", charset: "utf8", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "receiver_id"
     t.boolean "archive", default: false
@@ -231,7 +232,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.boolean "read", default: false
   end
 
-  create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "favorites", charset: "utf8", force: :cascade do |t|
     t.string "favoritable_type", null: false
     t.bigint "favoritable_id", null: false
     t.string "favoritor_type", null: false
@@ -248,7 +249,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["scope"], name: "index_favorites_on_scope"
   end
 
-  create_table "friendly_id_slugs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "friendly_id_slugs", charset: "utf8", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -259,7 +260,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "guest_artist_application_responses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "guest_artist_application_responses", charset: "utf8", force: :cascade do |t|
     t.bigint "guest_artist_application_id"
     t.bigint "user_id"
     t.text "message"
@@ -267,7 +268,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["user_id"], name: "index_guest_artist_application_responses_on_user_id"
   end
 
-  create_table "guest_artist_applications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "guest_artist_applications", charset: "utf8", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "artist_id"
     t.string "phone_number"
@@ -280,7 +281,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["studio_id"], name: "index_guest_artist_applications_on_studio_id"
   end
 
-  create_table "landing_pages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "landing_pages", charset: "utf8", force: :cascade do |t|
     t.string "page_key"
     t.string "page_url"
     t.string "page_title"
@@ -295,7 +296,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["page_key"], name: "index_landing_pages_on_page_key"
   end
 
-  create_table "locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "locations", charset: "utf8", force: :cascade do |t|
     t.string "country"
     t.string "state"
     t.string "city"
@@ -305,7 +306,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.decimal "lon", precision: 15, scale: 10
   end
 
-  create_table "message_mails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "message_mails", charset: "utf8", force: :cascade do |t|
     t.integer "message_id", null: false
     t.integer "user_id", null: false
     t.string "thread_id"
@@ -315,7 +316,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "messages", charset: "utf8", force: :cascade do |t|
     t.string "subject"
     t.text "content"
     t.integer "receiver_id"
@@ -336,7 +337,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["thread_id"], name: "index_messages_on_thread_id"
   end
 
-  create_table "pages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pages", charset: "utf8", force: :cascade do |t|
     t.string "slug"
     t.string "title"
     t.text "content"
@@ -346,7 +347,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "placements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "placements", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "slug"
     t.integer "tattoo_count", default: 0
@@ -355,7 +356,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["slug"], name: "index_placements_on_slug"
   end
 
-  create_table "studio_artists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "studio_artists", charset: "utf8", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "artist_id"
     t.date "start_date"
@@ -366,7 +367,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["studio_id"], name: "index_studio_artists_on_studio_id"
   end
 
-  create_table "studio_invites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "studio_invites", charset: "utf8", force: :cascade do |t|
     t.bigint "studio_id"
     t.string "invite_code"
     t.string "email"
@@ -381,7 +382,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["studio_id"], name: "index_studio_invites_on_studio_id"
   end
 
-  create_table "studios", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "studios", charset: "utf8", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
     t.text "bio"
@@ -418,6 +419,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "phone_verified", default: false
+    t.string "currency_code"
     t.boolean "monday", default: false
     t.boolean "tuesday", default: false
     t.boolean "wednesday", default: false
@@ -439,14 +441,13 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.time "friday_end"
     t.time "saturday_end"
     t.time "sunday_end"
-    t.string "currency_code"
     t.string "street_address_2"
     t.integer "reminder_count", default: 0
     t.index ["accepting_guest_artist"], name: "index_studios_on_accepting_guest_artist"
     t.index ["user_id"], name: "index_studios_on_user_id"
   end
 
-  create_table "styles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "styles", charset: "utf8", force: :cascade do |t|
     t.string "slug"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -454,7 +455,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.integer "tattoo_count", default: 0
   end
 
-  create_table "tattoos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tattoos", charset: "utf8", force: :cascade do |t|
     t.string "placement"
     t.string "size"
     t.string "color"
@@ -478,7 +479,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_010911) do
     t.index ["style_id"], name: "index_tattoos_on_style_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "full_name"
     t.string "email"
     t.string "role"

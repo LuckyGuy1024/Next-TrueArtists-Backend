@@ -59,7 +59,7 @@ class Tattoo < ApplicationRecord
   end
 
   def seo_title
-    format('%s %s %s %s | %s', style&.name, color, placement, 'Tattoo', (artist.name || studio.name)).titleize
+    format('%s %s %s %s | %s', style&.name, color, placement, 'Tattoo', (artist&.name || studio.name)).titleize
   end
 
   def slug_candidates

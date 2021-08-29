@@ -10,4 +10,12 @@ when 'production'
   every 24.hours, at: Time.parse('2pm').getlocal.strftime('%H:%M'), roles: [:app] do
     rake 'onboarding:reminders --trace'
   end
+
+  every 24.hours, at: Time.parse('2pm').getlocal.strftime('%H:%M'), roles: [:app] do
+    runner "BookingsNotificationJob.perform_now"
+  end
+
+  every 24.hours, at: Time.parse('1pm').getlocal.strftime('%H:%M'), roles: [:app] do
+    runner "BookingsArchivingJob.perform_now"
+  end
 end
