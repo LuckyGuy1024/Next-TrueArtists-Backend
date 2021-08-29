@@ -3,15 +3,15 @@
     <%= link_to tattoo_path(tattoo), class: 'gallery-item half' do %>
       <% if false #modern_browser? %>
         <% variant = tattoo.image.variant(convert: 'webp').processed %>
-        <%= lazy_image_tag(asset_blob_url(variant), title: tattoo.seo_title, alt: tattoo.seo_title) %>
+        <%= lazy_image_tag(asset_blob_url(variant), title: tattoo.seo_title, alt: tattoo.seo_title, class: 'grid-item-img') %>
       <% else %>
-        <%= lazy_image_tag(asset_blob_url(tattoo.image), title: tattoo.seo_title, alt: tattoo.seo_title) %>
+        <%= lazy_image_tag(asset_blob_url(tattoo.image), title: tattoo.seo_title, alt: tattoo.seo_title, class: 'grid-item-img') %>
       <% end %>
     <% end %>
     <div class='tattoo-info'>
       <%= link_to url_for(tattoo.parent) do %>
         <% if tattoo.parent.avatar.attached? %>
-          <%= lazy_image_tag(asset_blob_url(tattoo.parent.avatar)) %>
+          <%= lazy_image_tag(asset_blob_url(tattoo.parent.avatar), class: 'grid-item-user-logo') %>
         <% end %>
          <span itemprop='name'>
            <%= tattoo.parent.name %><br>
