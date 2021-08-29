@@ -43,9 +43,15 @@
             horizontalOrder: false,
           }
         });
-        $grid.imagesLoaded().progress(function() {
-          $grid.isotope('layout')
+
+        document.addEventListener('lazyloaded', function(e) {
+            console.log('lazyloaded dup')
+            $grid.isotope('layout')
         });
+
+        // $grid.imagesLoaded().progress(function() {
+        //   $grid.isotope('layout')
+        // });
       }
     },
     // nice-select js
