@@ -62,9 +62,7 @@
           </div>
 
           <% if params[:show_booking].present? %>
-            <div class="artist-p-btn">
-              <!-- <a href="#" class="btn btn-secondary">Save</a> -->
-              <!-- remove me after testing -->
+            <div class="artist-profile-actions">
               <%= link_to 'Contact', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/message/artist/#{@artist.slug}", target: '_blank', class: 'btn btn-secondary' %>
               <%= link_to 'Book', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/booking/artist/#{@artist.slug}", target: '_blank', class: 'btn btn-primary' %>
             </div>
