@@ -40,14 +40,6 @@ class Message < ApplicationRecord
     return unless conversation.booking.blank?
 
     MessageMailingService.new(self).send
-  end
-
-  def send_user_notification
-    return if email_client_reply
-    return if message_type_booking?
-    return unless conversation.booking.blank?
-
-    MessageMailingService.new(self).send
     # MessageSmsService.new(self, @@result[:phone]).send unless @@result[:phone].nil?
   end
 

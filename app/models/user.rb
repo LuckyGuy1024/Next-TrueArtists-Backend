@@ -31,6 +31,11 @@ class User < ApplicationRecord
   has_one :artist, dependent: :destroy
   has_one :studio, dependent: :destroy
   has_many :articles, dependent: :destroy
+  has_many :messages, class_name: 'Message', as: :sender
+  has_many :receipts, lambda {
+                        order(created_at: :desc, id: :desc)
+                      }, class_name: 'Receipt', dependent: :destroy, as: :receiver
+
   has_many :conventions, class_name: 'Convention', foreign_key: 'created_by', dependent: :destroy
   has_many :announcements, class_name: 'Announcement', foreign_key: 'published_by', dependent: :destroy
   has_one_attached :avatar
@@ -101,6 +106,10 @@ class User < ApplicationRecord
 
   def change_password_request
     UserMailer.change_password_request(self, password).deliver_now
+  end
+
+  def unread_message_count
+    @unread_message_count = Conversation.unread(self).count
   end
 
   def self.find_by_password_reset_token(token)
