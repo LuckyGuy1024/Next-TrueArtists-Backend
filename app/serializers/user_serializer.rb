@@ -2,7 +2,7 @@ class UserSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   has_one :artist
   has_one :studio
-  
+
   attributes :id,
              :email,
              :full_name,
@@ -11,6 +11,7 @@ class UserSerializer < ActiveModel::Serializer
              :slug,
              :formatted_address,
              :unread_inbox_count,
+             :pending_bookings_count,
              :studio,
              :artist,
              :avatar

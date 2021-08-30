@@ -100,6 +100,18 @@ class User < ApplicationRecord
     role == User.roles[:admin]
   end
 
+  def regular?
+    role == User.roles[:regular]
+  end
+
+  def studio?
+    role == User.roles[:studio_manager]
+  end
+
+  def artist?
+    role == User.roles[:artist]
+  end
+
   def role_is?(assigned_role)
     assigned_role == role
   end
@@ -109,8 +121,15 @@ class User < ApplicationRecord
   end
 
   def unread_inbox_count
-    return 200
     @unread_inbox_count = Conversation.unread(self).count
+  end
+
+  # should be moved to an account instead of a user
+  def pending_bookings_count
+    return 0 if admin? || regular?
+    return artist.bookings.pending_review.count if artist?
+
+    artist.bookings.pending_review.count if studio?
   end
 
   def self.find_by_password_reset_token(token)
