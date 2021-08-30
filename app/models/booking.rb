@@ -3,6 +3,8 @@
 class Booking < ApplicationRecord
   include AASM
 
+  MAX_REMINDER_COUNT = 2
+  
   TATTOO_COLORS = [
     'Colored',
     'Black & White',
@@ -74,11 +76,18 @@ class Booking < ApplicationRecord
   scope :sender_bookings, ->(user_id) { where(sender_id: user_id) }
   scope :receiver_bookings, ->(user_id) { where(receiver_id: user_id) }
   scope :user_bookings, ->(user_id) { sender_bookings(user_id).or(receiver_bookings(user_id)) }
+  scope :requires_archiving, lambda {
+          pending_review.where('reminder_count >= ? AND created_at < ?', MAX_REMINDER_COUNT, 5.days.ago)
+        }
+  scope :requires_reminder, lambda {
+          pending_review.where('reminder_count < ? AND created_at < ?', MAX_REMINDER_COUNT, 24.hours.ago)
+        }
 
   def search_data
     attributes.merge(
       full_name: user.full_name,
-      email: user.email)
+      email: user.email
+    )
   end
 
   private

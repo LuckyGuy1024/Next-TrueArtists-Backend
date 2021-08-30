@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_29_170731) do
+ActiveRecord::Schema.define(version: 2021_08_29_171029) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_170731) do
     t.integer "style_id"
     t.string "availability"
     t.integer "conversation_id"
+    t.integer "reminder_count", default: 0
     t.index ["bookable_type", "bookable_id"], name: "booking_id"
     t.index ["conversation_id"], name: "index_bookings_on_conversation_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
