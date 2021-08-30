@@ -3,13 +3,17 @@ class BookingMailer < ApplicationMailer
     @booking = booking
     @bookable = booking.bookable
     @user = booking.user
-    mail(to: @bookable.email, subject: 'You have a new booking')
+    mail(to: @bookable.email,
+         personalizations: [{ to: [{ email: @bookable.email }] }],
+         subject: 'You have a new booking')
   end
 
   def reminder(booking, subject)
     @booking = booking
     @bookable = booking.bookable
     @user = booking.user
-    mail(to: @bookable.email, subject: subject)
+    mail(to: @bookable.email,
+         personalizations: [{ to: [{ email: @bookable.email }] }],
+         subject: subject)
   end
 end
