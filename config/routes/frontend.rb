@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  mount Searchjoy::Engine, at: "searchjoy"
   scope module: 'frontend' do
     resources :sessions do
       collection do

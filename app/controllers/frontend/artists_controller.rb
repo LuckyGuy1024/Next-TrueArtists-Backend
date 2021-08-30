@@ -3,6 +3,7 @@
 module Frontend
   class ArtistsController < FrontendController
     include ArtistScoped
+    after_action :track_searches, only: %i[index]
 
     def index
       @artists = search.base_filter

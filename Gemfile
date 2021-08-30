@@ -44,6 +44,7 @@ gem 'dalli'
 gem 'validates_timeliness'
 gem 'image_processing', '~> 1.2'
 gem 'sitemap_generator'
+gem "searchjoy"
 
 group :development, :test do
   gem 'pg', '>= 0.18', '< 2.0'
