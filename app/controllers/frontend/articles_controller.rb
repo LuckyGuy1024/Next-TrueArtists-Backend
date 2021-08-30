@@ -3,6 +3,7 @@
 module Frontend
   class ArticlesController < FrontendController
     include ArticleScoped
+    after_action :track_searches, only: [:index]
 
     def index
       @articles = search.base_filter

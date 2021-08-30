@@ -4,6 +4,7 @@ module Frontend
 
     before_action :find_styles, only: %i[index styles facet]
     before_action :find_placements, only: %i[index placements facet]
+    after_action :track_searches, only: %i[index]
 
     def index
       @tattoos = search.base_filter

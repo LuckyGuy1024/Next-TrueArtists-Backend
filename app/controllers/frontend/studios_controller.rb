@@ -3,6 +3,7 @@
 module Frontend
   class StudiosController < FrontendController
     include StudioScoped
+    after_action :track_searches, only: %i[index]
 
     def index
       @studios  = search.base_filter

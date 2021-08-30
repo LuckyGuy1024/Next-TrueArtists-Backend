@@ -15,6 +15,7 @@ class FrontendController < ActionController::Base
 
   def current_user_city_state
     return nil unless current_user_location
+
     if current_user_location.state.present?
       "#{current_user_location.city}, #{current_user_location.state}"
     else
@@ -79,7 +80,7 @@ class FrontendController < ActionController::Base
   def lazy_image_tag(target_src, **attrs, &block)
     (attrs ||= {}).symbolize_keys!
 
-    target_src = image_path(target_src) unless target_src =~ /http(s)?:\/\// || target_src.nil?
+    target_src = image_path(target_src) unless target_src =~ %r{http(s)?://} || target_src.nil?
 
     (attrs[:data] ||= {})[:src] = target_src
     empty_string = ''.dup
@@ -120,12 +121,12 @@ class FrontendController < ActionController::Base
 
   def modern_browser?
     [
-      browser.chrome?(">= 65"),
-      browser.safari?(">= 10"),
-      browser.firefox?(">= 52"),
-      browser.ie?(">= 11") && !browser.compatibility_view?,
-      browser.edge?(">= 15"),
-      browser.opera?(">= 50"),
+      browser.chrome?('>= 65'),
+      browser.safari?('>= 10'),
+      browser.firefox?('>= 52'),
+      browser.ie?('>= 11') && !browser.compatibility_view?,
+      browser.edge?('>= 15'),
+      browser.opera?('>= 50'),
       browser.facebook? && browser.safari_webapp_mode? && browser.webkit_full_version.to_i >= 602
     ].any?
   end
@@ -137,5 +138,15 @@ class FrontendController < ActionController::Base
     else
       'application'
     end
+  end
+
+  def track_searches
+    return unless params[:query]
+
+    Searchjoy::Search.create(
+      search_type: controller_name,
+      query: params[:query],
+      user_id: current_user&.id
+    )
   end
 end

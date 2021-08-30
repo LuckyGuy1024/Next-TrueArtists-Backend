@@ -5,6 +5,7 @@ module Api::V1
     skip_before_action :authenticate_request!, only: %i[index show]
     before_action :find_studio, except: %i[create index verify_phone]
     before_action :find_application, only: %i[application]
+    after_action :track_searches, only: [:index]
 
     def index
       @results = StudioSearch.new(
