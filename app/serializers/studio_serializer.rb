@@ -38,12 +38,9 @@ class StudioSerializer < ActiveModel::Serializer
              :price_per_hour,
              :minimum_spend,
              :currency_code,
+             :working_hours,
              :avatar,
              :hero_banner,
-             :working_hours,
-             :has_social_profiles,
-             :has_tattoo_gallery,
-             :has_avatar,
              :onboarding_steps
 
   def avatar

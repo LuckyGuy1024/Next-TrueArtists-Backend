@@ -33,10 +33,6 @@ class ArtistSerializer < ActiveModel::Serializer
              :guest_artist,
              :avatar,
              :hero_banner,
-             :has_styles,
-             :has_social_profiles,
-             :has_tattoo_gallery,
-             :has_avatar,
              :onboarding_steps
 
   def avatar

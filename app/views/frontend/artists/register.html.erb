@@ -4,9 +4,10 @@
 <div class="home-page">
   <div class='hero-banner'>
     <div class='hero-banner-wrapper'>
-      <h1>Join the world's largest tattoo community</h1>
+      <h1>Join other certified Tattoo Artists & Shops</h1>
+      <h2>We guarantee you at least $1000 in new business your first year as a member</h2>
       <div class="join-section">
-        <%= link_to 'Join as studio/artist', account_service_artist_signup_url, class: 'btn btn-alternative' %>
+        <%= link_to 'Join as a studio/artist', account_service_artist_signup_url, class: 'btn btn-alternative' %>
       </div>
     </div>
   </div>
@@ -19,6 +20,11 @@
             <div class="why-us-header text-center">
               <h2>Why join TrueArtists?</h2>
               <h3>Even more features to benefit you</h3>
+            </div>
+            <div class="col-md-12 ">
+              <div class='text-center'>
+                <h2>We help you build and manage your portfolio, get new clients, discounts to conventions and supplies.</h2>
+              </div>
             </div>
             <div class="why-us-content text-center">
               <div class="row align-items-center">
@@ -117,7 +123,16 @@
                     <%= image_pack_tag("media/images/landing_pages/icons/icon_friendship.svg") %>
                   </div>
                 </div>
-                <div class='col-md-12'>
+                <div class='col-md-12 benefit'>
+                  <h2>TrueArtist's $1000 New Business Guarantee</h2>
+                  <p>
+                    We guarantee you at least $1000 in new business your first year as a member. Here is how it works. If you have not received at least $1000 in new business as a result of being a TrueArtists member within the first 12 months you simply send us an email staging this. Send this to info@trueartists.com
+                  </p>
+                  <p>
+                    You will not be asked for any verification or audit of your records on this. Your statement alone will be the deciding factor. At this point TrueArtists will extend your membership for another 12 months at no charge as compensation for not meeting our guarantee. If you have any further questions about this guarantee please send your questions to info@trueartists.com
+                  </p>
+                </div>
+                <div class='col-md-12 benefit'>
                   <h2>Ready to get started?</h2>
                   <div class='join-section'>
                     <%= link_to 'Join as Tattoo Artist/Studio', account_service_artist_signup_url, class: 'btn btn-alternative' %>
