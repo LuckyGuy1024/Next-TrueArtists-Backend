@@ -7,14 +7,14 @@ class BookingNotificationJob < ActiveJob::Base
   end
 
   def perform(booking_id)
-    subject = {
-      0 => 'Reminder: You have a pending bookings request',
-      1 => 'Final Reminder: You have a pending bookings request',
-    }
-
     booking = Booking.find(booking_id)
 
-    return if booking.reminder_count > Booking::MAX_REMINDER_AMOUNT
+    subject = {
+      0 => "Reminder: You have a pending booking request from #{booking.user&.full_name}",
+      1 => "Final Reminder: Respond to #{booking.user&.full_name}'s booking request",
+    }
+
+    return if booking.reminder_count > Booking::MAX_REMINDER_COUNT
 
     case booking.status
     when 'pending_review'
