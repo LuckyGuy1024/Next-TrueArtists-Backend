@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_29_171029) do
+ActiveRecord::Schema.define(version: 2021_08_31_010851) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -359,6 +359,18 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.index ["slug"], name: "index_placements_on_slug"
   end
 
+  create_table "quick_replies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "name"
+    t.string "category"
+    t.boolean "active", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "content"
+    t.index ["owner_type", "owner_id"], name: "index_quick_replies_on_owner"
+  end
+
   create_table "receipts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "receiver_type"
     t.bigint "receiver_id"
@@ -371,6 +383,23 @@ ActiveRecord::Schema.define(version: 2021_08_29_171029) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["message_id"], name: "index_receipts_on_message_id"
     t.index ["receiver_type", "receiver_id"], name: "index_receipts_on_receiver"
+  end
+
+  create_table "searchjoy_searches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "search_type"
+    t.string "query"
+    t.string "normalized_query"
+    t.integer "results_count"
+    t.datetime "created_at"
+    t.string "convertable_type"
+    t.bigint "convertable_id"
+    t.datetime "converted_at"
+    t.index ["convertable_type", "convertable_id"], name: "index_searchjoy_searches_on_convertable"
+    t.index ["created_at"], name: "index_searchjoy_searches_on_created_at"
+    t.index ["search_type", "created_at"], name: "index_searchjoy_searches_on_search_type_and_created_at"
+    t.index ["search_type", "normalized_query", "created_at"], name: "index_searchjoy_searches_on_search_type_query"
+    t.index ["user_id"], name: "index_searchjoy_searches_on_user_id"
   end
 
   create_table "studio_artists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
