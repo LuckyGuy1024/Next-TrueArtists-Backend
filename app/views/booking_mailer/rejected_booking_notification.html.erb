@@ -1,12 +1,10 @@
 <tr>
   <%= render layout: 'layouts/mailer_row' do %>
-    <h1 style="<%= row_styles %>">You recently made a booking request with a <%= @bookable.name %> at TrueArtists.</h1>
+    <h2 style="<%= h2_styles %>">Your booking request with <%= @bookable.name %> has been rejected.</h2>
 
-    <p style="<%= row_styles %>">Unfortunately, the studio name/artist name <%= @bookable.name %> is not available to accept your booking at this time.</p>
+    <p style="<%= row_styles %>">Unfortunately, <%= @bookable.name %> is not available to accept your booking at this time.</p>
 
-    <p style="<%= row_styles %>">Here are a few other artists/studios that might be able to help you.</p>
-
-    <p style="<%= row_styles %>"><%= link_to 'Click here', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/" %> to see more artists in your area.</p>
+    <p style="<%= row_styles %>"><%= link_to 'Click here', artists_url %> to explore more artists in your area.</p>
 
     <%= render 'layouts/mailer_post_block', contact_description: 'If you have any questions or need help finding an artist or shop, don\'t hesitate to contact us at' %>
   <% end %>

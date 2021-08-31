@@ -2,6 +2,8 @@
 
 <tr>
   <%= render layout: 'layouts/mailer_row' do %>
+    <h2 style="<%= h2_styles %>">You have a booking request pending approval</h2>
+
     <p style="<%= row_styles %>"><%= @user.full_name %> made a booking request with you at TrueArtists on <%= @booking.created_at.to_s(:full_usa) %> and you are yet to respond.</p>
 
     <p style="<%= row_styles %>">A prompt response helps customers finalize plans. If you don’t respond to <%= @user.full_name %> inquiry within 24 hours, it could negatively impact your response rate and your listing’s placement in search.</p>
