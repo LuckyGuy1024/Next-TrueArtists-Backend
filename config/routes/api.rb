@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       resources :artists do
         resources :tattoos
         resources :clients
-
+        resources :quick_replies
         member do
           get :studios
         end
@@ -42,7 +42,8 @@ Rails.application.routes.draw do
       resources :studios do
         resources :tattoos
         resources :clients
-
+        resources :quick_replies
+        
         collection do
           put 'verify-phone' => 'studios#verify_phone'
         end
