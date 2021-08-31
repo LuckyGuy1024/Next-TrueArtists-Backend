@@ -1,0 +1,11 @@
+<tr>
+  <%= render layout: 'layouts/mailer_row' do %>
+    <h1 style="<%= row_styles %>"><%= @user.full_name %> recently made a booking request with you <%= @bookable.name %> at TrueArtists.</h1>
+
+    <p style="<%= row_styles %>">Unfortunately, the customer has decided to cancel this booking!</p>
+
+    <p style="<%= row_styles %>">We encourage you to respond to customer inquiries within 24 hours to avoid cancellations.</p>
+
+    <%= render 'layouts/mailer_post_block', contact_description: 'If you have any questions or need help, don\'t hesitate to contact us at' %>
+  <% end %>
+</tr>

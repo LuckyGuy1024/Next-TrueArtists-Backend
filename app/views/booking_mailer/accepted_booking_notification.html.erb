@@ -1,0 +1,13 @@
+<% target_url = "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/" %>
+
+<tr>
+  <%= render layout: 'layouts/mailer_row' do %>
+    <h1 style="<%= row_styles %>">You recently made a booking request with a <%= @bookable.name %> at TrueArtists.</h1>
+
+    <p style="<%= row_styles %>"><%= link_to 'Click here', target_url %> to start a conversation about your idea, budget, and your availability.</p>
+
+    <%= render 'layouts/mailer_btn', btn_url: target_url, btn_name: 'Get started now', style: row_styles %>
+
+    <%= render 'layouts/mailer_post_block' %>
+  <% end %>
+</tr>

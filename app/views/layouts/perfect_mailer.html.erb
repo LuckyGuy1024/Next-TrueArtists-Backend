@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <title></title>
+  <!--[if mso]>
+    <style>
+      table {border-collapse:collapse;border-spacing:0;border:none;margin:0;}
+      div, td {padding:0;}
+      div {margin:0 !important;}
+    </style>
+    <noscript>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    </noscript>
+  <![endif]-->
+</head>
+<body style="margin:0;padding:0;word-spacing:normal;background-color:#EDEDED;">
+<div role="article" aria-roledescription="email" lang="en" style="text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color:#EDEDED;">
+  <table role="presentation" style="width:100%;border:none;border-spacing:0;">
+    <tr>
+      <td align="center" style="padding:0;">
+        <!--[if mso]>
+        <table role="presentation" align="center" style="width:600px;">
+          <tr>
+            <td>
+        <![endif]-->
+              <table role="presentation" style="width:94%;max-width:600px;border:none;border-spacing:0;text-align:left;font-family:Arial,Noto Sans,sans-serif;font-size:13px;line-height:24px;color:#2D3346;">
+                <tr>
+                  <td style="padding-top:60px;"></td>
+                </tr>
+                <tr>
+                  <td style="padding:36px 30px;font-size:24px;font-weight:bold;background-color:#ffffff;">
+                    <a href="<%= ENV.fetch('ACCOUNT_SERVICE_URL') %>" style="text-decoration:none;">
+                      <%= email_image_tag("Logo.png", width: "207", alt: "TrueArtists logo", style: "width:50%;max-width:207px;height:auto;border:none;text-decoration:none;color:#ffffff;") %>
+                    </a>
+                  </td>
+                </tr>
+
+                <%= yield %>
+
+                <%= render 'layouts/mailer_footer' %>
+              </table>
+        <!--[if mso]>
+            </td>
+          </tr>
+        </table>
+        <![endif]-->
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

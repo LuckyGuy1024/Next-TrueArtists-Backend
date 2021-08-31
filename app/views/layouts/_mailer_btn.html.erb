@@ -1,6 +1,6 @@
-<div>
+<div style="<%= local_assigns[:style] %>">
   <!--[if mso]>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://" style="height:42px;v-text-anchor:middle;width:200px;" arcsize="58%" stroke="f" fillcolor="#2D3346">
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="<%= btn_url %>" style="height:42px;v-text-anchor:middle;width:200px;" arcsize="58%" stroke="f" fillcolor="#2D3346">
       <w:anchorlock/>
       <center>
       <![endif]-->
@@ -11,4 +11,6 @@
       </center>
     </v:roundrect>
   <![endif]-->
+
+  <%= local_assigns[:additional_text] %>
 </div>

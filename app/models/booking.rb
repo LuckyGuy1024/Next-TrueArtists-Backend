@@ -4,7 +4,7 @@ class Booking < ApplicationRecord
   include AASM
 
   MAX_REMINDER_COUNT = 2
-  
+
   TATTOO_COLORS = [
     'Colored',
     'Black & White',
@@ -54,15 +54,15 @@ class Booking < ApplicationRecord
     state :canceled
     state :archived
 
-    event :accept do
+    event :accept, after: -> { BookingMailer.accepted_booking_notification(self).deliver_now } do
       transitions from: %i[pending_review canceled rejected], to: :accepted
     end
 
-    event :reject do
+    event :reject, after: -> { BookingMailer.rejected_booking_notification(self).deliver_now } do
       transitions from: %i[pending_review canceled], to: :rejected
     end
 
-    event :cancel do
+    event :cancel, after: -> { BookingMailer.canceled_booking_notification(self).deliver_now } do
       transitions from: %i[pending_review accepted], to: :canceled
     end
 
