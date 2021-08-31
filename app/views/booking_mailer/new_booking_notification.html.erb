@@ -1,6 +1,15 @@
-<p>You have a new booking at TrueArtists from <b><%= @user.full_name %></b></p>
+<% target_url = "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/dashboard/bookings/#{@booking.id}" %>
 
-<p><%= link_to 'Accept/Reject', "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/dashboard/bookings/#{@booking.id}" %> to view the booking.</p>
+<tr>
+  <%= render layout: 'layouts/mailer_row' do %>
+    <h2 style="<%= h2_styles %>">You have a new booking on TrueArtists.</h2>
 
-<p>Best Regards</p>
-<p>TrueArtist Team</p>
+    <p style="<%= row_styles %>"><%= link_to 'Please click here', target_url %> to respond to the customer and start a conversation on their idea, budget, and availability.</p>
+
+    <%= render 'layouts/mailer_btn', btn_url: target_url, btn_name: 'Respond now', style: row_styles %>
+
+    <p style="<%= row_styles %>">We encourage you to respond to customer inquiries within 24hours to avoid cancellations.</p>
+
+    <%= render 'layouts/mailer_post_block' %>
+  <% end %>
+</tr>

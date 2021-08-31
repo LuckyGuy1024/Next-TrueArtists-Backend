@@ -1,0 +1,15 @@
+<% target_url = "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/dashboard/booking/#{@booking.id}" %>
+
+<tr>
+  <%= render layout: 'layouts/mailer_row' do %>
+    <h2 style="<%= h2_styles %>">Your booking request with <%= link_to @bookable.name, @bookable %> has been accepted</h2>
+    
+    <p style="<%= row_styles %>"><%= link_to 'Start Consulation', target_url %> to start a conversation about your idea, budget, and your availability with your artist.</p>
+
+    <%= render 'layouts/mailer_btn', btn_url: target_url, btn_name: 'Get started now', style: row_styles %>
+
+    <p style="<%= row_styles %>">We encourage you to begin your conversation within 24 hours to avoid delays in scheduling an appointment.</p>
+
+    <%= render 'layouts/mailer_post_block' %>
+  <% end %>
+</tr>

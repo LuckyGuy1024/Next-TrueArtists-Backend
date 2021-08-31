@@ -1,0 +1,11 @@
+<tr>
+  <%= render layout: 'layouts/mailer_row' do %>
+    <h2 style="<%= h2_styles %>">Your booking request with <%= @bookable.name %> has been rejected.</h2>
+
+    <p style="<%= row_styles %>">Unfortunately, <%= @bookable.name %> is not available to accept your booking at this time.</p>
+
+    <p style="<%= row_styles %>"><%= link_to 'Click here', artists_url %> to explore more artists in your area.</p>
+
+    <%= render 'layouts/mailer_post_block', contact_description: 'If you have any questions or need help finding an artist or shop, don\'t hesitate to contact us at' %>
+  <% end %>
+</tr>
