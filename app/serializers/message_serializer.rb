@@ -12,7 +12,8 @@ class MessageSerializer < ActiveModel::Serializer
              :receiver_deleted,
              :thread_id,
              :is_read,
-             :created_at
+             :created_at,
+             :images
 
   def sender
     {
@@ -45,5 +46,17 @@ class MessageSerializer < ActiveModel::Serializer
     return object.studio.name if object.role_is?('studio_manager')
 
     object.full_name
+  end
+
+  def images
+    return unless object.attachments.attached?
+
+    object.attachments.each_with_object([]) do |image, array|
+      array << {
+        id: image.id,
+        image_url: asset_blob_url(image),
+        name: image.filename
+      }
+    end
   end
 end
