@@ -1,6 +1,5 @@
 class Api::V1::ClientsController < ApplicationController
-  skip_before_action :authenticate_request!, only: %i[create]
-  before_action :find_parent_object, except: :create
+  before_action :find_parent_object
   before_action :find_client, only: %i[show update destroy]
 
   def index
@@ -21,10 +20,7 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def create
-    parent_object = Artist.find_by(id: params[:artist_id]) ||
-                    Studio.find_by(id: params[:studio_id])
-
-    client = parent_object.clients.new(client_params)
+    client = @parent_object.clients.new(client_params)
 
     if client.save
       render json: ClientSerializer.new(client).to_json, status: :created
@@ -52,7 +48,11 @@ class Api::V1::ClientsController < ApplicationController
   private
 
   def find_parent_object
-    @parent_object = current_user.artist || current_user.studio
+    @parent_object = if params[:artist_id]
+                       current_user.artist
+                     elsif params[:studio_id]
+                       current_user.studio
+                     end
     head(:not_found) unless @parent_object
   end
 

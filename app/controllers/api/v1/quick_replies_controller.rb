@@ -1,14 +1,13 @@
 class Api::V1::QuickRepliesController < ApplicationController
-  skip_before_action :authenticate_request!, only: %i[create]
-  before_action :find_parent_object, except: :create
+  before_action :find_parent_object
   before_action :find_quick_reply, only: %i[show update destroy]
 
   def index
     quick_replies = if params[:query]
-                @parent_object.quick_replies.search(params[:query])
-              else
-                @parent_object.quick_replies
-              end
+                      @parent_object.quick_replies.search(params[:query])
+                    else
+                      @parent_object.quick_replies
+                    end
 
     @quick_replies = paginate(quick_replies)
     render json: ActiveModel::Serializer::CollectionSerializer.new(@quick_replies,
@@ -21,15 +20,12 @@ class Api::V1::QuickRepliesController < ApplicationController
   end
 
   def create
-    parent_object = Artist.find_by(id: params[:artist_id]) ||
-                    Studio.find_by(id: params[:studio_id])
+    quick_reply = @parent_object.quick_replies.new(quick_reply_params)
 
-    client = parent_object.quick_replies.new(client_params)
-
-    if client.save
-      render json: QuickReplySerializer.new(client).to_json, status: :created
+    if quick_reply.save
+      render json: QuickReplySerializer.new(quick_reply).to_json, status: :created
     else
-      render_api_error(status: 422, errors: client.errors)
+      render_api_error(status: 422, errors: quick_reply.errors)
     end
   end
 
@@ -52,7 +48,11 @@ class Api::V1::QuickRepliesController < ApplicationController
   private
 
   def find_parent_object
-    @parent_object = current_user.artist || current_user.studio
+    @parent_object = if params[:artist_id]
+                       current_user.artist
+                     elsif params[:studio_id]
+                       current_user.studio
+                     end
     head(:not_found) unless @parent_object
   end
 
@@ -60,7 +60,7 @@ class Api::V1::QuickRepliesController < ApplicationController
     @quick_replies = @parent_object.quick_replies.find(params[:id])
   end
 
-  def client_params
+  def quick_reply_params
     params.permit(
       :name,
       :category,
