@@ -15,6 +15,7 @@ class BookingSerializer < ActiveModel::Serializer
              :status,
              :created_at,
              :updated_at,
+             :conversation_id,
              :images,
              :user,
              :bookable

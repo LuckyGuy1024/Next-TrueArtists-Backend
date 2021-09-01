@@ -126,10 +126,9 @@ class User < ApplicationRecord
 
   # should be moved to an account instead of a user
   def pending_bookings_count
-    return 0 if admin? || regular?
-    return artist.bookings.pending_review.count if artist?
-
-    artist.bookings.pending_review.count if studio?
+    return 0 unless artist.present? || studio.present?
+    account = artist || studio
+    account.bookings.pending_review.count
   end
 
   def self.find_by_password_reset_token(token)
