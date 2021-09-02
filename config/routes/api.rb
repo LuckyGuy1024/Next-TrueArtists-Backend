@@ -27,15 +27,12 @@ Rails.application.routes.draw do
           get :studios
         end
 
-        collection do
-          put 'verify-phone' => 'studios#verify_phone'
-        end
-
         member do
-          get :artists
           delete 'delete-image/:image_id' => 'artists#remove_image'
           put :submit_for_review
-          get 'studio_invites' => 'artists#studio_invites'
+          put :verify_phone_number
+          get :phone_verification_code
+          get :studio_invites
         end
       end
 
@@ -43,20 +40,18 @@ Rails.application.routes.draw do
         resources :tattoos
         resources :clients
         resources :quick_replies
-        
-        collection do
-          put 'verify-phone' => 'studios#verify_phone'
-        end
 
         member do
           get :artists
           delete 'delete-image/:image_id' => 'studios#remove_image'
           delete 'studio_artists/:studio_artist_id' => 'studios#remove_studio_artist'
-          post 'invite_artist' => 'studios#invite_artist'
+          post :invite_artist
           put :submit_for_review
           get :guest_artist_applications
           get 'guest_artist_applications/:id' => 'studios#application'
-          get 'studio_invites' => 'studios#studio_invites'
+          get :studio_invites
+          put :verify_phone_number
+          get :phone_verification_code
         end
       end
 

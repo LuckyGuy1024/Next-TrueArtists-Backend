@@ -135,14 +135,19 @@ class Artist < ApplicationRecord
     user.assign_role(User.roles[:artist])
   end
 
-  def verify_phone(code)
-    status = PhoneNumberService.new(code: code, phone_number: phone_number).status
-
-    update(phone_verified: true) if status == 'approved'
+  def send_phone_verification_code
+    phone_number_service = PhoneNumberService.new(phone_number: phone_number)
+    phone_number_service.verification
   end
 
-  def send_phone_verification_code
-    PhoneNumberService.new(phone_number: phone_number).verify
+  def verify_phone_number(code)
+    phone_number_service = PhoneNumberService.new(code: code, phone_number: phone_number)
+    if phone_number_service.verified?
+      update(phone_verified: true)
+    else
+      errors.add(:phone_verified, 'Enter a valid verification code')
+      false
+    end
   end
 
   def send_complete_profile_notification

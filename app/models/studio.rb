@@ -115,10 +115,19 @@ class Studio < ApplicationRecord
     format('%s %s %s %s %s', street_address, city, state, country, zip_code)
   end
 
-  def verify_phone(code)
-    status = PhoneNumberService.new(code: code, phone_number: phone_number).status
+  def send_phone_verification_code
+    phone_number_service = PhoneNumberService.new(phone_number: phone_number)
+    phone_number_service.verification
+  end
 
-    update(phone_verified: true) if status == 'approved'
+  def verify_phone_number(code)
+    phone_number_service = PhoneNumberService.new(code: code, phone_number: phone_number)
+    if phone_number_service.verified?
+      update(phone_verified: true)
+    else
+      errors.add(:phone_verified, 'Enter a valid verification code')
+      false
+    end
   end
 
   def self.create_studio(user, params)
@@ -160,10 +169,6 @@ class Studio < ApplicationRecord
   end
 
   private
-
-  def send_phone_verification_code
-    PhoneNumberService.new(phone_number: phone_number).verify
-  end
 
   def upgrade_user_role
     user.assign_role(User.roles[:studio_manager])

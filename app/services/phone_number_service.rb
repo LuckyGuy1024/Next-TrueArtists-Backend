@@ -1,45 +1,47 @@
-
 class PhoneNumberService
-  attr_reader :options
+  attr_reader :message, :phone_number, :code
 
-  def initialize(options)
+  def initialize(options = {})
     @message = options[:message]
     @phone_number = options[:phone_number]
     @code = options[:code]
-    @client = Twilio::REST::Client.new
   end
 
-  def create_service
-    service = @client.verify.services.create(friendly_name: 'Your TrueArtist Verification Code is')
-
-    service.sid
+  def verification
+    client.verify
+          .services(ENV.fetch('TWILIO_VERIFICATION_SID'))
+          .verifications
+          .create(
+            to: phone_number,
+            channel: 'sms'
+          )
   end
 
-  def verify
-    verification = @client.verify.services(create_service).verifications.create(
-      to: @phone_number,
-      channel: 'sms'
-    )
-
-    verification.sid
-  end
-
-  def status
-    verification_check = @client.verify.services(create_service).verification_checks.create(
-      to: @phone_number,
-      code: code
-    )
-
-    verification_check.status
+  def verified?
+    client.verify
+          .services(ENV.fetch('TWILIO_VERIFICATION_SID'))
+          .verification_checks
+          .create(
+            to: phone_number,
+            code: code
+          ).status == 'approved'
+  rescue Twilio::REST::RestError => e
+    false
   end
 
   def send_sms
-    @client.messages.create({
-                              from: ENV.fetch('TWILIO_PHONE_NUMBER'),
-                              to: @phone_number,
-                              body: @message
-                            })
+    client.messages.create({
+                             from: ENV.fetch('TWILIO_PHONE_NUMBER'),
+                             to: phone_number,
+                             body: message
+                           })
   rescue Twilio::REST::TwilioError => e
     e.message
+  end
+
+  private
+
+  def client
+    @client = Twilio::REST::Client.new
   end
 end

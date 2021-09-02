@@ -3,7 +3,9 @@
 module Api::V1
   class StudiosController < ApplicationController
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_studio, except: %i[create index verify_phone]
+    before_action :find_studio, except: %i[create index
+                                           verify_phone_number
+                                           send_phone_verification_code]
     before_action :find_application, only: %i[application]
     after_action :track_searches, only: [:index]
 
@@ -88,13 +90,21 @@ module Api::V1
                                                                      serializer: StudioInviteSerializer), status: :ok
     end
 
-    def verify_phone
-      studio = current_user.studio.verify_phone(phone_verification_params[:code])
-
-      if studio
+    def verify_phone_number
+      authorize @studio, :update?
+      if @studio.verify_phone_number(phone_verification_params[:code])
         head(:ok)
       else
-        render_api_error(status: 422, errors: @studio.errors)
+        render_api_error(status: 422, errors: ['Enter a valid verification code'])
+      end
+    end
+
+    def phone_verification_code
+      authorize @studio, :update?
+      if @studio.send_phone_verification_code
+        head(:ok)
+      else
+        render_api_error(status: 422, errors: ['Enter a valid phone number'])
       end
     end
 
