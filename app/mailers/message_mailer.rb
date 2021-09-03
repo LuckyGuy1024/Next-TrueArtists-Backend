@@ -1,4 +1,6 @@
 class MessageMailer < ApplicationMailer
+  layout 'perfect_mailer'
+
   MAIL_DOMAIN = '@email.trueartists.com'
 
   default from: "Message <message#{MAIL_DOMAIN}>"

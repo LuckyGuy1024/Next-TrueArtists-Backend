@@ -1,1 +1,15 @@
-<%= h(@content).gsub("\n", "<br>").html_safe %>
+<% target_url = "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/dashboard/conversations" %>
+
+<tr>
+  <%= render layout: 'layouts/mailer_row' do %>
+    <h2 style="<%= h2_styles %>">You have unread messages at TrueArtists.</h2>
+
+    <p style="<%= row_styles %>">
+      <%= h(@content).gsub("\n", "<br>").html_safe %>
+    </p>
+
+    <%= render 'layouts/mailer_btn', btn_url: target_url, btn_name: 'Reply', style: row_styles, additional_text: ' to respond.' %>
+
+    <p style="<%= row_styles %>">Alternatively, you can also respond by replying to this email.</p>
+  <% end %>
+</tr>
