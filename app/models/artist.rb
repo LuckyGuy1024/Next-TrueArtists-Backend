@@ -30,7 +30,6 @@ class Artist < ApplicationRecord
   has_many :bookings, as: :bookable, dependent: :destroy
   has_many :quick_replies, as: :owner, dependent: :destroy
 
-
   has_one_attached :avatar do |attachable|
     attachable.format :webp
     attachable.resize '100x100'
@@ -135,9 +134,10 @@ class Artist < ApplicationRecord
     user.assign_role(User.roles[:artist])
   end
 
-  def send_phone_verification_code
+  def send_phone_verification_code(phone_number)
     phone_number_service = PhoneNumberService.new(phone_number: phone_number)
     phone_number_service.verification
+    update(phone_number: phone_number)
   end
 
   def verify_phone_number(code)

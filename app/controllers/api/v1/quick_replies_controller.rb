@@ -30,7 +30,7 @@ class Api::V1::QuickRepliesController < ApplicationController
   end
 
   def update
-    if @quick_replies.update(client_params)
+    if @quick_replies.update(quick_reply_params)
       render json: QuickReplySerializer.new(@quick_replies).to_json, status: :ok
     else
       render_api_error(status: 422, errors: @quick_replies.errors)

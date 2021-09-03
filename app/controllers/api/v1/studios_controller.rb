@@ -101,7 +101,7 @@ module Api::V1
 
     def phone_verification_code
       authorize @studio, :update?
-      if @studio.send_phone_verification_code
+      if @studio.send_phone_verification_code(params[:phone_number])
         head(:ok)
       else
         render_api_error(status: 422, errors: ['Enter a valid phone number'])

@@ -115,9 +115,10 @@ class Studio < ApplicationRecord
     format('%s %s %s %s %s', street_address, city, state, country, zip_code)
   end
 
-  def send_phone_verification_code
+  def send_phone_verification_code(phone_number)
     phone_number_service = PhoneNumberService.new(phone_number: phone_number)
     phone_number_service.verification
+    update(phone_number: phone_number)
   end
 
   def verify_phone_number(code)
