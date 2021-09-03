@@ -121,11 +121,11 @@ class Artist < ApplicationRecord
   def notify_admins
     AdminMailer.new_artist_notification(self).deliver_now
   end
-  
+
   def send_phone_verification_code(phone_number)
-    phone_number_service = PhoneNumberService.new(phone_number: "+#{phone_number}")
+    phone_number_service = PhoneNumberService.new(phone_number: phone_number)
     phone_number_service.verification
-    update(phone_number: "+#{phone_number}")
+    update(phone_number: phone_number)
   end
 
   def verify_phone_number(code)
