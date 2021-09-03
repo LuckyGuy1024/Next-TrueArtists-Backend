@@ -5,7 +5,7 @@ module EmailHelper
   end
 
   def row_styles
-    "margin: 0 0 20px 0; font-size: 16px"
+    "margin: 0 0 15px 0; font-size: 14px"
   end
 
   def h2_styles

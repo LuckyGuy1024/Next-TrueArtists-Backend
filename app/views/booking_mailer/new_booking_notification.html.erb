@@ -1,15 +1,100 @@
 <% target_url = "#{ENV.fetch('ACCOUNT_SERVICE_URL')}/dashboard/bookings/#{@booking.id}" %>
 
-<tr>
-  <%= render layout: 'layouts/mailer_row' do %>
-    <h2 style="<%= h2_styles %>">You have a new booking on TrueArtists.</h2>
+  <tr>
+    <%= render layout: 'layouts/mailer_row' do %>
+    <h2 style="<%= h2_styles %>">You have a new booking request on TrueArtists.</h2>
 
-    <p style="<%= row_styles %>"><%= link_to 'Please click here', target_url %> to respond to the customer and start a conversation on their idea, budget, and availability.</p>
+    <p style="<%= row_styles %>"><%= link_to 'Please click here', target_url %>
+      to respond to the customer and start a conversation on their idea, budget, and availability.</p>
 
     <%= render 'layouts/mailer_btn', btn_url: target_url, btn_name: 'Respond now', style: row_styles %>
+  <% end %>
+</tr>
+<tr>
+  <td style="background-color:#F7F7F7;">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="padding-left:20px;padding-right:20px;padding-bottom:20px">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td style="font-size:14px;line-height:20px;font-weight:400;font-weight:500;padding:16px;color:#ffffff;border-top-left-radius:8px;border-top-right-radius:8px;background-color:#2D3346;">Booking Request Details</td>
+                </tr>
+                <tr>
+                  <td style="padding-left:16px;padding-right:16px;border:1px solid #e6e6e6">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td style="font-size:12px;line-height:18px;font-weight:400;padding-top:16px;padding-bottom:16px;color:#000000;border-bottom:1px solid #e6e6e6">
+                            <span style="font-size:12px;line-height:18px;font-weight:400;font-weight:600"><%= @booking.user&.full_name %></span><br>
+                            <span style="font-size:12px;line-height:18px;font-weight:400;color:#333333">
+                              <%= @booking.formatted_address %>
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:12px;line-height:18px;font-weight:400;padding-top:16px;padding-bottom:16px;color:#000000">
+                            <span style="font-size:12px;line-height:18px;font-weight:400">Budget:</span><br>
+                            <span style="font-size:14px;line-height:20px;font-weight:400"><%= number_to_currency(@booking.budget) %></span></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:12px;line-height:18px;font-weight:400;padding-top:16px;padding-bottom:16px;color:#000000">
+                            <span style="font-size:12px;line-height:18px;font-weight:400">Availability:</span><br>
+                            <span style="font-size:14px;line-height:20px;font-weight:400"><%= @booking.availability %></span></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:12px;line-height:18px;font-weight:400;padding-top:16px;padding-bottom:16px;color:#000000">
+                            <span style="font-size:12px;line-height:18px;font-weight:400">Tattoo Size:</span><br>
+                            <span style="font-size:14px;line-height:20px;font-weight:400"><%= @booking.tattoo_size %></span></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:12px;line-height:18px;font-weight:400;padding-top:16px;padding-bottom:16px;color:#000000">
+                            <span style="font-size:12px;line-height:18px;font-weight:400">Tattoo Style:</span><br>
+                            <span style="font-size:14px;line-height:20px;font-weight:400"><%= @booking.style&.name %></span></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:12px;line-height:18px;font-weight:400;padding-top:16px;padding-bottom:16px;color:#000000">
+                            <span style="font-size:12px;line-height:18px;font-weight:400">Tattoo Size:</span><br>
+                            <span style="font-size:14px;line-height:20px;font-weight:400"><%= @booking.tattoo_size %></span></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:12px;line-height:18px;font-weight:400;padding-top:16px;padding-bottom:16px;color:#000000">
+                            <span style="font-size:12px;line-height:18px;font-weight:400">Tattoo Placement:</span><br>
+                            <span style="font-size:14px;line-height:20px;font-weight:400"><%= @booking.tattoo_placement %></span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-left:16px;padding-right:16px;padding-top:8px;padding-bottom:8px;border:1px solid #e6e6e6;border-top:none;color:#000000;border-bottom-left-radius:8px;border-bottom-right-radius:8px">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td style="padding-top:8px;padding-bottom:8px">
+                            <span style="font-size:14px;line-height:20px;font-weight:400">
+                              <%= @booking.description %>
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
 
+<tr>
+  <%= render layout: 'layouts/mailer_row' do %>
+    <%= render 'layouts/mailer_btn', btn_url: target_url, btn_name: 'Respond now', style: row_styles %>
     <p style="<%= row_styles %>">We encourage you to respond to customer inquiries within 24hours to avoid cancellations.</p>
-
     <%= render 'layouts/mailer_post_block' %>
   <% end %>
 </tr>
