@@ -71,7 +71,7 @@ class Studio < ApplicationRecord
   after_commit :upgrade_user_role, on: :create
   after_commit :send_complete_profile_notification, on: :create
   # after_validation :save_location_data #, if: :address_changed?
-  after_save :send_phone_verification_code, if: :phone_number_changed?
+  # after_save :send_phone_verification_code, if: :phone_number_changed?
 
   def format_studio_name
     self.name = name&.titleize
@@ -116,9 +116,9 @@ class Studio < ApplicationRecord
   end
 
   def send_phone_verification_code(phone_number)
-    phone_number_service = PhoneNumberService.new(phone_number: phone_number)
+    phone_number_service = PhoneNumberService.new(phone_number: "+#{phone_number}")
     phone_number_service.verification
-    update(phone_number: phone_number)
+    update(phone_number: "+#{phone_number}")
   end
 
   def verify_phone_number(code)

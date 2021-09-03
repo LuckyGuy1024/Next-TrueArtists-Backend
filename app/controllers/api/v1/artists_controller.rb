@@ -3,10 +3,7 @@
 module Api::V1
   class ArtistsController < ApplicationController
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_artist, except: %i[index create
-                                           accept_artist_invite
-                                           verify_phone_number
-                                           phone_verification_code]
+    before_action :find_artist, except: %i[index create]
 
     def index
       @results = ArtistSearch.new(
@@ -65,7 +62,7 @@ module Api::V1
 
     def verify_phone_number
       authorize @artist, :update?
-      if @artist.verify_phone_number(phone_verification_params[:code])
+      if @artist.verify_phone_number(params[:code])
         head(:ok)
       else
         render_api_error(status: 422, errors: ['Enter a valid verification code'])
@@ -74,6 +71,7 @@ module Api::V1
 
     def phone_verification_code
       authorize @artist, :update?
+      # authorize @artist, :update?
       if @artist.send_phone_verification_code(params[:phone_number])
         head(:ok)
       else

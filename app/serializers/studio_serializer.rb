@@ -72,7 +72,8 @@ class StudioSerializer < ActiveModel::Serializer
       avatar: object.has_avatar,
       address: object.has_address,
       phone_number: object.has_phone_number,
-      services: object.has_services
+      services: object.has_services,
+      phone_verified: object.phone_verified
     }
   end
 

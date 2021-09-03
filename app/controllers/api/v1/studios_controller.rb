@@ -3,9 +3,7 @@
 module Api::V1
   class StudiosController < ApplicationController
     skip_before_action :authenticate_request!, only: %i[index show]
-    before_action :find_studio, except: %i[create index
-                                           verify_phone_number
-                                           send_phone_verification_code]
+    before_action :find_studio, except: %i[create index]
     before_action :find_application, only: %i[application]
     after_action :track_searches, only: [:index]
 
@@ -92,7 +90,7 @@ module Api::V1
 
     def verify_phone_number
       authorize @studio, :update?
-      if @studio.verify_phone_number(phone_verification_params[:code])
+      if @studio.verify_phone_number(params[:code])
         head(:ok)
       else
         render_api_error(status: 422, errors: ['Enter a valid verification code'])
@@ -104,7 +102,7 @@ module Api::V1
       if @studio.send_phone_verification_code(params[:phone_number])
         head(:ok)
       else
-        render_api_error(status: 422, errors: ['Enter a valid phone number'])
+        render_api_error(status: 422, errors: @studio.errors)
       end
     end
 
@@ -160,10 +158,6 @@ module Api::V1
         near: params[:city] || params[:near],
         within: params[:within]
       }.delete_if { |_k, v| v.nil? }
-    end
-
-    def phone_verification_params
-      params.permit(:code)
     end
 
     def artist_invite_params

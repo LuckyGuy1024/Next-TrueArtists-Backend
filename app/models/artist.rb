@@ -46,9 +46,7 @@ class Artist < ApplicationRecord
 
   after_commit :send_complete_profile_notification, on: :create
   after_commit :upgrade_user_role, on: :create
-
-  after_save :send_phone_verification_code, if: :phone_number_changed?
-
+  # after_save :send_phone_verification_code, if: :phone_number_changed?
   # after_validation :save_location_data, if: :address_changed?
   before_validation :add_name
 
@@ -123,21 +121,11 @@ class Artist < ApplicationRecord
   def notify_admins
     AdminMailer.new_artist_notification(self).deliver_now
   end
-
-  private
-
-  def add_name
-    self.name = user.full_name&.titleize
-  end
-
-  def upgrade_user_role
-    user.assign_role(User.roles[:artist])
-  end
-
+  
   def send_phone_verification_code(phone_number)
-    phone_number_service = PhoneNumberService.new(phone_number: phone_number)
+    phone_number_service = PhoneNumberService.new(phone_number: "+#{phone_number}")
     phone_number_service.verification
-    update(phone_number: phone_number)
+    update(phone_number: "+#{phone_number}")
   end
 
   def verify_phone_number(code)
@@ -148,6 +136,16 @@ class Artist < ApplicationRecord
       errors.add(:phone_verified, 'Enter a valid verification code')
       false
     end
+  end
+
+  private
+
+  def add_name
+    self.name = user.full_name&.titleize
+  end
+
+  def upgrade_user_role
+    user.assign_role(User.roles[:artist])
   end
 
   def send_complete_profile_notification

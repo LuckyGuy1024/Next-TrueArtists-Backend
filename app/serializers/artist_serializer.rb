@@ -53,7 +53,8 @@ class ArtistSerializer < ActiveModel::Serializer
       tattoo_photos: object.has_tattoo_gallery,
       avatar: object.has_avatar,
       address: object.has_address,
-      phone_number: object.has_phone_number
+      phone_number: object.has_phone_number,
+      phone_verified: object.phone_verified
     }
   end
 
